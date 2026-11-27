@@ -147,8 +147,8 @@
       background: var(--bg-main);
       color: var(--text-primary);
       min-height: 100vh;
-      padding-top: calc(var(--safe-top) + 12px);
-      padding-bottom: calc(var(--safe-bottom) + 98px);
+      padding-top: calc(var(--safe-top) + 10px);
+      padding-bottom: calc(var(--safe-bottom) + 94px);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -183,14 +183,14 @@
     }
 
     .lock-mark {
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border-radius: 999px;
       border: 3px solid var(--emerald);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
+      margin: 0 auto 10px;
       color: var(--gold);
       font-weight: 800;
       font-size: 16px;
@@ -211,13 +211,13 @@
     .pin-dots {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
     .pin-dot {
-      width: 13px;
-      height: 13px;
+      width: 12px;
+      height: 12px;
       border-radius: 999px;
       border: 1.5px solid var(--text-secondary);
       background: transparent;
@@ -227,6 +227,7 @@
     .pin-dot.filled {
       background: var(--emerald);
       border-color: var(--emerald);
+      transform: scale(1.08);
     }
 
     .pin-err {
@@ -244,7 +245,7 @@
     }
 
     .key-btn {
-      height: 52px;
+      height: 50px;
       border-radius: 14px;
       border: 1px solid var(--border);
       background: var(--bg-elevated);
@@ -331,17 +332,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       gap: 10px;
     }
 
     .profile-trigger {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 6px 13px 6px 6px;
+      padding: 5px 12px 5px 5px;
       border-radius: 999px;
       cursor: pointer;
       color: var(--text-primary);
@@ -350,24 +351,21 @@
     }
 
     .avatar-circle {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
       background: var(--emerald-deep);
       border: 1px solid var(--emerald);
       color: var(--text-primary);
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
-    .profile-meta {
-      min-width: 0;
-    }
-
+    .profile-meta { min-width: 0; }
     .profile-meta strong {
       display: block;
       font-size: 13px;
@@ -377,7 +375,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .profile-meta span {
       display: block;
       font-size: 11px;
@@ -390,15 +387,15 @@
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
     .icon-btn {
       position: relative;
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
+      width: 35px;
+      height: 35px;
+      border-radius: 11px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-secondary);
@@ -430,15 +427,15 @@
       justify-content: space-between;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 7px 9px;
-      margin-bottom: 14px;
+      border-radius: 13px;
+      padding: 6px 8px;
+      margin-bottom: 10px;
     }
 
     .period-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
       border: 1px solid var(--border);
       background: var(--bg-elevated);
       color: var(--text-primary);
@@ -453,29 +450,20 @@
       cursor: pointer;
       padding: 0 8px;
     }
-
-    .period-center strong {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .period-center span {
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
+    .period-center strong { display: block; font-size: 13px; font-weight: 700; }
+    .period-center span { font-size: 11px; color: var(--text-secondary); }
 
     /* Cards & Typography */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 18px;
-      margin-bottom: 12px;
+      border-radius: 18px;
+      padding: 15px;
+      margin-bottom: 10px;
     }
 
     .hero-balance-card {
-      background: linear-gradient(165deg, var(--emerald-soft) 0%, var(--bg-card) 72%);
+      background: linear-gradient(165deg, var(--emerald-soft) 0%, var(--bg-card) 75%);
       border-color: var(--border-emerald);
     }
 
@@ -484,13 +472,13 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .label-muted {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       text-transform: uppercase;
       color: var(--text-secondary);
     }
@@ -498,7 +486,7 @@
     .pill-tag {
       font-size: 11px;
       font-weight: 700;
-      padding: 4px 9px;
+      padding: 3px 8px;
       border-radius: 999px;
       background: var(--emerald-soft);
       color: var(--income);
@@ -523,20 +511,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .hero-amount {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
-      letter-spacing: -0.6px;
+      letter-spacing: -0.5px;
       color: var(--text-primary);
     }
 
     .eye-btn {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: var(--bg-elevated);
@@ -550,63 +538,35 @@
 
     .hero-subgrid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding-top: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 10px;
       border-top: 1px solid var(--border);
     }
 
     .hero-subitem small {
       display: block;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-secondary);
       margin-bottom: 2px;
     }
 
     .hero-subitem strong {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .metric-tile {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 13px 14px;
-    }
-
-    .metric-tile small {
-      display: block;
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-bottom: 5px;
-    }
-
-    .metric-tile strong {
-      font-size: 15px;
-      font-weight: 700;
-      display: block;
-    }
-
-    .metric-tile span {
-      display: block;
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-top: 3px;
+    .daily-box {
+      margin-top: 11px;
+      padding-top: 11px;
+      border-top: 1px solid var(--border);
     }
 
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 14px 0 9px;
+      margin: 12px 0 7px;
       gap: 8px;
     }
 
@@ -632,13 +592,13 @@
       cursor: pointer;
     }
 
-    /* Chips & Filters */
+    /* Chips & Inputs */
     .chip-strip {
       display: flex;
-      gap: 8px;
+      gap: 7px;
       overflow-x: auto;
       padding-bottom: 4px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       scrollbar-width: none;
     }
     .chip-strip::-webkit-scrollbar { display: none; }
@@ -647,15 +607,15 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-secondary);
-      padding: 8px 12px;
-      border-radius: 11px;
+      padding: 7px 11px;
+      border-radius: 10px;
       font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
       cursor: pointer;
     }
 
-    .chip.active {
+    .chip:active, .chip.active {
       background: var(--emerald);
       border-color: var(--emerald);
       color: #062218;
@@ -683,9 +643,7 @@
       font-size: 13px;
     }
 
-    .input:focus, .select:focus, .search-input:focus {
-      border-color: var(--emerald);
-    }
+    .input:focus, .select:focus, .search-input:focus { border-color: var(--emerald); }
 
     .filter-grid {
       display: grid;
@@ -696,11 +654,11 @@
 
     /* Progress Bars */
     .bar-track {
-      height: 7px;
+      height: 6px;
       background: rgba(243, 244, 246, 0.08);
       border-radius: 999px;
       overflow: hidden;
-      margin: 7px 0;
+      margin: 6px 0;
     }
 
     .bar-fill {
@@ -712,68 +670,6 @@
 
     .bar-fill.warn { background: var(--expense); }
     .bar-fill.gold { background: var(--gold); }
-
-    /* Wave Chart */
-    .chart-filter-row {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .mini-tab {
-      flex: 1;
-      padding: 6px 8px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--bg-input);
-      color: var(--text-secondary);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .mini-tab.active {
-      background: var(--emerald-deep);
-      border-color: var(--emerald);
-      color: var(--text-primary);
-    }
-
-    .wave-canvas-box {
-      position: relative;
-      width: 100%;
-      height: 185px;
-      border-radius: 14px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .wave-canvas-box canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .chart-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .legend-swatch {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
 
     /* Calendar */
     .cal-weekdays {
@@ -793,7 +689,7 @@
     }
 
     .cal-cell {
-      min-height: 48px;
+      min-height: 46px;
       border-radius: 11px;
       border: 1px solid transparent;
       background: var(--bg-input);
@@ -802,22 +698,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: 2px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      padding: 4px 2px;
+      padding: 3px 2px;
     }
 
-    .cal-cell.empty {
-      background: transparent;
-      cursor: default;
-    }
-
-    .cal-cell.today {
-      border-color: var(--gold);
-    }
-
+    .cal-cell.empty { background: transparent; cursor: default; }
+    .cal-cell.today { border-color: var(--gold); }
     .cal-cell.selected {
       background: var(--emerald);
       color: #062218;
@@ -825,58 +714,33 @@
       border-color: var(--emerald);
     }
 
-    .cal-mini-net {
-      font-size: 9px;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .cal-dots {
-      display: flex;
-      gap: 3px;
-      height: 4px;
-    }
-
+    .cal-mini-net { font-size: 9px; font-weight: 700; line-height: 1; }
+    .cal-dots { display: flex; gap: 3px; height: 4px; }
     .dot-inc { width: 4px; height: 4px; border-radius: 50%; background: var(--income); }
     .dot-exp { width: 4px; height: 4px; border-radius: 50%; background: var(--expense); }
-    .cal-cell.selected .dot-inc,
-    .cal-cell.selected .dot-exp { background: #062218; }
+    .cal-cell.selected .dot-inc, .cal-cell.selected .dot-exp { background: #062218; }
 
     /* Lists & Items */
-    .list-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
+    .list-stack { display: flex; flex-direction: column; gap: 8px; }
 
     .row-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 13px 14px;
+      border-radius: 15px;
+      padding: 12px 13px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 10px;
     }
 
-    .row-left {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .row-content {
-      min-width: 0;
-      flex: 1;
-    }
+    .row-left { display: flex; align-items: flex-start; gap: 10px; min-width: 0; flex: 1; }
+    .row-content { min-width: 0; flex: 1; }
 
     .badge-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       color: var(--emerald);
@@ -886,13 +750,9 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 1px;
     }
 
-    .badge-icon.gold {
-      color: var(--gold);
-      border-color: rgba(198, 161, 91, 0.25);
-    }
+    .badge-icon.gold { color: var(--gold); border-color: rgba(198, 161, 91, 0.25); }
 
     .row-title {
       font-size: 13px;
@@ -902,46 +762,17 @@
       word-break: break-word;
     }
 
-    .row-title.single-line {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .row-sub {
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-top: 3px;
-      line-height: 1.35;
-      word-break: break-word;
-    }
-
-    .row-right {
-      text-align: right;
-      flex-shrink: 0;
-    }
+    .row-title.single-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .row-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; line-height: 1.35; }
+    .row-right { text-align: right; flex-shrink: 0; }
 
     .amt-inc { color: var(--income); font-weight: 700; font-size: 13px; }
     .amt-exp { color: var(--expense); font-weight: 700; font-size: 13px; }
     .amt-neu { color: var(--text-primary); font-weight: 700; font-size: 13px; }
     .amt-gold { color: var(--gold); font-weight: 700; font-size: 13px; }
 
-    .mini-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .link-btn {
-      background: none;
-      border: none;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
-
+    .mini-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+    .link-btn { background: none; border: none; font-size: 11px; font-weight: 600; color: var(--text-secondary); cursor: pointer; }
     .link-btn:hover { color: var(--text-primary); }
     .link-btn.danger:hover { color: var(--expense); }
 
@@ -952,58 +783,22 @@
       padding: 14px;
     }
 
-    .account-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .account-bal {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-top: 4px;
-    }
-
-    .account-meta-foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
-    .ledger-chip {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
+    .account-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .account-bal { font-size: 18px; font-weight: 800; color: var(--text-primary); margin-top: 4px; }
+    .account-meta-foot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
 
     .empty-state {
       background: var(--bg-card);
       border: 1px dashed var(--border);
-      border-radius: 15px;
-      padding: 18px 14px;
+      border-radius: 14px;
+      padding: 16px 14px;
       text-align: center;
       font-size: 12px;
       color: var(--text-secondary);
     }
 
     /* Theme Presets & Color Pickers */
-    .preset-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
+    .preset-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
     .preset-btn {
       padding: 10px 11px;
       border-radius: 12px;
@@ -1017,20 +812,8 @@
       gap: 8px;
       cursor: pointer;
     }
-
-    .preset-swatch {
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      flex-shrink: 0;
-    }
-
-    .color-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
+    .preset-swatch { width: 14px; height: 14px; border-radius: 999px; flex-shrink: 0; }
+    .color-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .color-box {
       display: flex;
       align-items: center;
@@ -1042,14 +825,7 @@
       font-size: 12px;
       color: var(--text-secondary);
     }
-
-    .color-box input[type="color"] {
-      width: 30px;
-      height: 26px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-    }
+    .color-box input[type="color"] { width: 30px; height: 26px; border: none; background: transparent; cursor: pointer; }
 
     /* Bottom Dock */
     .dock-wrap {
@@ -1091,10 +867,7 @@
       cursor: pointer;
     }
 
-    .dock-btn.active {
-      background: var(--emerald-deep);
-      color: var(--text-primary);
-    }
+    .dock-btn.active { background: var(--emerald-deep); color: var(--text-primary); }
 
     .fab-btn {
       width: 44px;
@@ -1135,17 +908,8 @@
       overflow-y: auto;
     }
 
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .modal-head h3 {
-      font-size: 16px;
-      font-weight: 700;
-    }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .modal-head h3 { font-size: 16px; font-weight: 700; }
 
     .close-btn {
       width: 32px;
@@ -1158,13 +922,7 @@
     }
 
     .field { margin-bottom: 12px; }
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 5px;
-    }
+    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 5px; }
 
     .check-row {
       display: flex;
@@ -1179,13 +937,7 @@
       margin-bottom: 12px;
     }
 
-    .tx-type-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 7px;
-      margin-bottom: 12px;
-    }
-
+    .tx-type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-bottom: 12px; }
     .tx-type-btn {
       padding: 9px 10px;
       border-radius: 11px;
@@ -1197,12 +949,7 @@
       cursor: pointer;
       text-align: center;
     }
-
-    .tx-type-btn.active {
-      background: var(--emerald);
-      border-color: var(--emerald);
-      color: #062218;
-    }
+    .tx-type-btn.active { background: var(--emerald); border-color: var(--emerald); color: #062218; }
 
     .btn-primary {
       width: 100%;
@@ -1252,12 +999,7 @@
     <div class="lock-mark">O</div>
     <div class="lock-title">Owen's Vault Terkunci</div>
     <div class="lock-sub" id="lockSubLabel">Masukkan PIN keamanan untuk membuka</div>
-    <div class="pin-dots" id="pinDots">
-      <span class="pin-dot"></span>
-      <span class="pin-dot"></span>
-      <span class="pin-dot"></span>
-      <span class="pin-dot"></span>
-    </div>
+    <div class="pin-dots" id="pinDots"></div>
     <div class="pin-err" id="pinError"></div>
     <div class="keypad">
       <button type="button" class="key-btn" onclick="pressPinKey('1')">1</button>
@@ -1298,15 +1040,15 @@
     </button>
 
     <div class="top-actions">
-      <button type="button" class="icon-btn" id="btnLockNow" onclick="lockVaultNow()" aria-label="Kunci Aplikasi">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <button type="button" class="icon-btn" onclick="lockVaultNow()" aria-label="Kunci Aplikasi">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
       </button>
       <button type="button" class="icon-btn" onclick="openNotifModal()" aria-label="Notifikasi">
         <span class="badge-dot hidden" id="notifDot"></span>
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
       </button>
       <button type="button" class="icon-btn" onclick="openSettingsModal()" aria-label="Pengaturan & Backup">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
   </header>
@@ -1321,112 +1063,78 @@
     <button type="button" class="period-btn" onclick="shiftMonth(1)" aria-label="Bulan Berikutnya">›</button>
   </div>
 
-  <!-- TAB 1: DASHBOARD -->
+  <!-- TAB 1: DASHBOARD LITE -->
   <section id="tabDashboard">
     <div class="card hero-balance-card">
       <div class="card-header-row">
-        <span class="label-muted">Saldo Tersedia (Spending Cash)</span>
-        <span class="pill-tag" id="cashFlowBadge">Arus Kas +Rp 0</span>
+        <span class="label-muted">Saldo Kas Tersedia</span>
+        <span class="pill-tag" id="cashFlowBadge">Net +Rp 0</span>
       </div>
       <div class="hero-amount-row">
         <div class="hero-amount" id="heroAvailableBalance">Rp 0</div>
         <button type="button" class="eye-btn" onclick="togglePrivacy()" aria-label="Sembunyikan atau tampilkan saldo">
-          <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
       </div>
+
       <div class="hero-subgrid">
         <div class="hero-subitem">
-          <small>Pemasukan Bulan Ini</small>
+          <small>Masuk (Bln)</small>
           <strong id="dashIncomeVal" style="color: var(--income);">Rp 0</strong>
         </div>
         <div class="hero-subitem">
-          <small>Pengeluaran Bulan Ini</small>
+          <small>Keluar (Bln)</small>
           <strong id="dashExpenseVal" style="color: var(--expense);">Rp 0</strong>
         </div>
         <div class="hero-subitem">
-          <small>Total Tabungan & Goals</small>
-          <strong id="dashTotalSavings" style="color: var(--income);">Rp 0</strong>
-        </div>
-        <div class="hero-subitem">
-          <small>Dana Darurat</small>
-          <strong id="dashEmergencyVal" style="color: var(--gold);">Rp 0</strong>
+          <small>Total Vault</small>
+          <strong id="dashTotalSavings" style="color: var(--gold);">Rp 0</strong>
         </div>
       </div>
-    </div>
 
-    <div class="grid-2">
-      <div class="metric-tile">
-        <small>Arus Kas Bersih Bulan Ini</small>
-        <strong id="dashNetCashflow">Rp 0</strong>
-        <span id="dashIncomeTargetNote">Target bulanan: Rp 0</span>
-      </div>
-      <div class="metric-tile">
-        <small>Rasio Tabungan (Savings Rate)</small>
-        <strong id="dashSavingsRate" style="color: var(--income);">0%</strong>
-        <span id="dashNetWorthNote">Kekayaan bersih: Rp 0</span>
-      </div>
-    </div>
-
-    <!-- WAVE CHART -->
-    <div class="card">
-      <div class="card-header-row">
-        <span class="label-muted">Grafik Gelombang Finansial</span>
-        <span class="pill-tag gold" id="wavePeriodSummary">Monthly</span>
-      </div>
-      <div class="chart-filter-row" id="waveFilterRow">
-        <button type="button" class="mini-tab" data-wf="daily" onclick="setWaveFilter('daily')">Daily</button>
-        <button type="button" class="mini-tab" data-wf="weekly" onclick="setWaveFilter('weekly')">Weekly</button>
-        <button type="button" class="mini-tab active" data-wf="monthly" onclick="setWaveFilter('monthly')">Monthly</button>
-        <button type="button" class="mini-tab" data-wf="yearly" onclick="setWaveFilter('yearly')">Yearly</button>
-      </div>
-      <div class="wave-canvas-box">
-        <canvas id="waveCanvas"></canvas>
-      </div>
-      <div class="chart-legend">
-        <span class="legend-item"><i class="legend-swatch" style="background:#34D399;"></i>Income</span>
-        <span class="legend-item"><i class="legend-swatch" style="background:#FB7185;"></i>Expense</span>
-        <span class="legend-item"><i class="legend-swatch" style="background:var(--emerald);"></i>Net Cash Flow</span>
-        <span class="legend-item"><i class="legend-swatch" style="background:var(--gold);"></i>Periode Sebelumnya</span>
+      <!-- PATOKAN HARIAN (DEFAULT Rp 30.000) -->
+      <div class="daily-box">
+        <div class="card-header-row" style="margin-bottom:2px;">
+          <span class="label-muted" id="dailyCapTitle">Patokan Harian (Hari Ini)</span>
+          <span class="pill-tag" id="dailyCapBadge">Aman</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;">
+          <strong id="dailyCapSpent" style="font-size:17px;">Rp 0</strong>
+          <span id="dailyCapRemain" style="font-size:11px;color:var(--text-secondary);">Sisa: Rp 30.000</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" id="dailyCapBar" style="width:0%;"></div>
+        </div>
+        <div class="account-meta-foot">
+          <span id="dailyCapExtraNote">Ekstra di luar patokan: Rp 0</span>
+          <span id="dailyCapLimitText">Limit: Rp 30.000/hari</span>
+        </div>
       </div>
     </div>
 
     <!-- QUICK ACTIONS -->
     <div class="section-head">
       <h3>Aksi Cepat</h3>
-      <span>Satu ketukan untuk mencatat</span>
+      <span>Tap untuk catat</span>
     </div>
     <div class="chip-strip" id="quickActionStrip"></div>
 
-    <!-- INSIGHTS -->
-    <div class="section-head">
-      <h3>Insight Finansial</h3>
-      <span>Dari data aktual</span>
-    </div>
-    <div class="list-stack" id="insightsList"></div>
-
-    <!-- TRANSACTIONS & FILTERS -->
+    <!-- TRANSACTIONS & SIMPLE FILTER -->
     <div class="section-head">
       <h3>Riwayat Transaksi</h3>
       <span id="txFilteredCount">0 item</span>
     </div>
-    <input type="text" id="txSearchInput" class="search-input" placeholder="Cari catatan, kategori, atau akun..." oninput="renderAll()" style="margin-bottom: 8px;" />
     <div class="filter-grid">
+      <input type="text" id="txSearchInput" class="search-input" placeholder="Cari catatan / kategori..." oninput="renderAll()" />
       <select id="txTypeFilter" class="select" onchange="renderAll()">
         <option value="all">Semua Jenis</option>
-        <option value="income">Pemasukan (Income)</option>
-        <option value="expense">Pengeluaran (Expense)</option>
+        <option value="expense">Pengeluaran</option>
+        <option value="income">Pemasukan</option>
         <option value="savings_contribution">Setor Tabungan</option>
         <option value="savings_withdrawal">Tarik Tabungan</option>
         <option value="internal_transfer">Transfer Internal</option>
         <option value="balance_adjustment">Penyesuaian Saldo</option>
       </select>
-      <select id="txCategoryFilter" class="select" onchange="renderAll()">
-        <option value="all">Semua Kategori</option>
-      </select>
-    </div>
-    <div class="filter-grid">
-      <input type="date" id="txDateFrom" class="input" onchange="renderAll()" />
-      <input type="date" id="txDateTo" class="input" onchange="renderAll()" />
     </div>
     <div class="list-stack" id="txFeedList"></div>
   </section>
@@ -1435,7 +1143,7 @@
   <section id="tabCalendar" class="hidden">
     <div class="card">
       <div class="card-header-row">
-        <span class="label-muted">Kalender Arus Kas Bulanan</span>
+        <span class="label-muted">Kalender Harian</span>
         <span class="pill-tag" id="calMonthNetPill">Net: Rp 0</span>
       </div>
       <div class="cal-weekdays">
@@ -1444,16 +1152,14 @@
       <div class="cal-grid" id="calGrid"></div>
     </div>
 
-    <div class="grid-2">
-      <div class="metric-tile">
-        <small>Pemasukan Tanggal Ini</small>
-        <strong id="calSelInc" style="color: var(--income);">Rp 0</strong>
-        <span id="calSelDateLabel">Pilih tanggal</span>
+    <div class="filter-grid">
+      <div class="account-card" style="padding:12px;">
+        <small style="font-size:11px;color:var(--text-secondary);">Masuk Tanggal Ini</small>
+        <strong id="calSelInc" style="display:block;font-size:15px;color:var(--income);margin-top:3px;">Rp 0</strong>
       </div>
-      <div class="metric-tile">
-        <small>Pengeluaran & Hasil Bersih</small>
-        <strong id="calSelExp" style="color: var(--expense);">Rp 0</strong>
-        <span id="calSelNet">Bersih: Rp 0</span>
+      <div class="account-card" style="padding:12px;">
+        <small style="font-size:11px;color:var(--text-secondary);">Keluar Tanggal Ini</small>
+        <strong id="calSelExp" style="display:block;font-size:15px;color:var(--expense);margin-top:3px;">Rp 0</strong>
       </div>
     </div>
 
@@ -1468,7 +1174,7 @@
   <section id="tabBudget" class="hidden">
     <div class="card">
       <div class="card-header-row">
-        <span class="label-muted">Ringkasan Anggaran Bulanan</span>
+        <span class="label-muted">Anggaran Bulanan</span>
         <span class="pill-tag gold" id="budgetTotalRatio">0% Terpakai</span>
       </div>
       <div class="hero-amount" id="budgetTotalRemaining" style="font-size: 24px; margin-bottom: 6px;">Rp 0</div>
@@ -1492,7 +1198,7 @@
   <section id="tabSavings" class="hidden">
     <div class="card hero-balance-card">
       <div class="card-header-row">
-        <span class="label-muted">Total Rekening Tabungan & Goals</span>
+        <span class="label-muted">Total Vault & Tabungan</span>
         <span class="pill-tag" id="savingsOverallPct">0%</span>
       </div>
       <div class="hero-amount" id="savingsGrandTotal">Rp 0</div>
@@ -1506,8 +1212,8 @@
     </div>
 
     <div class="section-head">
-      <h3>Rekening & Target Independen</h3>
-      <button type="button" class="action-chip-btn" onclick="openSavingsModal()">+ Rekening / Goal</button>
+      <h3>Rekening & Target</h3>
+      <button type="button" class="action-chip-btn" onclick="openSavingsModal()">+ Rekening</button>
     </div>
     <div class="list-stack" id="savingsAccountsList"></div>
   </section>
@@ -1569,6 +1275,11 @@
       <label>Kategori</label>
       <select id="txCategory" class="select"></select>
     </div>
+
+    <label class="check-row" id="txExtraGroup">
+      <input type="checkbox" id="txIsExtra" />
+      <span>Di luar patokan harian (misal ngopi bareng teman / ekstra)</span>
+    </label>
 
     <div class="field hidden" id="txSavingsAccountGroup">
       <label id="txSavingsAccountLabel">Rekening Tabungan / Goal</label>
@@ -1651,11 +1362,11 @@
   </div>
 </div>
 
-<!-- MODAL PROFIL, KEAMANAN PIN & TEMA -->
+<!-- MODAL PROFIL, LIMIT HARIAN, PIN & TEMA -->
 <div class="modal-backdrop" id="modalProfile" onclick="backdropClose(event, 'modalProfile')">
   <div class="modal-sheet">
     <div class="modal-head">
-      <h3>Profil, PIN & Tema</h3>
+      <h3>Profil, Limit, PIN & Tema</h3>
       <button type="button" class="close-btn" onclick="closeModal('modalProfile')">✕</button>
     </div>
     <div class="field">
@@ -1664,23 +1375,23 @@
     </div>
     <div class="filter-grid">
       <div class="field" style="margin-bottom:0;">
-        <label>Inisial Avatar</label>
+        <label>Inisial</label>
         <input type="text" id="profInitials" class="input" maxlength="2" />
       </div>
       <div class="field" style="margin-bottom:0;">
-        <label>Mata Uang</label>
-        <select id="profCurrency" class="select">
-          <option value="IDR">IDR (Rp)</option>
-        </select>
+        <label>Limit Harian (Rp)</label>
+        <input type="number" id="profDailyLimit" class="input" placeholder="30000" inputmode="numeric" />
       </div>
     </div>
-    <div class="field">
-      <label>Target Pemasukan Bulanan (Rp)</label>
-      <input type="number" id="profMonthlyIncome" class="input" inputmode="numeric" />
-    </div>
-    <div class="field">
-      <label>Saldo Awal Kas Tersedia (Rp)</label>
-      <input type="number" id="profOpeningCash" class="input" inputmode="numeric" />
+    <div class="filter-grid">
+      <div class="field" style="margin-bottom:0;">
+        <label>Target Masuk / Bln (Rp)</label>
+        <input type="number" id="profMonthlyIncome" class="input" inputmode="numeric" />
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>Saldo Awal Kas (Rp)</label>
+        <input type="number" id="profOpeningCash" class="input" inputmode="numeric" />
+      </div>
     </div>
 
     <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
@@ -1709,14 +1420,14 @@
 
     <label class="check-row">
       <input type="checkbox" id="profPinEnabled" />
-      <span>Aktifkan Kunci PIN saat buka / kunci aplikasi</span>
+      <span>Aktifkan Kunci PIN</span>
     </label>
     <div class="field">
-      <label>Atur / Ganti PIN (4–6 digit angka, kosongkan jika tidak diubah)</label>
-      <input type="password" id="profNewPin" class="input" placeholder="Contoh: 1234 atau 250899" inputmode="numeric" maxlength="6" />
+      <label>Atur / Ganti PIN (4–6 digit angka)</label>
+      <input type="password" id="profNewPin" class="input" placeholder="Contoh: 123456" inputmode="numeric" maxlength="6" />
     </div>
 
-    <button type="button" class="btn-primary" onclick="saveProfilePreferences()">Simpan Profil & Pengaturan</button>
+    <button type="button" class="btn-primary" onclick="saveProfilePreferences()">Simpan</button>
   </div>
 </div>
 
@@ -1724,12 +1435,12 @@
 <div class="modal-backdrop" id="modalNotif" onclick="backdropClose(event, 'modalNotif')">
   <div class="modal-sheet">
     <div class="modal-head">
-      <h3>Notifikasi & Aktivitas</h3>
+      <h3>Notifikasi</h3>
       <button type="button" class="close-btn" onclick="closeModal('modalNotif')">✕</button>
     </div>
     <button type="button" class="btn-secondary" onclick="requestWebNotif()">Aktifkan Notifikasi Perangkat</button>
     <div class="list-stack" id="notifModalList" style="margin-bottom:12px;"></div>
-    <button type="button" class="btn-danger" onclick="clearNotifs()">Bersihkan Riwayat Notifikasi</button>
+    <button type="button" class="btn-danger" onclick="clearNotifs()">Bersihkan Riwayat</button>
   </div>
 </div>
 
@@ -1737,19 +1448,19 @@
 <div class="modal-backdrop" id="modalSettings" onclick="backdropClose(event, 'modalSettings')">
   <div class="modal-sheet">
     <div class="modal-head">
-      <h3>Data, Keamanan & Backup</h3>
+      <h3>Data & Backup</h3>
       <button type="button" class="close-btn" onclick="closeModal('modalSettings')">✕</button>
     </div>
     <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;line-height:1.45;">
-      Data disimpan otomatis ke multi-mirror <code>localStorage</code> serta <code>IndexedDB</code> dengan validasi integritas dan pemulihan cadangan lokal.
+      Tersimpan otomatis ke multi-mirror <code>localStorage</code> dan <code>IndexedDB</code>.
     </p>
     <button type="button" class="btn-secondary" onclick="downloadVaultIconPng()">Unduh Ikon Huruf "O" (512×512 PNG)</button>
-    <button type="button" class="btn-secondary" onclick="exportBackupJson()">Export Backup JSON (v4.0)</button>
+    <button type="button" class="btn-secondary" onclick="exportBackupJson()">Export Backup JSON</button>
     <label class="btn-secondary" style="display:block;text-align:center;cursor:pointer;">
-      Import Backup JSON (Tervalidasi)
+      Import Backup JSON
       <input type="file" id="importJsonInput" accept=".json" onchange="importBackupJson(event)" style="display:none;" />
     </label>
-    <button type="button" class="btn-secondary" onclick="recoverFromBestStorage()">Audit & Pulihkan dari Mirror Terbaik</button>
+    <button type="button" class="btn-secondary" onclick="recoverFromBestStorage()">Pulihkan dari Mirror Terbaik</button>
     <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;" />
     <button type="button" class="btn-danger" onclick="resetAllVaultData()">Reset Seluruh Data</button>
   </div>
@@ -1768,86 +1479,31 @@
   const IDB_STORE = 'vault_snapshots';
 
   const THEME_PRESETS = {
-    emerald: {
-      name: 'Emerald Luxury',
-      bgMain: '#090D0B',
-      bgCard: '#111B16',
-      bgElevated: '#16241D',
-      bgInput: '#0D1410',
-      primary: '#10B981',
-      deep: '#064E3B',
-      gold: '#C6A15B'
-    },
-    gold: {
-      name: 'Obsidian Gold',
-      bgMain: '#0B0A08',
-      bgCard: '#161410',
-      bgElevated: '#201C16',
-      bgInput: '#100E0B',
-      primary: '#C6A15B',
-      deep: '#4A3818',
-      gold: '#E5C580'
-    },
-    mint: {
-      name: 'Midnight Mint',
-      bgMain: '#080D0F',
-      bgCard: '#0F1A1E',
-      bgElevated: '#15252B',
-      bgInput: '#0B1316',
-      primary: '#2DD4BF',
-      deep: '#0F4C47',
-      gold: '#C6A15B'
-    },
-    slate: {
-      name: 'Nordic Sapphire',
-      bgMain: '#090C12',
-      bgCard: '#111724',
-      bgElevated: '#182133',
-      bgInput: '#0C111B',
-      primary: '#60A5FA',
-      deep: '#1E3A8A',
-      gold: '#C6A15B'
-    }
+    emerald: { name: 'Emerald Luxury', bgMain: '#090D0B', bgCard: '#111B16', bgElevated: '#16241D', bgInput: '#0D1410', primary: '#10B981', deep: '#064E3B', gold: '#C6A15B' },
+    gold: { name: 'Obsidian Gold', bgMain: '#0B0A08', bgCard: '#161410', bgElevated: '#201C16', bgInput: '#100E0B', primary: '#C6A15B', deep: '#4A3818', gold: '#E5C580' },
+    mint: { name: 'Midnight Mint', bgMain: '#080D0F', bgCard: '#0F1A1E', bgElevated: '#15252B', bgInput: '#0B1316', primary: '#2DD4BF', deep: '#0F4C47', gold: '#C6A15B' },
+    slate: { name: 'Nordic Sapphire', bgMain: '#090C12', bgCard: '#111724', bgElevated: '#182133', bgInput: '#0C111B', primary: '#60A5FA', deep: '#1E3A8A', gold: '#C6A15B' }
   };
 
   const DEFAULT_BUDGETS = [
     { id: 'b_food', category: 'Makan & Minum', limit: 900000 },
     { id: 'b_transport', category: 'Transport & Bensin', limit: 600000 },
     { id: 'b_coffee', category: 'Ngopi & Nongkrong', limit: 500000 },
-    { id: 'b_smoke', category: 'Rokok & Snack', limit: 450000 },
     { id: 'b_shop', category: 'Belanja & Kebutuhan', limit: 750000 }
   ];
 
   const DEFAULT_SAVINGS_ACCOUNTS = [
-    {
-      id: 'acc_main_savings',
-      name: 'Main Savings',
-      kind: 'savings',
-      monthlyTarget: 500000,
-      goalTarget: 10000000
-    },
-    {
-      id: 'acc_emergency_fund',
-      name: 'Emergency Fund',
-      kind: 'emergency',
-      monthlyTarget: 500000,
-      goalTarget: 15000000
-    },
-    {
-      id: 'acc_piggy_vault',
-      name: 'Piggy Vault',
-      kind: 'vault',
-      monthlyTarget: 250000,
-      goalTarget: 5000000
-    }
+    { id: 'acc_main_savings', name: 'Main Savings', kind: 'savings', monthlyTarget: 500000, goalTarget: 10000000 },
+    { id: 'acc_emergency_fund', name: 'Emergency Fund', kind: 'emergency', monthlyTarget: 500000, goalTarget: 15000000 },
+    { id: 'acc_piggy_vault', name: 'Piggy Vault', kind: 'vault', monthlyTarget: 250000, goalTarget: 5000000 }
   ];
 
   const DEFAULT_QUICK_ACTIONS = [
-    { id: 'qa_1', type: 'expense', category: 'Makan & Minum', amount: 15000, label: 'Makan 15rb', note: 'Makan harian' },
-    { id: 'qa_2', type: 'expense', category: 'Transport & Bensin', amount: 20000, label: 'Bensin 20rb', note: 'BBM motor' },
-    { id: 'qa_3', type: 'expense', category: 'Ngopi & Nongkrong', amount: 25000, label: 'Ngopi 25rb', note: 'Kopi / nongkrong' },
-    { id: 'qa_4', type: 'income', category: 'Tips & Bonus', amount: 50000, label: 'Tips +50rb', note: 'Tips / bonus' },
-    { id: 'qa_5', type: 'savings_contribution', category: 'Tabungan', amount: 50000, label: 'Nabung Vault +50rb', accountId: 'acc_piggy_vault', note: 'Setor tabungan' }
+    { id: 'qa_1', type: 'expense', category: 'Makan & Minum', amount: 15000, label: 'Makan 15rb', note: 'Makan harian', isExtra: false },
+    { id: 'qa_2', type: 'expense', category: 'Transport & Bensin', amount: 20000, label: 'Bensin 20rb', note: 'BBM motor', isExtra: false },
+    { id: 'qa_3', type: 'expense', category: 'Ngopi & Nongkrong', amount: 25000, label: 'Ngopi 25rb', note: 'Kopi / nongkrong', isExtra: false },
+    { id: 'qa_4', type: 'income', category: 'Tips & Bonus', amount: 50000, label: 'Tips +50rb', note: 'Tips / bonus', isExtra: false },
+    { id: 'qa_5', type: 'savings_contribution', category: 'Tabungan', amount: 50000, label: 'Vault +50rb', accountId: 'acc_piggy_vault', note: 'Setor tabungan', isExtra: false }
   ];
 
   const DEFAULT_STATE = {
@@ -1856,6 +1512,8 @@
     profile: {
       name: 'Owen',
       initials: 'OW',
+      dailySpendingLimit: 30000,
+      pinLength: 6,
       monthlyIncomeTarget: 0,
       openingCash: 0,
       currency: 'IDR',
@@ -1871,13 +1529,7 @@
     quickActions: DEFAULT_QUICK_ACTIONS.slice(),
     transactions: [],
     notifications: [
-      {
-        id: 'init_v4',
-        tone: 'gold',
-        title: "Owen's Vault 4.0 siap digunakan",
-        time: 'Baru saja',
-        read: false
-      }
+      { id: 'init_v4', tone: 'gold', title: "Owen's Vault 4.0 siap (Patokan harian Rp30.000)", time: 'Baru saja', read: false }
     ]
   };
 
@@ -1938,9 +1590,7 @@
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  function getCurrentYM() {
-    return getTodayISO().slice(0, 7);
-  }
+  function getCurrentYM() { return getTodayISO().slice(0, 7); }
 
   function clockNow() {
     const d = new Date();
@@ -1949,8 +1599,7 @@
 
   function formatRp(num) {
     const n = Math.round(Number(num) || 0);
-    const sign = n < 0 ? '-' : '';
-    return sign + 'Rp ' + Math.abs(n).toLocaleString('id-ID');
+    return (n < 0 ? '-' : '') + 'Rp ' + Math.abs(n).toLocaleString('id-ID');
   }
 
   function displayMoney(num) {
@@ -1959,11 +1608,7 @@
   }
 
   function escapeHtml(s) {
-    return String(s || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
   function stripLeadingEmoji(str) {
@@ -1972,61 +1617,45 @@
 
   function normalizeBudgets(list) {
     if (!Array.isArray(list) || !list.length) return DEFAULT_BUDGETS.slice();
-    return list
-      .filter(function(b) { return b && String(b.category || '').trim() && Number(b.limit) >= 0; })
-      .map(function(b, i) {
-        return {
-          id: String(b.id || ('bud_' + i)),
-          category: stripLeadingEmoji(b.category),
-          limit: Math.round(Number(b.limit) || 0)
-        };
-      });
+    return list.filter(function(b) { return b && String(b.category || '').trim() && Number(b.limit) >= 0; }).map(function(b, i) {
+      return { id: String(b.id || ('bud_' + i)), category: stripLeadingEmoji(b.category), limit: Math.round(Number(b.limit) || 0) };
+    });
   }
 
   function normalizeSavingsAccounts(list) {
     const validKinds = ['savings', 'emergency', 'vault', 'goal'];
     if (!Array.isArray(list) || !list.length) return DEFAULT_SAVINGS_ACCOUNTS.slice();
-    return list
-      .filter(function(a) { return a && String(a.name || '').trim(); })
-      .map(function(a, i) {
-        return {
-          id: String(a.id || ('acc_' + i)),
-          name: String(a.name).trim(),
-          kind: validKinds.indexOf(a.kind) !== -1 ? a.kind : 'goal',
-          monthlyTarget: Math.max(0, Math.round(Number(a.monthlyTarget) || 0)),
-          goalTarget: Math.max(1000, Math.round(Number(a.goalTarget) || 1000000))
-        };
-      });
+    return list.filter(function(a) { return a && String(a.name || '').trim(); }).map(function(a, i) {
+      return {
+        id: String(a.id || ('acc_' + i)),
+        name: String(a.name).trim(),
+        kind: validKinds.indexOf(a.kind) !== -1 ? a.kind : 'goal',
+        monthlyTarget: Math.max(0, Math.round(Number(a.monthlyTarget) || 0)),
+        goalTarget: Math.max(1000, Math.round(Number(a.goalTarget) || 1000000))
+      };
+    });
   }
 
   function normalizeTransactions(list) {
     if (!Array.isArray(list)) return [];
-    const allowedTypes = [
-      'income',
-      'expense',
-      'savings_contribution',
-      'savings_withdrawal',
-      'internal_transfer',
-      'balance_adjustment'
-    ];
-    return list
-      .filter(function(t) { return t && Number(t.amount) > 0; })
-      .map(function(t, idx) {
-        const type = allowedTypes.indexOf(t.type) !== -1 ? t.type : 'expense';
-        const dateStr = String(t.date || getTodayISO()).slice(0, 10);
-        return {
-          id: String(t.id || ('tx_' + Date.now() + '_' + idx)),
-          type: type,
-          amount: Math.round(Number(t.amount)),
-          date: dateStr.length === 10 ? dateStr : getTodayISO(),
-          category: stripLeadingEmoji(t.category || (type === 'income' ? 'Gaji & Pemasukan' : type === 'expense' ? 'Makan & Minum' : 'Akun')),
-          accountId: t.accountId ? String(t.accountId) : '',
-          fromAccount: t.fromAccount ? String(t.fromAccount) : 'cash',
-          toAccount: t.toAccount ? String(t.toAccount) : 'acc_main_savings',
-          adjustSign: t.adjustSign === 'sub' ? 'sub' : 'add',
-          note: String(t.note || '').trim()
-        };
-      });
+    const allowedTypes = ['income', 'expense', 'savings_contribution', 'savings_withdrawal', 'internal_transfer', 'balance_adjustment'];
+    return list.filter(function(t) { return t && Number(t.amount) > 0; }).map(function(t, idx) {
+      const type = allowedTypes.indexOf(t.type) !== -1 ? t.type : 'expense';
+      const dateStr = String(t.date || getTodayISO()).slice(0, 10);
+      return {
+        id: String(t.id || ('tx_' + Date.now() + '_' + idx)),
+        type: type,
+        amount: Math.round(Number(t.amount)),
+        date: dateStr.length === 10 ? dateStr : getTodayISO(),
+        category: stripLeadingEmoji(t.category || (type === 'income' ? 'Gaji & Pemasukan' : type === 'expense' ? 'Makan & Minum' : 'Akun')),
+        accountId: t.accountId ? String(t.accountId) : '',
+        fromAccount: t.fromAccount ? String(t.fromAccount) : 'cash',
+        toAccount: t.toAccount ? String(t.toAccount) : 'acc_main_savings',
+        adjustSign: t.adjustSign === 'sub' ? 'sub' : 'add',
+        isExtra: !!t.isExtra,
+        note: String(t.note || '').trim()
+      };
+    });
   }
 
   function migrateLegacyPayload(rawObj) {
@@ -2034,10 +1663,14 @@
     const inner = rawObj.data && typeof rawObj.data === 'object' ? rawObj.data : rawObj;
 
     if (Array.isArray(inner.transactions) && Array.isArray(inner.savingsAccounts)) {
+      const mergedProf = Object.assign({}, DEFAULT_STATE.profile, inner.profile || {});
+      if (typeof mergedProf.dailySpendingLimit !== 'number' || Number.isNaN(mergedProf.dailySpendingLimit)) mergedProf.dailySpendingLimit = 30000;
+      const len = Number(mergedProf.pinLength);
+      mergedProf.pinLength = (len >= 4 && len <= 6) ? len : 6;
       return {
         version: '4.0',
         updatedAt: Number(inner.updatedAt || rawObj.updatedAt || Date.now()),
-        profile: Object.assign({}, DEFAULT_STATE.profile, inner.profile || {}),
+        profile: mergedProf,
         budgets: normalizeBudgets(inner.budgets),
         savingsAccounts: normalizeSavingsAccounts(inner.savingsAccounts),
         quickActions: Array.isArray(inner.quickActions) && inner.quickActions.length ? inner.quickActions : DEFAULT_QUICK_ACTIONS.slice(),
@@ -2050,93 +1683,35 @@
     if (!hasLegacyArrays) return null;
 
     const accounts = DEFAULT_SAVINGS_ACCOUNTS.slice();
-    if (Array.isArray(inner.goals)) {
-      inner.goals.forEach(function(g, i) {
-        if (g && String(g.title || '').trim()) {
-          accounts.push({
-            id: String(g.id || ('goal_' + i)),
-            name: String(g.title).trim(),
-            kind: 'goal',
-            monthlyTarget: 0,
-            goalTarget: Math.max(1000, Math.round(Number(g.target) || 1000000))
-          });
-        }
-      });
-    }
-
     const txs = [];
     (inner.incomeTx || []).forEach(function(inc, i) {
       if (!inc || Number(inc.amount) <= 0) return;
-      txs.push({
-        id: 'mig_inc_' + String(inc.id || i),
-        type: 'income',
-        amount: Math.round(Number(inc.amount)),
-        date: String(inc.date || getTodayISO()).slice(0, 10),
-        category: stripLeadingEmoji(inc.label || 'Gaji & Pemasukan'),
-        accountId: '',
-        fromAccount: '',
-        toAccount: '',
-        adjustSign: 'add',
-        note: String(inc.note || inc.label || '').trim()
-      });
+      txs.push({ id: 'mig_inc_' + i, type: 'income', amount: Math.round(Number(inc.amount)), date: String(inc.date || getTodayISO()).slice(0, 10), category: stripLeadingEmoji(inc.label || 'Gaji & Pemasukan'), isExtra: false, note: String(inc.note || inc.label || '').trim() });
     });
-
     (inner.expenseTx || []).forEach(function(exp, i) {
       if (!exp || Number(exp.amount) <= 0) return;
-      txs.push({
-        id: 'mig_exp_' + String(exp.id || i),
-        type: 'expense',
-        amount: Math.round(Number(exp.amount)),
-        date: String(exp.date || getTodayISO()).slice(0, 10),
-        category: stripLeadingEmoji(exp.category || 'Pengeluaran'),
-        accountId: '',
-        fromAccount: '',
-        toAccount: '',
-        adjustSign: 'add',
-        note: String(exp.note || '').trim() + (exp.isExtra ? ' (Ekstra)' : '')
-      });
+      txs.push({ id: 'mig_exp_' + i, type: 'expense', amount: Math.round(Number(exp.amount)), date: String(exp.date || getTodayISO()).slice(0, 10), category: stripLeadingEmoji(exp.category || 'Pengeluaran'), isExtra: !!exp.isExtra, note: String(exp.note || '').trim() });
     });
-
     (inner.vaultTx || []).forEach(function(v, i) {
       if (!v || Number(v.amount) <= 0) return;
-      txs.push({
-        id: 'mig_vlt_' + String(v.id || i),
-        type: v.type === 'out' ? 'savings_withdrawal' : 'savings_contribution',
-        amount: Math.round(Number(v.amount)),
-        date: String(v.date || getTodayISO()).slice(0, 10),
-        category: v.type === 'out' ? 'Tarik Tabungan' : 'Setor Tabungan',
-        accountId: 'acc_piggy_vault',
-        fromAccount: '',
-        toAccount: '',
-        adjustSign: 'add',
-        note: String(v.note || (v.type === 'out' ? 'Tarik Vault' : 'Setor Vault')).trim()
-      });
+      txs.push({ id: 'mig_vlt_' + i, type: v.type === 'out' ? 'savings_withdrawal' : 'savings_contribution', amount: Math.round(Number(v.amount)), date: String(v.date || getTodayISO()).slice(0, 10), category: v.type === 'out' ? 'Tarik Tabungan' : 'Setor Tabungan', accountId: 'acc_piggy_vault', isExtra: false, note: String(v.note || '').trim() });
     });
 
     const prof = inner.profile || {};
     const nameStr = String(prof.name || 'Owen').trim() || 'Owen';
-    const initialsStr = String(prof.avatar || nameStr.slice(0, 2)).trim().toUpperCase().slice(0, 2) || 'OW';
-
     return {
       version: '4.0',
       updatedAt: Number(inner.updatedAt || Date.now()),
       profile: Object.assign({}, DEFAULT_STATE.profile, {
         name: nameStr,
-        initials: initialsStr
+        initials: String(prof.avatar || nameStr.slice(0, 2)).trim().toUpperCase().slice(0, 2) || 'OW',
+        dailySpendingLimit: Math.max(0, Math.round(Number(prof.dailyLimit) || 30000))
       }),
       budgets: DEFAULT_BUDGETS.slice(),
       savingsAccounts: accounts,
       quickActions: DEFAULT_QUICK_ACTIONS.slice(),
       transactions: normalizeTransactions(txs),
-      notifications: [
-        {
-          id: 'mig_v4_' + Date.now(),
-          tone: 'gold',
-          title: "Data lama berhasil dimigrasikan ke Owen's Vault 4.0",
-          time: clockNow(),
-          read: false
-        }
-      ]
+      notifications: [{ id: 'mig_v4_' + Date.now(), tone: 'gold', title: "Data lama dimigrasikan ke Vault 4.0", time: clockNow(), read: false }]
     };
   }
 
@@ -2151,9 +1726,7 @@
         if (migrated) {
           const score = migrated.transactions.length + migrated.savingsAccounts.length;
           const bestScore = best ? (best.transactions.length + best.savingsAccounts.length) : -1;
-          if (!best || (migrated.updatedAt || 0) > (best.updatedAt || 0) || score > bestScore) {
-            best = migrated;
-          }
+          if (!best || (migrated.updatedAt || 0) > (best.updatedAt || 0) || score > bestScore) best = migrated;
         }
       } catch (e) {}
     }
@@ -2163,9 +1736,7 @@
   function writeMirrors(st) {
     const stamped = Object.assign({}, st, { version: '4.0', updatedAt: Date.now() });
     const json = JSON.stringify(stamped);
-    [V4_KEY, MIRROR_1_KEY, MIRROR_2_KEY].forEach(function(k) {
-      try { localStorage.setItem(k, json); } catch (e) {}
-    });
+    [V4_KEY, MIRROR_1_KEY, MIRROR_2_KEY].forEach(function(k) { try { localStorage.setItem(k, json); } catch (e) {} });
     try { sessionStorage.setItem(V4_KEY, json); } catch (e) {}
     return stamped;
   }
@@ -2176,9 +1747,7 @@
       const req = indexedDB.open(IDB_NAME, 1);
       req.onupgradeneeded = function(e) {
         const db = e.target.result;
-        if (!db.objectStoreNames.contains(IDB_STORE)) {
-          db.createObjectStore(IDB_STORE, { keyPath: 'id' });
-        }
+        if (!db.objectStoreNames.contains(IDB_STORE)) db.createObjectStore(IDB_STORE, { keyPath: 'id' });
       };
       req.onsuccess = function(e) { resolve(e.target.result); };
       req.onerror = function(e) { reject(e.target.error); };
@@ -2197,9 +1766,7 @@
       return new Promise(function(resolve) {
         const tx = db.transaction(IDB_STORE, 'readonly');
         const req = tx.objectStore(IDB_STORE).get('vault_v4_latest');
-        req.onsuccess = function() {
-          resolve(req.result ? migrateLegacyPayload(req.result.payload) : null);
-        };
+        req.onsuccess = function() { resolve(req.result ? migrateLegacyPayload(req.result.payload) : null); };
         req.onerror = function() { resolve(null); };
       });
     }).catch(function() { return null; });
@@ -2209,25 +1776,37 @@
   let activeTab = 'dashboard';
   let activeYM = getCurrentYM();
   let selectedDateISO = getTodayISO();
-  let waveFilter = 'monthly';
   let txFormType = 'expense';
   let editingTxId = null;
   let editingBudgetId = null;
   let editingSavingsId = null;
   let toastTimer = null;
   let enteredPin = '';
-  let isVaultLocked = false;
 
-  /* PIN LOCK ENGINE */
+  /* FIXED 6-DIGIT PIN LOCK ENGINE */
+  function getTargetPinLength() {
+    const len = Number(state.profile && state.profile.pinLength);
+    return (len >= 4 && len <= 6) ? len : 6;
+  }
+
+  function buildPinDotsDom() {
+    const wrap = document.getElementById('pinDots');
+    const len = getTargetPinLength();
+    let html = '';
+    for (let i = 0; i < len; i++) {
+      html += '<span class="pin-dot' + (i < enteredPin.length ? ' filled' : '') + '"></span>';
+    }
+    wrap.innerHTML = html;
+  }
+
   function initPinGateOnBoot() {
     if (state.profile && state.profile.pinEnabled && state.profile.pinHash) {
-      isVaultLocked = true;
       enteredPin = '';
       document.getElementById('pinError').textContent = '';
-      renderPinDots();
+      document.getElementById('lockSubLabel').textContent = 'Masukkan ' + getTargetPinLength() + ' digit PIN untuk membuka';
+      buildPinDotsDom();
       document.getElementById('pinLockScreen').classList.remove('hidden');
     } else {
-      isVaultLocked = false;
       document.getElementById('pinLockScreen').classList.add('hidden');
     }
   }
@@ -2235,51 +1814,46 @@
   function lockVaultNow() {
     if (!state.profile || !state.profile.pinEnabled || !state.profile.pinHash) {
       openProfileModal();
-      showToast('Aktifkan PIN dulu di bagian bawah menu Profil', 'gold');
+      showToast('Aktifkan & isi PIN di bagian bawah menu Profil', 'gold');
       return;
     }
-    isVaultLocked = true;
     enteredPin = '';
     document.getElementById('pinError').textContent = '';
-    renderPinDots();
+    document.getElementById('lockSubLabel').textContent = 'Masukkan ' + getTargetPinLength() + ' digit PIN untuk membuka';
+    buildPinDotsDom();
     document.getElementById('pinLockScreen').classList.remove('hidden');
   }
 
-  function renderPinDots() {
-    const dots = document.querySelectorAll('#pinDots .pin-dot');
-    dots.forEach(function(d, idx) {
-      d.classList.toggle('filled', idx < enteredPin.length);
-    });
-  }
-
   function pressPinKey(digit) {
-    if (enteredPin.length >= 6) return;
+    const targetLen = getTargetPinLength();
+    if (enteredPin.length >= targetLen) return;
     enteredPin += String(digit);
     document.getElementById('pinError').textContent = '';
-    renderPinDots();
+    buildPinDotsDom();
 
-    if (enteredPin.length >= 4 && hashPinValue(enteredPin) === state.profile.pinHash) {
-      isVaultLocked = false;
-      enteredPin = '';
-      document.getElementById('pinLockScreen').classList.add('hidden');
-      showToast('Vault terbuka', 'ok');
-    } else if (enteredPin.length === 6) {
-      document.getElementById('pinError').textContent = 'PIN salah, coba lagi';
-      enteredPin = '';
-      setTimeout(renderPinDots, 160);
+    if (enteredPin.length === targetLen) {
+      if (hashPinValue(enteredPin) === state.profile.pinHash) {
+        enteredPin = '';
+        document.getElementById('pinLockScreen').classList.add('hidden');
+        showToast('Vault terbuka', 'ok');
+      } else {
+        document.getElementById('pinError').textContent = 'PIN salah, coba lagi';
+        enteredPin = '';
+        setTimeout(buildPinDotsDom, 150);
+      }
     }
   }
 
   function backspacePinEntry() {
     enteredPin = enteredPin.slice(0, -1);
     document.getElementById('pinError').textContent = '';
-    renderPinDots();
+    buildPinDotsDom();
   }
 
   function clearPinEntry() {
     enteredPin = '';
     document.getElementById('pinError').textContent = '';
-    renderPinDots();
+    buildPinDotsDom();
   }
 
   /* ACCOUNTING ENGINE */
@@ -2287,59 +1861,31 @@
     const accounts = state.savingsAccounts || [];
     const accMap = {};
     const accBalances = {};
-    const accLedger = {};
 
-    accounts.forEach(function(a) {
-      accMap[a.id] = a;
-      accBalances[a.id] = 0;
-      accLedger[a.id] = [];
-    });
+    accounts.forEach(function(a) { accMap[a.id] = a; accBalances[a.id] = 0; });
 
     let spendingCash = Number(state.profile.openingCash) || 0;
-
-    const ordered = state.transactions.slice().sort(function(a, b) {
-      return a.date.localeCompare(b.date) || a.id.localeCompare(b.id);
-    });
+    const ordered = state.transactions.slice().sort(function(a, b) { return a.date.localeCompare(b.date) || a.id.localeCompare(b.id); });
 
     ordered.forEach(function(tx) {
       const amt = Math.round(Number(tx.amount) || 0);
       if (amt <= 0) return;
-
-      if (tx.type === 'income') {
-        spendingCash += amt;
-      } else if (tx.type === 'expense') {
-        spendingCash -= amt;
-      } else if (tx.type === 'savings_contribution') {
+      if (tx.type === 'income') spendingCash += amt;
+      else if (tx.type === 'expense') spendingCash -= amt;
+      else if (tx.type === 'savings_contribution') {
         const aid = accMap[tx.accountId] ? tx.accountId : (accounts[0] && accounts[0].id);
         spendingCash -= amt;
-        if (aid) {
-          accBalances[aid] = (accBalances[aid] || 0) + amt;
-          accLedger[aid].unshift({ date: tx.date, kind: 'in', amount: amt, note: tx.note || 'Setor tabungan' });
-        }
+        if (aid) accBalances[aid] = (accBalances[aid] || 0) + amt;
       } else if (tx.type === 'savings_withdrawal') {
         const aid = accMap[tx.accountId] ? tx.accountId : (accounts[0] && accounts[0].id);
         spendingCash += amt;
-        if (aid) {
-          accBalances[aid] = (accBalances[aid] || 0) - amt;
-          accLedger[aid].unshift({ date: tx.date, kind: 'out', amount: amt, note: tx.note || 'Tarik tabungan' });
-        }
+        if (aid) accBalances[aid] = (accBalances[aid] || 0) - amt;
       } else if (tx.type === 'internal_transfer') {
         const fromId = tx.fromAccount || 'cash';
         const toId = tx.toAccount || (accounts[0] && accounts[0].id) || 'cash';
-        if (fromId === 'cash' && accMap[toId]) {
-          spendingCash -= amt;
-          accBalances[toId] = (accBalances[toId] || 0) + amt;
-          accLedger[toId].unshift({ date: tx.date, kind: 'in', amount: amt, note: tx.note || 'Transfer dari Kas' });
-        } else if (accMap[fromId] && toId === 'cash') {
-          accBalances[fromId] = (accBalances[fromId] || 0) - amt;
-          spendingCash += amt;
-          accLedger[fromId].unshift({ date: tx.date, kind: 'out', amount: amt, note: tx.note || 'Transfer ke Kas' });
-        } else if (accMap[fromId] && accMap[toId] && fromId !== toId) {
-          accBalances[fromId] = (accBalances[fromId] || 0) - amt;
-          accBalances[toId] = (accBalances[toId] || 0) + amt;
-          accLedger[fromId].unshift({ date: tx.date, kind: 'out', amount: amt, note: tx.note || ('Transfer ke ' + accMap[toId].name) });
-          accLedger[toId].unshift({ date: tx.date, kind: 'in', amount: amt, note: tx.note || ('Transfer dari ' + accMap[fromId].name) });
-        }
+        if (fromId === 'cash' && accMap[toId]) { spendingCash -= amt; accBalances[toId] = (accBalances[toId] || 0) + amt; }
+        else if (accMap[fromId] && toId === 'cash') { accBalances[fromId] = (accBalances[fromId] || 0) - amt; spendingCash += amt; }
+        else if (accMap[fromId] && accMap[toId] && fromId !== toId) { accBalances[fromId] = (accBalances[fromId] || 0) - amt; accBalances[toId] = (accBalances[toId] || 0) + amt; }
       } else if (tx.type === 'balance_adjustment') {
         if (tx.adjustSign === 'sub') spendingCash -= amt;
         else spendingCash += amt;
@@ -2347,29 +1893,28 @@
     });
 
     const totalSavings = accounts.reduce(function(sum, a) { return sum + (accBalances[a.id] || 0); }, 0);
-    const emergencyBalance = accounts
-      .filter(function(a) { return a.kind === 'emergency'; })
-      .reduce(function(sum, a) { return sum + (accBalances[a.id] || 0); }, 0);
-    const netWorth = spendingCash + totalSavings;
+    const refDayISO = activeYM === getCurrentYM() ? getTodayISO() : (selectedDateISO.startsWith(activeYM) ? selectedDateISO : activeYM + '-01');
+
+    const dayExpenses = state.transactions.filter(function(t) { return t.type === 'expense' && t.date === refDayISO; });
+    const dailySpent = dayExpenses.filter(function(t) { return !t.isExtra; }).reduce(function(s, t) { return s + t.amount; }, 0);
+    const dailyExtraSpent = dayExpenses.filter(function(t) { return !!t.isExtra; }).reduce(function(s, t) { return s + t.amount; }, 0);
 
     const monthTxs = state.transactions.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
     const monthlyIncome = monthTxs.filter(function(t) { return t.type === 'income'; }).reduce(function(s, t) { return s + t.amount; }, 0);
     const monthlyExpense = monthTxs.filter(function(t) { return t.type === 'expense'; }).reduce(function(s, t) { return s + t.amount; }, 0);
     const monthlyNetCashflow = monthlyIncome - monthlyExpense;
-    const savingsRate = monthlyIncome > 0 ? Math.round(((monthlyIncome - monthlyExpense) / monthlyIncome) * 100) : 0;
 
     return {
       spendingCash: spendingCash,
       totalSavings: totalSavings,
-      emergencyBalance: emergencyBalance,
-      netWorth: netWorth,
       accBalances: accBalances,
-      accLedger: accLedger,
+      refDayISO: refDayISO,
+      dailySpent: dailySpent,
+      dailyExtraSpent: dailyExtraSpent,
       monthTxs: monthTxs,
       monthlyIncome: monthlyIncome,
       monthlyExpense: monthlyExpense,
-      monthlyNetCashflow: monthlyNetCashflow,
-      savingsRate: savingsRate
+      monthlyNetCashflow: monthlyNetCashflow
     };
   }
 
@@ -2382,7 +1927,7 @@
     txt.textContent = msg;
     card.classList.add('show');
     if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() { card.classList.remove('show'); }, 3000);
+    toastTimer = setTimeout(function() { card.classList.remove('show'); }, 2800);
   }
 
   function hideToast() {
@@ -2391,19 +1936,9 @@
     if (toastTimer) clearTimeout(toastTimer);
   }
 
-  function pushNotification(title, tone, silentToast) {
-    state.notifications = [{
-      id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-      tone: tone || 'ok',
-      title: String(title || '').trim(),
-      time: clockNow(),
-      read: false
-    }].concat(state.notifications || []).slice(0, 30);
-
-    if (!silentToast) showToast(title, tone);
-    if ('Notification' in window && Notification.permission === 'granted') {
-      try { new Notification("Owen's Vault 4.0", { body: title }); } catch (e) {}
-    }
+  function pushNotification(title, tone) {
+    state.notifications = [{ id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5), tone: tone || 'ok', title: String(title || '').trim(), time: clockNow(), read: false }].concat(state.notifications || []).slice(0, 30);
+    showToast(title, tone);
   }
 
   function persist(skipIDB) {
@@ -2450,14 +1985,6 @@
     renderAll();
   }
 
-  function setWaveFilter(f) {
-    waveFilter = f;
-    document.querySelectorAll('#waveFilterRow .mini-tab').forEach(function(b) {
-      b.classList.toggle('active', b.getAttribute('data-wf') === f);
-    });
-    renderAll();
-  }
-
   function togglePrivacy() {
     state.profile.hideBalances = !state.profile.hideBalances;
     persist();
@@ -2480,216 +2007,51 @@
 
     document.getElementById('heroAvailableBalance').textContent = displayMoney(acc.spendingCash);
     const cfBadge = document.getElementById('cashFlowBadge');
-    cfBadge.textContent = 'Arus Kas ' + (acc.monthlyNetCashflow >= 0 ? '+' : '') + formatRp(acc.monthlyNetCashflow);
+    cfBadge.textContent = 'Net ' + (acc.monthlyNetCashflow >= 0 ? '+' : '') + formatRp(acc.monthlyNetCashflow);
     cfBadge.className = 'pill-tag' + (acc.monthlyNetCashflow < 0 ? ' neg' : '');
 
     document.getElementById('dashIncomeVal').textContent = displayMoney(acc.monthlyIncome);
     document.getElementById('dashExpenseVal').textContent = displayMoney(acc.monthlyExpense);
     document.getElementById('dashTotalSavings').textContent = displayMoney(acc.totalSavings);
-    document.getElementById('dashEmergencyVal').textContent = displayMoney(acc.emergencyBalance);
 
-    const netEl = document.getElementById('dashNetCashflow');
-    netEl.textContent = displayMoney(acc.monthlyNetCashflow);
-    netEl.style.color = acc.monthlyNetCashflow >= 0 ? 'var(--income)' : 'var(--expense)';
+    // Daily Cap Render
+    const dailyCap = Math.max(0, Number(prof.dailySpendingLimit) || 0);
+    const capPct = dailyCap > 0 ? Math.min(100, Math.round((acc.dailySpent / dailyCap) * 100)) : 0;
+    const capRem = dailyCap - acc.dailySpent;
 
-    const incTarget = Number(prof.monthlyIncomeTarget) || 0;
-    document.getElementById('dashIncomeTargetNote').textContent = incTarget > 0
-      ? 'Target masuk: ' + formatRp(incTarget) + ' (' + Math.round((acc.monthlyIncome / incTarget) * 100) + '%)'
-      : 'Set target pemasukan di Profil';
+    document.getElementById('dailyCapTitle').textContent = acc.refDayISO === getTodayISO() ? 'Patokan Harian (Hari Ini)' : 'Patokan Harian (' + acc.refDayISO + ')';
+    document.getElementById('dailyCapSpent').textContent = displayMoney(acc.dailySpent);
+    document.getElementById('dailyCapBar').style.width = capPct + '%';
+    document.getElementById('dailyCapExtraNote').textContent = 'Ekstra luar limit: ' + displayMoney(acc.dailyExtraSpent);
 
-    document.getElementById('dashSavingsRate').textContent = acc.savingsRate + '%';
-    document.getElementById('dashNetWorthNote').textContent = 'Kekayaan bersih: ' + displayMoney(acc.netWorth);
+    const capBadge = document.getElementById('dailyCapBadge');
+    const capBar = document.getElementById('dailyCapBar');
+    if (dailyCap <= 0) {
+      capBadge.textContent = 'Bebas';
+      capBadge.className = 'pill-tag gold';
+      capBar.className = 'bar-fill gold';
+      document.getElementById('dailyCapRemain').textContent = 'Tanpa patokan';
+      document.getElementById('dailyCapLimitText').textContent = 'Limit: Rp 0/hari';
+    } else if (capRem < 0) {
+      capBadge.textContent = 'Over Limit';
+      capBadge.className = 'pill-tag neg';
+      capBar.className = 'bar-fill warn';
+      document.getElementById('dailyCapRemain').textContent = 'Lewat ' + displayMoney(Math.abs(capRem));
+      document.getElementById('dailyCapLimitText').textContent = 'Limit: ' + formatRp(dailyCap) + '/hari';
+    } else {
+      capBadge.textContent = capPct >= 80 ? (capPct + '%') : 'Aman';
+      capBadge.className = capPct >= 80 ? 'pill-tag gold' : 'pill-tag';
+      capBar.className = capPct >= 80 ? 'bar-fill gold' : 'bar-fill';
+      document.getElementById('dailyCapRemain').textContent = 'Sisa: ' + displayMoney(capRem);
+      document.getElementById('dailyCapLimitText').textContent = 'Limit: ' + formatRp(dailyCap) + '/hari';
+    }
 
-    renderWaveChart(acc);
     renderQuickActions();
-    renderInsights(acc);
     renderTransactionFeed(acc);
     renderCalendarTab(acc);
     renderBudgetTab(acc);
     renderSavingsTab(acc);
     renderNotificationsModal();
-  }
-
-  function renderWaveChart(acc) {
-    const canvas = document.getElementById('waveCanvas');
-    if (!canvas) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const rect = canvas.getBoundingClientRect();
-    const w = Math.max(280, Math.floor(rect.width || 440));
-    const h = Math.max(150, Math.floor(rect.height || 185));
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, w, h);
-
-    const primaryCol = (state.profile && state.profile.primaryColor) || '#10B981';
-    const goldCol = (state.profile && state.profile.accentColor) || '#C6A15B';
-
-    const buckets = buildWaveBuckets(waveFilter, activeYM);
-    document.getElementById('wavePeriodSummary').textContent = waveFilter.charAt(0).toUpperCase() + waveFilter.slice(1);
-
-    const seriesInc = buckets.map(function(b) { return b.inc; });
-    const seriesExp = buckets.map(function(b) { return b.exp; });
-    const seriesNet = buckets.map(function(b) { return b.inc - b.exp; });
-    const seriesPrev = buckets.map(function(b) { return b.prevNet; });
-
-    const allVals = seriesInc.concat(seriesExp).concat(seriesNet).concat(seriesPrev).map(function(v) { return Math.abs(v); });
-    const maxMag = Math.max.apply(null, allVals.concat([1]));
-
-    const padL = 12;
-    const padR = 12;
-    const padT = 18;
-    const padB = 26;
-    const plotW = w - padL - padR;
-    const plotH = h - padT - padB;
-    const count = Math.max(2, buckets.length);
-
-    function getX(idx) { return padL + (idx / (count - 1)) * plotW; }
-    function getY(val) {
-      const norm = Math.max(-1, Math.min(1, val / maxMag));
-      return padT + plotH * (0.5 - norm * 0.42);
-    }
-
-    ctx.strokeStyle = 'rgba(243, 244, 246, 0.06)';
-    ctx.lineWidth = 1;
-    [0.2, 0.5, 0.8].forEach(function(frac) {
-      const gy = padT + plotH * frac;
-      ctx.beginPath();
-      ctx.moveTo(padL, gy);
-      ctx.lineTo(w - padR, gy);
-      ctx.stroke();
-    });
-
-    function drawSmoothWave(values, strokeColor, fillTopColor, dashed) {
-      if (values.length < 2) return;
-      ctx.save();
-      if (dashed) ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      const pts = values.map(function(v, i) { return { x: getX(i), y: getY(v) }; });
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (let i = 0; i < pts.length - 1; i++) {
-        const xc = (pts[i].x + pts[i + 1].x) * 0.5;
-        const yc = (pts[i].y + pts[i + 1].y) * 0.5;
-        ctx.quadraticCurveTo(pts[i].x, pts[i].y, xc, yc);
-      }
-      ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = dashed ? 1.5 : 2.2;
-      ctx.stroke();
-
-      if (fillTopColor && !dashed) {
-        ctx.lineTo(pts[pts.length - 1].x, h - padB);
-        ctx.lineTo(pts[0].x, h - padB);
-        ctx.closePath();
-        const grad = ctx.createLinearGradient(0, padT, 0, h - padB);
-        grad.addColorStop(0, fillTopColor);
-        grad.addColorStop(1, 'rgba(9, 13, 11, 0)');
-        ctx.fillStyle = grad;
-        ctx.fill();
-      }
-      ctx.restore();
-    }
-
-    drawSmoothWave(seriesPrev, hexToRgba(goldCol, 0.78), null, true);
-    drawSmoothWave(seriesExp, '#FB7185', 'rgba(251, 113, 133, 0.14)', false);
-    drawSmoothWave(seriesInc, '#34D399', 'rgba(52, 211, 153, 0.15)', false);
-    drawSmoothWave(seriesNet, primaryCol, hexToRgba(primaryCol, 0.24), false);
-
-    ctx.fillStyle = '#9CA3AF';
-    ctx.font = '600 10px -apple-system, BlinkMacSystemFont, sans-serif';
-    ctx.textAlign = 'center';
-    const step = Math.max(1, Math.ceil(buckets.length / 6));
-    buckets.forEach(function(b, idx) {
-      if (idx % step === 0 || idx === buckets.length - 1) {
-        ctx.fillText(b.label, getX(idx), h - 8);
-      }
-    });
-  }
-
-  function buildWaveBuckets(mode, ym) {
-    const parts = ym.split('-');
-    const y = Number(parts[0]);
-    const m = Number(parts[1]) - 1;
-
-    function sumRange(startISO, endISO) {
-      let inc = 0;
-      let exp = 0;
-      state.transactions.forEach(function(t) {
-        if (t.date >= startISO && t.date <= endISO) {
-          if (t.type === 'income') inc += t.amount;
-          if (t.type === 'expense') exp += t.amount;
-        }
-      });
-      return { inc: inc, exp: exp };
-    }
-
-    if (mode === 'daily') {
-      const days = new Date(y, m + 1, 0).getDate();
-      const out = [];
-      for (let d = 1; d <= days; d++) {
-        const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-        const prevDate = new Date(y, m, d - 7);
-        const prevIso = prevDate.getFullYear() + '-' + String(prevDate.getMonth() + 1).padStart(2, '0') + '-' + String(prevDate.getDate()).padStart(2, '0');
-        const cur = sumRange(iso, iso);
-        const prev = sumRange(prevIso, prevIso);
-        out.push({ label: String(d), inc: cur.inc, exp: cur.exp, prevNet: prev.inc - prev.exp });
-      }
-      return out;
-    }
-
-    if (mode === 'weekly') {
-      const out = [];
-      for (let w = 0; w < 4; w++) {
-        const dStart = w * 7 + 1;
-        const dEnd = w === 3 ? new Date(y, m + 1, 0).getDate() : (w + 1) * 7;
-        const sIso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(dStart).padStart(2, '0');
-        const eIso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(dEnd).padStart(2, '0');
-        const prevStart = new Date(y, m, dStart - 28);
-        const prevEnd = new Date(y, m, dEnd - 28);
-        const psIso = prevStart.getFullYear() + '-' + String(prevStart.getMonth() + 1).padStart(2, '0') + '-' + String(prevStart.getDate()).padStart(2, '0');
-        const peIso = prevEnd.getFullYear() + '-' + String(prevEnd.getMonth() + 1).padStart(2, '0') + '-' + String(prevEnd.getDate()).padStart(2, '0');
-        const cur = sumRange(sIso, eIso);
-        const prev = sumRange(psIso, peIso);
-        out.push({ label: 'W' + (w + 1), inc: cur.inc, exp: cur.exp, prevNet: prev.inc - prev.exp });
-      }
-      return out;
-    }
-
-    if (mode === 'yearly') {
-      const out = [];
-      for (let mo = 0; mo < 12; mo++) {
-        const ymCur = y + '-' + String(mo + 1).padStart(2, '0');
-        const lastDay = new Date(y, mo + 1, 0).getDate();
-        const ymPrev = (y - 1) + '-' + String(mo + 1).padStart(2, '0');
-        const lastDayPrev = new Date(y - 1, mo + 1, 0).getDate();
-        const cur = sumRange(ymCur + '-01', ymCur + '-' + String(lastDay).padStart(2, '0'));
-        const prev = sumRange(ymPrev + '-01', ymPrev + '-' + String(lastDayPrev).padStart(2, '0'));
-        const lbl = new Date(y, mo, 1).toLocaleDateString('id-ID', { month: 'short' });
-        out.push({ label: lbl, inc: cur.inc, exp: cur.exp, prevNet: prev.inc - prev.exp });
-      }
-      return out;
-    }
-
-    const out = [];
-    for (let i = -5; i <= 0; i++) {
-      const dt = new Date(y, m + i, 1);
-      const ymCur = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
-      const lastD = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
-      const dtPrev = new Date(dt.getFullYear(), dt.getMonth() - 1, 1);
-      const ymPrev = dtPrev.getFullYear() + '-' + String(dtPrev.getMonth() + 1).padStart(2, '0');
-      const lastDPrev = new Date(dtPrev.getFullYear(), dtPrev.getMonth() + 1, 0).getDate();
-      const cur = sumRange(ymCur + '-01', ymCur + '-' + String(lastD).padStart(2, '0'));
-      const prev = sumRange(ymPrev + '-01', ymPrev + '-' + String(lastDPrev).padStart(2, '0'));
-      out.push({
-        label: dt.toLocaleDateString('id-ID', { month: 'short' }),
-        inc: cur.inc,
-        exp: cur.exp,
-        prevNet: prev.inc - prev.exp
-      });
-    }
-    return out;
   }
 
   function renderQuickActions() {
@@ -2714,150 +2076,60 @@
       fromAccount: 'cash',
       toAccount: qa.accountId || '',
       adjustSign: 'add',
+      isExtra: !!qa.isExtra,
       note: qa.note || qa.label
     });
     pushNotification('Tercatat: ' + qa.label, qa.type === 'expense' ? 'warn' : 'ok');
     persist();
   }
 
-  function renderInsights(acc) {
-    const box = document.getElementById('insightsList');
-    const items = [];
-
-    const catTotals = {};
-    acc.monthTxs.filter(function(t) { return t.type === 'expense'; }).forEach(function(t) {
-      catTotals[t.category] = (catTotals[t.category] || 0) + t.amount;
-    });
-    const sortedCats = Object.keys(catTotals).sort(function(a, b) { return catTotals[b] - catTotals[a]; });
-    if (sortedCats.length > 0) {
-      const topCat = sortedCats[0];
-      items.push({
-        tag: 'Kategori Terbesar',
-        title: topCat + ' — ' + formatRp(catTotals[topCat]),
-        sub: 'Pengeluaran tertinggi pada periode ' + activeYM + '.'
-      });
-    } else {
-      items.push({
-        tag: 'Ringkasan',
-        title: 'Belum ada pengeluaran tercatat di bulan ini',
-        sub: 'Saldo tersedia saat ini ' + displayMoney(acc.spendingCash) + '.'
-      });
-    }
-
-    let overBudgets = 0;
-    (state.budgets || []).forEach(function(b) {
-      const spent = catTotals[b.category] || 0;
-      if (b.limit > 0 && spent >= b.limit * 0.85) overBudgets++;
-    });
-    if (overBudgets > 0) {
-      items.push({
-        tag: 'Peringatan Budget',
-        title: overBudgets + ' kategori mendekati atau melewati batas',
-        sub: 'Periksa tab Budget untuk menyesuaikan alokasi bulanan.'
-      });
-    }
-
-    const totalGoalTarget = (state.savingsAccounts || []).reduce(function(s, a) { return s + (Number(a.goalTarget) || 0); }, 0);
-    if (totalGoalTarget > 0) {
-      const pct = Math.min(100, Math.max(0, Math.round((acc.totalSavings / totalGoalTarget) * 100)));
-      items.push({
-        tag: 'Progres Vault',
-        title: 'Terkumpul ' + pct + '% dari total target rekening',
-        sub: 'Total tabungan ' + displayMoney(acc.totalSavings) + ' dari ' + formatRp(totalGoalTarget) + '.'
-      });
-    }
-
-    box.innerHTML = items.slice(0, 3).map(function(it) {
-      return '<div class="row-card">' +
-        '<div class="row-left">' +
-          '<div class="badge-icon gold">IN</div>' +
-          '<div class="row-content">' +
-            '<div class="row-title">' + escapeHtml(it.title) + '</div>' +
-            '<div class="row-sub">' + escapeHtml(it.sub) + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<span class="pill-tag gold">' + escapeHtml(it.tag) + '</span>' +
-      '</div>';
-    }).join('');
-  }
-
-  function syncCategoryFilterOptions() {
-    const sel = document.getElementById('txCategoryFilter');
-    if (!sel) return;
-    const prevVal = sel.value || 'all';
-    const setCats = new Set();
-    (state.budgets || []).forEach(function(b) { setCats.add(b.category); });
-    state.transactions.forEach(function(t) { if (t.category) setCats.add(t.category); });
-
-    const arr = Array.from(setCats).sort();
-    sel.innerHTML = '<option value="all">Semua Kategori</option>' + arr.map(function(c) {
-      return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>';
-    }).join('');
-    sel.value = Array.prototype.some.call(sel.options, function(o) { return o.value === prevVal; }) ? prevVal : 'all';
-  }
-
   function renderTransactionFeed(acc) {
-    syncCategoryFilterOptions();
     const q = (document.getElementById('txSearchInput').value || '').trim().toLowerCase();
     const tFilter = document.getElementById('txTypeFilter').value;
-    const cFilter = document.getElementById('txCategoryFilter').value;
-    const dFrom = document.getElementById('txDateFrom').value;
-    const dTo = document.getElementById('txDateTo').value;
 
     const typeLabels = {
-      income: 'Pemasukan',
-      expense: 'Pengeluaran',
-      savings_contribution: 'Setor Tabungan',
-      savings_withdrawal: 'Tarik Tabungan',
-      internal_transfer: 'Transfer Internal',
-      balance_adjustment: 'Penyesuaian Saldo'
+      income: 'Masuk',
+      expense: 'Keluar',
+      savings_contribution: 'Setor Vault',
+      savings_withdrawal: 'Tarik Vault',
+      internal_transfer: 'Transfer',
+      balance_adjustment: 'Penyesuaian'
     };
 
     const filtered = acc.monthTxs.filter(function(t) {
       if (tFilter !== 'all' && t.type !== tFilter) return false;
-      if (cFilter !== 'all' && t.category !== cFilter) return false;
-      if (dFrom && t.date < dFrom) return false;
-      if (dTo && t.date > dTo) return false;
       if (q) {
         const hay = [t.note, t.category, typeLabels[t.type] || t.type, t.date].join(' ').toLowerCase();
         if (hay.indexOf(q) === -1) return false;
       }
       return true;
-    }).sort(function(a, b) {
-      return b.date.localeCompare(a.date) || b.id.localeCompare(a.id);
-    });
+    }).sort(function(a, b) { return b.date.localeCompare(a.date) || b.id.localeCompare(a.id); });
 
     document.getElementById('txFilteredCount').textContent = filtered.length + ' item';
     const listEl = document.getElementById('txFeedList');
 
     if (!filtered.length) {
-      listEl.innerHTML = '<div class="empty-state">Belum ada transaksi yang sesuai filter pada bulan ini.</div>';
+      listEl.innerHTML = '<div class="empty-state">Belum ada transaksi di periode ini. Tap + untuk mencatat.</div>';
       return;
     }
 
     listEl.innerHTML = filtered.map(function(t) {
       let amtClass = 'amt-neu';
       let prefix = '';
-      if (t.type === 'income' || t.type === 'savings_withdrawal') {
-        amtClass = 'amt-inc';
-        prefix = '+';
-      } else if (t.type === 'expense' || t.type === 'savings_contribution') {
-        amtClass = 'amt-exp';
-        prefix = '-';
-      } else if (t.type === 'internal_transfer') {
-        amtClass = 'amt-gold';
-      } else if (t.type === 'balance_adjustment') {
-        amtClass = t.adjustSign === 'sub' ? 'amt-exp' : 'amt-inc';
-        prefix = t.adjustSign === 'sub' ? '-' : '+';
-      }
+      if (t.type === 'income' || t.type === 'savings_withdrawal') { amtClass = 'amt-inc'; prefix = '+'; }
+      else if (t.type === 'expense' || t.type === 'savings_contribution') { amtClass = 'amt-exp'; prefix = '-'; }
+      else if (t.type === 'internal_transfer') { amtClass = 'amt-gold'; }
+      else if (t.type === 'balance_adjustment') { amtClass = t.adjustSign === 'sub' ? 'amt-exp' : 'amt-inc'; prefix = t.adjustSign === 'sub' ? '-' : '+'; }
 
       const codeBadge = t.type === 'income' ? 'IN' : t.type === 'expense' ? 'EX' : t.type === 'internal_transfer' ? 'TF' : 'SV';
+      const extraTag = t.type === 'expense' && t.isExtra ? ' • Ekstra' : '';
+
       return '<div class="row-card">' +
         '<div class="row-left">' +
           '<div class="badge-icon' + (t.type === 'internal_transfer' ? ' gold' : '') + '">' + codeBadge + '</div>' +
           '<div class="row-content">' +
             '<div class="row-title single-line">' + escapeHtml(t.note || t.category) + '</div>' +
-            '<div class="row-sub">' + escapeHtml(typeLabels[t.type] || t.type) + ' • ' + escapeHtml(t.category) + ' • ' + t.date + '</div>' +
+            '<div class="row-sub">' + escapeHtml(t.category) + ' • ' + t.date + extraTag + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="row-right">' +
@@ -2893,7 +2165,6 @@
 
     let cells = '';
     for (let e = 0; e < firstDow; e++) cells += '<div class="cal-cell empty"></div>';
-
     for (let d = 1; d <= totalDays; d++) {
       const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
       const st = dayStats[iso] || { inc: 0, exp: 0 };
@@ -2905,8 +2176,8 @@
       const dots = [];
       if (st.inc > 0) dots.push('<i class="dot-inc"></i>');
       if (st.exp > 0) dots.push('<i class="dot-exp"></i>');
-
       const compactNet = net !== 0 ? ((net > 0 ? '+' : '-') + Math.round(Math.abs(net) / 1000) + 'k') : '';
+
       cells += '<button type="button" class="' + cls.join(' ') + '" onclick="selectCalendarDate(\'' + iso + '\')">' +
         '<span>' + d + '</span>' +
         (compactNet ? '<span class="cal-mini-net" style="color:' + (net >= 0 ? 'var(--income)' : 'var(--expense)') + '">' + compactNet + '</span>' : '<span class="cal-mini-net" style="opacity:0.35;">·</span>') +
@@ -2916,17 +2187,14 @@
     document.getElementById('calGrid').innerHTML = cells;
 
     const selStat = dayStats[selectedDateISO] || { inc: 0, exp: 0, list: [] };
-    const selNet = selStat.inc - selStat.exp;
-    document.getElementById('calSelDateLabel').textContent = 'Tanggal: ' + selectedDateISO;
     document.getElementById('calSelInc').textContent = displayMoney(selStat.inc);
     document.getElementById('calSelExp').textContent = displayMoney(selStat.exp);
-    document.getElementById('calSelNet').textContent = 'Bersih Harian: ' + (selNet >= 0 ? '+' : '') + displayMoney(selNet);
     document.getElementById('calDetailHeading').textContent = 'Transaksi ' + selectedDateISO;
     document.getElementById('calDetailCount').textContent = selStat.list.length + ' item';
 
     const detailEl = document.getElementById('calDetailList');
     if (!selStat.list.length) {
-      detailEl.innerHTML = '<div class="empty-state">Tidak ada transaksi pada tanggal ' + selectedDateISO + '.</div>';
+      detailEl.innerHTML = '<div class="empty-state">Tidak ada transaksi pada ' + selectedDateISO + '.</div>';
       return;
     }
 
@@ -2972,7 +2240,7 @@
 
     const listEl = document.getElementById('budgetList');
     if (!budgets.length) {
-      listEl.innerHTML = '<div class="empty-state">Belum ada kategori anggaran. Tap + Kategori untuk membuat.</div>';
+      listEl.innerHTML = '<div class="empty-state">Belum ada kategori anggaran.</div>';
       return;
     }
 
@@ -3008,11 +2276,11 @@
     if (editingBudgetId) {
       const b = state.budgets.find(function(x) { return x.id === editingBudgetId; });
       if (!b) return;
-      document.getElementById('modalBudgetTitle').textContent = 'Edit Kategori Anggaran';
+      document.getElementById('modalBudgetTitle').textContent = 'Edit Kategori';
       document.getElementById('budName').value = b.category;
       document.getElementById('budLimit').value = b.limit;
     } else {
-      document.getElementById('modalBudgetTitle').textContent = 'Tambah Kategori Anggaran';
+      document.getElementById('modalBudgetTitle').textContent = 'Tambah Kategori';
       document.getElementById('budName').value = '';
       document.getElementById('budLimit').value = '';
     }
@@ -3022,18 +2290,13 @@
   function saveBudgetCategory() {
     const name = stripLeadingEmoji(document.getElementById('budName').value);
     const limit = Math.max(0, Math.round(Number(document.getElementById('budLimit').value) || 0));
-    if (!name || limit <= 0) {
-      showToast('Isi nama kategori dan batas anggaran yang valid', 'warn');
-      return;
-    }
+    if (!name || limit <= 0) { showToast('Isi nama kategori & batas yang valid', 'warn'); return; }
     if (editingBudgetId) {
-      state.budgets = state.budgets.map(function(b) {
-        return b.id === editingBudgetId ? Object.assign({}, b, { category: name, limit: limit }) : b;
-      });
+      state.budgets = state.budgets.map(function(b) { return b.id === editingBudgetId ? Object.assign({}, b, { category: name, limit: limit }) : b; });
       pushNotification('Anggaran "' + name + '" diperbarui', 'ok');
     } else {
       state.budgets.push({ id: 'bud_' + Date.now(), category: name, limit: limit });
-      pushNotification('Kategori anggaran "' + name + '" ditambahkan', 'ok');
+      pushNotification('Kategori "' + name + '" ditambahkan', 'ok');
     }
     editingBudgetId = null;
     persist();
@@ -3058,16 +2321,9 @@
     document.getElementById('savingsMonthlyTargetSum').textContent = 'Target Bulanan: ' + formatRp(totalMonthlyTarget);
     document.getElementById('savingsGoalTargetSum').textContent = 'Total Target: ' + formatRp(totalGoalTarget);
 
-    const kindNames = {
-      savings: 'Main Savings',
-      emergency: 'Emergency Fund',
-      vault: 'Piggy Vault',
-      goal: 'Savings Goal'
-    };
-
     const listEl = document.getElementById('savingsAccountsList');
     if (!accounts.length) {
-      listEl.innerHTML = '<div class="empty-state">Belum ada rekening tabungan. Tap + Rekening / Goal untuk menambah.</div>';
+      listEl.innerHTML = '<div class="empty-state">Belum ada rekening tabungan.</div>';
       return;
     }
 
@@ -3075,12 +2331,9 @@
       const bal = acc.accBalances[a.id] || 0;
       const target = Math.max(1000, Number(a.goalTarget) || 1000000);
       const prog = Math.min(100, Math.max(0, Math.round((bal / target) * 100)));
-      const recent = (acc.accLedger[a.id] || []).slice(0, 2);
-
       return '<div class="account-card">' +
         '<div class="account-head">' +
           '<div>' +
-            '<span class="pill-tag" style="margin-bottom:4px;display:inline-block;">' + escapeHtml(kindNames[a.kind] || 'Goal') + '</span>' +
             '<div class="row-title" style="font-size:15px;">' + escapeHtml(a.name) + '</div>' +
             '<div class="account-bal">' + displayMoney(bal) + '</div>' +
           '</div>' +
@@ -3094,9 +2347,6 @@
           '<span>Target: ' + formatRp(target) + ' (' + prog + '%)</span>' +
           '<span>Bulanan: ' + formatRp(a.monthlyTarget) + '</span>' +
         '</div>' +
-        (recent.length ? '<div class="ledger-chip">' + recent.map(function(ev) {
-          return '<div>' + ev.date + ' • ' + (ev.kind === 'in' ? '+' : '-') + formatRp(ev.amount) + ' — ' + escapeHtml(ev.note) + '</div>';
-        }).join('') + '</div>' : '') +
       '</div>';
     }).join('');
   }
@@ -3106,13 +2356,13 @@
     if (editingSavingsId) {
       const a = state.savingsAccounts.find(function(x) { return x.id === editingSavingsId; });
       if (!a) return;
-      document.getElementById('modalSavingsTitle').textContent = 'Edit Rekening / Goal';
+      document.getElementById('modalSavingsTitle').textContent = 'Edit Rekening';
       document.getElementById('savName').value = a.name;
       document.getElementById('savKind').value = a.kind;
       document.getElementById('savMonthlyTarget').value = a.monthlyTarget;
       document.getElementById('savGoalTarget').value = a.goalTarget;
     } else {
-      document.getElementById('modalSavingsTitle').textContent = 'Tambah Rekening / Goal';
+      document.getElementById('modalSavingsTitle').textContent = 'Tambah Rekening';
       document.getElementById('savName').value = '';
       document.getElementById('savKind').value = 'goal';
       document.getElementById('savMonthlyTarget').value = '500000';
@@ -3126,27 +2376,12 @@
     const kind = document.getElementById('savKind').value;
     const monthlyTarget = Math.max(0, Math.round(Number(document.getElementById('savMonthlyTarget').value) || 0));
     const goalTarget = Math.max(1000, Math.round(Number(document.getElementById('savGoalTarget').value) || 1000000));
-
-    if (!name) {
-      showToast('Masukkan nama rekening atau goal', 'warn');
-      return;
-    }
-
+    if (!name) { showToast('Masukkan nama rekening', 'warn'); return; }
     if (editingSavingsId) {
-      state.savingsAccounts = state.savingsAccounts.map(function(a) {
-        return a.id === editingSavingsId
-          ? Object.assign({}, a, { name: name, kind: kind, monthlyTarget: monthlyTarget, goalTarget: goalTarget })
-          : a;
-      });
+      state.savingsAccounts = state.savingsAccounts.map(function(a) { return a.id === editingSavingsId ? Object.assign({}, a, { name: name, kind: kind, monthlyTarget: monthlyTarget, goalTarget: goalTarget }) : a; });
       pushNotification('Rekening "' + name + '" diperbarui', 'ok');
     } else {
-      state.savingsAccounts.push({
-        id: 'acc_' + Date.now(),
-        name: name,
-        kind: kind,
-        monthlyTarget: monthlyTarget,
-        goalTarget: goalTarget
-      });
+      state.savingsAccounts.push({ id: 'acc_' + Date.now(), name: name, kind: kind, monthlyTarget: monthlyTarget, goalTarget: goalTarget });
       pushNotification('Rekening "' + name + '" ditambahkan', 'ok');
     }
     editingSavingsId = null;
@@ -3156,7 +2391,7 @@
 
   function deleteSavingsAccount(id) {
     state.savingsAccounts = state.savingsAccounts.filter(function(a) { return a.id !== id; });
-    pushNotification('Rekening tabungan dihapus', 'gold');
+    pushNotification('Rekening dihapus', 'gold');
     persist();
   }
 
@@ -3165,23 +2400,17 @@
     const cats = new Set((state.budgets || []).map(function(b) { return b.category; }));
     ['Gaji & Pemasukan', 'Tips & Bonus', 'Tabungan', 'Transfer Internal', 'Penyesuaian'].forEach(function(c) { cats.add(c); });
     const catList = Array.from(cats);
-    catSel.innerHTML = catList.map(function(c) {
-      return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>';
-    }).join('');
+    catSel.innerHTML = catList.map(function(c) { return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>'; }).join('');
     if (selectedCat && catList.indexOf(selectedCat) !== -1) catSel.value = selectedCat;
 
     const accSel = document.getElementById('txSavingsAccount');
     const accs = state.savingsAccounts || [];
-    accSel.innerHTML = accs.map(function(a) {
-      return '<option value="' + escapeHtml(a.id) + '">' + escapeHtml(a.name) + '</option>';
-    }).join('');
+    accSel.innerHTML = accs.map(function(a) { return '<option value="' + escapeHtml(a.id) + '">' + escapeHtml(a.name) + '</option>'; }).join('');
     if (selectedAccId) accSel.value = selectedAccId;
 
     const fromSel = document.getElementById('txTransferFrom');
     const toSel = document.getElementById('txTransferTo');
-    const endpointOptions = '<option value="cash">Kas Tersedia (Spending Cash)</option>' + accs.map(function(a) {
-      return '<option value="' + escapeHtml(a.id) + '">' + escapeHtml(a.name) + '</option>';
-    }).join('');
+    const endpointOptions = '<option value="cash">Kas Tersedia</option>' + accs.map(function(a) { return '<option value="' + escapeHtml(a.id) + '">' + escapeHtml(a.name) + '</option>'; }).join('');
     fromSel.innerHTML = endpointOptions;
     toSel.innerHTML = endpointOptions;
     fromSel.value = fromId || 'cash';
@@ -3190,22 +2419,14 @@
 
   function selectTxType(type) {
     txFormType = type;
-    const map = {
-      expense: 'ttExpense',
-      income: 'ttIncome',
-      savings_contribution: 'ttSaveIn',
-      savings_withdrawal: 'ttSaveOut',
-      internal_transfer: 'ttTransfer',
-      balance_adjustment: 'ttAdjust'
-    };
-    Object.keys(map).forEach(function(k) {
-      document.getElementById(map[k]).classList.toggle('active', k === type);
-    });
+    const map = { expense: 'ttExpense', income: 'ttIncome', savings_contribution: 'ttSaveIn', savings_withdrawal: 'ttSaveOut', internal_transfer: 'ttTransfer', balance_adjustment: 'ttAdjust' };
+    Object.keys(map).forEach(function(k) { document.getElementById(map[k]).classList.toggle('active', k === type); });
 
     document.getElementById('txCategoryGroup').classList.toggle('hidden', type === 'internal_transfer' || type === 'savings_contribution' || type === 'savings_withdrawal');
+    document.getElementById('txExtraGroup').classList.toggle('hidden', type !== 'expense');
     const showSavAcc = type === 'savings_contribution' || type === 'savings_withdrawal';
     document.getElementById('txSavingsAccountGroup').classList.toggle('hidden', !showSavAcc);
-    document.getElementById('txSavingsAccountLabel').textContent = type === 'savings_contribution' ? 'Setor ke Rekening Tabungan' : 'Tarik dari Rekening Tabungan';
+    document.getElementById('txSavingsAccountLabel').textContent = type === 'savings_contribution' ? 'Setor ke Rekening' : 'Tarik dari Rekening';
     document.getElementById('txTransferGroup').classList.toggle('hidden', type !== 'internal_transfer');
     document.getElementById('txAdjustModeGroup').classList.toggle('hidden', type !== 'balance_adjustment');
   }
@@ -3213,12 +2434,12 @@
   function openTxModal() {
     editingTxId = null;
     document.getElementById('modalTxTitle').textContent = 'Catat Transaksi';
-    document.getElementById('btnSaveTx').textContent = 'Simpan Transaksi';
+    document.getElementById('btnSaveTx').textContent = 'Simpan';
     document.getElementById('txTypeSelector').classList.remove('hidden');
     document.getElementById('txAmount').value = '';
     document.getElementById('txNote').value = '';
+    document.getElementById('txIsExtra').checked = false;
     document.getElementById('txDate').value = selectedDateISO.startsWith(activeYM) ? selectedDateISO : (activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01');
-
     populateTxDropdowns();
     selectTxType(activeTab === 'savings' ? 'savings_contribution' : 'expense');
     openModal('modalTx');
@@ -3229,13 +2450,13 @@
     if (!tx) return;
     editingTxId = id;
     document.getElementById('modalTxTitle').textContent = 'Edit Transaksi';
-    document.getElementById('btnSaveTx').textContent = 'Perbarui Transaksi';
+    document.getElementById('btnSaveTx').textContent = 'Perbarui';
     document.getElementById('txTypeSelector').classList.add('hidden');
     document.getElementById('txDate').value = tx.date;
     document.getElementById('txAmount').value = tx.amount;
     document.getElementById('txNote').value = tx.note || '';
+    document.getElementById('txIsExtra').checked = !!tx.isExtra;
     document.getElementById('txAdjustMode').value = tx.adjustSign || 'add';
-
     populateTxDropdowns(tx.accountId, tx.fromAccount, tx.toAccount, tx.category);
     selectTxType(tx.type);
     openModal('modalTx');
@@ -3243,10 +2464,7 @@
 
   function saveTransaction() {
     const amount = Math.round(Number(document.getElementById('txAmount').value) || 0);
-    if (amount <= 0) {
-      showToast('Nominal transaksi harus lebih dari 0', 'warn');
-      return;
-    }
+    if (amount <= 0) { showToast('Nominal harus lebih dari 0', 'warn'); return; }
 
     const dateVal = document.getElementById('txDate').value || getTodayISO();
     const noteVal = String(document.getElementById('txNote').value || '').trim();
@@ -3255,11 +2473,9 @@
     const fromVal = document.getElementById('txTransferFrom').value;
     const toVal = document.getElementById('txTransferTo').value;
     const adjSign = document.getElementById('txAdjustMode').value;
+    const isExtraVal = document.getElementById('txIsExtra').checked;
 
-    if (txFormType === 'internal_transfer' && fromVal === toVal) {
-      showToast('Pilih akun asal dan tujuan yang berbeda', 'warn');
-      return;
-    }
+    if (txFormType === 'internal_transfer' && fromVal === toVal) { showToast('Pilih akun asal & tujuan berbeda', 'warn'); return; }
 
     const payload = {
       id: editingTxId || ('tx_' + Date.now()),
@@ -3271,19 +2487,19 @@
       fromAccount: fromVal,
       toAccount: toVal,
       adjustSign: adjSign,
+      isExtra: txFormType === 'expense' ? isExtraVal : false,
       note: noteVal
     };
 
     if (editingTxId) {
       state.transactions = state.transactions.map(function(t) { return t.id === editingTxId ? payload : t; });
-      pushNotification('Transaksi diperbarui (' + formatRp(amount) + ')', 'ok');
+      pushNotification('Transaksi diperbarui', 'ok');
     } else {
       state.transactions.push(payload);
       activeYM = dateVal.slice(0, 7);
       selectedDateISO = dateVal;
-      pushNotification('Transaksi tersimpan (' + formatRp(amount) + ')', txFormType === 'expense' ? 'warn' : 'ok');
+      pushNotification('Tersimpan (' + formatRp(amount) + ')', txFormType === 'expense' ? 'warn' : 'ok');
     }
-
     editingTxId = null;
     persist();
     closeModal('modalTx');
@@ -3291,19 +2507,18 @@
 
   function deleteTx(id) {
     state.transactions = state.transactions.filter(function(t) { return t.id !== id; });
-    pushNotification('Transaksi dihapus & saldo dihitung ulang', 'gold');
+    pushNotification('Transaksi dihapus', 'gold');
     persist();
   }
 
-  /* PROFILE, THEME CUSTOMIZER & PIN */
   function openProfileModal() {
     const p = state.profile;
     const preset = THEME_PRESETS[p.themePreset] || THEME_PRESETS.emerald;
     document.getElementById('profName').value = p.name || 'Owen';
     document.getElementById('profInitials').value = p.initials || 'OW';
+    document.getElementById('profDailyLimit').value = typeof p.dailySpendingLimit === 'number' ? p.dailySpendingLimit : 30000;
     document.getElementById('profMonthlyIncome').value = p.monthlyIncomeTarget || 0;
     document.getElementById('profOpeningCash').value = p.openingCash || 0;
-    document.getElementById('profCurrency').value = p.currency || 'IDR';
     document.getElementById('customPrimaryColor').value = p.primaryColor || preset.primary;
     document.getElementById('customAccentColor').value = p.accentColor || preset.gold;
     document.getElementById('profPinEnabled').checked = !!p.pinEnabled;
@@ -3319,14 +2534,12 @@
     document.getElementById('customPrimaryColor').value = pr.primary;
     document.getElementById('customAccentColor').value = pr.gold;
     applyThemeToDocument(state.profile);
-    renderWaveChart(computeAccounting());
   }
 
   function onCustomColorChange() {
     state.profile.primaryColor = document.getElementById('customPrimaryColor').value;
     state.profile.accentColor = document.getElementById('customAccentColor').value;
     applyThemeToDocument(state.profile);
-    renderWaveChart(computeAccounting());
   }
 
   function saveProfilePreferences() {
@@ -3337,27 +2550,28 @@
 
     if (rawNewPin) {
       if (!/^\d{4,6}$/.test(rawNewPin)) {
-        showToast('PIN harus berupa 4 sampai 6 digit angka', 'warn');
+        showToast('PIN harus 4–6 digit angka', 'warn');
         return;
       }
       state.profile.pinHash = hashPinValue(rawNewPin);
+      state.profile.pinLength = rawNewPin.length;
     }
 
     if (pinEnabled && !state.profile.pinHash) {
-      showToast('Masukkan 4–6 digit PIN terlebih dahulu', 'warn');
+      showToast('Isi 4–6 digit PIN terlebih dahulu', 'warn');
       return;
     }
 
     state.profile.name = name;
     state.profile.initials = initials;
+    state.profile.dailySpendingLimit = Math.max(0, Math.round(Number(document.getElementById('profDailyLimit').value) || 0));
     state.profile.monthlyIncomeTarget = Math.max(0, Math.round(Number(document.getElementById('profMonthlyIncome').value) || 0));
     state.profile.openingCash = Math.round(Number(document.getElementById('profOpeningCash').value) || 0);
-    state.profile.currency = document.getElementById('profCurrency').value || 'IDR';
     state.profile.primaryColor = document.getElementById('customPrimaryColor').value || '#10B981';
     state.profile.accentColor = document.getElementById('customAccentColor').value || '#C6A15B';
     state.profile.pinEnabled = pinEnabled;
 
-    pushNotification('Profil, tema & keamanan diperbarui', 'ok');
+    pushNotification('Pengaturan tersimpan', 'ok');
     persist();
     closeModal('modalProfile');
   }
@@ -3372,67 +2586,40 @@
     const list = state.notifications || [];
     const unread = list.filter(function(n) { return !n.read; }).length;
     document.getElementById('notifDot').classList.toggle('hidden', unread === 0);
-
     const el = document.getElementById('notifModalList');
     if (!el) return;
-    if (!list.length) {
-      el.innerHTML = '<div class="empty-state">Tidak ada riwayat notifikasi.</div>';
-      return;
-    }
+    if (!list.length) { el.innerHTML = '<div class="empty-state">Tidak ada riwayat.</div>'; return; }
     el.innerHTML = list.map(function(n) {
-      return '<div class="row-card">' +
-        '<div class="row-content">' +
-          '<div class="row-title">' + escapeHtml(n.title) + '</div>' +
-          '<div class="row-sub">' + escapeHtml(n.time || '') + '</div>' +
-        '</div>' +
-      '</div>';
+      return '<div class="row-card"><div class="row-content"><div class="row-title">' + escapeHtml(n.title) + '</div><div class="row-sub">' + escapeHtml(n.time || '') + '</div></div></div>';
     }).join('');
   }
 
   function requestWebNotif() {
-    if (!('Notification' in window)) {
-      showToast('Perangkat tidak mendukung notifikasi web', 'warn');
-      return;
-    }
-    Notification.requestPermission().then(function(p) {
-      showToast('Izin notifikasi: ' + p, 'gold');
-    });
+    if (!('Notification' in window)) { showToast('Perangkat tidak mendukung notifikasi web', 'warn'); return; }
+    Notification.requestPermission().then(function(p) { showToast('Notifikasi: ' + p, 'gold'); });
   }
 
-  function clearNotifs() {
-    state.notifications = [];
-    persist();
-  }
-
-  function openSettingsModal() {
-    openModal('modalSettings');
-  }
+  function clearNotifs() { state.notifications = []; persist(); }
+  function openSettingsModal() { openModal('modalSettings'); }
 
   function downloadVaultIconPng() {
     if (typeof window.__OWEN_VAULT_ICON_512 !== 'function') return;
-    const url = window.__OWEN_VAULT_ICON_512();
     const a = document.createElement('a');
-    a.href = url;
+    a.href = window.__OWEN_VAULT_ICON_512();
     a.download = 'owens-vault-icon-512.png';
     a.click();
-    showToast('Ikon huruf "O" (512×512) diunduh', 'gold');
+    showToast('Ikon "O" (512×512) diunduh', 'gold');
   }
 
   function exportBackupJson() {
-    const bundle = {
-      app: "Owen's Vault",
-      version: '4.0',
-      exportedAt: new Date().toISOString(),
-      data: state
-    };
-    const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify({ app: "Owen's Vault", version: '4.0', exportedAt: new Date().toISOString(), data: state }, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = 'owens-vault-4.0-' + getTodayISO() + '.json';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('Backup JSON v4.0 berhasil diunduh', 'ok');
+    showToast('Backup JSON diunduh', 'ok');
   }
 
   function importBackupJson(ev) {
@@ -3441,19 +2628,13 @@
     const reader = new FileReader();
     reader.onload = function(e) {
       try {
-        const parsed = JSON.parse(e.target.result);
-        const migrated = migrateLegacyPayload(parsed);
-        if (!migrated) {
-          showToast('Struktur JSON tidak valid atau kosong', 'warn');
-          return;
-        }
+        const migrated = migrateLegacyPayload(JSON.parse(e.target.result));
+        if (!migrated) { showToast('JSON tidak valid', 'warn'); return; }
         state = migrated;
-        pushNotification('Backup JSON berhasil dipulihkan (' + state.transactions.length + ' transaksi)', 'ok');
+        pushNotification('Backup dipulihkan (' + state.transactions.length + ' tx)', 'ok');
         persist();
         closeModal('modalSettings');
-      } catch (err) {
-        showToast('Gagal membaca file JSON', 'warn');
-      }
+      } catch (err) { showToast('Gagal membaca JSON', 'warn'); }
       ev.target.value = '';
     };
     reader.readAsText(file);
@@ -3461,33 +2642,19 @@
 
   function recoverFromBestStorage() {
     const best = loadBestLocalState();
-    if (best) {
-      state = best;
-      persist();
-      showToast('Data dipulihkan dari mirror lokal terbaik', 'gold');
-    } else {
+    if (best) { state = best; persist(); showToast('Dipulihkan dari mirror lokal', 'gold'); }
+    else {
       loadIDB().then(function(idb) {
-        if (idb) {
-          state = idb;
-          persist();
-          showToast('Data dipulihkan dari IndexedDB', 'gold');
-        } else {
-          showToast('Tidak ada cadangan lain ditemukan', 'warn');
-        }
+        if (idb) { state = idb; persist(); showToast('Dipulihkan dari IndexedDB', 'gold'); }
+        else showToast('Cadangan lain tidak ditemukan', 'warn');
       });
     }
   }
 
   function resetAllVaultData() {
-    if (!confirm('Hapus seluruh data transaksi, anggaran, dan rekening tabungan di perangkat ini?')) return;
+    if (!confirm('Hapus seluruh data di perangkat ini?')) return;
     state = JSON.parse(JSON.stringify(DEFAULT_STATE));
-    state.notifications = [{
-      id: 'rst_' + Date.now(),
-      tone: 'warn',
-      title: 'Seluruh data direset ke kondisi awal',
-      time: clockNow(),
-      read: false
-    }];
+    state.notifications = [{ id: 'rst_' + Date.now(), tone: 'warn', title: 'Data direset ke awal', time: clockNow(), read: false }];
     persist();
     closeModal('modalSettings');
   }
@@ -3496,7 +2663,6 @@
   function closeModal(id) { document.getElementById(id).classList.remove('open'); }
   function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
 
-  window.addEventListener('resize', function() { renderWaveChart(computeAccounting()); });
   applyThemeToDocument(state.profile);
   initPinGateOnBoot();
   renderAll();
