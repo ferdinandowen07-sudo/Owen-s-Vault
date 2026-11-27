@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#06140e" />
   <title>Owen's Vault 2.2</title>
 
-  <!-- ICON HOME SCREEN STATIS (LANGSUNG TERBACA iOS SAFARI) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230f3d28'/%3E%3Cstop offset='100%25' stop-color='%2304130c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' fill='url(%23bg)'/%3E%3Ccircle cx='90' cy='80' r='46' fill='%2310b981' fill-opacity='0.2' stroke='%2310b981' stroke-width='5'/%3E%3Ctext x='90' y='96' text-anchor='middle' font-family='-apple-system, sans-serif' font-size='52' font-weight='800' fill='%23ecfdf5'%3EO%3C/text%3E%3Ctext x='90' y='154' text-anchor='middle' font-family='-apple-system, sans-serif' font-size='15' font-weight='800' letter-spacing='1' fill='%2334d399'%3EOWEN'S VAULT%3C/text%3E%3C/svg%3E" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%2306140e'/%3E%3Ccircle cx='90' cy='90' r='52' fill='%2310b981' fill-opacity='0.2' stroke='%2310b981' stroke-width='6'/%3E%3Ctext x='90' y='108' text-anchor='middle' font-family='sans-serif' font-size='60' font-weight='800' fill='%23ecfdf5'%3EO%3C/text%3E%3C/svg%3E" />
+  <!-- ICON HOME SCREEN BARU (EMERALD & GOLD VAULT EMBLEM) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230c2b1e'/%3E%3Cstop offset='100%25' stop-color='%2304110b'/%3E%3C/linearGradient%3E%3ClinearGradient id='gold' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23fbbf24'/%3E%3Cstop offset='100%25' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' fill='url(%23bg)'/%3E%3Crect x='36' y='34' width='108' height='92' rx='24' fill='%2310b981' fill-opacity='0.14' stroke='url(%23gold)' stroke-width='4'/%3E%3Ccircle cx='90' cy='80' r='24' fill='none' stroke='%2334d399' stroke-width='3.5'/%3E%3Cpath d='M90 64v32M81 73h18M81 87h18' stroke='%23fbbf24' stroke-width='3.5' stroke-linecap='round'/%3E%3Ctext x='90' y='152' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='800' letter-spacing='1.2' fill='%23ecfdf5'%3EOWEN'S VAULT%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%2306140e'/%3E%3Crect x='36' y='36' width='108' height='108' rx='24' fill='%2310b981' fill-opacity='0.16' stroke='%2310b981' stroke-width='5'/%3E%3Cpath d='M90 62v56M78 74h24M78 106h24' stroke='%23fbbf24' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
 
   <style>
     :root {
@@ -21,6 +21,7 @@
       --accent: #10b981;
       --accent-glow: rgba(16, 185, 129, 0.25);
       --accent-soft: rgba(16, 185, 129, 0.12);
+      --gold: #fbbf24;
       --warning: #f59e0b;
       --danger: #ef4444;
       --text-primary: #ecfdf5;
@@ -59,7 +60,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       position: relative;
       z-index: 20;
     }
@@ -120,25 +121,26 @@
       background: var(--bg-card-elevated);
     }
 
-    /* Switch Tabs */
+    /* Switch Tabs (3 Tabs) */
     .tabs {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       background: var(--bg-card);
       padding: 4px;
       border-radius: 14px;
       border: 1px solid var(--border);
       margin-bottom: 18px;
+      gap: 4px;
     }
 
     .tab-btn {
-      padding: 10px;
+      padding: 10px 6px;
       border: none;
       border-radius: 10px;
       background: transparent;
       color: var(--text-muted);
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
       touch-action: manipulation;
     }
@@ -147,6 +149,36 @@
       background: var(--accent);
       color: #04130c;
       box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    /* Month Selector Bar */
+    .month-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+    }
+
+    .month-nav-btn {
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .month-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
     }
 
     /* Cards */
@@ -175,7 +207,7 @@
     }
 
     .hero-amount {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 800;
       letter-spacing: -1px;
       margin-bottom: 14px;
@@ -230,7 +262,7 @@
     }
 
     .stat-box strong {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
     }
 
@@ -449,13 +481,13 @@
 
     .type-selector {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 14px;
     }
 
     .type-pill {
-      padding: 11px 6px;
+      padding: 10px 8px;
       border-radius: 12px;
       background: #06140e;
       border: 1px solid var(--border);
@@ -545,7 +577,7 @@
       <div class="brand-logo" id="headerAvatar">O</div>
       <div class="brand-text">
         <h1 id="headerTitle">Owen's Vault</h1>
-        <span id="headerSubtitle">v2.2 • Personal Finance</span>
+        <span id="headerSubtitle">v2.2 • Vault, Salary & Expenses</span>
       </div>
     </div>
     <div class="header-actions">
@@ -560,8 +592,16 @@
 
   <!-- TABS -->
   <div class="tabs">
-    <button type="button" class="tab-btn active" id="tabVault" onclick="switchTab('vault')">🐷 Piggy Vault</button>
-    <button type="button" class="tab-btn" id="tabExpenses" onclick="switchTab('expenses')">💸 Pengeluaran</button>
+    <button type="button" class="tab-btn active" id="tabVault" onclick="switchTab('vault')">🐷 Vault</button>
+    <button type="button" class="tab-btn" id="tabExpenses" onclick="switchTab('expenses')">💸 Keluar</button>
+    <button type="button" class="tab-btn" id="tabIncome" onclick="switchTab('income')">💼 Salary</button>
+  </div>
+
+  <!-- MONTH NAVIGATOR (UNTUK KELUAR & SALARY) -->
+  <div class="month-bar hidden" id="monthBar">
+    <button type="button" class="month-nav-btn" onclick="changeMonth(-1)">‹</button>
+    <span class="month-label" id="activeMonthLabel">November 2026</span>
+    <button type="button" class="month-nav-btn" onclick="changeMonth(1)">›</button>
   </div>
 
   <!-- VIEW 1: PIGGY VAULT -->
@@ -617,7 +657,7 @@
 
     <div class="stats-grid">
       <div class="stat-box">
-        <span>Bulan Ini (Rutin)</span>
+        <span>Keluar Bulan Ini (Rutin)</span>
         <strong id="monthlyRegularText">Rp 0</strong>
       </div>
       <div class="stat-box">
@@ -637,10 +677,51 @@
     </div>
 
     <div class="section-title">
-      <span>Riwayat Pengeluaran</span>
+      <span>Riwayat Pengeluaran Bulan Ini</span>
       <span id="expenseCount" style="font-size: 12px; color: var(--text-muted);">0 transaksi</span>
     </div>
     <div class="tx-list" id="expenseList"></div>
+  </section>
+
+  <!-- VIEW 3: INCOME & SALARY -->
+  <section id="viewIncome" class="hidden">
+    <div class="card hero-card">
+      <div class="hero-label">
+        <span>Total Salary & Income Bulan Ini</span>
+        <span id="incomeMonthTag" style="color: #fbbf24;">Bulan Ini</span>
+      </div>
+      <div class="hero-amount" id="monthlyIncomeTotal" style="color: #34d399;">Rp 0</div>
+      <div class="progress-meta">
+        <span id="incomeVsExpenseText">Pengeluaran Bulan Ini: Rp 0</span>
+        <span id="monthlyNetText">Selisih: Rp 0</span>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span>Gaji Pokok / Shift</span>
+        <strong id="salaryMainText">Rp 0</strong>
+      </div>
+      <div class="stat-box">
+        <span>Tips / Bonus / Extra</span>
+        <strong id="salaryBonusText" style="color: #fbbf24;">Rp 0</strong>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <span>Catat Cepat Income</span>
+    </div>
+    <div class="chips">
+      <button type="button" class="chip" onclick="quickIncome('Salary / Gaji', 1500000, '💼', 'salary')">💼 + Rp 1,5jt</button>
+      <button type="button" class="chip" onclick="quickIncome('Tips / Bonus', 50000, '✨', 'bonus')">✨ Tips 50rb</button>
+      <button type="button" class="chip" onclick="quickIncome('Freelance / Event', 250000, '🎯', 'bonus')">🎯 Event 250rb</button>
+    </div>
+
+    <div class="section-title">
+      <span>Record Salary & Income Bulan Ini</span>
+      <span id="incomeCount" style="font-size: 12px; color: var(--text-muted);">0 record</span>
+    </div>
+    <div class="tx-list" id="incomeList"></div>
   </section>
 </div>
 
@@ -657,6 +738,7 @@
 
     <div class="type-selector">
       <button type="button" class="type-pill active" id="pillExpense" onclick="setTxType('expense')">💸 Pengeluaran</button>
+      <button type="button" class="type-pill" id="pillIncome" onclick="setTxType('income')">💼 Income / Salary</button>
       <button type="button" class="type-pill" id="pillVaultIn" onclick="setTxType('vault_in')">🐷 Nabung</button>
       <button type="button" class="type-pill" id="pillVaultOut" onclick="setTxType('vault_out')">📤 Tarik Vault</button>
     </div>
@@ -667,7 +749,7 @@
     </div>
 
     <div class="form-group" id="groupCategory">
-      <label>Kategori</label>
+      <label>Kategori Pengeluaran</label>
       <select id="inputCategory" class="form-control">
         <option value="🍜|Makan & Minum">🍜 Makan & Minum</option>
         <option value="⛽|Transport & Bensin">⛽ Transport & Bensin</option>
@@ -678,9 +760,18 @@
       </select>
     </div>
 
+    <div class="form-group hidden" id="groupIncomeKind">
+      <label>Jenis Pemasukan</label>
+      <select id="inputIncomeKind" class="form-control">
+        <option value="💼|salary|Salary / Gaji">💼 Salary / Gaji</option>
+        <option value="✨|bonus|Tips / Bonus">✨ Tips / Bonus</option>
+        <option value="🎯|bonus|Side Job / Freelance">🎯 Side Job / Freelance</option>
+      </select>
+    </div>
+
     <div class="form-group">
       <label>Catatan (Opsional)</label>
-      <input type="text" id="inputNote" class="form-control" placeholder="Contoh: Kopi susu sama teman" />
+      <input type="text" id="inputNote" class="form-control" placeholder="Contoh: Gaji bulan ini / Kopi susu" />
     </div>
 
     <label class="checkbox-row" id="groupExtra">
@@ -753,12 +844,14 @@
       dailyLimit: 30000
     },
     vaultTx: [],
-    expenseTx: []
+    expenseTx: [],
+    incomeTx: []
   };
 
   let state = loadState();
   let currentTab = 'vault';
   let selectedTxType = 'expense';
+  let selectedMonthKey = getCurrentMonthStr();
 
   function loadState() {
     try {
@@ -768,7 +861,8 @@
       return {
         profile: { ...defaultState.profile, ...(parsed.profile || {}) },
         vaultTx: Array.isArray(parsed.vaultTx) ? parsed.vaultTx : [],
-        expenseTx: Array.isArray(parsed.expenseTx) ? parsed.expenseTx : []
+        expenseTx: Array.isArray(parsed.expenseTx) ? parsed.expenseTx : [],
+        incomeTx: Array.isArray(parsed.incomeTx) ? parsed.incomeTx : []
       };
     } catch (e) {
       return JSON.parse(JSON.stringify(defaultState));
@@ -797,6 +891,21 @@
     return getTodayStr().slice(0, 7);
   }
 
+  function formatMonthTitle(ymStr) {
+    const parts = ymStr.split('-');
+    const year = Number(parts[0]);
+    const monthIdx = Number(parts[1]) - 1;
+    const d = new Date(year, monthIdx, 1);
+    return d.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+  }
+
+  function changeMonth(delta) {
+    const parts = selectedMonthKey.split('-');
+    const d = new Date(Number(parts[0]), Number(parts[1]) - 1 + delta, 1);
+    selectedMonthKey = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    render();
+  }
+
   function formatDateDisplay(isoStr) {
     const d = new Date(isoStr);
     return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
@@ -807,7 +916,12 @@
     document.getElementById('headerTitle').textContent = name + "'s Vault";
     document.getElementById('headerAvatar').textContent = name.charAt(0).toUpperCase();
 
-    // Vault
+    // Month Bar visibility
+    const showMonthBar = (currentTab === 'expenses' || currentTab === 'income');
+    document.getElementById('monthBar').classList.toggle('hidden', !showMonthBar);
+    document.getElementById('activeMonthLabel').textContent = formatMonthTitle(selectedMonthKey);
+
+    // 1. VAULT
     const vaultBalance = state.vaultTx.reduce(function(acc, item) {
       return item.type === 'in' ? acc + item.amount : acc - item.amount;
     }, 0);
@@ -843,9 +957,8 @@
       }).join('');
     }
 
-    // Expenses
+    // 2. EXPENSES (Daily limit today + Selected Month summary/list)
     const today = getTodayStr();
-    const month = getCurrentMonthStr();
     const dailyLimit = Math.max(1, state.profile.dailyLimit);
 
     let todayRegular = 0;
@@ -856,12 +969,13 @@
       const txDay = tx.date.slice(0, 10);
       const txMonth = tx.date.slice(0, 7);
       if (txDay === today && !tx.isExtra) todayRegular += tx.amount;
-      if (txMonth === month) {
+      if (txMonth === selectedMonthKey) {
         if (tx.isExtra) monthExtra += tx.amount;
         else monthRegular += tx.amount;
       }
     });
 
+    const totalMonthExpense = monthRegular + monthExtra;
     const dailyPct = Math.min(100, Math.round((todayRegular / dailyLimit) * 100));
     const remaining = dailyLimit - todayRegular;
     const progressEl = document.getElementById('dailyProgress');
@@ -884,13 +998,17 @@
 
     document.getElementById('monthlyRegularText').textContent = formatRp(monthRegular);
     document.getElementById('monthlyExtraText').textContent = formatRp(monthExtra);
-    document.getElementById('expenseCount').textContent = state.expenseTx.length + ' transaksi';
+
+    const monthExpenses = state.expenseTx.filter(function(tx) {
+      return tx.date.slice(0, 7) === selectedMonthKey;
+    });
+    document.getElementById('expenseCount').textContent = monthExpenses.length + ' transaksi';
 
     const expenseListEl = document.getElementById('expenseList');
-    if (state.expenseTx.length === 0) {
-      expenseListEl.innerHTML = '<div class="empty-state">Belum ada pengeluaran tercatat. Tekan <b>+</b> untuk mencatat.</div>';
+    if (monthExpenses.length === 0) {
+      expenseListEl.innerHTML = '<div class="empty-state">Belum ada pengeluaran di ' + formatMonthTitle(selectedMonthKey) + '.</div>';
     } else {
-      expenseListEl.innerHTML = state.expenseTx.slice().reverse().map(function(tx) {
+      expenseListEl.innerHTML = monthExpenses.slice().reverse().map(function(tx) {
         return '<div class="tx-item">' +
           '<div class="tx-left">' +
             '<div class="tx-icon">' + (tx.icon || '💸') + '</div>' +
@@ -906,14 +1024,67 @@
         '</div>';
       }).join('');
     }
+
+    // 3. INCOME & SALARY (Selected Month)
+    const monthIncomes = state.incomeTx.filter(function(tx) {
+      return tx.date.slice(0, 7) === selectedMonthKey;
+    });
+
+    let totalMonthIncome = 0;
+    let totalSalaryMain = 0;
+    let totalSalaryBonus = 0;
+
+    monthIncomes.forEach(function(tx) {
+      totalMonthIncome += tx.amount;
+      if (tx.kind === 'salary') totalSalaryMain += tx.amount;
+      else totalSalaryBonus += tx.amount;
+    });
+
+    const netMonth = totalMonthIncome - totalMonthExpense;
+    document.getElementById('incomeMonthTag').textContent = formatMonthTitle(selectedMonthKey);
+    document.getElementById('monthlyIncomeTotal').textContent = formatRp(totalMonthIncome);
+    document.getElementById('incomeVsExpenseText').textContent = 'Keluar: ' + formatRp(totalMonthExpense);
+    const netEl = document.getElementById('monthlyNetText');
+    netEl.textContent = (netMonth >= 0 ? 'Sisa: ' : 'Defisit: ') + formatRp(Math.abs(netMonth));
+    netEl.style.color = netMonth >= 0 ? '#34d399' : '#f87171';
+
+    document.getElementById('salaryMainText').textContent = formatRp(totalSalaryMain);
+    document.getElementById('salaryBonusText').textContent = formatRp(totalSalaryBonus);
+    document.getElementById('incomeCount').textContent = monthIncomes.length + ' record';
+
+    const incomeListEl = document.getElementById('incomeList');
+    if (monthIncomes.length === 0) {
+      incomeListEl.innerHTML = '<div class="empty-state">Belum ada record salary/income di ' + formatMonthTitle(selectedMonthKey) + '. Tekan <b>+</b> untuk mencatat.</div>';
+    } else {
+      incomeListEl.innerHTML = monthIncomes.slice().reverse().map(function(tx) {
+        return '<div class="tx-item">' +
+          '<div class="tx-left">' +
+            '<div class="tx-icon">' + (tx.icon || '💼') + '</div>' +
+            '<div class="tx-info">' +
+              '<h4>' + (tx.note || tx.label) + '</h4>' +
+              '<span>' + tx.label + ' • ' + formatDateDisplay(tx.date) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="tx-right">' +
+            '<span class="tx-amount plus">+' + formatRp(tx.amount) + '</span>' +
+            '<button type="button" class="tx-del" onclick="deleteIncomeTx(\'' + tx.id + '\')">Hapus</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
   }
 
   function switchTab(tab) {
     currentTab = tab;
     document.getElementById('tabVault').classList.toggle('active', tab === 'vault');
     document.getElementById('tabExpenses').classList.toggle('active', tab === 'expenses');
+    document.getElementById('tabIncome').classList.toggle('active', tab === 'income');
+
     document.getElementById('viewVault').classList.toggle('hidden', tab !== 'vault');
     document.getElementById('viewExpenses').classList.toggle('hidden', tab !== 'expenses');
+    document.getElementById('viewIncome').classList.toggle('hidden', tab !== 'income');
+
+    render();
   }
 
   function openModal(id) {
@@ -932,18 +1103,35 @@
     document.getElementById('inputAmount').value = '';
     document.getElementById('inputNote').value = '';
     document.getElementById('inputIsExtra').checked = false;
-    setTxType(currentTab === 'vault' ? 'vault_in' : 'expense');
+
+    let initialType = 'expense';
+    if (currentTab === 'vault') initialType = 'vault_in';
+    else if (currentTab === 'income') initialType = 'income';
+
+    setTxType(initialType);
     openModal('modalAdd');
   }
 
   function setTxType(type) {
     selectedTxType = type;
     document.getElementById('pillExpense').classList.toggle('active', type === 'expense');
+    document.getElementById('pillIncome').classList.toggle('active', type === 'income');
     document.getElementById('pillVaultIn').classList.toggle('active', type === 'vault_in');
     document.getElementById('pillVaultOut').classList.toggle('active', type === 'vault_out');
+
     const isExpense = type === 'expense';
+    const isIncome = type === 'income';
     document.getElementById('groupCategory').classList.toggle('hidden', !isExpense);
     document.getElementById('groupExtra').classList.toggle('hidden', !isExpense);
+    document.getElementById('groupIncomeKind').classList.toggle('hidden', !isIncome);
+  }
+
+  function getTxTimestampForSelectedMonth() {
+    const currentMonth = getCurrentMonthStr();
+    if (selectedMonthKey === currentMonth) {
+      return new Date().toISOString();
+    }
+    return selectedMonthKey + '-15T12:00:00.000Z';
   }
 
   function saveTransaction() {
@@ -953,7 +1141,6 @@
       return;
     }
     const note = document.getElementById('inputNote').value.trim();
-    const now = new Date().toISOString();
 
     if (selectedTxType === 'expense') {
       const catRaw = document.getElementById('inputCategory').value.split('|');
@@ -965,7 +1152,18 @@
         category: catRaw[1],
         note: note,
         isExtra: isExtra,
-        date: now
+        date: getTxTimestampForSelectedMonth()
+      });
+    } else if (selectedTxType === 'income') {
+      const incRaw = document.getElementById('inputIncomeKind').value.split('|');
+      state.incomeTx.push({
+        id: String(Date.now()),
+        amount: amount,
+        icon: incRaw[0],
+        kind: incRaw[1],
+        label: incRaw[2],
+        note: note || incRaw[2],
+        date: getTxTimestampForSelectedMonth()
       });
     } else {
       state.vaultTx.push({
@@ -973,7 +1171,7 @@
         type: selectedTxType === 'vault_in' ? 'in' : 'out',
         amount: amount,
         note: note,
-        date: now
+        date: new Date().toISOString()
       });
     }
 
@@ -1000,7 +1198,20 @@
       category: category,
       note: category,
       isExtra: !!isExtra,
-      date: new Date().toISOString()
+      date: getTxTimestampForSelectedMonth()
+    });
+    saveState();
+  }
+
+  function quickIncome(label, amount, icon, kind) {
+    state.incomeTx.push({
+      id: String(Date.now()),
+      amount: amount,
+      icon: icon,
+      kind: kind,
+      label: label,
+      note: label,
+      date: getTxTimestampForSelectedMonth()
     });
     saveState();
   }
@@ -1012,6 +1223,11 @@
 
   function deleteExpenseTx(id) {
     state.expenseTx = state.expenseTx.filter(function(t) { return t.id !== id; });
+    saveState();
+  }
+
+  function deleteIncomeTx(id) {
+    state.incomeTx = state.incomeTx.filter(function(t) { return t.id !== id; });
     saveState();
   }
 
@@ -1054,7 +1270,12 @@
       try {
         const imported = JSON.parse(ev.target.result);
         if (imported.profile && Array.isArray(imported.vaultTx)) {
-          state = imported;
+          state = {
+            profile: { ...defaultState.profile, ...(imported.profile || {}) },
+            vaultTx: Array.isArray(imported.vaultTx) ? imported.vaultTx : [],
+            expenseTx: Array.isArray(imported.expenseTx) ? imported.expenseTx : [],
+            incomeTx: Array.isArray(imported.incomeTx) ? imported.incomeTx : []
+          };
           saveState();
           alert('Data berhasil dipulihkan!');
           closeModal('modalSettings');
@@ -1069,7 +1290,7 @@
   }
 
   function resetAllData() {
-    if (confirm('Yakin hapus semua data tabungan dan pengeluaran?')) {
+    if (confirm('Yakin hapus semua data tabungan, salary, dan pengeluaran?')) {
       state = JSON.parse(JSON.stringify(defaultState));
       saveState();
       closeModal('modalSettings');
