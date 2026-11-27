@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Owen's Vault" />
-  <meta name="theme-color" content="#06140e" />
-  <title>Owen's Vault 2.2</title>
+  <meta name="apple-mobile-web-app-title" content="Owen's Vault 3.0" />
+  <meta name="theme-color" content="#05130d" />
+  <title>Owen's Vault 3.0</title>
 
   <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="" />
   <link id="favicon" rel="icon" type="image/png" href="" />
 
   <script>
-    // Render High-Res Glossy Vault Icon (512x512 PNG) sebelum UI dirender
-    (function buildRichVaultIcon() {
+    (function generateVault3Icon() {
       try {
         const size = 512;
         const c = document.createElement('canvas');
@@ -22,42 +21,13 @@
         c.height = size;
         const ctx = c.getContext('2d');
 
-        // 1. Deep Emerald & Obsidian Radial Background
-        const bgGrad = ctx.createRadialGradient(170, 120, 40, 256, 256, 360);
-        bgGrad.addColorStop(0, '#17543a');
-        bgGrad.addColorStop(0.55, '#092418');
-        bgGrad.addColorStop(1, '#030d09');
-        ctx.fillStyle = bgGrad;
+        const bg = ctx.createRadialGradient(165, 115, 30, 256, 256, 360);
+        bg.addColorStop(0, '#164e37');
+        bg.addColorStop(0.55, '#081f15');
+        bg.addColorStop(1, '#030c08');
+        ctx.fillStyle = bg;
         ctx.fillRect(0, 0, size, size);
 
-        // Ambient Gold & Emerald Glow Orbs
-        const glow1 = ctx.createRadialGradient(380, 130, 10, 380, 130, 180);
-        glow1.addColorStop(0, 'rgba(251, 191, 36, 0.24)');
-        glow1.addColorStop(1, 'rgba(251, 191, 36, 0)');
-        ctx.fillStyle = glow1;
-        ctx.fillRect(0, 0, size, size);
-
-        const glow2 = ctx.createRadialGradient(130, 390, 10, 130, 390, 190);
-        glow2.addColorStop(0, 'rgba(16, 185, 129, 0.28)');
-        glow2.addColorStop(1, 'rgba(16, 185, 129, 0)');
-        ctx.fillStyle = glow2;
-        ctx.fillRect(0, 0, size, size);
-
-        // Subtle Grid / Tech Lines
-        ctx.strokeStyle = 'rgba(110, 231, 183, 0.06)';
-        ctx.lineWidth = 2;
-        for (let i = 64; i < size; i += 64) {
-          ctx.beginPath();
-          ctx.moveTo(i, 0);
-          ctx.lineTo(i, size);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(0, i);
-          ctx.lineTo(size, i);
-          ctx.stroke();
-        }
-
-        // Helper Rounded Rect
         function rrect(x, y, w, h, r) {
           ctx.beginPath();
           ctx.moveTo(x + r, y);
@@ -68,136 +38,71 @@
           ctx.closePath();
         }
 
-        // 2. Vault Body with Shadow & Metallic Border
         ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.65)';
-        ctx.shadowBlur = 36;
-        ctx.shadowOffsetY = 18;
-
-        const vaultGrad = ctx.createLinearGradient(104, 96, 408, 376);
-        vaultGrad.addColorStop(0, '#133b29');
-        vaultGrad.addColorStop(0.5, '#0b2419');
-        vaultGrad.addColorStop(1, '#06150e');
-        rrect(104, 96, 304, 268, 56);
-        ctx.fillStyle = vaultGrad;
+        ctx.shadowColor = 'rgba(0,0,0,0.65)';
+        ctx.shadowBlur = 32;
+        ctx.shadowOffsetY = 16;
+        const cardGrad = ctx.createLinearGradient(108, 96, 404, 372);
+        cardGrad.addColorStop(0, '#123828');
+        cardGrad.addColorStop(1, '#06150e');
+        rrect(108, 96, 296, 276, 54);
+        ctx.fillStyle = cardGrad;
         ctx.fill();
         ctx.restore();
 
-        const goldBorder = ctx.createLinearGradient(104, 96, 408, 364);
-        goldBorder.addColorStop(0, '#fde68a');
-        goldBorder.addColorStop(0.45, '#10b981');
-        goldBorder.addColorStop(1, '#f59e0b');
-        rrect(104, 96, 304, 268, 56);
+        const rim = ctx.createLinearGradient(108, 96, 404, 372);
+        rim.addColorStop(0, '#fde68a');
+        rim.addColorStop(0.5, '#10b981');
+        rim.addColorStop(1, '#f59e0b');
+        rrect(108, 96, 296, 276, 54);
         ctx.lineWidth = 6;
-        ctx.strokeStyle = goldBorder;
+        ctx.strokeStyle = rim;
         ctx.stroke();
-
-        // Inner Recessed Door Frame
-        rrect(126, 118, 260, 224, 40);
-        ctx.fillStyle = 'rgba(4, 15, 10, 0.55)';
-        ctx.fill();
-        ctx.lineWidth = 2.5;
-        ctx.strokeStyle = 'rgba(110, 231, 183, 0.22)';
-        ctx.stroke();
-
-        // Vault Hinges (Left)
-        [164, 272].forEach(function(hy) {
-          rrect(92, hy, 22, 34, 8);
-          ctx.fillStyle = '#34d399';
-          ctx.fill();
-        });
-
-        // 3. Center Dial Ring & Gold Emblem
-        const cx = 246;
-        const cy = 230;
 
         ctx.beginPath();
-        ctx.arc(cx, cy, 76, 0, Math.PI * 2);
-        const dialGrad = ctx.createLinearGradient(cx - 76, cy - 76, cx + 76, cy + 76);
-        dialGrad.addColorStop(0, '#1f6144');
-        dialGrad.addColorStop(1, '#091f15');
-        ctx.fillStyle = dialGrad;
+        ctx.arc(256, 226, 72, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.14)';
         ctx.fill();
-        ctx.lineWidth = 6;
+        ctx.lineWidth = 5;
         ctx.strokeStyle = '#fbbf24';
         ctx.stroke();
 
-        // Dial Spokes / Notches
-        for (let a = 0; a < 12; a++) {
-          const ang = (a * Math.PI) / 6;
-          ctx.beginPath();
-          ctx.moveTo(cx + Math.cos(ang) * 56, cy + Math.sin(ang) * 56);
-          ctx.lineTo(cx + Math.cos(ang) * 70, cy + Math.sin(ang) * 70);
-          ctx.strokeStyle = a % 3 === 0 ? '#fde68a' : 'rgba(167, 243, 208, 0.45)';
-          ctx.lineWidth = a % 3 === 0 ? 4 : 2.5;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-        }
-
-        // Center "O" Monogram in Gold Gradient
-        const textGrad = ctx.createLinearGradient(cx, cy - 34, cx, cy + 34);
-        textGrad.addColorStop(0, '#fef08a');
-        textGrad.addColorStop(1, '#f59e0b');
-        ctx.fillStyle = textGrad;
-        ctx.font = '900 66px -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif';
+        ctx.fillStyle = '#fef08a';
+        ctx.font = '900 58px -apple-system, BlinkMacSystemFont, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('O', cx, cy + 3);
-
-        // Locking Handle on Right
-        rrect(344, 194, 16, 72, 8);
-        ctx.fillStyle = '#34d399';
-        ctx.fill();
-
-        // 4. Bottom Badge Label ("OWEN'S VAULT")
-        rrect(118, 392, 276, 56, 20);
-        ctx.fillStyle = 'rgba(16, 185, 129, 0.16)';
-        ctx.fill();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = 'rgba(251, 191, 36, 0.55)';
-        ctx.stroke();
+        ctx.fillText('3.0', 256, 228);
 
         ctx.fillStyle = '#ecfdf5';
-        ctx.font = '800 22px -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText("OWEN'S VAULT", 256, 421);
+        ctx.font = '800 22px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText("OWEN'S VAULT", 256, 422);
 
-        // Top Gloss Shine Sweep
-        const gloss = ctx.createLinearGradient(0, 0, 0, 220);
-        gloss.addColorStop(0, 'rgba(255, 255, 255, 0.14)');
-        gloss.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = gloss;
-        ctx.fillRect(0, 0, size, 220);
-
-        const pngUrl = c.toDataURL('image/png');
-        const appleIcon = document.getElementById('apple-touch-icon');
-        const favIcon = document.getElementById('favicon');
-        if (appleIcon) appleIcon.href = pngUrl;
-        if (favIcon) favIcon.href = pngUrl;
-      } catch (err) {
-        console.warn('Vault icon render skipped:', err);
-      }
+        const url = c.toDataURL('image/png');
+        const a = document.getElementById('apple-touch-icon');
+        const f = document.getElementById('favicon');
+        if (a) a.href = url;
+        if (f) f.href = url;
+      } catch (e) {}
     })();
   </script>
 
   <style>
     :root {
-      --bg-primary: #06140e;
-      --bg-card: #0c2218;
-      --bg-card-elevated: #123123;
+      --bg: #05130d;
+      --surface: #0b2017;
+      --surface-2: #112e21;
+      --surface-3: #173d2c;
       --accent: #10b981;
-      --accent-glow: rgba(16, 185, 129, 0.25);
-      --accent-soft: rgba(16, 185, 129, 0.12);
+      --accent-2: #34d399;
+      --accent-soft: rgba(16, 185, 129, 0.14);
       --gold: #fbbf24;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --text-primary: #ecfdf5;
-      --text-secondary: #86efac;
-      --text-muted: #6ee7b799;
-      --border: rgba(16, 185, 129, 0.22);
-      --safe-top: env(safe-area-inset-top, 20px);
-      --safe-bottom: env(safe-area-inset-bottom, 20px);
+      --danger: #f87171;
+      --text: #ecfdf5;
+      --text-dim: #9bd3b8;
+      --text-muted: #679f85;
+      --border: rgba(52, 211, 153, 0.18);
+      --safe-top: env(safe-area-inset-top, 16px);
+      --safe-bottom: env(safe-area-inset-bottom, 16px);
     }
 
     * {
@@ -209,294 +114,416 @@
     }
 
     body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background: radial-gradient(circle at top right, #0d2b1e 0%, var(--bg) 52%);
+      color: var(--text);
       min-height: 100vh;
-      padding-top: calc(var(--safe-top) + 12px);
-      padding-bottom: calc(var(--safe-bottom) + 100px);
+      padding-top: calc(var(--safe-top) + 10px);
+      padding-bottom: calc(var(--safe-bottom) + 104px);
       overflow-x: hidden;
     }
 
-    .container {
-      max-width: 480px;
+    .app {
+      max-width: 490px;
       margin: 0 auto;
-      padding: 0 18px;
+      padding: 0 16px;
     }
 
-    /* Header */
-    .header {
+    /* Top Bar */
+    .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
-      position: relative;
-      z-index: 20;
+      margin-bottom: 16px;
     }
 
-    .brand {
+    .user-pill {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 12px 6px 6px;
+      border-radius: 999px;
+      cursor: pointer;
+      touch-action: manipulation;
     }
 
-    .brand-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #10b981, #047857);
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #047857);
+      color: #04130c;
+      font-weight: 800;
+      font-size: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
-      color: #04130c;
-      box-shadow: 0 4px 14px var(--accent-glow);
     }
 
-    .brand-text h1 {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
+    .user-meta strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.15;
     }
 
-    .brand-text span {
+    .user-meta span {
       font-size: 11px;
       color: var(--text-muted);
-      display: block;
     }
 
-    .header-actions {
+    .top-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--bg-card);
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text-primary);
+      color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       touch-action: manipulation;
+      transition: transform 0.14s ease, background 0.14s ease;
     }
 
-    .icon-btn:active {
+    .btn-icon:active {
       transform: scale(0.92);
-      background: var(--bg-card-elevated);
+      background: var(--surface-2);
     }
 
-    /* Switch Tabs (3 Tabs) */
-    .tabs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: var(--bg-card);
-      padding: 4px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      margin-bottom: 18px;
-      gap: 4px;
-    }
-
-    .tab-btn {
-      padding: 10px 6px;
-      border: none;
-      border-radius: 10px;
-      background: transparent;
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 12px;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .tab-btn.active {
-      background: var(--accent);
-      color: #04130c;
-      box-shadow: 0 2px 10px var(--accent-glow);
-    }
-
-    /* Month Selector Bar */
-    .month-bar {
+    /* Month Switcher */
+    .month-switcher {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: var(--bg-card);
+      justify-content: space-between;
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px 14px;
+      border-radius: 16px;
+      padding: 8px 10px;
       margin-bottom: 14px;
     }
 
-    .month-nav-btn {
-      background: var(--bg-card-elevated);
+    .month-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      color: var(--text-primary);
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
       touch-action: manipulation;
     }
 
-    .month-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-secondary);
+    .month-btn:active { transform: scale(0.92); }
+
+    .month-center {
+      text-align: center;
+      cursor: pointer;
     }
 
-    /* Cards */
+    .month-center strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .month-center span {
+      font-size: 11px;
+      color: var(--accent-2);
+    }
+
+    /* Cards & Animations */
+    .view-section {
+      animation: fadeSlide 0.2s ease;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .card {
-      background: var(--bg-card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      margin-bottom: 14px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
     }
 
-    .hero-card {
-      background: linear-gradient(145deg, #0f2d20 0%, #091c14 100%);
+    .balance-card {
+      background: linear-gradient(145deg, #103525 0%, #071b12 100%);
     }
 
-    .hero-label {
-      font-size: 12px;
-      color: var(--text-secondary);
+    .eyebrow {
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 6px;
+      color: var(--text-dim);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 6px;
     }
 
-    .hero-amount {
+    .big-amount {
       font-size: 30px;
       font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 14px;
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
     }
 
-    .progress-wrap {
+    .progress-track {
+      height: 9px;
       background: rgba(0, 0, 0, 0.35);
-      height: 10px;
       border-radius: 99px;
       overflow: hidden;
       margin-bottom: 8px;
     }
 
-    .progress-bar {
+    .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #10b981, #34d399);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
       border-radius: 99px;
-      transition: width 0.3s ease;
+      transition: width 0.35s ease;
     }
 
-    .progress-bar.over {
+    .progress-fill.warn {
       background: linear-gradient(90deg, #f59e0b, #ef4444);
     }
 
-    .progress-meta {
+    .card-foot {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
       color: var(--text-muted);
     }
 
-    /* Stats Grid */
-    .stats-grid {
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 11px;
+      margin-bottom: 14px;
     }
 
-    .stat-box {
-      background: var(--bg-card);
+    .mini-card {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 17px;
       padding: 14px;
     }
 
-    .stat-box span {
+    .mini-card small {
+      display: block;
       font-size: 11px;
       color: var(--text-muted);
-      display: block;
       margin-bottom: 4px;
     }
 
-    .stat-box strong {
+    .mini-card strong {
       font-size: 15px;
       font-weight: 700;
     }
 
-    /* Section Header */
-    .section-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 12px;
+    .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--text-secondary);
+      margin: 6px 0 10px;
     }
 
-    /* Quick Chips */
-    .chips {
+    .section-head h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dim);
+    }
+
+    .section-head span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chip-row {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 6px;
+      padding-bottom: 4px;
       margin-bottom: 14px;
       scrollbar-width: none;
     }
-    .chips::-webkit-scrollbar { display: none; }
+    .chip-row::-webkit-scrollbar { display: none; }
 
     .chip {
-      background: var(--bg-card-elevated);
+      background: var(--surface-2);
       border: 1px solid var(--border);
-      color: var(--text-primary);
+      color: var(--text);
       padding: 9px 13px;
-      border-radius: 12px;
+      border-radius: 13px;
       font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
       cursor: pointer;
       touch-action: manipulation;
     }
+
     .chip:active { transform: scale(0.95); }
 
-    /* Transaction List */
+    /* Calendar */
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      position: relative;
+      touch-action: manipulation;
+    }
+
+    .cal-day.empty {
+      background: transparent;
+      cursor: default;
+    }
+
+    .cal-day.today {
+      border-color: var(--accent-2);
+    }
+
+    .cal-day.selected {
+      background: var(--accent);
+      color: #04130c;
+      font-weight: 800;
+    }
+
+    .cal-dots {
+      display: flex;
+      gap: 3px;
+      margin-top: 3px;
+      height: 5px;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .dot.inc { background: #34d399; }
+    .dot.exp { background: #f87171; }
+    .cal-day.selected .dot { background: #04130c; }
+
+    /* Chart Bars */
+    .chart-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      height: 150px;
+      padding-top: 16px;
+    }
+
+    .chart-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .chart-bars {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .bar {
+      width: 11px;
+      border-radius: 6px 6px 2px 2px;
+      min-height: 3px;
+      transition: height 0.3s ease;
+    }
+
+    .bar.inc { background: var(--accent-2); }
+    .bar.exp { background: var(--danger); }
+
+    .chart-lbl {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .cat-row {
+      margin-bottom: 12px;
+    }
+
+    .cat-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    /* Transactions */
     .tx-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
 
     .tx-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(16, 185, 129, 0.14);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       padding: 12px 14px;
-      border-radius: 14px;
     }
 
     .tx-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
     }
 
-    .tx-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
+    .tx-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
       background: var(--accent-soft);
       display: flex;
       align-items: center;
@@ -504,13 +531,13 @@
       font-size: 18px;
     }
 
-    .tx-info h4 {
+    .tx-title {
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 2px;
     }
 
-    .tx-info span {
+    .tx-sub {
       font-size: 11px;
       color: var(--text-muted);
     }
@@ -519,161 +546,210 @@
       text-align: right;
     }
 
-    .tx-amount {
+    .tx-val {
+      display: block;
       font-size: 14px;
       font-weight: 700;
-      display: block;
     }
 
-    .tx-amount.plus { color: #34d399; }
-    .tx-amount.minus { color: #f87171; }
-    .tx-amount.extra { color: #fbbf24; }
+    .tx-val.plus { color: var(--accent-2); }
+    .tx-val.minus { color: var(--danger); }
+    .tx-val.extra { color: var(--gold); }
 
     .tx-del {
       background: none;
       border: none;
       color: var(--text-muted);
       font-size: 11px;
-      margin-top: 4px;
-      padding: 2px 6px;
+      margin-top: 3px;
       cursor: pointer;
       touch-action: manipulation;
     }
 
-    /* Floating Action Button (+) */
-    .fab {
+    .empty-box {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 24px 14px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Dock + FAB */
+    .dock-wrap {
       position: fixed;
-      bottom: calc(var(--safe-bottom) + 22px);
-      right: 22px;
-      width: 62px;
-      height: 62px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #04130c;
+      left: 0;
+      right: 0;
+      bottom: calc(var(--safe-bottom) + 12px);
+      display: flex;
+      justify-content: center;
+      padding: 0 14px;
+      z-index: 900;
+      pointer-events: none;
+    }
+
+    .dock {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(11, 32, 23, 0.95);
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      border-radius: 22px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .dock-btn {
       border: none;
-      font-size: 34px;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 9px 11px;
+      border-radius: 15px;
+      font-size: 11px;
       font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .dock-btn.active {
+      background: var(--surface-3);
+      color: var(--accent-2);
+    }
+
+    .fab-add {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), #059669);
+      color: #04130c;
+      font-size: 28px;
+      font-weight: 800;
       line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45);
       cursor: pointer;
-      z-index: 999;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
       touch-action: manipulation;
     }
 
-    .fab:active {
-      transform: scale(0.9);
-    }
+    .fab-add:active { transform: scale(0.92); }
 
-    /* Modals */
-    .modal-backdrop {
+    /* Modal */
+    .modal-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(2, 10, 7, 0.85);
+      inset: 0;
+      background: rgba(2, 10, 6, 0.84);
       display: none;
       align-items: flex-end;
       justify-content: center;
       z-index: 2000;
     }
 
-    .modal-backdrop.open {
-      display: flex;
-    }
+    .modal-bg.open { display: flex; }
 
-    .modal-sheet {
-      background: #0c2218;
+    .modal-card {
+      background: var(--surface);
       border-top: 1px solid var(--border);
       border-radius: 24px 24px 0 0;
       width: 100%;
-      max-width: 480px;
-      padding: 22px 20px calc(var(--safe-bottom) + 24px);
+      max-width: 490px;
+      padding: 20px 18px calc(var(--safe-bottom) + 24px);
       max-height: 90vh;
       overflow-y: auto;
     }
 
-    .modal-header {
+    .modal-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .modal-header h3 {
-      font-size: 18px;
-      font-weight: 700;
-    }
+    .modal-top h3 { font-size: 17px; font-weight: 700; }
 
-    .close-btn {
-      background: var(--bg-card-elevated);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      width: 34px;
-      height: 34px;
+    .x-btn {
+      width: 32px;
+      height: 32px;
       border-radius: 10px;
-      font-size: 18px;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    .form-control {
-      width: 100%;
-      background: #06140e;
       border: 1px solid var(--border);
-      color: var(--text-primary);
-      padding: 12px 14px;
-      border-radius: 12px;
+      background: var(--surface-2);
+      color: var(--text);
       font-size: 16px;
-      outline: none;
+      cursor: pointer;
     }
 
-    .form-control:focus {
-      border-color: var(--accent);
-    }
-
-    .type-selector {
+    .type-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 14px;
     }
 
-    .type-pill {
-      padding: 10px 8px;
+    .type-opt {
+      padding: 10px;
       border-radius: 12px;
-      background: #06140e;
       border: 1px solid var(--border);
+      background: var(--bg);
       color: var(--text-muted);
       font-size: 12px;
-      font-weight: 600;
-      text-align: center;
+      font-weight: 700;
       cursor: pointer;
-      touch-action: manipulation;
     }
 
-    .type-pill.active {
+    .type-opt.active {
       background: var(--accent-soft);
       border-color: var(--accent);
-      color: var(--text-primary);
+      color: var(--text);
     }
 
-    .btn-primary {
+    .field {
+      margin-bottom: 13px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 13px;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .input:focus { border-color: var(--accent); }
+
+    .check-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 11px 12px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+
+    .btn-main {
       width: 100%;
       padding: 14px;
       border-radius: 14px;
@@ -681,56 +757,33 @@
       background: var(--accent);
       color: #04130c;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
-      margin-top: 6px;
-      touch-action: manipulation;
     }
 
-    .btn-secondary {
+    .btn-sub {
       width: 100%;
-      padding: 13px;
+      padding: 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: var(--bg-card-elevated);
-      color: var(--text-primary);
+      background: var(--surface-2);
+      color: var(--text);
       font-size: 13px;
       font-weight: 600;
-      cursor: pointer;
       margin-bottom: 10px;
-      touch-action: manipulation;
+      cursor: pointer;
     }
 
-    .btn-danger {
+    .btn-warn {
       width: 100%;
-      padding: 13px;
+      padding: 12px;
       border-radius: 12px;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      background: rgba(248, 113, 113, 0.12);
       color: #fca5a5;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #06140e;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-bottom: 14px;
-      font-size: 13px;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 28px 12px;
-      color: var(--text-muted);
-      font-size: 13px;
     }
 
     .hidden { display: none !important; }
@@ -738,187 +791,220 @@
 </head>
 <body>
 
-<div class="container">
-  <!-- HEADER -->
-  <header class="header">
-    <div class="brand">
-      <div class="brand-logo" id="headerAvatar">O</div>
-      <div class="brand-text">
-        <h1 id="headerTitle">Owen's Vault</h1>
-        <span id="headerSubtitle">v2.2 • Vault, Salary & Expenses</span>
+<div class="app">
+  <!-- TOP HEADER -->
+  <header class="topbar">
+    <button type="button" class="user-pill" onclick="openProfileModal()">
+      <div class="avatar" id="topAvatar">O</div>
+      <div class="user-meta">
+        <strong id="topName">Owen</strong>
+        <span>Vault 3.0 • Tap Profil</span>
       </div>
-    </div>
-    <div class="header-actions">
-      <button type="button" class="icon-btn" id="btnProfile" onclick="openProfileModal()" aria-label="Profile">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      </button>
-      <button type="button" class="icon-btn" id="btnSettings" onclick="openSettingsModal()" aria-label="Settings">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+
+    <div class="top-actions">
+      <button type="button" class="btn-icon" onclick="openSettingsModal()" aria-label="Settings">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
   </header>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button type="button" class="tab-btn active" id="tabVault" onclick="switchTab('vault')">🐷 Vault</button>
-    <button type="button" class="tab-btn" id="tabExpenses" onclick="switchTab('expenses')">💸 Keluar</button>
-    <button type="button" class="tab-btn" id="tabIncome" onclick="switchTab('income')">💼 Salary</button>
+  <!-- MONTH SWITCHER (HOME, CALENDAR, REPORT) -->
+  <div class="month-switcher" id="monthSwitcher">
+    <button type="button" class="month-btn" onclick="shiftMonth(-1)">‹</button>
+    <div class="month-center" onclick="jumpToCurrentMonth()">
+      <strong id="monthTitle">November 2026</strong>
+      <span id="monthSub">Tap untuk bulan ini</span>
+    </div>
+    <button type="button" class="month-btn" onclick="shiftMonth(1)">›</button>
   </div>
 
-  <!-- MONTH NAVIGATOR (UNTUK KELUAR & SALARY) -->
-  <div class="month-bar hidden" id="monthBar">
-    <button type="button" class="month-nav-btn" onclick="changeMonth(-1)">‹</button>
-    <span class="month-label" id="activeMonthLabel">November 2026</span>
-    <button type="button" class="month-nav-btn" onclick="changeMonth(1)">›</button>
-  </div>
+  <!-- TAB 1: HOME (SALDO BULANAN, SALARY, PENGELUARAN & LIMIT HARIAN) -->
+  <section id="secHome" class="view-section">
+    <div class="card balance-card">
+      <div class="eyebrow">
+        <span>Saldo Kas Bulan Ini (Income - Keluar)</span>
+        <span id="homeCashBadge">Positif</span>
+      </div>
+      <div class="big-amount" id="homeNetBalance">Rp 0</div>
+      <div class="card-foot">
+        <span id="homeIncomeStat">Salary/Income: Rp 0</span>
+        <span id="homeExpenseStat">Keluar: Rp 0</span>
+      </div>
+    </div>
 
-  <!-- VIEW 1: PIGGY VAULT -->
-  <section id="viewVault">
-    <div class="card hero-card">
-      <div class="hero-label">
-        <span>Total Tabungan</span>
-        <span id="vaultPercent">0%</span>
+    <div class="card">
+      <div class="eyebrow">
+        <span>Limit Harian Hari Ini (Rutin)</span>
+        <span id="todayLimitBadge">Aman</span>
       </div>
-      <div class="hero-amount" id="vaultBalance">Rp 0</div>
-      <div class="progress-wrap">
-        <div class="progress-bar" id="vaultProgress" style="width: 0%"></div>
+      <div class="big-amount" style="font-size: 24px; margin-bottom: 10px;" id="todaySpentVal">Rp 0</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="todayBar" style="width: 0%"></div>
       </div>
-      <div class="progress-meta">
+      <div class="card-foot">
+        <span id="todayRemainVal">Sisa: Rp 30.000</span>
+        <span id="todayExtraVal" style="color: var(--gold);">Ekstra Bulan Ini: Rp 0</span>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h3>Aksi Cepat</h3>
+    </div>
+    <div class="chip-row">
+      <button type="button" class="chip" onclick="quickExp('Makan', 15000, '🍜', false)">🍜 Makan 15rb</button>
+      <button type="button" class="chip" onclick="quickExp('Rokok', 28000, '🚬', false)">🚬 Rokok 28rb</button>
+      <button type="button" class="chip" onclick="quickExp('Bensin', 20000, '⛽', false)">⛽ Bensin 20rb</button>
+      <button type="button" class="chip" onclick="quickExp('Ngopi (Ekstra)', 25000, '☕', true)">☕ Ngopi 25rb</button>
+      <button type="button" class="chip" onclick="quickInc('Tips / Bonus', 50000, '✨', 'bonus')">✨ Tips 50rb</button>
+    </div>
+
+    <div class="section-head">
+      <h3>Aktivitas Bulan Ini</h3>
+      <span id="homeTxCount">0 item</span>
+    </div>
+    <div class="tx-list" id="homeTxList"></div>
+  </section>
+
+  <!-- TAB 2: KALENDER PEMASUKAN & PENGELUARAN -->
+  <section id="secCalendar" class="view-section hidden">
+    <div class="card">
+      <div class="cal-weekdays">
+        <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="card-foot" style="margin-top: 12px;">
+        <span><i class="dot inc" style="display:inline-block;margin-right:4px;"></i>Ada Income/Salary</span>
+        <span><i class="dot exp" style="display:inline-block;margin-right:4px;"></i>Ada Pengeluaran</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="mini-card">
+        <small>Masuk di Tanggal Ini</small>
+        <strong id="calDayInc" style="color: var(--accent-2);">Rp 0</strong>
+      </div>
+      <div class="mini-card">
+        <small>Keluar di Tanggal Ini</small>
+        <strong id="calDayExp" style="color: var(--danger);">Rp 0</strong>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h3 id="calSelectedTitle">Transaksi Tanggal Terpilih</h3>
+      <span id="calDayCount">0 item</span>
+    </div>
+    <div class="tx-list" id="calDayList"></div>
+  </section>
+
+  <!-- TAB 3: LAPORAN BULANAN & GRAFIK -->
+  <section id="secReport" class="view-section hidden">
+    <div class="card">
+      <div class="eyebrow">
+        <span>Grafik 6 Bulan (Hijau: Income • Merah: Keluar)</span>
+      </div>
+      <div class="chart-wrap" id="sixMonthChart"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="mini-card">
+        <small>Salary Pokok Bulan Ini</small>
+        <strong id="repSalaryMain" style="color: var(--accent-2);">Rp 0</strong>
+      </div>
+      <div class="mini-card">
+        <small>Tips / Bonus Bulan Ini</small>
+        <strong id="repSalaryBonus" style="color: var(--gold);">Rp 0</strong>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow"><span>Breakdown Kategori Pengeluaran</span></div>
+      <div id="categoryBreakdown"></div>
+    </div>
+  </section>
+
+  <!-- TAB 4: PIGGY VAULT (TABUNGAN) -->
+  <section id="secVault" class="view-section hidden">
+    <div class="card balance-card">
+      <div class="eyebrow">
+        <span>Total Tabungan Vault</span>
+        <span id="vaultPctBadge">0%</span>
+      </div>
+      <div class="big-amount" id="vaultTotalVal">Rp 0</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="vaultBar" style="width: 0%"></div>
+      </div>
+      <div class="card-foot">
         <span>Terkumpul</span>
-        <span id="vaultTargetText">Target: Rp 10.000.000</span>
+        <span id="vaultTargetVal">Target: Rp 10.000.000</span>
       </div>
     </div>
 
-    <div class="section-title">
-      <span>Tambah Cepat Tabungan</span>
+    <div class="section-head">
+      <h3>Setor Cepat ke Vault</h3>
     </div>
-    <div class="chips">
+    <div class="chip-row">
       <button type="button" class="chip" onclick="quickVault(20000)">+ Rp 20rb</button>
       <button type="button" class="chip" onclick="quickVault(50000)">+ Rp 50rb</button>
       <button type="button" class="chip" onclick="quickVault(100000)">+ Rp 100rb</button>
       <button type="button" class="chip" onclick="quickVault(500000)">+ Rp 500rb</button>
     </div>
 
-    <div class="section-title">
-      <span>Riwayat Vault</span>
-      <span id="vaultCount" style="font-size: 12px; color: var(--text-muted);">0 transaksi</span>
+    <div class="section-head">
+      <h3>Riwayat Vault</h3>
+      <span id="vaultTxCount">0 item</span>
     </div>
-    <div class="tx-list" id="vaultList"></div>
-  </section>
-
-  <!-- VIEW 2: EXPENSES -->
-  <section id="viewExpenses" class="hidden">
-    <div class="card hero-card">
-      <div class="hero-label">
-        <span>Limit Harian (Hari Ini)</span>
-        <span id="dailyStatusBadge">Aman</span>
-      </div>
-      <div class="hero-amount" id="dailySpentText">Rp 0</div>
-      <div class="progress-wrap">
-        <div class="progress-bar" id="dailyProgress" style="width: 0%"></div>
-      </div>
-      <div class="progress-meta">
-        <span id="dailyRemainingText">Sisa: Rp 30.000</span>
-        <span id="dailyLimitDisplay">Limit: Rp 30.000</span>
-      </div>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-box">
-        <span>Keluar Bulan Ini (Rutin)</span>
-        <strong id="monthlyRegularText">Rp 0</strong>
-      </div>
-      <div class="stat-box">
-        <span>Dana Ekstra / Ngopi</span>
-        <strong id="monthlyExtraText" style="color: #fbbf24;">Rp 0</strong>
-      </div>
-    </div>
-
-    <div class="section-title">
-      <span>Catat Cepat</span>
-    </div>
-    <div class="chips">
-      <button type="button" class="chip" onclick="quickExpense('Makan', 15000, '🍜', false)">🍜 Makan 15rb</button>
-      <button type="button" class="chip" onclick="quickExpense('Rokok', 28000, '🚬', false)">🚬 Rokok 28rb</button>
-      <button type="button" class="chip" onclick="quickExpense('Bensin', 20000, '⛽', false)">⛽ Bensin 20rb</button>
-      <button type="button" class="chip" onclick="quickExpense('Ngopi (Ekstra)', 25000, '☕', true)">☕ Ngopi 25rb</button>
-    </div>
-
-    <div class="section-title">
-      <span>Riwayat Pengeluaran Bulan Ini</span>
-      <span id="expenseCount" style="font-size: 12px; color: var(--text-muted);">0 transaksi</span>
-    </div>
-    <div class="tx-list" id="expenseList"></div>
-  </section>
-
-  <!-- VIEW 3: INCOME & SALARY -->
-  <section id="viewIncome" class="hidden">
-    <div class="card hero-card">
-      <div class="hero-label">
-        <span>Total Salary & Income Bulan Ini</span>
-        <span id="incomeMonthTag" style="color: #fbbf24;">Bulan Ini</span>
-      </div>
-      <div class="hero-amount" id="monthlyIncomeTotal" style="color: #34d399;">Rp 0</div>
-      <div class="progress-meta">
-        <span id="incomeVsExpenseText">Pengeluaran Bulan Ini: Rp 0</span>
-        <span id="monthlyNetText">Selisih: Rp 0</span>
-      </div>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-box">
-        <span>Gaji Pokok / Shift</span>
-        <strong id="salaryMainText">Rp 0</strong>
-      </div>
-      <div class="stat-box">
-        <span>Tips / Bonus / Extra</span>
-        <strong id="salaryBonusText" style="color: #fbbf24;">Rp 0</strong>
-      </div>
-    </div>
-
-    <div class="section-title">
-      <span>Catat Cepat Income</span>
-    </div>
-    <div class="chips">
-      <button type="button" class="chip" onclick="quickIncome('Salary / Gaji', 1500000, '💼', 'salary')">💼 + Rp 1,5jt</button>
-      <button type="button" class="chip" onclick="quickIncome('Tips / Bonus', 50000, '✨', 'bonus')">✨ Tips 50rb</button>
-      <button type="button" class="chip" onclick="quickIncome('Freelance / Event', 250000, '🎯', 'bonus')">🎯 Event 250rb</button>
-    </div>
-
-    <div class="section-title">
-      <span>Record Salary & Income Bulan Ini</span>
-      <span id="incomeCount" style="font-size: 12px; color: var(--text-muted);">0 record</span>
-    </div>
-    <div class="tx-list" id="incomeList"></div>
+    <div class="tx-list" id="vaultTxList"></div>
   </section>
 </div>
 
-<!-- FLOATING ACTION BUTTON (+) -->
-<button type="button" class="fab" id="btnAdd" onclick="openAddModal()" aria-label="Tambah Transaksi">+</button>
+<!-- BOTTOM NAVIGATION DOCK -->
+<div class="dock-wrap">
+  <nav class="dock">
+    <button type="button" class="dock-btn active" id="navHome" onclick="setNav('home')">
+      <span>🏠</span><span>Home</span>
+    </button>
+    <button type="button" class="dock-btn" id="navCalendar" onclick="setNav('calendar')">
+      <span>📅</span><span>Kalender</span>
+    </button>
+    <button type="button" class="fab-add" onclick="openAddModal()" aria-label="Tambah">+</button>
+    <button type="button" class="dock-btn" id="navReport" onclick="setNav('report')">
+      <span>📊</span><span>Laporan</span>
+    </button>
+    <button type="button" class="dock-btn" id="navVault" onclick="setNav('vault')">
+      <span>🐷</span><span>Vault</span>
+    </button>
+  </nav>
+</div>
 
-<!-- MODAL 1: TAMBAH TRANSAKSI (+) -->
-<div class="modal-backdrop" id="modalAdd" onclick="handleBackdropClick(event, 'modalAdd')">
-  <div class="modal-sheet">
-    <div class="modal-header">
+<!-- MODAL TAMBAH TRANSAKSI -->
+<div class="modal-bg" id="modalAdd" onclick="backdropClose(event, 'modalAdd')">
+  <div class="modal-card">
+    <div class="modal-top">
       <h3>Tambah Transaksi</h3>
-      <button type="button" class="close-btn" onclick="closeModal('modalAdd')">✕</button>
+      <button type="button" class="x-btn" onclick="closeModal('modalAdd')">✕</button>
     </div>
 
-    <div class="type-selector">
-      <button type="button" class="type-pill active" id="pillExpense" onclick="setTxType('expense')">💸 Pengeluaran</button>
-      <button type="button" class="type-pill" id="pillIncome" onclick="setTxType('income')">💼 Income / Salary</button>
-      <button type="button" class="type-pill" id="pillVaultIn" onclick="setTxType('vault_in')">🐷 Nabung</button>
-      <button type="button" class="type-pill" id="pillVaultOut" onclick="setTxType('vault_out')">📤 Tarik Vault</button>
+    <div class="type-grid">
+      <button type="button" class="type-opt active" id="optExp" onclick="chooseTxType('expense')">💸 Pengeluaran</button>
+      <button type="button" class="type-opt" id="optInc" onclick="chooseTxType('income')">💼 Income / Salary</button>
+      <button type="button" class="type-opt" id="optVin" onclick="chooseTxType('vault_in')">🐷 Nabung Vault</button>
+      <button type="button" class="type-opt" id="optVout" onclick="chooseTxType('vault_out')">📤 Tarik Vault</button>
     </div>
 
-    <div class="form-group">
+    <div class="field">
+      <label>Tanggal</label>
+      <input type="date" id="txDate" class="input" />
+    </div>
+
+    <div class="field">
       <label>Nominal (Rp)</label>
-      <input type="number" id="inputAmount" class="form-control" placeholder="Contoh: 25000" inputmode="numeric" />
+      <input type="number" id="txAmount" class="input" placeholder="Contoh: 25000" inputmode="numeric" />
     </div>
 
-    <div class="form-group" id="groupCategory">
+    <div class="field" id="boxExpCat">
       <label>Kategori Pengeluaran</label>
-      <select id="inputCategory" class="form-control">
+      <select id="txExpCat" class="input">
         <option value="🍜|Makan & Minum">🍜 Makan & Minum</option>
         <option value="⛽|Transport & Bensin">⛽ Transport & Bensin</option>
         <option value="🚬|Rokok">🚬 Rokok</option>
@@ -928,86 +1014,95 @@
       </select>
     </div>
 
-    <div class="form-group hidden" id="groupIncomeKind">
-      <label>Jenis Pemasukan</label>
-      <select id="inputIncomeKind" class="form-control">
+    <div class="field hidden" id="boxIncKind">
+      <label>Jenis Income / Salary</label>
+      <select id="txIncKind" class="input">
         <option value="💼|salary|Salary / Gaji">💼 Salary / Gaji</option>
         <option value="✨|bonus|Tips / Bonus">✨ Tips / Bonus</option>
-        <option value="🎯|bonus|Side Job / Freelance">🎯 Side Job / Freelance</option>
+        <option value="🎯|bonus|Side Job / Event">🎯 Side Job / Event</option>
       </select>
     </div>
 
-    <div class="form-group">
-      <label>Catatan (Opsional)</label>
-      <input type="text" id="inputNote" class="form-control" placeholder="Contoh: Gaji bulan ini / Kopi susu" />
+    <div class="field">
+      <label>Catatan</label>
+      <input type="text" id="txNote" class="input" placeholder="Opsional..." />
     </div>
 
-    <label class="checkbox-row" id="groupExtra">
-      <input type="checkbox" id="inputIsExtra" />
-      <span>Masukkan ke <b>Dana Ekstra</b> (tidak memotong limit harian Rp30rb)</span>
+    <label class="check-box" id="boxExtra">
+      <input type="checkbox" id="txExtra" />
+      <span>Tandai sebagai <b>Dana Ekstra</b> (tidak memotong limit harian)</span>
     </label>
 
-    <button type="button" class="btn-primary" onclick="saveTransaction()">Simpan Transaksi</button>
+    <button type="button" class="btn-main" onclick="submitTransaction()">Simpan</button>
   </div>
 </div>
 
-<!-- MODAL 2: PROFILE -->
-<div class="modal-backdrop" id="modalProfile" onclick="handleBackdropClick(event, 'modalProfile')">
-  <div class="modal-sheet">
-    <div class="modal-header">
-      <h3>Profil Pengguna</h3>
-      <button type="button" class="close-btn" onclick="closeModal('modalProfile')">✕</button>
+<!-- MODAL PROFIL -->
+<div class="modal-bg" id="modalProfile" onclick="backdropClose(event, 'modalProfile')">
+  <div class="modal-card">
+    <div class="modal-top">
+      <h3>Profil & Target</h3>
+      <button type="button" class="x-btn" onclick="closeModal('modalProfile')">✕</button>
     </div>
 
-    <div class="form-group">
-      <label>Nama Tampilan</label>
-      <input type="text" id="profileName" class="form-control" value="Owen" />
+    <div class="field">
+      <label>Nama</label>
+      <input type="text" id="profName" class="input" />
     </div>
 
-    <div class="form-group">
+    <div class="field">
+      <label>Simbol Avatar (1-2 Karakter / Emoji)</label>
+      <input type="text" id="profAvatar" class="input" maxlength="4" />
+    </div>
+
+    <div class="field">
       <label>Target Tabungan Vault (Rp)</label>
-      <input type="number" id="profileTarget" class="form-control" inputmode="numeric" />
+      <input type="number" id="profVaultTarget" class="input" inputmode="numeric" />
     </div>
 
-    <div class="form-group">
+    <div class="field">
       <label>Limit Pengeluaran Harian (Rp)</label>
-      <input type="number" id="profileDailyLimit" class="form-control" inputmode="numeric" />
+      <input type="number" id="profDailyLimit" class="input" inputmode="numeric" />
     </div>
 
-    <button type="button" class="btn-primary" onclick="saveProfile()">Simpan Profil</button>
+    <button type="button" class="btn-main" onclick="saveProfileData()">Simpan Profil</button>
   </div>
 </div>
 
-<!-- MODAL 3: SETTINGS -->
-<div class="modal-backdrop" id="modalSettings" onclick="handleBackdropClick(event, 'modalSettings')">
-  <div class="modal-sheet">
-    <div class="modal-header">
-      <h3>Pengaturan & Data</h3>
-      <button type="button" class="close-btn" onclick="closeModal('modalSettings')">✕</button>
+<!-- MODAL SETTINGS -->
+<div class="modal-bg" id="modalSettings" onclick="backdropClose(event, 'modalSettings')">
+  <div class="modal-card">
+    <div class="modal-top">
+      <h3>Pengaturan & Backup</h3>
+      <button type="button" class="x-btn" onclick="closeModal('modalSettings')">✕</button>
     </div>
 
-    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
-      Simpan cadangan data kamu dalam file JSON agar aman saat ganti HP atau membersihkan cache Safari.
+    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+      Kompatibel dengan format data Vault 2.2 & Vault 3.0. Simpan JSON secara berkala untuk cadangan aman.
     </p>
 
-    <button type="button" class="btn-secondary" onclick="exportData()">⬇️ Backup Data (Export JSON)</button>
+    <button type="button" class="btn-sub" onclick="exportJson()">⬇️ Export Backup JSON (v3.0)</button>
 
-    <label class="btn-secondary" style="display: block; text-align: center; cursor: pointer;">
-      ⬆️ Restore Data (Import JSON)
-      <input type="file" id="inputImport" accept=".json" onchange="importData(event)" style="display: none;" />
+    <label class="btn-sub" style="display:block;text-align:center;cursor:pointer;">
+      ⬆️ Import Backup JSON
+      <input type="file" id="fileImportJson" accept=".json" onchange="importJson(event)" style="display:none;" />
     </label>
 
-    <hr style="border: none; border-top: 1px solid var(--border); margin: 16px 0;" />
+    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
 
-    <button type="button" class="btn-danger" onclick="resetAllData()">🗑️ Reset Semua Data</button>
+    <button type="button" class="btn-warn" onclick="wipeAllData()">🗑️ Reset Semua Data</button>
   </div>
 </div>
 
 <script>
-  const STORAGE_KEY = 'owens_vault_v2_2_data';
-  const defaultState = {
+  const V3_KEY = 'owens_vault_v3_0_data';
+  const V2_KEY = 'owens_vault_v2_2_data';
+
+  const DEFAULT_STATE = {
+    version: '3.0',
     profile: {
       name: 'Owen',
+      avatar: 'O',
       vaultTarget: 10000000,
       dailyLimit: 30000
     },
@@ -1016,334 +1111,477 @@
     incomeTx: []
   };
 
-  let state = loadState();
-  let currentTab = 'vault';
-  let selectedTxType = 'expense';
-  let selectedMonthKey = getCurrentMonthStr();
-
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return JSON.parse(JSON.stringify(defaultState));
-      const parsed = JSON.parse(raw);
-      return {
-        profile: { ...defaultState.profile, ...(parsed.profile || {}) },
-        vaultTx: Array.isArray(parsed.vaultTx) ? parsed.vaultTx : [],
-        expenseTx: Array.isArray(parsed.expenseTx) ? parsed.expenseTx : [],
-        incomeTx: Array.isArray(parsed.incomeTx) ? parsed.incomeTx : []
-      };
-    } catch (e) {
-      return JSON.parse(JSON.stringify(defaultState));
-    }
-  }
-
-  function saveState() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch (e) {
-      console.warn('Storage error:', e);
-    }
-    render();
-  }
-
-  function formatRp(num) {
-    return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
-  }
-
-  function getTodayStr() {
+  function getTodayISO() {
     const d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  function getCurrentMonthStr() {
-    return getTodayStr().slice(0, 7);
+  function getCurrentYM() {
+    return getTodayISO().slice(0, 7);
   }
 
-  function formatMonthTitle(ymStr) {
-    const parts = ymStr.split('-');
-    const year = Number(parts[0]);
-    const monthIdx = Number(parts[1]) - 1;
-    const d = new Date(year, monthIdx, 1);
+  function normalizeTxList(list, fallbackDate) {
+    if (!Array.isArray(list)) return [];
+    return list
+      .filter(function(item) { return item && Number(item.amount) > 0; })
+      .map(function(item, idx) {
+        const rawDate = String(item.date || fallbackDate || getTodayISO());
+        const dateStr = rawDate.length >= 10 ? rawDate.slice(0, 10) : getTodayISO();
+        return Object.assign({}, item, {
+          id: String(item.id || (Date.now() + idx)),
+          amount: Math.round(Number(item.amount)),
+          date: dateStr
+        });
+      });
+  }
+
+  function loadVault3State() {
+    try {
+      const rawV3 = localStorage.getItem(V3_KEY);
+      if (rawV3) {
+        const p = JSON.parse(rawV3);
+        return {
+          version: '3.0',
+          profile: Object.assign({}, DEFAULT_STATE.profile, p.profile || {}),
+          vaultTx: normalizeTxList(p.vaultTx),
+          expenseTx: normalizeTxList(p.expenseTx),
+          incomeTx: normalizeTxList(p.incomeTx)
+        };
+      }
+
+      // Migrasi otomatis dari data Vault 2.2 jika ada
+      const rawV2 = localStorage.getItem(V2_KEY);
+      if (rawV2) {
+        const v2 = JSON.parse(rawV2);
+        const migrated = {
+          version: '3.0',
+          profile: Object.assign({}, DEFAULT_STATE.profile, v2.profile || {}),
+          vaultTx: normalizeTxList(v2.vaultTx),
+          expenseTx: normalizeTxList(v2.expenseTx),
+          incomeTx: normalizeTxList(v2.incomeTx)
+        };
+        localStorage.setItem(V3_KEY, JSON.stringify(migrated));
+        return migrated;
+      }
+    } catch (err) {}
+    return JSON.parse(JSON.stringify(DEFAULT_STATE));
+  }
+
+  let state = loadVault3State();
+  let activeNav = 'home';
+  let activeYM = getCurrentYM();
+  let selectedDayISO = getTodayISO();
+  let chosenType = 'expense';
+
+  function persist() {
+    try {
+      localStorage.setItem(V3_KEY, JSON.stringify(state));
+    } catch (err) {}
+    renderAll();
+  }
+
+  function rp(n) {
+    return 'Rp ' + Math.round(Number(n || 0)).toLocaleString('id-ID');
+  }
+
+  function formatMonthLabel(ym) {
+    const parts = ym.split('-');
+    const d = new Date(Number(parts[0]), Number(parts[1]) - 1, 1);
     return d.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
   }
 
-  function changeMonth(delta) {
-    const parts = selectedMonthKey.split('-');
+  function shiftMonth(delta) {
+    const parts = activeYM.split('-');
     const d = new Date(Number(parts[0]), Number(parts[1]) - 1 + delta, 1);
-    selectedMonthKey = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
-    render();
+    activeYM = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    if (!selectedDayISO.startsWith(activeYM)) {
+      selectedDayISO = activeYM + '-01';
+    }
+    renderAll();
   }
 
-  function formatDateDisplay(isoStr) {
-    const d = new Date(isoStr);
-    return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  function jumpToCurrentMonth() {
+    activeYM = getCurrentYM();
+    selectedDayISO = getTodayISO();
+    renderAll();
   }
 
-  function render() {
-    const name = state.profile.name || 'Owen';
-    document.getElementById('headerTitle').textContent = name + "'s Vault";
-    document.getElementById('headerAvatar').textContent = name.charAt(0).toUpperCase();
+  function setNav(tab) {
+    activeNav = tab;
+    ['home', 'calendar', 'report', 'vault'].forEach(function(k) {
+      const cap = k.charAt(0).toUpperCase() + k.slice(1);
+      document.getElementById('nav' + cap).classList.toggle('active', k === tab);
+      document.getElementById('sec' + cap).classList.toggle('hidden', k !== tab);
+    });
+    document.getElementById('monthSwitcher').classList.toggle('hidden', tab === 'vault');
+    renderAll();
+  }
 
-    const showMonthBar = (currentTab === 'expenses' || currentTab === 'income');
-    document.getElementById('monthBar').classList.toggle('hidden', !showMonthBar);
-    document.getElementById('activeMonthLabel').textContent = formatMonthTitle(selectedMonthKey);
-
-    // 1. VAULT
-    const vaultBalance = state.vaultTx.reduce(function(acc, item) {
-      return item.type === 'in' ? acc + item.amount : acc - item.amount;
+  function getVaultBalance() {
+    return state.vaultTx.reduce(function(sum, t) {
+      return t.type === 'in' ? sum + t.amount : sum - t.amount;
     }, 0);
-    const target = Math.max(1, state.profile.vaultTarget);
-    const pct = Math.min(100, Math.round((vaultBalance / target) * 100));
+  }
 
-    document.getElementById('vaultBalance').textContent = formatRp(vaultBalance);
-    document.getElementById('vaultPercent').textContent = pct + '%';
-    document.getElementById('vaultProgress').style.width = pct + '%';
-    document.getElementById('vaultTargetText').textContent = 'Target: ' + formatRp(target);
-    document.getElementById('vaultCount').textContent = state.vaultTx.length + ' transaksi';
+  function renderAll() {
+    const prof = state.profile;
+    const displayName = (prof.name || 'Owen').trim() || 'Owen';
+    const avatarChar = (prof.avatar || displayName.charAt(0) || 'O').trim();
 
-    const vaultListEl = document.getElementById('vaultList');
-    if (state.vaultTx.length === 0) {
-      vaultListEl.innerHTML = '<div class="empty-state">Belum ada riwayat tabungan. Tekan tombol <b>+</b> untuk mulai menabung.</div>';
+    document.getElementById('topName').textContent = displayName;
+    document.getElementById('topAvatar').textContent = avatarChar;
+    document.getElementById('monthTitle').textContent = formatMonthLabel(activeYM);
+    document.getElementById('monthSub').textContent = activeYM === getCurrentYM() ? 'Bulan Aktif • Tap Reset' : 'Arsip Bulan • Tap ke Bulan Ini';
+
+    const monthExp = state.expenseTx.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
+    const monthInc = state.incomeTx.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
+
+    const totalInc = monthInc.reduce(function(s, t) { return s + t.amount; }, 0);
+    const salaryMain = monthInc.filter(function(t) { return t.kind === 'salary'; }).reduce(function(s, t) { return s + t.amount; }, 0);
+    const salaryBonus = totalInc - salaryMain;
+
+    const regularExp = monthExp.filter(function(t) { return !t.isExtra; }).reduce(function(s, t) { return s + t.amount; }, 0);
+    const extraExp = monthExp.filter(function(t) { return !!t.isExtra; }).reduce(function(s, t) { return s + t.amount; }, 0);
+    const totalExp = regularExp + extraExp;
+    const netCash = totalInc - totalExp;
+
+    // HOME
+    document.getElementById('homeNetBalance').textContent = (netCash < 0 ? '-' : '') + rp(Math.abs(netCash));
+    document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--text)' : 'var(--danger)';
+    const cashBadge = document.getElementById('homeCashBadge');
+    cashBadge.textContent = netCash >= 0 ? 'Surplus / Aman' : 'Defisit';
+    cashBadge.style.color = netCash >= 0 ? 'var(--accent-2)' : 'var(--danger)';
+
+    document.getElementById('homeIncomeStat').textContent = 'Salary/Income: ' + rp(totalInc);
+    document.getElementById('homeExpenseStat').textContent = 'Keluar: ' + rp(totalExp);
+
+    const todayISO = getTodayISO();
+    const dailyLimit = Math.max(1000, Number(prof.dailyLimit) || 30000);
+    const todayRegularSpent = state.expenseTx
+      .filter(function(t) { return t.date === todayISO && !t.isExtra; })
+      .reduce(function(s, t) { return s + t.amount; }, 0);
+
+    const todayPct = Math.min(100, Math.round((todayRegularSpent / dailyLimit) * 100));
+    const todayRemain = dailyLimit - todayRegularSpent;
+    const todayBar = document.getElementById('todayBar');
+
+    document.getElementById('todaySpentVal').textContent = rp(todayRegularSpent);
+    todayBar.style.width = todayPct + '%';
+    if (todayRemain >= 0) {
+      todayBar.classList.remove('warn');
+      document.getElementById('todayRemainVal').textContent = 'Sisa: ' + rp(todayRemain) + ' / ' + rp(dailyLimit);
+      document.getElementById('todayLimitBadge').textContent = 'Aman';
+      document.getElementById('todayLimitBadge').style.color = 'var(--accent-2)';
     } else {
-      vaultListEl.innerHTML = state.vaultTx.slice().reverse().map(function(tx) {
+      todayBar.classList.add('warn');
+      document.getElementById('todayRemainVal').textContent = 'Lewat limit: ' + rp(Math.abs(todayRemain));
+      document.getElementById('todayLimitBadge').textContent = 'Over Limit';
+      document.getElementById('todayLimitBadge').style.color = 'var(--danger)';
+    }
+    document.getElementById('todayExtraVal').textContent = 'Ekstra Bulan Ini: ' + rp(extraExp);
+
+    // Gabungkan aktivitas bulan aktif
+    const combinedMonth = []
+      .concat(monthInc.map(function(t) { return Object.assign({}, t, { _kind: 'inc' }); }))
+      .concat(monthExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }))
+      .sort(function(a, b) { return b.date.localeCompare(a.date) || Number(b.id) - Number(a.id); });
+
+    document.getElementById('homeTxCount').textContent = combinedMonth.length + ' item';
+    document.getElementById('homeTxList').innerHTML = renderFeedItems(combinedMonth);
+
+    // CALENDAR
+    renderCalendar(monthInc, monthExp);
+
+    // REPORT
+    renderReport(salaryMain, salaryBonus, monthExp);
+
+    // VAULT
+    const vaultBal = getVaultBalance();
+    const vaultTarget = Math.max(1000, Number(prof.vaultTarget) || 10000000);
+    const vaultPct = Math.min(100, Math.max(0, Math.round((vaultBal / vaultTarget) * 100)));
+
+    document.getElementById('vaultTotalVal').textContent = rp(vaultBal);
+    document.getElementById('vaultPctBadge').textContent = vaultPct + '%';
+    document.getElementById('vaultBar').style.width = vaultPct + '%';
+    document.getElementById('vaultTargetVal').textContent = 'Target: ' + rp(vaultTarget);
+    document.getElementById('vaultTxCount').textContent = state.vaultTx.length + ' item';
+
+    const vaultSorted = state.vaultTx.slice().reverse();
+    document.getElementById('vaultTxList').innerHTML = vaultSorted.length === 0
+      ? '<div class="empty-box">Belum ada transaksi di Piggy Vault. Tekan <b>+</b> untuk mulai nabung.</div>'
+      : vaultSorted.map(function(t) {
+          const isIn = t.type === 'in';
+          return '<div class="tx-item">' +
+            '<div class="tx-left">' +
+              '<div class="tx-badge">' + (isIn ? '🐷' : '📤') + '</div>' +
+              '<div>' +
+                '<div class="tx-title">' + escapeHtml(t.note || (isIn ? 'Setor Vault' : 'Tarik Vault')) + '</div>' +
+                '<div class="tx-sub">' + t.date + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="tx-right">' +
+              '<span class="tx-val ' + (isIn ? 'plus' : 'minus') + '">' + (isIn ? '+' : '-') + rp(t.amount) + '</span>' +
+              '<button type="button" class="tx-del" onclick="removeVaultTx(\'' + t.id + '\')">Hapus</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+  }
+
+  function renderFeedItems(items) {
+    if (!items.length) {
+      return '<div class="empty-box">Belum ada pemasukan atau pengeluaran di bulan ini.</div>';
+    }
+    return items.map(function(t) {
+      if (t._kind === 'inc') {
         return '<div class="tx-item">' +
           '<div class="tx-left">' +
-            '<div class="tx-icon">' + (tx.type === 'in' ? '🐷' : '📤') + '</div>' +
-            '<div class="tx-info">' +
-              '<h4>' + (tx.note || (tx.type === 'in' ? 'Setor Tabungan' : 'Tarik Tabungan')) + '</h4>' +
-              '<span>' + formatDateDisplay(tx.date) + '</span>' +
+            '<div class="tx-badge">' + (t.icon || '💼') + '</div>' +
+            '<div>' +
+              '<div class="tx-title">' + escapeHtml(t.note || t.label || 'Income') + '</div>' +
+              '<div class="tx-sub">' + escapeHtml(t.label || 'Salary') + ' • ' + t.date + '</div>' +
             '</div>' +
           '</div>' +
           '<div class="tx-right">' +
-            '<span class="tx-amount ' + (tx.type === 'in' ? 'plus' : 'minus') + '">' +
-              (tx.type === 'in' ? '+' : '-') + formatRp(tx.amount) +
-            '</span>' +
-            '<button type="button" class="tx-del" onclick="deleteVaultTx(\'' + tx.id + '\')">Hapus</button>' +
+            '<span class="tx-val plus">+' + rp(t.amount) + '</span>' +
+            '<button type="button" class="tx-del" onclick="removeIncomeTx(\'' + t.id + '\')">Hapus</button>' +
           '</div>' +
         '</div>';
-      }).join('');
-    }
-
-    // 2. EXPENSES
-    const today = getTodayStr();
-    const dailyLimit = Math.max(1, state.profile.dailyLimit);
-
-    let todayRegular = 0;
-    let monthRegular = 0;
-    let monthExtra = 0;
-
-    state.expenseTx.forEach(function(tx) {
-      const txDay = tx.date.slice(0, 10);
-      const txMonth = tx.date.slice(0, 7);
-      if (txDay === today && !tx.isExtra) todayRegular += tx.amount;
-      if (txMonth === selectedMonthKey) {
-        if (tx.isExtra) monthExtra += tx.amount;
-        else monthRegular += tx.amount;
       }
-    });
+      const valCls = t.isExtra ? 'extra' : 'minus';
+      return '<div class="tx-item">' +
+        '<div class="tx-left">' +
+          '<div class="tx-badge">' + (t.icon || '💸') + '</div>' +
+          '<div>' +
+            '<div class="tx-title">' + escapeHtml(t.note || t.category || 'Pengeluaran') + '</div>' +
+            '<div class="tx-sub">' + escapeHtml(t.category || 'Umum') + (t.isExtra ? ' • Ekstra' : '') + ' • ' + t.date + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="tx-right">' +
+          '<span class="tx-val ' + valCls + '">-' + rp(t.amount) + '</span>' +
+          '<button type="button" class="tx-del" onclick="removeExpenseTx(\'' + t.id + '\')">Hapus</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
 
-    const totalMonthExpense = monthRegular + monthExtra;
-    const dailyPct = Math.min(100, Math.round((todayRegular / dailyLimit) * 100));
-    const remaining = dailyLimit - todayRegular;
-    const progressEl = document.getElementById('dailyProgress');
+  function renderCalendar(monthInc, monthExp) {
+    const parts = activeYM.split('-');
+    const y = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+    const firstDow = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const todayISO = getTodayISO();
 
-    document.getElementById('dailySpentText').textContent = formatRp(todayRegular);
-    document.getElementById('dailyLimitDisplay').textContent = 'Limit: ' + formatRp(dailyLimit);
-    progressEl.style.width = dailyPct + '%';
+    const incDays = new Set(monthInc.map(function(t) { return t.date; }));
+    const expDays = new Set(monthExp.map(function(t) { return t.date; }));
 
-    if (remaining >= 0) {
-      progressEl.classList.remove('over');
-      document.getElementById('dailyRemainingText').textContent = 'Sisa: ' + formatRp(remaining);
-      document.getElementById('dailyStatusBadge').textContent = 'Aman';
-      document.getElementById('dailyStatusBadge').style.color = '#34d399';
-    } else {
-      progressEl.classList.add('over');
-      document.getElementById('dailyRemainingText').textContent = 'Lewat: ' + formatRp(Math.abs(remaining));
-      document.getElementById('dailyStatusBadge').textContent = 'Over Limit';
-      document.getElementById('dailyStatusBadge').style.color = '#f87171';
+    let html = '';
+    for (let e = 0; e < firstDow; e++) {
+      html += '<div class="cal-day empty"></div>';
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+      const cls = ['cal-day'];
+      if (iso === todayISO) cls.push('today');
+      if (iso === selectedDayISO) cls.push('selected');
+
+      const dots = [];
+      if (incDays.has(iso)) dots.push('<span class="dot inc"></span>');
+      if (expDays.has(iso)) dots.push('<span class="dot exp"></span>');
+
+      html += '<button type="button" class="' + cls.join(' ') + '" onclick="selectCalDay(\'' + iso + '\')">' +
+        '<span>' + day + '</span>' +
+        '<span class="cal-dots">' + dots.join('') + '</span>' +
+      '</button>';
+    }
+    document.getElementById('calGrid').innerHTML = html;
+
+    const dayInc = monthInc.filter(function(t) { return t.date === selectedDayISO; });
+    const dayExp = monthExp.filter(function(t) { return t.date === selectedDayISO; });
+
+    document.getElementById('calDayInc').textContent = rp(dayInc.reduce(function(s, t) { return s + t.amount; }, 0));
+    document.getElementById('calDayExp').textContent = rp(dayExp.reduce(function(s, t) { return s + t.amount; }, 0));
+    document.getElementById('calSelectedTitle').textContent = 'Transaksi ' + selectedDayISO;
+
+    const mergedDay = []
+      .concat(dayInc.map(function(t) { return Object.assign({}, t, { _kind: 'inc' }); }))
+      .concat(dayExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }));
+
+    document.getElementById('calDayCount').textContent = mergedDay.length + ' item';
+    document.getElementById('calDayList').innerHTML = mergedDay.length === 0
+      ? '<div class="empty-box">Tidak ada transaksi pada tanggal ' + selectedDayISO + '.</div>'
+      : renderFeedItems(mergedDay);
+  }
+
+  function selectCalDay(iso) {
+    selectedDayISO = iso;
+    renderAll();
+  }
+
+  function renderReport(salaryMain, salaryBonus, monthExp) {
+    document.getElementById('repSalaryMain').textContent = rp(salaryMain);
+    document.getElementById('repSalaryBonus').textContent = rp(salaryBonus);
+
+    // Grafik 6 bulan terakhir dari activeYM
+    const parts = activeYM.split('-');
+    const baseY = Number(parts[0]);
+    const baseM = Number(parts[1]) - 1;
+    const months = [];
+    for (let i = -5; i <= 0; i++) {
+      const d = new Date(baseY, baseM + i, 1);
+      const ym = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+      const inc = state.incomeTx.filter(function(t) { return t.date.slice(0, 7) === ym; }).reduce(function(s, t) { return s + t.amount; }, 0);
+      const exp = state.expenseTx.filter(function(t) { return t.date.slice(0, 7) === ym; }).reduce(function(s, t) { return s + t.amount; }, 0);
+      months.push({
+        lbl: d.toLocaleDateString('id-ID', { month: 'short' }),
+        inc: inc,
+        exp: exp
+      });
     }
 
-    document.getElementById('monthlyRegularText').textContent = formatRp(monthRegular);
-    document.getElementById('monthlyExtraText').textContent = formatRp(monthExtra);
+    const maxVal = Math.max.apply(null, months.reduce(function(arr, m) { return arr.concat([m.inc, m.exp]); }, [1]));
+    document.getElementById('sixMonthChart').innerHTML = months.map(function(m) {
+      const hInc = Math.max(4, Math.round((m.inc / maxVal) * 110));
+      const hExp = Math.max(4, Math.round((m.exp / maxVal) * 110));
+      return '<div class="chart-col">' +
+        '<div class="chart-bars">' +
+          '<div class="bar inc" style="height:' + hInc + 'px" title="Income: ' + rp(m.inc) + '"></div>' +
+          '<div class="bar exp" style="height:' + hExp + 'px" title="Keluar: ' + rp(m.exp) + '"></div>' +
+        '</div>' +
+        '<span class="chart-lbl">' + m.lbl + '</span>' +
+      '</div>';
+    }).join('');
 
-    const monthExpenses = state.expenseTx.filter(function(tx) {
-      return tx.date.slice(0, 7) === selectedMonthKey;
-    });
-    document.getElementById('expenseCount').textContent = monthExpenses.length + ' transaksi';
-
-    const expenseListEl = document.getElementById('expenseList');
-    if (monthExpenses.length === 0) {
-      expenseListEl.innerHTML = '<div class="empty-state">Belum ada pengeluaran di ' + formatMonthTitle(selectedMonthKey) + '.</div>';
-    } else {
-      expenseListEl.innerHTML = monthExpenses.slice().reverse().map(function(tx) {
-        return '<div class="tx-item">' +
-          '<div class="tx-left">' +
-            '<div class="tx-icon">' + (tx.icon || '💸') + '</div>' +
-            '<div class="tx-info">' +
-              '<h4>' + (tx.note || tx.category) + '</h4>' +
-              '<span>' + tx.category + (tx.isExtra ? ' • Dana Ekstra' : '') + ' • ' + formatDateDisplay(tx.date) + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="tx-right">' +
-            '<span class="tx-amount ' + (tx.isExtra ? 'extra' : 'minus') + '">-' + formatRp(tx.amount) + '</span>' +
-            '<button type="button" class="tx-del" onclick="deleteExpenseTx(\'' + tx.id + '\')">Hapus</button>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    }
-
-    // 3. INCOME & SALARY
-    const monthIncomes = state.incomeTx.filter(function(tx) {
-      return tx.date.slice(0, 7) === selectedMonthKey;
+    // Breakdown kategori pengeluaran bulan aktif
+    const totalExp = monthExp.reduce(function(s, t) { return s + t.amount; }, 0);
+    const mapCat = {};
+    monthExp.forEach(function(t) {
+      const key = t.category || 'Lainnya';
+      mapCat[key] = (mapCat[key] || 0) + t.amount;
     });
 
-    let totalMonthIncome = 0;
-    let totalSalaryMain = 0;
-    let totalSalaryBonus = 0;
-
-    monthIncomes.forEach(function(tx) {
-      totalMonthIncome += tx.amount;
-      if (tx.kind === 'salary') totalSalaryMain += tx.amount;
-      else totalSalaryBonus += tx.amount;
-    });
-
-    const netMonth = totalMonthIncome - totalMonthExpense;
-    document.getElementById('incomeMonthTag').textContent = formatMonthTitle(selectedMonthKey);
-    document.getElementById('monthlyIncomeTotal').textContent = formatRp(totalMonthIncome);
-    document.getElementById('incomeVsExpenseText').textContent = 'Keluar: ' + formatRp(totalMonthExpense);
-    const netEl = document.getElementById('monthlyNetText');
-    netEl.textContent = (netMonth >= 0 ? 'Sisa: ' : 'Defisit: ') + formatRp(Math.abs(netMonth));
-    netEl.style.color = netMonth >= 0 ? '#34d399' : '#f87171';
-
-    document.getElementById('salaryMainText').textContent = formatRp(totalSalaryMain);
-    document.getElementById('salaryBonusText').textContent = formatRp(totalSalaryBonus);
-    document.getElementById('incomeCount').textContent = monthIncomes.length + ' record';
-
-    const incomeListEl = document.getElementById('incomeList');
-    if (monthIncomes.length === 0) {
-      incomeListEl.innerHTML = '<div class="empty-state">Belum ada record salary/income di ' + formatMonthTitle(selectedMonthKey) + '. Tekan <b>+</b> untuk mencatat.</div>';
-    } else {
-      incomeListEl.innerHTML = monthIncomes.slice().reverse().map(function(tx) {
-        return '<div class="tx-item">' +
-          '<div class="tx-left">' +
-            '<div class="tx-icon">' + (tx.icon || '💼') + '</div>' +
-            '<div class="tx-info">' +
-              '<h4>' + (tx.note || tx.label) + '</h4>' +
-              '<span>' + tx.label + ' • ' + formatDateDisplay(tx.date) + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="tx-right">' +
-            '<span class="tx-amount plus">+' + formatRp(tx.amount) + '</span>' +
-            '<button type="button" class="tx-del" onclick="deleteIncomeTx(\'' + tx.id + '\')">Hapus</button>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    }
+    const entries = Object.keys(mapCat).map(function(k) { return { name: k, val: mapCat[k] }; }).sort(function(a, b) { return b.val - a.val; });
+    document.getElementById('categoryBreakdown').innerHTML = entries.length === 0
+      ? '<div class="empty-box" style="border:none;padding:12px;">Belum ada data kategori di bulan ini.</div>'
+      : entries.map(function(e) {
+          const pct = totalExp > 0 ? Math.round((e.val / totalExp) * 100) : 0;
+          return '<div class="cat-row">' +
+            '<div class="cat-top"><span>' + escapeHtml(e.name) + ' (' + pct + '%)</span><strong>' + rp(e.val) + '</strong></div>' +
+            '<div class="progress-track" style="height:7px;margin-bottom:0;"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+          '</div>';
+        }).join('');
   }
 
-  function switchTab(tab) {
-    currentTab = tab;
-    document.getElementById('tabVault').classList.toggle('active', tab === 'vault');
-    document.getElementById('tabExpenses').classList.toggle('active', tab === 'expenses');
-    document.getElementById('tabIncome').classList.toggle('active', tab === 'income');
-
-    document.getElementById('viewVault').classList.toggle('hidden', tab !== 'vault');
-    document.getElementById('viewExpenses').classList.toggle('hidden', tab !== 'expenses');
-    document.getElementById('viewIncome').classList.toggle('hidden', tab !== 'income');
-
-    render();
-  }
-
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-  }
-
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
-  }
-
-  function handleBackdropClick(e, id) {
-    if (e.target.id === id) closeModal(id);
-  }
+  // Modals & Actions
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
 
   function openAddModal() {
-    document.getElementById('inputAmount').value = '';
-    document.getElementById('inputNote').value = '';
-    document.getElementById('inputIsExtra').checked = false;
+    document.getElementById('txAmount').value = '';
+    document.getElementById('txNote').value = '';
+    document.getElementById('txExtra').checked = false;
+    const defaultDate = selectedDayISO.startsWith(activeYM) ? selectedDayISO : (activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01');
+    document.getElementById('txDate').value = defaultDate;
 
-    let initialType = 'expense';
-    if (currentTab === 'vault') initialType = 'vault_in';
-    else if (currentTab === 'income') initialType = 'income';
-
-    setTxType(initialType);
+    const initialType = activeNav === 'vault' ? 'vault_in' : 'expense';
+    chooseTxType(initialType);
     openModal('modalAdd');
   }
 
-  function setTxType(type) {
-    selectedTxType = type;
-    document.getElementById('pillExpense').classList.toggle('active', type === 'expense');
-    document.getElementById('pillIncome').classList.toggle('active', type === 'income');
-    document.getElementById('pillVaultIn').classList.toggle('active', type === 'vault_in');
-    document.getElementById('pillVaultOut').classList.toggle('active', type === 'vault_out');
+  function chooseTxType(type) {
+    chosenType = type;
+    document.getElementById('optExp').classList.toggle('active', type === 'expense');
+    document.getElementById('optInc').classList.toggle('active', type === 'income');
+    document.getElementById('optVin').classList.toggle('active', type === 'vault_in');
+    document.getElementById('optVout').classList.toggle('active', type === 'vault_out');
 
-    const isExpense = type === 'expense';
-    const isIncome = type === 'income';
-    document.getElementById('groupCategory').classList.toggle('hidden', !isExpense);
-    document.getElementById('groupExtra').classList.toggle('hidden', !isExpense);
-    document.getElementById('groupIncomeKind').classList.toggle('hidden', !isIncome);
+    document.getElementById('boxExpCat').classList.toggle('hidden', type !== 'expense');
+    document.getElementById('boxExtra').classList.toggle('hidden', type !== 'expense');
+    document.getElementById('boxIncKind').classList.toggle('hidden', type !== 'income');
   }
 
-  function getTxTimestampForSelectedMonth() {
-    const currentMonth = getCurrentMonthStr();
-    if (selectedMonthKey === currentMonth) {
-      return new Date().toISOString();
-    }
-    return selectedMonthKey + '-15T12:00:00.000Z';
-  }
-
-  function saveTransaction() {
-    const amount = Number(document.getElementById('inputAmount').value);
+  function submitTransaction() {
+    const amount = Math.round(Number(document.getElementById('txAmount').value));
     if (!amount || amount <= 0) {
       alert('Masukkan nominal yang valid.');
       return;
     }
-    const note = document.getElementById('inputNote').value.trim();
+    const dateVal = document.getElementById('txDate').value || getTodayISO();
+    const noteVal = document.getElementById('txNote').value.trim();
 
-    if (selectedTxType === 'expense') {
-      const catRaw = document.getElementById('inputCategory').value.split('|');
-      const isExtra = document.getElementById('inputIsExtra').checked;
+    if (chosenType === 'expense') {
+      const cat = document.getElementById('txExpCat').value.split('|');
+      const isExtra = document.getElementById('txExtra').checked;
       state.expenseTx.push({
         id: String(Date.now()),
         amount: amount,
-        icon: catRaw[0],
-        category: catRaw[1],
-        note: note,
+        icon: cat[0],
+        category: cat[1],
+        note: noteVal,
         isExtra: isExtra,
-        date: getTxTimestampForSelectedMonth()
+        date: dateVal
       });
-    } else if (selectedTxType === 'income') {
-      const incRaw = document.getElementById('inputIncomeKind').value.split('|');
+      activeYM = dateVal.slice(0, 7);
+      selectedDayISO = dateVal;
+    } else if (chosenType === 'income') {
+      const inc = document.getElementById('txIncKind').value.split('|');
       state.incomeTx.push({
         id: String(Date.now()),
         amount: amount,
-        icon: incRaw[0],
-        kind: incRaw[1],
-        label: incRaw[2],
-        note: note || incRaw[2],
-        date: getTxTimestampForSelectedMonth()
+        icon: inc[0],
+        kind: inc[1],
+        label: inc[2],
+        note: noteVal || inc[2],
+        date: dateVal
       });
+      activeYM = dateVal.slice(0, 7);
+      selectedDayISO = dateVal;
     } else {
+      const vType = chosenType === 'vault_in' ? 'in' : 'out';
+      if (vType === 'out' && amount > getVaultBalance()) {
+        alert('Saldo Vault tidak mencukupi untuk penarikan sebesar ' + rp(amount) + '.');
+        return;
+      }
       state.vaultTx.push({
         id: String(Date.now()),
-        type: selectedTxType === 'vault_in' ? 'in' : 'out',
+        type: vType,
         amount: amount,
-        note: note,
-        date: new Date().toISOString()
+        note: noteVal,
+        date: dateVal
       });
     }
 
-    saveState();
+    persist();
     closeModal('modalAdd');
+  }
+
+  function quickExp(category, amount, icon, isExtra) {
+    const d = activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01';
+    state.expenseTx.push({
+      id: String(Date.now()),
+      amount: amount,
+      icon: icon,
+      category: category,
+      note: category,
+      isExtra: !!isExtra,
+      date: d
+    });
+    persist();
+  }
+
+  function quickInc(label, amount, icon, kind) {
+    const d = activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01';
+    state.incomeTx.push({
+      id: String(Date.now()),
+      amount: amount,
+      icon: icon,
+      kind: kind,
+      label: label,
+      note: label,
+      date: d
+    });
+    persist();
   }
 
   function quickVault(amount) {
@@ -1352,66 +1590,42 @@
       type: 'in',
       amount: amount,
       note: 'Setor Cepat',
-      date: new Date().toISOString()
+      date: getTodayISO()
     });
-    saveState();
+    persist();
   }
 
-  function quickExpense(category, amount, icon, isExtra) {
-    state.expenseTx.push({
-      id: String(Date.now()),
-      amount: amount,
-      icon: icon,
-      category: category,
-      note: category,
-      isExtra: !!isExtra,
-      date: getTxTimestampForSelectedMonth()
-    });
-    saveState();
-  }
-
-  function quickIncome(label, amount, icon, kind) {
-    state.incomeTx.push({
-      id: String(Date.now()),
-      amount: amount,
-      icon: icon,
-      kind: kind,
-      label: label,
-      note: label,
-      date: getTxTimestampForSelectedMonth()
-    });
-    saveState();
-  }
-
-  function deleteVaultTx(id) {
-    state.vaultTx = state.vaultTx.filter(function(t) { return t.id !== id; });
-    saveState();
-  }
-
-  function deleteExpenseTx(id) {
+  function removeExpenseTx(id) {
     state.expenseTx = state.expenseTx.filter(function(t) { return t.id !== id; });
-    saveState();
+    persist();
   }
 
-  function deleteIncomeTx(id) {
+  function removeIncomeTx(id) {
     state.incomeTx = state.incomeTx.filter(function(t) { return t.id !== id; });
-    saveState();
+    persist();
+  }
+
+  function removeVaultTx(id) {
+    state.vaultTx = state.vaultTx.filter(function(t) { return t.id !== id; });
+    persist();
   }
 
   function openProfileModal() {
-    document.getElementById('profileName').value = state.profile.name;
-    document.getElementById('profileTarget').value = state.profile.vaultTarget;
-    document.getElementById('profileDailyLimit').value = state.profile.dailyLimit;
+    document.getElementById('profName').value = state.profile.name || 'Owen';
+    document.getElementById('profAvatar').value = state.profile.avatar || 'O';
+    document.getElementById('profVaultTarget').value = state.profile.vaultTarget || 10000000;
+    document.getElementById('profDailyLimit').value = state.profile.dailyLimit || 30000;
     openModal('modalProfile');
   }
 
-  function saveProfile() {
-    const name = document.getElementById('profileName').value.trim() || 'Owen';
-    const vaultTarget = Number(document.getElementById('profileTarget').value) || 10000000;
-    const dailyLimit = Number(document.getElementById('profileDailyLimit').value) || 30000;
+  function saveProfileData() {
+    const name = document.getElementById('profName').value.trim() || 'Owen';
+    const avatar = document.getElementById('profAvatar').value.trim() || name.charAt(0).toUpperCase();
+    const vaultTarget = Math.max(1000, Math.round(Number(document.getElementById('profVaultTarget').value) || 10000000));
+    const dailyLimit = Math.max(1000, Math.round(Number(document.getElementById('profDailyLimit').value) || 30000));
 
-    state.profile = { name: name, vaultTarget: vaultTarget, dailyLimit: dailyLimit };
-    saveState();
+    state.profile = { name: name, avatar: avatar, vaultTarget: vaultTarget, dailyLimit: dailyLimit };
+    persist();
     closeModal('modalProfile');
   }
 
@@ -1419,52 +1633,68 @@
     openModal('modalSettings');
   }
 
-  function exportData() {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  function exportJson() {
+    const payload = {
+      version: '3.0',
+      exportedAt: new Date().toISOString(),
+      data: state
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'owens-vault-backup-' + getTodayStr() + '.json';
+    a.download = 'owens-vault-3.0-' + getTodayISO() + '.json';
     a.click();
     URL.revokeObjectURL(url);
   }
 
-  function importData(e) {
-    const file = e.target.files[0];
+  function importJson(ev) {
+    const file = ev.target.files && ev.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(ev) {
+    reader.onload = function(e) {
       try {
-        const imported = JSON.parse(ev.target.result);
-        if (imported.profile && Array.isArray(imported.vaultTx)) {
-          state = {
-            profile: { ...defaultState.profile, ...(imported.profile || {}) },
-            vaultTx: Array.isArray(imported.vaultTx) ? imported.vaultTx : [],
-            expenseTx: Array.isArray(imported.expenseTx) ? imported.expenseTx : [],
-            incomeTx: Array.isArray(imported.incomeTx) ? imported.incomeTx : []
-          };
-          saveState();
-          alert('Data berhasil dipulihkan!');
-          closeModal('modalSettings');
-        } else {
-          alert('Format file JSON tidak sesuai.');
+        const parsed = JSON.parse(e.target.result);
+        const src = parsed && parsed.data && typeof parsed.data === 'object' ? parsed.data : parsed;
+        if (!src || !Array.isArray(src.vaultTx)) {
+          alert('Format file JSON tidak dikenali.');
+          return;
         }
+        state = {
+          version: '3.0',
+          profile: Object.assign({}, DEFAULT_STATE.profile, src.profile || {}),
+          vaultTx: normalizeTxList(src.vaultTx),
+          expenseTx: normalizeTxList(src.expenseTx),
+          incomeTx: normalizeTxList(src.incomeTx)
+        };
+        persist();
+        alert('Backup berhasil dipulihkan ke Owen\'s Vault 3.0!');
+        closeModal('modalSettings');
       } catch (err) {
-        alert('Gagal membaca file JSON.');
+        alert('File JSON rusak atau tidak valid.');
       }
+      ev.target.value = '';
     };
     reader.readAsText(file);
   }
 
-  function resetAllData() {
-    if (confirm('Yakin hapus semua data tabungan, salary, dan pengeluaran?')) {
-      state = JSON.parse(JSON.stringify(defaultState));
-      saveState();
+  function wipeAllData() {
+    if (confirm('Hapus permanen semua data Vault, Salary, dan Pengeluaran?')) {
+      state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      persist();
       closeModal('modalSettings');
     }
   }
 
-  render();
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  renderAll();
 </script>
 </body>
 </html>
