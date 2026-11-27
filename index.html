@@ -8,8 +8,10 @@
   <meta name="apple-mobile-web-app-title" content="Owen's Vault" />
   <meta name="theme-color" content="#06140e" />
   <title>Owen's Vault 2.2</title>
-  <link id="apple-touch-icon" rel="apple-touch-icon" href="" />
-  <link id="favicon" rel="icon" type="image/png" href="" />
+
+  <!-- ICON HOME SCREEN STATIS (LANGSUNG TERBACA iOS SAFARI) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230f3d28'/%3E%3Cstop offset='100%25' stop-color='%2304130c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' fill='url(%23bg)'/%3E%3Ccircle cx='90' cy='80' r='46' fill='%2310b981' fill-opacity='0.2' stroke='%2310b981' stroke-width='5'/%3E%3Ctext x='90' y='96' text-anchor='middle' font-family='-apple-system, sans-serif' font-size='52' font-weight='800' fill='%23ecfdf5'%3EO%3C/text%3E%3Ctext x='90' y='154' text-anchor='middle' font-family='-apple-system, sans-serif' font-size='15' font-weight='800' letter-spacing='1' fill='%2334d399'%3EOWEN'S VAULT%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%2306140e'/%3E%3Ccircle cx='90' cy='90' r='52' fill='%2310b981' fill-opacity='0.2' stroke='%2310b981' stroke-width='6'/%3E%3Ctext x='90' y='108' text-anchor='middle' font-family='sans-serif' font-size='60' font-weight='800' fill='%23ecfdf5'%3EO%3C/text%3E%3C/svg%3E" />
 
   <style>
     :root {
@@ -23,8 +25,8 @@
       --danger: #ef4444;
       --text-primary: #ecfdf5;
       --text-secondary: #86efac;
-      --text-muted: #6ee7b788;
-      --border: rgba(16, 185, 129, 0.18);
+      --text-muted: #6ee7b799;
+      --border: rgba(16, 185, 129, 0.22);
       --safe-top: env(safe-area-inset-top, 20px);
       --safe-bottom: env(safe-area-inset-bottom, 20px);
     }
@@ -42,7 +44,7 @@
       color: var(--text-primary);
       min-height: 100vh;
       padding-top: calc(var(--safe-top) + 12px);
-      padding-bottom: calc(var(--safe-bottom) + 96px);
+      padding-bottom: calc(var(--safe-bottom) + 100px);
       overflow-x: hidden;
     }
 
@@ -58,6 +60,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 20;
     }
 
     .brand {
@@ -98,8 +102,8 @@
     }
 
     .icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -108,7 +112,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
+      touch-action: manipulation;
     }
 
     .icon-btn:active {
@@ -136,7 +140,7 @@
       font-weight: 600;
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      touch-action: manipulation;
     }
 
     .tab-btn.active {
@@ -157,8 +161,6 @@
 
     .hero-card {
       background: linear-gradient(145deg, #0f2d20 0%, #091c14 100%);
-      position: relative;
-      overflow: hidden;
     }
 
     .hero-label {
@@ -191,7 +193,7 @@
       height: 100%;
       background: linear-gradient(90deg, #10b981, #34d399);
       border-radius: 99px;
-      transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 0.3s ease;
     }
 
     .progress-bar.over {
@@ -258,12 +260,13 @@
       background: var(--bg-card-elevated);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 8px 12px;
+      padding: 9px 13px;
       border-radius: 12px;
       font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
       cursor: pointer;
+      touch-action: manipulation;
     }
     .chip:active { transform: scale(0.95); }
 
@@ -278,8 +281,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(16, 185, 129, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(16, 185, 129, 0.14);
       padding: 12px 14px;
       border-radius: 14px;
     }
@@ -331,30 +334,33 @@
       border: none;
       color: var(--text-muted);
       font-size: 11px;
-      margin-top: 2px;
+      margin-top: 4px;
+      padding: 2px 6px;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     /* Floating Action Button (+) */
     .fab {
       position: fixed;
-      bottom: calc(var(--safe-bottom) + 20px);
+      bottom: calc(var(--safe-bottom) + 22px);
       right: 22px;
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: 20px;
       background: linear-gradient(135deg, #10b981, #059669);
       color: #04130c;
       border: none;
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 700;
+      line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45);
       cursor: pointer;
-      z-index: 90;
-      transition: transform 0.15s ease;
+      z-index: 999;
+      touch-action: manipulation;
     }
 
     .fab:active {
@@ -364,14 +370,15 @@
     /* Modals */
     .modal-backdrop {
       position: fixed;
-      inset: 0;
-      background: rgba(2, 10, 7, 0.82);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(2, 10, 7, 0.85);
       display: none;
       align-items: flex-end;
       justify-content: center;
-      z-index: 200;
+      z-index: 2000;
     }
 
     .modal-backdrop.open {
@@ -387,12 +394,6 @@
       padding: 22px 20px calc(var(--safe-bottom) + 24px);
       max-height: 90vh;
       overflow-y: auto;
-      animation: slideUp 0.22s ease-out;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
     }
 
     .modal-header {
@@ -411,11 +412,12 @@
       background: var(--bg-card-elevated);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
       font-size: 18px;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .form-group {
@@ -437,7 +439,7 @@
       color: var(--text-primary);
       padding: 12px 14px;
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 16px;
       outline: none;
     }
 
@@ -453,7 +455,7 @@
     }
 
     .type-pill {
-      padding: 10px 6px;
+      padding: 11px 6px;
       border-radius: 12px;
       background: #06140e;
       border: 1px solid var(--border);
@@ -462,6 +464,7 @@
       font-weight: 600;
       text-align: center;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .type-pill.active {
@@ -481,11 +484,12 @@
       font-weight: 700;
       cursor: pointer;
       margin-top: 6px;
+      touch-action: manipulation;
     }
 
     .btn-secondary {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: var(--bg-card-elevated);
@@ -494,11 +498,12 @@
       font-weight: 600;
       cursor: pointer;
       margin-bottom: 10px;
+      touch-action: manipulation;
     }
 
     .btn-danger {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border-radius: 12px;
       border: 1px solid rgba(239, 68, 68, 0.3);
       background: rgba(239, 68, 68, 0.12);
@@ -506,6 +511,7 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .checkbox-row {
@@ -543,10 +549,10 @@
       </div>
     </div>
     <div class="header-actions">
-      <button type="button" class="icon-btn" id="btnProfile" aria-label="Profile">
+      <button type="button" class="icon-btn" id="btnProfile" onclick="openProfileModal()" aria-label="Profile">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       </button>
-      <button type="button" class="icon-btn" id="btnSettings" aria-label="Settings">
+      <button type="button" class="icon-btn" id="btnSettings" onclick="openSettingsModal()" aria-label="Settings">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
@@ -554,8 +560,8 @@
 
   <!-- TABS -->
   <div class="tabs">
-    <button type="button" class="tab-btn active" data-tab="vault">🐷 Piggy Vault</button>
-    <button type="button" class="tab-btn" data-tab="expenses">💸 Pengeluaran</button>
+    <button type="button" class="tab-btn active" id="tabVault" onclick="switchTab('vault')">🐷 Piggy Vault</button>
+    <button type="button" class="tab-btn" id="tabExpenses" onclick="switchTab('expenses')">💸 Pengeluaran</button>
   </div>
 
   <!-- VIEW 1: PIGGY VAULT -->
@@ -624,9 +630,9 @@
       <span>Catat Cepat</span>
     </div>
     <div class="chips">
-      <button type="button" class="chip" onclick="quickExpense('Makan', 15000, '🍜')">🍜 Makan 15rb</button>
-      <button type="button" class="chip" onclick="quickExpense('Rokok', 28000, '🚬')">🚬 Rokok 28rb</button>
-      <button type="button" class="chip" onclick="quickExpense('Bensin', 20000, '⛽')">⛽ Bensin 20rb</button>
+      <button type="button" class="chip" onclick="quickExpense('Makan', 15000, '🍜', false)">🍜 Makan 15rb</button>
+      <button type="button" class="chip" onclick="quickExpense('Rokok', 28000, '🚬', false)">🚬 Rokok 28rb</button>
+      <button type="button" class="chip" onclick="quickExpense('Bensin', 20000, '⛽', false)">⛽ Bensin 20rb</button>
       <button type="button" class="chip" onclick="quickExpense('Ngopi (Ekstra)', 25000, '☕', true)">☕ Ngopi 25rb</button>
     </div>
 
@@ -639,10 +645,10 @@
 </div>
 
 <!-- FLOATING ACTION BUTTON (+) -->
-<button type="button" class="fab" id="btnAdd" aria-label="Tambah Transaksi">+</button>
+<button type="button" class="fab" id="btnAdd" onclick="openAddModal()" aria-label="Tambah Transaksi">+</button>
 
 <!-- MODAL 1: TAMBAH TRANSAKSI (+) -->
-<div class="modal-backdrop" id="modalAdd">
+<div class="modal-backdrop" id="modalAdd" onclick="handleBackdropClick(event, 'modalAdd')">
   <div class="modal-sheet">
     <div class="modal-header">
       <h3>Tambah Transaksi</h3>
@@ -650,9 +656,9 @@
     </div>
 
     <div class="type-selector">
-      <div class="type-pill active" data-type="expense">💸 Pengeluaran</div>
-      <div class="type-pill" data-type="vault_in">🐷 Nabung</div>
-      <div class="type-pill" data-type="vault_out">📤 Tarik Vault</div>
+      <button type="button" class="type-pill active" id="pillExpense" onclick="setTxType('expense')">💸 Pengeluaran</button>
+      <button type="button" class="type-pill" id="pillVaultIn" onclick="setTxType('vault_in')">🐷 Nabung</button>
+      <button type="button" class="type-pill" id="pillVaultOut" onclick="setTxType('vault_out')">📤 Tarik Vault</button>
     </div>
 
     <div class="form-group">
@@ -682,12 +688,12 @@
       <span>Masukkan ke <b>Dana Ekstra</b> (tidak memotong limit harian Rp30rb)</span>
     </label>
 
-    <button type="button" class="btn-primary" id="btnSaveTx">Simpan Transaksi</button>
+    <button type="button" class="btn-primary" onclick="saveTransaction()">Simpan Transaksi</button>
   </div>
 </div>
 
 <!-- MODAL 2: PROFILE -->
-<div class="modal-backdrop" id="modalProfile">
+<div class="modal-backdrop" id="modalProfile" onclick="handleBackdropClick(event, 'modalProfile')">
   <div class="modal-sheet">
     <div class="modal-header">
       <h3>Profil Pengguna</h3>
@@ -709,12 +715,12 @@
       <input type="number" id="profileDailyLimit" class="form-control" inputmode="numeric" />
     </div>
 
-    <button type="button" class="btn-primary" id="btnSaveProfile">Simpan Profil</button>
+    <button type="button" class="btn-primary" onclick="saveProfile()">Simpan Profil</button>
   </div>
 </div>
 
 <!-- MODAL 3: SETTINGS -->
-<div class="modal-backdrop" id="modalSettings">
+<div class="modal-backdrop" id="modalSettings" onclick="handleBackdropClick(event, 'modalSettings')">
   <div class="modal-sheet">
     <div class="modal-header">
       <h3>Pengaturan & Data</h3>
@@ -725,65 +731,20 @@
       Simpan cadangan data kamu dalam file JSON agar aman saat ganti HP atau membersihkan cache Safari.
     </p>
 
-    <button type="button" class="btn-secondary" id="btnExport">⬇️ Backup Data (Export JSON)</button>
+    <button type="button" class="btn-secondary" onclick="exportData()">⬇️ Backup Data (Export JSON)</button>
 
     <label class="btn-secondary" style="display: block; text-align: center; cursor: pointer;">
       ⬆️ Restore Data (Import JSON)
-      <input type="file" id="inputImport" accept=".json" style="display: none;" />
+      <input type="file" id="inputImport" accept=".json" onchange="importData(event)" style="display: none;" />
     </label>
 
     <hr style="border: none; border-top: 1px solid var(--border); margin: 16px 0;" />
 
-    <button type="button" class="btn-danger" id="btnReset">🗑️ Reset Semua Data</button>
+    <button type="button" class="btn-danger" onclick="resetAllData()">🗑️ Reset Semua Data</button>
   </div>
 </div>
 
 <script>
-  // 1. GENERATE APPLE TOUCH ICON OTOMATIS (180x180 PNG)
-  (function generateHomeScreenIcon() {
-    try {
-      const canvas = document.createElement('canvas');
-      canvas.width = 180;
-      canvas.height = 180;
-      const ctx = canvas.getContext('2d');
-
-      // Background Dark Emerald Gradient
-      const grad = ctx.createLinearGradient(0, 0, 180, 180);
-      grad.addColorStop(0, '#0f3d28');
-      grad.addColorStop(1, '#04130c');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 180, 180);
-
-      // Inner Glowing Circle
-      ctx.beginPath();
-      ctx.arc(90, 82, 48, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.18)';
-      ctx.fill();
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = '#10b981';
-      ctx.stroke();
-
-      // Letter "O"
-      ctx.fillStyle = '#ecfdf5';
-      ctx.font = 'bold 54px -apple-system, BlinkMacSystemFont, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('O', 90, 84);
-
-      // Label "VAULT"
-      ctx.fillStyle = '#34d399';
-      ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, sans-serif';
-      ctx.fillText("OWEN'S VAULT", 90, 152);
-
-      const dataUrl = canvas.toDataURL('image/png');
-      document.getElementById('apple-touch-icon').href = dataUrl;
-      document.getElementById('favicon').href = dataUrl;
-    } catch (e) {
-      console.warn('Icon gen error:', e);
-    }
-  })();
-
-  // 2. STATE & STORAGE
   const STORAGE_KEY = 'owens_vault_v2_2_data';
   const defaultState = {
     profile: {
@@ -815,11 +776,14 @@
   }
 
   function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.warn('Storage error:', e);
+    }
     render();
   }
 
-  // 3. FORMATTERS
   function formatRp(num) {
     return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
   }
@@ -838,50 +802,48 @@
     return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   }
 
-  // 4. RENDER UI
   function render() {
-    // Header
     const name = state.profile.name || 'Owen';
-    document.getElementById('headerTitle').textContent = `${name}'s Vault`;
+    document.getElementById('headerTitle').textContent = name + "'s Vault";
     document.getElementById('headerAvatar').textContent = name.charAt(0).toUpperCase();
 
-    // Vault Calculation
-    const vaultBalance = state.vaultTx.reduce((acc, item) => {
+    // Vault
+    const vaultBalance = state.vaultTx.reduce(function(acc, item) {
       return item.type === 'in' ? acc + item.amount : acc - item.amount;
     }, 0);
     const target = Math.max(1, state.profile.vaultTarget);
     const pct = Math.min(100, Math.round((vaultBalance / target) * 100));
 
     document.getElementById('vaultBalance').textContent = formatRp(vaultBalance);
-    document.getElementById('vaultPercent').textContent = `${pct}%`;
-    document.getElementById('vaultProgress').style.width = `${pct}%`;
-    document.getElementById('vaultTargetText').textContent = `Target: ${formatRp(target)}`;
-    document.getElementById('vaultCount').textContent = `${state.vaultTx.length} transaksi`;
+    document.getElementById('vaultPercent').textContent = pct + '%';
+    document.getElementById('vaultProgress').style.width = pct + '%';
+    document.getElementById('vaultTargetText').textContent = 'Target: ' + formatRp(target);
+    document.getElementById('vaultCount').textContent = state.vaultTx.length + ' transaksi';
 
     const vaultListEl = document.getElementById('vaultList');
     if (state.vaultTx.length === 0) {
-      vaultListEl.innerHTML = `<div class="empty-state">Belum ada riwayat tabungan. Tekan tombol <b>+</b> untuk mulai menabung.</div>`;
+      vaultListEl.innerHTML = '<div class="empty-state">Belum ada riwayat tabungan. Tekan tombol <b>+</b> untuk mulai menabung.</div>';
     } else {
-      vaultListEl.innerHTML = state.vaultTx.slice().reverse().map(tx => `
-        <div class="tx-item">
-          <div class="tx-left">
-            <div class="tx-icon">${tx.type === 'in' ? '🐷' : '📤'}</div>
-            <div class="tx-info">
-              <h4>${tx.note || (tx.type === 'in' ? 'Setor Tabungan' : 'Tarik Tabungan')}</h4>
-              <span>${formatDateDisplay(tx.date)}</span>
-            </div>
-          </div>
-          <div class="tx-right">
-            <span class="tx-amount ${tx.type === 'in' ? 'plus' : 'minus'}">
-              ${tx.type === 'in' ? '+' : '-'}${formatRp(tx.amount)}
-            </span>
-            <button type="button" class="tx-del" onclick="deleteVaultTx('${tx.id}')">Hapus</button>
-          </div>
-        </div>
-      `).join('');
+      vaultListEl.innerHTML = state.vaultTx.slice().reverse().map(function(tx) {
+        return '<div class="tx-item">' +
+          '<div class="tx-left">' +
+            '<div class="tx-icon">' + (tx.type === 'in' ? '🐷' : '📤') + '</div>' +
+            '<div class="tx-info">' +
+              '<h4>' + (tx.note || (tx.type === 'in' ? 'Setor Tabungan' : 'Tarik Tabungan')) + '</h4>' +
+              '<span>' + formatDateDisplay(tx.date) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="tx-right">' +
+            '<span class="tx-amount ' + (tx.type === 'in' ? 'plus' : 'minus') + '">' +
+              (tx.type === 'in' ? '+' : '-') + formatRp(tx.amount) +
+            '</span>' +
+            '<button type="button" class="tx-del" onclick="deleteVaultTx(\'' + tx.id + '\')">Hapus</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
 
-    // Expense Calculation
+    // Expenses
     const today = getTodayStr();
     const month = getCurrentMonthStr();
     const dailyLimit = Math.max(1, state.profile.dailyLimit);
@@ -890,12 +852,10 @@
     let monthRegular = 0;
     let monthExtra = 0;
 
-    state.expenseTx.forEach(tx => {
+    state.expenseTx.forEach(function(tx) {
       const txDay = tx.date.slice(0, 10);
       const txMonth = tx.date.slice(0, 7);
-      if (txDay === today && !tx.isExtra) {
-        todayRegular += tx.amount;
-      }
+      if (txDay === today && !tx.isExtra) todayRegular += tx.amount;
       if (txMonth === month) {
         if (tx.isExtra) monthExtra += tx.amount;
         else monthRegular += tx.amount;
@@ -907,48 +867,55 @@
     const progressEl = document.getElementById('dailyProgress');
 
     document.getElementById('dailySpentText').textContent = formatRp(todayRegular);
-    document.getElementById('dailyLimitDisplay').textContent = `Limit: ${formatRp(dailyLimit)}`;
-    progressEl.style.width = `${dailyPct}%`;
+    document.getElementById('dailyLimitDisplay').textContent = 'Limit: ' + formatRp(dailyLimit);
+    progressEl.style.width = dailyPct + '%';
 
     if (remaining >= 0) {
       progressEl.classList.remove('over');
-      document.getElementById('dailyRemainingText').textContent = `Sisa: ${formatRp(remaining)}`;
+      document.getElementById('dailyRemainingText').textContent = 'Sisa: ' + formatRp(remaining);
       document.getElementById('dailyStatusBadge').textContent = 'Aman';
       document.getElementById('dailyStatusBadge').style.color = '#34d399';
     } else {
       progressEl.classList.add('over');
-      document.getElementById('dailyRemainingText').textContent = `Lewat: ${formatRp(Math.abs(remaining))}`;
+      document.getElementById('dailyRemainingText').textContent = 'Lewat: ' + formatRp(Math.abs(remaining));
       document.getElementById('dailyStatusBadge').textContent = 'Over Limit';
       document.getElementById('dailyStatusBadge').style.color = '#f87171';
     }
 
     document.getElementById('monthlyRegularText').textContent = formatRp(monthRegular);
     document.getElementById('monthlyExtraText').textContent = formatRp(monthExtra);
-    document.getElementById('expenseCount').textContent = `${state.expenseTx.length} transaksi`;
+    document.getElementById('expenseCount').textContent = state.expenseTx.length + ' transaksi';
 
     const expenseListEl = document.getElementById('expenseList');
     if (state.expenseTx.length === 0) {
-      expenseListEl.innerHTML = `<div class="empty-state">Belum ada pengeluaran tercatat. Tekan <b>+</b> untuk mencatat.</div>`;
+      expenseListEl.innerHTML = '<div class="empty-state">Belum ada pengeluaran tercatat. Tekan <b>+</b> untuk mencatat.</div>';
     } else {
-      expenseListEl.innerHTML = state.expenseTx.slice().reverse().map(tx => `
-        <div class="tx-item">
-          <div class="tx-left">
-            <div class="tx-icon">${tx.icon || '💸'}</div>
-            <div class="tx-info">
-              <h4>${tx.note || tx.category}</h4>
-              <span>${tx.category}${tx.isExtra ? ' • Dana Ekstra' : ''} • ${formatDateDisplay(tx.date)}</span>
-            </div>
-          </div>
-          <div class="tx-right">
-            <span class="tx-amount ${tx.isExtra ? 'extra' : 'minus'}">-${formatRp(tx.amount)}</span>
-            <button type="button" class="tx-del" onclick="deleteExpenseTx('${tx.id}')">Hapus</button>
-          </div>
-        </div>
-      `).join('');
+      expenseListEl.innerHTML = state.expenseTx.slice().reverse().map(function(tx) {
+        return '<div class="tx-item">' +
+          '<div class="tx-left">' +
+            '<div class="tx-icon">' + (tx.icon || '💸') + '</div>' +
+            '<div class="tx-info">' +
+              '<h4>' + (tx.note || tx.category) + '</h4>' +
+              '<span>' + tx.category + (tx.isExtra ? ' • Dana Ekstra' : '') + ' • ' + formatDateDisplay(tx.date) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="tx-right">' +
+            '<span class="tx-amount ' + (tx.isExtra ? 'extra' : 'minus') + '">-' + formatRp(tx.amount) + '</span>' +
+            '<button type="button" class="tx-del" onclick="deleteExpenseTx(\'' + tx.id + '\')">Hapus</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
   }
 
-  // 5. MODAL CONTROLS
+  function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById('tabVault').classList.toggle('active', tab === 'vault');
+    document.getElementById('tabExpenses').classList.toggle('active', tab === 'expenses');
+    document.getElementById('viewVault').classList.toggle('hidden', tab !== 'vault');
+    document.getElementById('viewExpenses').classList.toggle('hidden', tab !== 'expenses');
+  }
+
   function openModal(id) {
     document.getElementById(id).classList.add('open');
   }
@@ -957,52 +924,29 @@
     document.getElementById(id).classList.remove('open');
   }
 
-  // Close modal when tapping outside sheet
-  document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
-    backdrop.addEventListener('click', (e) => {
-      if (e.target === backdrop) {
-        backdrop.classList.remove('open');
-      }
-    });
-  });
+  function handleBackdropClick(e, id) {
+    if (e.target.id === id) closeModal(id);
+  }
 
-  // 6. EVENT LISTENERS (BUTTONS & TABS)
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentTab = btn.dataset.tab;
-      document.getElementById('viewVault').classList.toggle('hidden', currentTab !== 'vault');
-      document.getElementById('viewExpenses').classList.toggle('hidden', currentTab !== 'expenses');
-    });
-  });
-
-  // Tombol +
-  document.getElementById('btnAdd').addEventListener('click', () => {
+  function openAddModal() {
     document.getElementById('inputAmount').value = '';
     document.getElementById('inputNote').value = '';
     document.getElementById('inputIsExtra').checked = false;
-
-    const defaultType = currentTab === 'vault' ? 'vault_in' : 'expense';
-    setTxType(defaultType);
+    setTxType(currentTab === 'vault' ? 'vault_in' : 'expense');
     openModal('modalAdd');
-  });
+  }
 
   function setTxType(type) {
     selectedTxType = type;
-    document.querySelectorAll('.type-pill').forEach(p => {
-      p.classList.toggle('active', p.dataset.type === type);
-    });
+    document.getElementById('pillExpense').classList.toggle('active', type === 'expense');
+    document.getElementById('pillVaultIn').classList.toggle('active', type === 'vault_in');
+    document.getElementById('pillVaultOut').classList.toggle('active', type === 'vault_out');
     const isExpense = type === 'expense';
     document.getElementById('groupCategory').classList.toggle('hidden', !isExpense);
     document.getElementById('groupExtra').classList.toggle('hidden', !isExpense);
   }
 
-  document.querySelectorAll('.type-pill').forEach(pill => {
-    pill.addEventListener('click', () => setTxType(pill.dataset.type));
-  });
-
-  document.getElementById('btnSaveTx').addEventListener('click', () => {
+  function saveTransaction() {
     const amount = Number(document.getElementById('inputAmount').value);
     if (!amount || amount <= 0) {
       alert('Masukkan nominal yang valid.');
@@ -1016,100 +960,97 @@
       const isExtra = document.getElementById('inputIsExtra').checked;
       state.expenseTx.push({
         id: String(Date.now()),
-        amount,
+        amount: amount,
         icon: catRaw[0],
         category: catRaw[1],
-        note,
-        isExtra,
+        note: note,
+        isExtra: isExtra,
         date: now
       });
     } else {
       state.vaultTx.push({
         id: String(Date.now()),
         type: selectedTxType === 'vault_in' ? 'in' : 'out',
-        amount,
-        note,
+        amount: amount,
+        note: note,
         date: now
       });
     }
 
     saveState();
     closeModal('modalAdd');
-  });
+  }
 
-  // Quick Actions
-  window.quickVault = function(amount) {
+  function quickVault(amount) {
     state.vaultTx.push({
       id: String(Date.now()),
       type: 'in',
-      amount,
+      amount: amount,
       note: 'Setor Cepat',
       date: new Date().toISOString()
     });
     saveState();
-  };
+  }
 
-  window.quickExpense = function(category, amount, icon, isExtra = false) {
+  function quickExpense(category, amount, icon, isExtra) {
     state.expenseTx.push({
       id: String(Date.now()),
-      amount,
-      icon,
-      category,
+      amount: amount,
+      icon: icon,
+      category: category,
       note: category,
-      isExtra,
+      isExtra: !!isExtra,
       date: new Date().toISOString()
     });
     saveState();
-  };
+  }
 
-  window.deleteVaultTx = function(id) {
-    state.vaultTx = state.vaultTx.filter(t => t.id !== id);
+  function deleteVaultTx(id) {
+    state.vaultTx = state.vaultTx.filter(function(t) { return t.id !== id; });
     saveState();
-  };
+  }
 
-  window.deleteExpenseTx = function(id) {
-    state.expenseTx = state.expenseTx.filter(t => t.id !== id);
+  function deleteExpenseTx(id) {
+    state.expenseTx = state.expenseTx.filter(function(t) { return t.id !== id; });
     saveState();
-  };
+  }
 
-  // Tombol Profile
-  document.getElementById('btnProfile').addEventListener('click', () => {
+  function openProfileModal() {
     document.getElementById('profileName').value = state.profile.name;
     document.getElementById('profileTarget').value = state.profile.vaultTarget;
     document.getElementById('profileDailyLimit').value = state.profile.dailyLimit;
     openModal('modalProfile');
-  });
+  }
 
-  document.getElementById('btnSaveProfile').addEventListener('click', () => {
+  function saveProfile() {
     const name = document.getElementById('profileName').value.trim() || 'Owen';
     const vaultTarget = Number(document.getElementById('profileTarget').value) || 10000000;
     const dailyLimit = Number(document.getElementById('profileDailyLimit').value) || 30000;
 
-    state.profile = { name, vaultTarget, dailyLimit };
+    state.profile = { name: name, vaultTarget: vaultTarget, dailyLimit: dailyLimit };
     saveState();
     closeModal('modalProfile');
-  });
+  }
 
-  // Tombol Settings
-  document.getElementById('btnSettings').addEventListener('click', () => {
+  function openSettingsModal() {
     openModal('modalSettings');
-  });
+  }
 
-  document.getElementById('btnExport').addEventListener('click', () => {
+  function exportData() {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `owens-vault-backup-${getTodayStr()}.json`;
+    a.download = 'owens-vault-backup-' + getTodayStr() + '.json';
     a.click();
     URL.revokeObjectURL(url);
-  });
+  }
 
-  document.getElementById('inputImport').addEventListener('change', (e) => {
+  function importData(e) {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (ev) => {
+    reader.onload = function(ev) {
       try {
         const imported = JSON.parse(ev.target.result);
         if (imported.profile && Array.isArray(imported.vaultTx)) {
@@ -1125,19 +1066,17 @@
       }
     };
     reader.readAsText(file);
-  });
+  }
 
-  document.getElementById('btnReset').addEventListener('click', () => {
+  function resetAllData() {
     if (confirm('Yakin hapus semua data tabungan dan pengeluaran?')) {
       state = JSON.parse(JSON.stringify(defaultState));
       saveState();
       closeModal('modalSettings');
     }
-  });
+  }
 
-  // Initial Render
   render();
 </script>
 </body>
 </html>
-
