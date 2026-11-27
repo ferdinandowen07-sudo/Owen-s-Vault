@@ -5,93 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Owen's Vault 3.0" />
-  <meta name="theme-color" content="#0b0d10" />
-  <title>Owen's Vault 3.0</title>
+  <meta name="apple-mobile-web-app-title" content="Owen's Vault" />
+  <meta name="theme-color" content="#090D0B" />
+  <title>Owen's Vault 4.0</title>
 
-  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./icon.png?v=32" />
-  <link id="favicon" rel="icon" type="image/png" href="./icon.png?v=32" />
+  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./icon-180.png" />
+  <link id="apple-touch-icon-192" rel="apple-touch-icon" sizes="192x192" href="./icon-180.png" />
+  <link id="favicon" rel="icon" type="image/png" href="./icon-180.png" />
 
   <script>
-    (function initMinimalIcon() {
-      try {
-        const size = 512;
+    (function initEmeraldLuxuryIcon() {
+      function renderVaultIconDataUrl(pxSize) {
         const c = document.createElement('canvas');
-        c.width = size;
-        c.height = size;
+        c.width = pxSize;
+        c.height = pxSize;
         const ctx = c.getContext('2d');
 
-        ctx.fillStyle = '#0b0d10';
-        ctx.fillRect(0, 0, size, size);
+        // Deep dark emerald background (#090D0B)
+        ctx.fillStyle = '#090D0B';
+        ctx.fillRect(0, 0, pxSize, pxSize);
 
-        function rrect(x, y, w, h, r) {
-          ctx.beginPath();
-          ctx.moveTo(x + r, y);
-          ctx.arcTo(x + w, y, x + w, y + h, r);
-          ctx.arcTo(x + w, y + h, x, y + h, r);
-          ctx.arcTo(x, y + h, x, y, r);
-          ctx.arcTo(x, y, x + w, y, r);
-          ctx.closePath();
-        }
+        const cx = pxSize * 0.5;
+        const cy = pxSize * 0.5;
+        const outerR = pxSize * 0.29;
+        const innerR = pxSize * 0.165;
 
-        rrect(96, 96, 320, 280, 56);
-        ctx.fillStyle = '#141922';
+        // Subtle deep emerald halo (#064E3B)
+        const halo = ctx.createRadialGradient(cx, cy, innerR * 0.4, cx, cy, outerR * 1.35);
+        halo.addColorStop(0, 'rgba(16, 185, 129, 0.18)');
+        halo.addColorStop(0.65, 'rgba(6, 78, 59, 0.14)');
+        halo.addColorStop(1, 'rgba(9, 13, 11, 0)');
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR * 1.35, 0, Math.PI * 2);
         ctx.fill();
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'rgba(241, 245, 249, 0.16)';
+
+        // Geometric "O" ring in Primary Emerald (#10B981) with Deep Emerald (#064E3B) edge
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+        ctx.lineWidth = Math.max(10, pxSize * 0.068);
+        ctx.strokeStyle = '#10B981';
         ctx.stroke();
 
-        ctx.fillStyle = '#f8fafc';
-        ctx.font = '800 62px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('3.0', 256, 224);
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR + ctx.lineWidth * 0.48, 0, Math.PI * 2);
+        ctx.lineWidth = Math.max(2, pxSize * 0.008);
+        ctx.strokeStyle = 'rgba(6, 78, 59, 0.9)';
+        ctx.stroke();
 
-        ctx.fillStyle = '#34d399';
-        ctx.font = '700 18px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.fillText('VAULT', 256, 282);
+        // Subtle Gold Accent (#C6A15B) architectural tick & inner ring accent
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR - ctx.lineWidth * 0.52, -Math.PI * 0.35, Math.PI * 0.15);
+        ctx.lineWidth = Math.max(2.5, pxSize * 0.011);
+        ctx.strokeStyle = '#C6A15B';
+        ctx.stroke();
 
-        ctx.fillStyle = '#94a3b8';
-        ctx.font = '600 18px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.fillText("OWEN'S VAULT", 256, 424);
+        // Precision vertical/horizontal vault alignment notch in Gold (#C6A15B)
+        const notchLen = pxSize * 0.048;
+        ctx.strokeStyle = '#C6A15B';
+        ctx.lineWidth = Math.max(2.5, pxSize * 0.011);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - outerR - ctx.lineWidth * 0.9);
+        ctx.lineTo(cx, cy - outerR - ctx.lineWidth * 0.9 - notchLen * 0.45);
+        ctx.stroke();
+        ctx.restore();
 
-        const canvasUrl = c.toDataURL('image/png');
+        return c.toDataURL('image/png');
+      }
+
+      window.__OWEN_VAULT_ICON_512 = function() {
+        return renderVaultIconDataUrl(512);
+      };
+
+      try {
+        const icon180 = renderVaultIconDataUrl(180);
+        const icon512 = renderVaultIconDataUrl(512);
+
+        const a180 = document.getElementById('apple-touch-icon');
+        const a192 = document.getElementById('apple-touch-icon-192');
+        const fav = document.getElementById('favicon');
+        if (a180) a180.href = icon180;
+        if (a192) a192.href = icon512;
+        if (fav) fav.href = icon180;
+
+        // Probe external ./icon-180.png if user uploaded one; keep generated crisp "O" icon on fallback
         const probe = new Image();
         probe.onload = function() {
-          const a = document.getElementById('apple-touch-icon');
-          const f = document.getElementById('favicon');
-          if (a) a.href = './icon.png?v=32';
-          if (f) f.href = './icon.png?v=32';
+          if (a180) a180.href = './icon-180.png?v=40';
+          if (fav) fav.href = './icon-180.png?v=40';
         };
-        probe.onerror = function() {
-          const a = document.getElementById('apple-touch-icon');
-          const f = document.getElementById('favicon');
-          if (a) a.href = canvasUrl;
-          if (f) f.href = canvasUrl;
+        probe.src = './icon-180.png?v=40';
+
+        // Dynamic PWA Web App Manifest blob for standalone home screen support
+        const manifestObj = {
+          name: "Owen's Vault 4.0",
+          short_name: "Owen's Vault",
+          start_url: "./",
+          display: "standalone",
+          background_color: "#090D0B",
+          theme_color: "#090D0B",
+          icons: [
+            { src: icon180, sizes: "180x180", type: "image/png" },
+            { src: icon512, sizes: "512x512", type: "image/png" }
+          ]
         };
-        probe.src = './icon.png?v=32';
+        const mBlob = new Blob([JSON.stringify(manifestObj)], { type: "application/manifest+json" });
+        const mUrl = URL.createObjectURL(mBlob);
+        const mLink = document.createElement('link');
+        mLink.rel = 'manifest';
+        mLink.href = mUrl;
+        document.head.appendChild(mLink);
       } catch (e) {}
     })();
   </script>
 
   <style>
     :root {
-      --bg: #0b0d10;
-      --surface: #12161c;
-      --surface-2: #181d26;
-      --surface-3: #222936;
-      --ink: #f8fafc;
-      --ink-soft: #cbd5e1;
-      --ink-muted: #7c8798;
-      --accent: #f1f5f9;
-      --accent-soft: rgba(241, 245, 249, 0.1);
-      --income: #34d399;
-      --expense: #fb7185;
-      --extra: #93c5fd;
-      --border: rgba(248, 250, 252, 0.08);
-      --border-strong: rgba(248, 250, 252, 0.16);
-      --safe-top: env(safe-area-inset-top, 16px);
-      --safe-bottom: env(safe-area-inset-bottom, 16px);
+      --bg-main: #090D0B;
+      --bg-card: #111B16;
+      --bg-elevated: #16241D;
+      --bg-input: #0D1410;
+      --emerald: #10B981;
+      --emerald-deep: #064E3B;
+      --emerald-soft: rgba(16, 185, 129, 0.12);
+      --income: #34D399;
+      --expense: #FB7185;
+      --expense-soft: rgba(251, 113, 133, 0.12);
+      --text-primary: #F3F4F6;
+      --text-secondary: #9CA3AF;
+      --gold: #C6A15B;
+      --gold-soft: rgba(198, 161, 91, 0.14);
+      --border: rgba(243, 244, 246, 0.08);
+      --border-emerald: rgba(16, 185, 129, 0.24);
+      --safe-top: env(safe-area-inset-top, 14px);
+      --safe-bottom: env(safe-area-inset-bottom, 14px);
     }
 
     * {
@@ -99,25 +147,26 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background: var(--bg);
-      color: var(--ink);
+      background: var(--bg-main);
+      color: var(--text-primary);
       min-height: 100vh;
       padding-top: calc(var(--safe-top) + 12px);
-      padding-bottom: calc(var(--safe-bottom) + 106px);
+      padding-bottom: calc(var(--safe-bottom) + 98px);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     .app {
-      max-width: 490px;
+      max-width: 520px;
       margin: 0 auto;
       padding: 0 16px;
     }
 
-    /* Live Notification Toast */
+    /* Toast Notification */
     .toast-wrap {
       position: fixed;
       top: calc(var(--safe-top) + 8px);
@@ -133,21 +182,18 @@
     .toast-card {
       pointer-events: auto;
       width: 100%;
-      max-width: 458px;
-      background: rgba(24, 29, 38, 0.96);
-      border: 1px solid var(--border-strong);
-      border-radius: 15px;
-      padding: 11px 13px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      max-width: 488px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-emerald);
+      border-radius: 14px;
+      padding: 10px 13px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: translateY(-8px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
     .toast-card.show {
@@ -171,57 +217,63 @@
     }
 
     .toast-dot.warn { background: var(--expense); }
-    .toast-dot.info { background: var(--extra); }
+    .toast-dot.gold { background: var(--gold); }
 
     .toast-msg {
       font-size: 12px;
       font-weight: 600;
-      color: var(--ink);
+      color: var(--text-primary);
       line-height: 1.35;
     }
 
+    /* Top Bar */
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 14px;
+      gap: 10px;
     }
 
-    .user-pill {
+    .profile-trigger {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 6px 14px 6px 6px;
+      padding: 6px 13px 6px 6px;
       border-radius: 999px;
       cursor: pointer;
-      touch-action: manipulation;
+      color: var(--text-primary);
+      text-align: left;
     }
 
-    .avatar {
+    .avatar-circle {
       width: 34px;
       height: 34px;
       border-radius: 999px;
-      background: var(--accent);
-      color: #0b0d10;
-      font-weight: 800;
-      font-size: 14px;
+      background: var(--emerald-deep);
+      border: 1px solid var(--emerald);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
-    .user-meta strong {
+    .profile-meta strong {
       display: block;
-      font-size: 14px;
-      line-height: 1.15;
-      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
     }
 
-    .user-meta span {
+    .profile-meta span {
+      display: block;
       font-size: 11px;
-      color: var(--ink-muted);
+      color: var(--text-secondary);
     }
 
     .top-actions {
@@ -230,347 +282,373 @@
       gap: 8px;
     }
 
-    .btn-icon {
+    .icon-btn {
       position: relative;
       width: 38px;
       height: 38px;
       border-radius: 12px;
-      background: var(--surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      color: var(--ink-soft);
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.14s ease, background 0.14s ease;
     }
 
-    .btn-icon:active {
-      transform: scale(0.93);
-      background: var(--surface-2);
+    .icon-btn:hover {
+      border-color: var(--border-emerald);
+      color: var(--text-primary);
     }
 
-    .notif-badge {
+    .badge-dot {
       position: absolute;
-      top: 7px;
-      right: 7px;
+      top: 8px;
+      right: 8px;
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--income);
+      background: var(--gold);
     }
 
-    .month-switcher {
+    /* Period Bar */
+    .period-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 15px;
+      border-radius: 14px;
       padding: 7px 9px;
       margin-bottom: 14px;
     }
 
-    .month-btn {
+    .period-btn {
       width: 32px;
       height: 32px;
       border-radius: 9px;
       border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--ink);
-      font-size: 17px;
-      font-weight: 700;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      touch-action: manipulation;
     }
 
-    .month-btn:active { transform: scale(0.93); }
-
-    .month-center {
+    .period-center {
       text-align: center;
       cursor: pointer;
+      padding: 0 8px;
     }
 
-    .month-center strong {
+    .period-center strong {
       display: block;
       font-size: 13px;
-      color: var(--ink);
+      font-weight: 700;
     }
 
-    .month-center span {
+    .period-center span {
       font-size: 11px;
-      color: var(--ink-muted);
+      color: var(--text-secondary);
     }
 
-    .view-section {
-      animation: fadeSlide 0.18s ease;
-    }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    /* Cards & Typography */
     .card {
-      background: var(--surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 18px;
       margin-bottom: 12px;
     }
 
-    .balance-card {
-      background: var(--surface-2);
-      border-color: var(--border-strong);
+    .hero-balance-card {
+      background: linear-gradient(165deg, rgba(6, 78, 59, 0.34) 0%, var(--bg-card) 68%);
+      border-color: var(--border-emerald);
     }
 
-    .eyebrow {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      color: var(--ink-muted);
+    .card-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    .big-amount {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.7px;
-      margin-bottom: 12px;
-      color: var(--ink);
-    }
-
-    .progress-track {
-      height: 6px;
-      background: rgba(248, 250, 252, 0.08);
-      border-radius: 99px;
-      overflow: hidden;
+      gap: 8px;
       margin-bottom: 8px;
     }
 
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 99px;
-      transition: width 0.3s ease;
+    .label-muted {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
     }
 
-    .progress-fill.done { background: var(--income); }
-    .progress-fill.warn { background: var(--expense); }
+    .pill-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--emerald-soft);
+      color: var(--income);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
 
-    .card-foot {
+    .pill-tag.neg {
+      background: var(--expense-soft);
+      color: var(--expense);
+      border-color: rgba(251, 113, 133, 0.25);
+    }
+
+    .pill-tag.gold {
+      background: var(--gold-soft);
+      color: var(--gold);
+      border-color: rgba(198, 161, 91, 0.28);
+    }
+
+    .hero-amount-row {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      font-size: 12px;
-      color: var(--ink-muted);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-amount {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--text-primary);
+    }
+
+    .eye-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .hero-subgrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-subitem small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .hero-subitem strong {
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin-bottom: 12px;
     }
 
-    .mini-card {
-      background: var(--surface);
+    .metric-tile {
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 13px 14px;
     }
 
-    .mini-card small {
+    .metric-tile small {
       display: block;
       font-size: 11px;
-      color: var(--ink-muted);
-      margin-bottom: 4px;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
     }
 
-    .mini-card strong {
+    .metric-tile strong {
       font-size: 15px;
       font-weight: 700;
+      display: block;
+    }
+
+    .metric-tile span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 3px;
     }
 
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 8px 0 9px;
+      margin: 14px 0 9px;
+      gap: 8px;
     }
 
     .section-head h3 {
       font-size: 13px;
       font-weight: 700;
-      color: var(--ink-soft);
-      letter-spacing: 0.2px;
+      color: var(--text-primary);
     }
 
     .section-head span {
       font-size: 11px;
-      color: var(--ink-muted);
+      color: var(--text-secondary);
     }
 
-    .mini-link-btn {
-      background: var(--surface-2);
-      border: 1px solid var(--border-strong);
-      color: var(--ink);
+    .action-chip-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-emerald);
+      color: var(--income);
       padding: 5px 10px;
       border-radius: 9px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      touch-action: manipulation;
     }
 
-    .chip-row {
+    /* Chips & Filters */
+    .chip-strip {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 4px;
-      margin-bottom: 11px;
+      margin-bottom: 10px;
       scrollbar-width: none;
     }
-    .chip-row::-webkit-scrollbar { display: none; }
+    .chip-strip::-webkit-scrollbar { display: none; }
 
     .chip {
-      background: var(--surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      color: var(--ink-soft);
+      color: var(--text-secondary);
       padding: 8px 12px;
       border-radius: 11px;
       font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
       cursor: pointer;
-      touch-action: manipulation;
     }
 
     .chip.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0b0d10;
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #062218;
       font-weight: 700;
     }
 
-    .chip:active { transform: scale(0.95); }
-
-    .search-box {
+    .input, .select, .search-input {
       width: 100%;
-      background: var(--surface);
+      background: var(--bg-input);
       border: 1px solid var(--border);
-      color: var(--ink);
-      padding: 10px 13px;
+      color: var(--text-primary);
+      padding: 11px 13px;
       border-radius: 12px;
-      font-size: 13px;
-      margin-bottom: 11px;
+      font-size: 14px;
       outline: none;
     }
 
-    .search-box:focus { border-color: var(--border-strong); }
-
-    .goal-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-bottom: 14px;
+    .input:focus, .select:focus, .search-input:focus {
+      border-color: var(--emerald);
     }
 
-    .goal-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 13px 14px;
-    }
-
-    .goal-card.reached { border-color: rgba(52, 211, 153, 0.3); }
-
-    .goal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .goal-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .goal-emoji {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      flex-shrink: 0;
-    }
-
-    .goal-name { font-size: 14px; font-weight: 700; color: var(--ink); }
-    .goal-sub { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
-
-    .goal-pct-pill {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 8px;
-      background: var(--surface-2);
-      color: var(--ink-soft);
-      flex-shrink: 0;
-    }
-
-    .goal-card.reached .goal-pct-pill {
-      background: rgba(52, 211, 153, 0.14);
-      color: var(--income);
-    }
-
-    .goal-foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--ink-muted);
-      margin-top: 2px;
-    }
-
-    /* Notification Feed */
-    .notif-list {
-      display: flex;
-      flex-direction: column;
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
-    .notif-card {
-      background: var(--bg);
+    /* Progress Bars */
+    .bar-track {
+      height: 7px;
+      background: rgba(243, 244, 246, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 7px 0;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--emerald);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .bar-fill.warn { background: var(--expense); }
+    .bar-fill.gold { background: var(--gold); }
+
+    /* Wave Chart */
+    .chart-filter-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .mini-tab {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 9px;
       border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 11px 12px;
-    }
-
-    .notif-card.unread { border-color: var(--border-strong); }
-
-    .notif-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 2px;
-    }
-
-    .notif-meta {
+      background: var(--bg-input);
+      color: var(--text-secondary);
       font-size: 11px;
-      color: var(--ink-muted);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mini-tab.active {
+      background: var(--emerald-deep);
+      border-color: var(--emerald);
+      color: var(--text-primary);
+    }
+
+    .wave-canvas-box {
+      position: relative;
+      width: 100%;
+      height: 185px;
+      border-radius: 14px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .wave-canvas-box canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
     }
 
     /* Calendar */
@@ -579,202 +657,220 @@
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
       font-size: 11px;
-      color: var(--ink-muted);
-      margin-bottom: 8px;
       font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
     }
 
     .cal-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
+      gap: 5px;
     }
 
-    .cal-day {
-      aspect-ratio: 1;
+    .cal-cell {
+      min-height: 48px;
       border-radius: 11px;
-      background: transparent;
       border: 1px solid transparent;
+      background: var(--bg-input);
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      gap: 3px;
+      font-size: 12px;
       font-weight: 600;
-      color: var(--ink-soft);
       cursor: pointer;
-      position: relative;
-      touch-action: manipulation;
+      padding: 4px 2px;
     }
 
-    .cal-day.empty { cursor: default; }
-    .cal-day.today { border-color: var(--border-strong); color: var(--ink); }
-    .cal-day.selected { background: var(--accent); color: #0b0d10; font-weight: 800; }
+    .cal-cell.empty {
+      background: transparent;
+      cursor: default;
+    }
+
+    .cal-cell.today {
+      border-color: var(--gold);
+    }
+
+    .cal-cell.selected {
+      background: var(--emerald);
+      color: #062218;
+      font-weight: 800;
+      border-color: var(--emerald);
+    }
+
+    .cal-mini-net {
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1;
+    }
 
     .cal-dots {
       display: flex;
       gap: 3px;
-      margin-top: 3px;
       height: 4px;
     }
 
-    .dot { width: 4px; height: 4px; border-radius: 50%; }
-    .dot.inc { background: var(--income); }
-    .dot.exp { background: var(--expense); }
-    .cal-day.selected .dot { background: #0b0d10; }
+    .dot-inc { width: 4px; height: 4px; border-radius: 50%; background: var(--income); }
+    .dot-exp { width: 4px; height: 4px; border-radius: 50%; background: var(--expense); }
+    .cal-cell.selected .dot-inc,
+    .cal-cell.selected .dot-exp { background: #062218; }
 
-    .chart-wrap {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 10px;
-      height: 146px;
-      padding-top: 14px;
-    }
-
-    .chart-col {
-      flex: 1;
+    /* Lists & Items */
+    .list-stack {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      height: 100%;
+      gap: 9px;
     }
 
-    .chart-bars {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .bar {
-      width: 10px;
-      border-radius: 5px 5px 2px 2px;
-      min-height: 3px;
-      transition: height 0.3s ease;
-    }
-
-    .bar.inc { background: var(--income); }
-    .bar.exp { background: var(--expense); }
-
-    .chart-lbl {
-      font-size: 10px;
-      color: var(--ink-muted);
-      margin-top: 6px;
-      font-weight: 600;
-    }
-
-    .cat-row { margin-bottom: 11px; }
-
-    .cat-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      margin-bottom: 5px;
-      color: var(--ink-soft);
-    }
-
-    .tx-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .tx-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--surface);
+    .row-card {
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 12px 13px;
-    }
-
-    .tx-left {
+      border-radius: 16px;
+      padding: 13px 14px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
       gap: 10px;
+    }
+
+    .row-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
       min-width: 0;
       flex: 1;
-      padding-right: 8px;
     }
 
-    .tx-badge {
+    .badge-icon {
       width: 38px;
       height: 38px;
-      flex-shrink: 0;
       border-radius: 11px;
-      background: var(--surface-2);
+      background: var(--bg-elevated);
       border: 1px solid var(--border);
+      color: var(--emerald);
+      font-size: 12px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 17px;
+      flex-shrink: 0;
     }
 
-    .tx-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-      color: var(--ink);
+    .badge-icon.gold {
+      color: var(--gold);
+      border-color: rgba(198, 161, 91, 0.25);
+    }
+
+    .row-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .tx-sub {
+    .row-sub {
       font-size: 11px;
-      color: var(--ink-muted);
+      color: var(--text-secondary);
+      margin-top: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .tx-right { text-align: right; flex-shrink: 0; }
-    .tx-val { display: block; font-size: 14px; font-weight: 700; }
-    .tx-val.plus { color: var(--income); }
-    .tx-val.minus { color: var(--expense); }
-    .tx-val.extra { color: var(--extra); }
+    .row-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
 
-    .tx-actions {
+    .amt-inc { color: var(--income); font-weight: 700; font-size: 13px; }
+    .amt-exp { color: var(--expense); font-weight: 700; font-size: 13px; }
+    .amt-neu { color: var(--text-primary); font-weight: 700; font-size: 13px; }
+    .amt-gold { color: var(--gold); font-weight: 700; font-size: 13px; }
+
+    .mini-actions {
       display: flex;
       justify-content: flex-end;
       gap: 8px;
-      margin-top: 3px;
+      margin-top: 4px;
     }
 
-    .tx-act {
+    .link-btn {
       background: none;
       border: none;
-      color: var(--ink-muted);
       font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
       cursor: pointer;
-      touch-action: manipulation;
     }
 
-    .tx-act.edit:active { color: var(--ink); }
-    .tx-act.del:active { color: var(--expense); }
+    .link-btn:hover { color: var(--text-primary); }
+    .link-btn.danger:hover { color: var(--expense); }
 
-    .empty-box {
-      background: var(--surface);
+    .account-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .account-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .account-bal {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+
+    .account-meta-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .ledger-chip {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state {
+      background: var(--bg-card);
       border: 1px dashed var(--border);
       border-radius: 15px;
-      padding: 20px 14px;
+      padding: 18px 14px;
       text-align: center;
-      font-size: 13px;
-      color: var(--ink-muted);
+      font-size: 12px;
+      color: var(--text-secondary);
     }
 
+    /* Bottom Dock */
     .dock-wrap {
       position: fixed;
       left: 0;
       right: 0;
-      bottom: calc(var(--safe-bottom) + 12px);
+      bottom: calc(var(--safe-bottom) + 10px);
       display: flex;
       justify-content: center;
-      padding: 0 14px;
+      padding: 0 12px;
       z-index: 900;
       pointer-events: none;
     }
@@ -783,190 +879,163 @@
       pointer-events: auto;
       display: flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(18, 22, 28, 0.94);
-      border: 1px solid var(--border-strong);
-      padding: 6px 8px;
+      gap: 3px;
+      background: rgba(17, 27, 22, 0.96);
+      border: 1px solid var(--border-emerald);
+      padding: 6px;
       border-radius: 20px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
     }
 
     .dock-btn {
       border: none;
       background: transparent;
-      color: var(--ink-muted);
-      padding: 8px 11px;
+      color: var(--text-secondary);
+      padding: 7px 9px;
       border-radius: 13px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 3px;
       cursor: pointer;
-      touch-action: manipulation;
     }
 
-    .dock-btn.active { background: var(--surface-3); color: var(--ink); }
+    .dock-btn.active {
+      background: var(--emerald-deep);
+      color: var(--text-primary);
+    }
 
-    .fab-add {
-      width: 46px;
-      height: 46px;
+    .fab-btn {
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
       border: none;
-      background: var(--accent);
-      color: #0b0d10;
-      font-size: 26px;
-      font-weight: 800;
-      line-height: 1;
+      background: var(--emerald);
+      color: #062218;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      touch-action: manipulation;
+      margin: 0 2px;
+      flex-shrink: 0;
     }
 
-    .fab-add:active { transform: scale(0.93); }
-
-    .modal-bg {
+    /* Modals */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(5, 7, 10, 0.82);
+      background: rgba(5, 8, 7, 0.82);
       display: none;
       align-items: flex-end;
       justify-content: center;
       z-index: 2000;
     }
 
-    .modal-bg.open { display: flex; }
+    .modal-backdrop.open { display: flex; }
 
-    .modal-card {
-      background: var(--surface);
-      border-top: 1px solid var(--border-strong);
+    .modal-sheet {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-emerald);
       border-radius: 22px 22px 0 0;
       width: 100%;
-      max-width: 490px;
+      max-width: 520px;
       padding: 20px 18px calc(var(--safe-bottom) + 24px);
       max-height: 90vh;
       overflow-y: auto;
     }
 
-    .modal-top {
+    .modal-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
-    .modal-top h3 { font-size: 16px; font-weight: 700; color: var(--ink); }
+    .modal-head h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
 
-    .x-btn {
+    .close-btn {
       width: 32px;
       height: 32px;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--ink);
-      font-size: 15px;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
       cursor: pointer;
-    }
-
-    .type-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 13px;
-    }
-
-    .type-opt {
-      padding: 10px;
-      border-radius: 11px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--ink-muted);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .type-opt.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0b0d10;
     }
 
     .field { margin-bottom: 12px; }
-
     .field label {
       display: block;
       font-size: 12px;
-      color: var(--ink-soft);
-      margin-bottom: 5px;
       font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
     }
 
-    .input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--ink);
-      padding: 11px 13px;
+    .tx-type-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .tx-type-btn {
+      padding: 9px 10px;
       border-radius: 11px;
-      font-size: 15px;
-      outline: none;
-    }
-
-    .input:focus { border-color: var(--border-strong); }
-
-    .check-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--bg);
       border: 1px solid var(--border);
-      padding: 10px 12px;
-      border-radius: 11px;
-      margin-bottom: 13px;
-      font-size: 13px;
-      color: var(--ink-soft);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
     }
 
-    .btn-main {
+    .tx-type-btn.active {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #062218;
+    }
+
+    .btn-primary {
       width: 100%;
       padding: 13px;
       border-radius: 12px;
       border: none;
-      background: var(--accent);
-      color: #0b0d10;
-      font-size: 15px;
+      background: var(--emerald);
+      color: #062218;
+      font-size: 14px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    .btn-sub {
+    .btn-secondary {
       width: 100%;
-      padding: 12px;
-      border-radius: 11px;
+      padding: 11px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--ink);
+      background: var(--bg-elevated);
+      color: var(--text-primary);
       font-size: 13px;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
       cursor: pointer;
     }
 
-    .btn-warn {
+    .btn-danger {
       width: 100%;
-      padding: 12px;
-      border-radius: 11px;
-      border: 1px solid rgba(251, 113, 133, 0.3);
-      background: rgba(251, 113, 133, 0.1);
-      color: #fda4af;
+      padding: 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(251, 113, 133, 0.35);
+      background: var(--expense-soft);
+      color: var(--expense);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
     }
 
@@ -979,239 +1048,276 @@
   <div class="toast-card" id="toastCard">
     <div class="toast-left">
       <span class="toast-dot" id="toastDot"></span>
-      <span class="toast-msg" id="toastMsg">Update</span>
+      <span class="toast-msg" id="toastMsg">Siap</span>
     </div>
-    <button type="button" class="tx-act" onclick="hideToast()">Tutup</button>
+    <button type="button" class="link-btn" onclick="hideToast()">Tutup</button>
   </div>
 </div>
 
 <div class="app">
+  <!-- TOP HEADER -->
   <header class="topbar">
-    <button type="button" class="user-pill" onclick="openProfileModal()">
-      <div class="avatar" id="topAvatar">O</div>
-      <div class="user-meta">
+    <button type="button" class="profile-trigger" onclick="openProfileModal()">
+      <div class="avatar-circle" id="topAvatar">OW</div>
+      <div class="profile-meta">
         <strong id="topName">Owen</strong>
-        <span>Vault 3.0 • Minimal</span>
+        <span id="topSubtitle">Vault 4.0 • Emerald</span>
       </div>
     </button>
 
     <div class="top-actions">
-      <button type="button" class="btn-icon" onclick="openNotifModal()" aria-label="Notifications">
-        <span class="notif-badge hidden" id="notifDot"></span>
+      <button type="button" class="icon-btn" onclick="openNotifModal()" aria-label="Notifikasi">
+        <span class="badge-dot hidden" id="notifDot"></span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
       </button>
-      <button type="button" class="btn-icon" onclick="openSettingsModal()" aria-label="Settings">
+      <button type="button" class="icon-btn" onclick="openSettingsModal()" aria-label="Pengaturan & Backup">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
   </header>
 
-  <div class="month-switcher" id="monthSwitcher">
-    <button type="button" class="month-btn" onclick="shiftMonth(-1)">‹</button>
-    <div class="month-center" onclick="jumpToCurrentMonth()">
+  <!-- MONTH PERIOD BAR -->
+  <div class="period-bar" id="periodBar">
+    <button type="button" class="period-btn" onclick="shiftMonth(-1)" aria-label="Bulan Sebelumnya">‹</button>
+    <div class="period-center" onclick="jumpToCurrentMonth()">
       <strong id="monthTitle">November 2026</strong>
-      <span id="monthSub">Tap untuk bulan ini</span>
+      <span id="monthSub">Tap untuk kembali ke bulan ini</span>
     </div>
-    <button type="button" class="month-btn" onclick="shiftMonth(1)">›</button>
+    <button type="button" class="period-btn" onclick="shiftMonth(1)" aria-label="Bulan Berikutnya">›</button>
   </div>
 
-  <!-- TAB 1: HOME -->
-  <section id="secHome" class="view-section">
-    <div class="card balance-card">
-      <div class="eyebrow">
-        <span>Saldo Kas Bulan Ini</span>
-        <span id="homeCashBadge">Surplus</span>
+  <!-- TAB 1: DASHBOARD -->
+  <section id="tabDashboard">
+    <div class="card hero-balance-card">
+      <div class="card-header-row">
+        <span class="label-muted">Saldo Tersedia (Spending Cash)</span>
+        <span class="pill-tag" id="cashFlowBadge">Arus Kas +Rp 0</span>
       </div>
-      <div class="big-amount" id="homeNetBalance">Rp 0</div>
-      <div class="card-foot">
-        <span id="homeIncomeStat" style="color: var(--income);">Masuk: Rp 0</span>
-        <span id="homeExpenseStat" style="color: var(--expense);">Keluar: Rp 0</span>
+      <div class="hero-amount-row">
+        <div class="hero-amount" id="heroAvailableBalance">Rp 0</div>
+        <button type="button" class="eye-btn" onclick="togglePrivacy()" aria-label="Sembunyikan atau tampilkan saldo">
+          <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+      <div class="hero-subgrid">
+        <div class="hero-subitem">
+          <small>Pemasukan Bulan Ini</small>
+          <strong id="dashIncomeVal" style="color: var(--income);">Rp 0</strong>
+        </div>
+        <div class="hero-subitem">
+          <small>Pengeluaran Bulan Ini</small>
+          <strong id="dashExpenseVal" style="color: var(--expense);">Rp 0</strong>
+        </div>
+        <div class="hero-subitem">
+          <small>Total Tabungan & Goals</small>
+          <strong id="dashTotalSavings" style="color: var(--income);">Rp 0</strong>
+        </div>
+        <div class="hero-subitem">
+          <small>Dana Darurat</small>
+          <strong id="dashEmergencyVal" style="color: var(--gold);">Rp 0</strong>
+        </div>
       </div>
     </div>
 
+    <div class="grid-2">
+      <div class="metric-tile">
+        <small>Arus Kas Bersih Bulan Ini</small>
+        <strong id="dashNetCashflow">Rp 0</strong>
+        <span id="dashIncomeTargetNote">Target bulanan: Rp 0</span>
+      </div>
+      <div class="metric-tile">
+        <small>Rasio Tabungan (Savings Rate)</small>
+        <strong id="dashSavingsRate" style="color: var(--income);">0%</strong>
+        <span id="dashNetWorthNote">Kekayaan bersih: Rp 0</span>
+      </div>
+    </div>
+
+    <!-- WAVE CHART -->
     <div class="card">
-      <div class="eyebrow">
-        <span>Limit Harian Hari Ini (Rutin)</span>
-        <span id="todayLimitBadge">Aman</span>
+      <div class="card-header-row">
+        <span class="label-muted">Grafik Gelombang Finansial</span>
+        <span class="pill-tag gold" id="wavePeriodSummary">Bulanan</span>
       </div>
-      <div class="big-amount" style="font-size: 24px; margin-bottom: 10px;" id="todaySpentVal">Rp 0</div>
-      <div class="progress-track">
-        <div class="progress-fill" id="todayBar" style="width: 0%"></div>
+      <div class="chart-filter-row" id="waveFilterRow">
+        <button type="button" class="mini-tab" data-wf="daily" onclick="setWaveFilter('daily')">Daily</button>
+        <button type="button" class="mini-tab" data-wf="weekly" onclick="setWaveFilter('weekly')">Weekly</button>
+        <button type="button" class="mini-tab active" data-wf="monthly" onclick="setWaveFilter('monthly')">Monthly</button>
+        <button type="button" class="mini-tab" data-wf="yearly" onclick="setWaveFilter('yearly')">Yearly</button>
       </div>
-      <div class="card-foot">
-        <span id="todayRemainVal">Sisa: Rp 30.000</span>
-        <span id="todayExtraVal" style="color: var(--extra);">Ekstra: Rp 0</span>
+      <div class="wave-canvas-box">
+        <canvas id="waveCanvas"></canvas>
+      </div>
+      <div class="chart-legend">
+        <span class="legend-item"><i class="legend-swatch" style="background:#34D399;"></i>Income</span>
+        <span class="legend-item"><i class="legend-swatch" style="background:#FB7185;"></i>Expense</span>
+        <span class="legend-item"><i class="legend-swatch" style="background:#10B981;"></i>Net Cash Flow</span>
+        <span class="legend-item"><i class="legend-swatch" style="background:#C6A15B;"></i>Periode Sebelumnya</span>
       </div>
     </div>
 
-    <div class="section-head"><h3>Aksi Cepat</h3></div>
-    <div class="chip-row">
-      <button type="button" class="chip" onclick="quickExp('Makan & Minum', 15000, '🍜', false)">🍜 Makan 15rb</button>
-      <button type="button" class="chip" onclick="quickExp('Rokok', 28000, '🚬', false)">🚬 Rokok 28rb</button>
-      <button type="button" class="chip" onclick="quickExp('Transport & Bensin', 20000, '⛽', false)">⛽ Bensin 20rb</button>
-      <button type="button" class="chip" onclick="quickExp('Ngopi / Nongkrong', 25000, '☕', true)">☕ Ngopi 25rb</button>
-      <button type="button" class="chip" onclick="quickInc('Tips / Bonus', 50000, '✨', 'bonus')">✨ Tips 50rb</button>
-    </div>
-
+    <!-- QUICK ACTIONS -->
     <div class="section-head">
-      <h3>Aktivitas Bulan Ini</h3>
-      <span id="homeTxCount">0 item</span>
+      <h3>Aksi Cepat</h3>
+      <span id="quickActionsHint">Satu ketukan untuk mencatat</span>
     </div>
+    <div class="chip-strip" id="quickActionStrip"></div>
 
-    <div class="chip-row" id="filterRow">
-      <button type="button" class="chip active" data-f="all" onclick="setHomeFilter('all')">Semua</button>
-      <button type="button" class="chip" data-f="inc" onclick="setHomeFilter('inc')">Income</button>
-      <button type="button" class="chip" data-f="exp" onclick="setHomeFilter('exp')">Pengeluaran</button>
-      <button type="button" class="chip" data-f="extra" onclick="setHomeFilter('extra')">Ekstra</button>
+    <!-- INSIGHTS -->
+    <div class="section-head">
+      <h3>Insight Finansial</h3>
+      <span>Dari data aktual</span>
     </div>
+    <div class="list-stack" id="insightsList"></div>
 
-    <input type="text" id="homeSearch" class="search-box" placeholder="Cari catatan atau kategori..." oninput="renderAll()" />
-    <div class="tx-list" id="homeTxList"></div>
+    <!-- TRANSACTIONS & FILTERS -->
+    <div class="section-head">
+      <h3>Riwayat Transaksi</h3>
+      <span id="txFilteredCount">0 item</span>
+    </div>
+    <input type="text" id="txSearchInput" class="search-input" placeholder="Cari catatan, kategori, atau akun..." oninput="renderAll()" style="margin-bottom: 8px;" />
+    <div class="filter-grid">
+      <select id="txTypeFilter" class="select" onchange="renderAll()">
+        <option value="all">Semua Jenis</option>
+        <option value="income">Pemasukan (Income)</option>
+        <option value="expense">Pengeluaran (Expense)</option>
+        <option value="savings_contribution">Setor Tabungan</option>
+        <option value="savings_withdrawal">Tarik Tabungan</option>
+        <option value="internal_transfer">Transfer Internal</option>
+        <option value="balance_adjustment">Penyesuaian Saldo</option>
+      </select>
+      <select id="txCategoryFilter" class="select" onchange="renderAll()">
+        <option value="all">Semua Kategori</option>
+      </select>
+    </div>
+    <div class="filter-grid">
+      <input type="date" id="txDateFrom" class="input" onchange="renderAll()" />
+      <input type="date" id="txDateTo" class="input" onchange="renderAll()" />
+    </div>
+    <div class="list-stack" id="txFeedList"></div>
   </section>
 
   <!-- TAB 2: KALENDER -->
-  <section id="secCalendar" class="view-section hidden">
+  <section id="tabCalendar" class="hidden">
     <div class="card">
+      <div class="card-header-row">
+        <span class="label-muted">Kalender Arus Kas Bulanan</span>
+        <span class="pill-tag" id="calMonthNetPill">Net: Rp 0</span>
+      </div>
       <div class="cal-weekdays">
         <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
       </div>
       <div class="cal-grid" id="calGrid"></div>
-      <div class="card-foot" style="margin-top: 12px;">
-        <span><i class="dot inc" style="display:inline-block;margin-right:5px;"></i>Masuk</span>
-        <span><i class="dot exp" style="display:inline-block;margin-right:5px;"></i>Keluar</span>
-      </div>
     </div>
 
     <div class="grid-2">
-      <div class="mini-card">
-        <small>Masuk Tanggal Ini</small>
-        <strong id="calDayInc" style="color: var(--income);">Rp 0</strong>
+      <div class="metric-tile">
+        <small>Pemasukan Tanggal Ini</small>
+        <strong id="calSelInc" style="color: var(--income);">Rp 0</strong>
+        <span id="calSelDateLabel">Pilih tanggal</span>
       </div>
-      <div class="mini-card">
-        <small>Keluar Tanggal Ini</small>
-        <strong id="calDayExp" style="color: var(--expense);">Rp 0</strong>
+      <div class="metric-tile">
+        <small>Pengeluaran & Hasil Bersih</small>
+        <strong id="calSelExp" style="color: var(--expense);">Rp 0</strong>
+        <span id="calSelNet">Bersih: Rp 0</span>
       </div>
     </div>
 
     <div class="section-head">
-      <h3 id="calSelectedTitle">Transaksi Tanggal Terpilih</h3>
-      <span id="calDayCount">0 item</span>
+      <h3 id="calDetailHeading">Transaksi Tanggal Terpilih</h3>
+      <span id="calDetailCount">0 item</span>
     </div>
-    <div class="tx-list" id="calDayList"></div>
+    <div class="list-stack" id="calDetailList"></div>
   </section>
 
-  <!-- TAB 3: LAPORAN -->
-  <section id="secReport" class="view-section hidden">
+  <!-- TAB 3: ANGGARAN -->
+  <section id="tabBudget" class="hidden">
     <div class="card">
-      <div class="eyebrow"><span>Grafik 6 Bulan (Mint: Masuk • Rose: Keluar)</span></div>
-      <div class="chart-wrap" id="sixMonthChart"></div>
+      <div class="card-header-row">
+        <span class="label-muted">Ringkasan Anggaran Bulanan</span>
+        <span class="pill-tag gold" id="budgetTotalRatio">0% Terpakai</span>
+      </div>
+      <div class="hero-amount" id="budgetTotalRemaining" style="font-size: 24px; margin-bottom: 6px;">Rp 0</div>
+      <div class="bar-track">
+        <div class="bar-fill" id="budgetOverallBar" style="width: 0%;"></div>
+      </div>
+      <div class="account-meta-foot">
+        <span id="budgetTotalSpentText">Terpakai: Rp 0</span>
+        <span id="budgetTotalLimitText">Total Limit: Rp 0</span>
+      </div>
     </div>
 
-    <div class="grid-2">
-      <div class="mini-card">
-        <small>Salary Pokok Bulan Ini</small>
-        <strong id="repSalaryMain" style="color: var(--income);">Rp 0</strong>
-      </div>
-      <div class="mini-card">
-        <small>Tips / Bonus Bulan Ini</small>
-        <strong id="repSalaryBonus" style="color: var(--ink);">Rp 0</strong>
-      </div>
+    <div class="section-head">
+      <h3>Kategori Anggaran</h3>
+      <button type="button" class="action-chip-btn" onclick="openBudgetModal()">+ Kategori</button>
     </div>
-
-    <div class="card">
-      <div class="eyebrow"><span>Breakdown Kategori Pengeluaran</span></div>
-      <div id="categoryBreakdown"></div>
-    </div>
+    <div class="list-stack" id="budgetList"></div>
   </section>
 
-  <!-- TAB 4: PIGGY VAULT & GOALS -->
-  <section id="secVault" class="view-section hidden">
-    <div class="card balance-card">
-      <div class="eyebrow">
-        <span>Total Tabungan Vault</span>
-        <span id="vaultPctBadge">0%</span>
+  <!-- TAB 4: TABUNGAN & GOALS -->
+  <section id="tabSavings" class="hidden">
+    <div class="card hero-balance-card">
+      <div class="card-header-row">
+        <span class="label-muted">Total Rekening Tabungan & Goals</span>
+        <span class="pill-tag" id="savingsOverallPct">0%</span>
       </div>
-      <div class="big-amount" id="vaultTotalVal">Rp 0</div>
-      <div class="progress-track">
-        <div class="progress-fill" id="vaultBar" style="width: 0%"></div>
+      <div class="hero-amount" id="savingsGrandTotal">Rp 0</div>
+      <div class="bar-track">
+        <div class="bar-fill" id="savingsGrandBar" style="width: 0%;"></div>
       </div>
-      <div class="card-foot">
-        <span>Terkumpul</span>
-        <span id="vaultTargetVal">Target Utama: Rp 10.000.000</span>
+      <div class="account-meta-foot">
+        <span id="savingsMonthlyTargetSum">Target Bulanan: Rp 0</span>
+        <span id="savingsGoalTargetSum">Total Target: Rp 0</span>
       </div>
     </div>
 
     <div class="section-head">
-      <h3>Target Barang / Goals</h3>
-      <button type="button" class="mini-link-btn" onclick="openGoalModal()">+ Tambah Goal</button>
+      <h3>Rekening & Target Independen</h3>
+      <button type="button" class="action-chip-btn" onclick="openSavingsModal()">+ Rekening / Goal</button>
     </div>
-    <div class="goal-stack" id="goalsList"></div>
-
-    <div class="section-head"><h3>Setor Cepat ke Vault</h3></div>
-    <div class="chip-row">
-      <button type="button" class="chip" onclick="quickVault(20000)">+ Rp 20rb</button>
-      <button type="button" class="chip" onclick="quickVault(50000)">+ Rp 50rb</button>
-      <button type="button" class="chip" onclick="quickVault(100000)">+ Rp 100rb</button>
-      <button type="button" class="chip" onclick="quickVault(500000)">+ Rp 500rb</button>
-    </div>
-
-    <div class="section-head">
-      <h3>Riwayat Vault</h3>
-      <span id="vaultTxCount">0 item</span>
-    </div>
-    <div class="tx-list" id="vaultTxList"></div>
+    <div class="list-stack" id="savingsAccountsList"></div>
   </section>
 </div>
 
+<!-- BOTTOM NAVIGATION -->
 <div class="dock-wrap">
-  <nav class="dock">
-    <button type="button" class="dock-btn active" id="navHome" onclick="setNav('home')">
-      <span>🏠</span><span>Home</span>
+  <nav class="dock" aria-label="Navigasi Utama">
+    <button type="button" class="dock-btn active" id="navDashboard" onclick="switchTab('dashboard')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
     </button>
-    <button type="button" class="dock-btn" id="navCalendar" onclick="setNav('calendar')">
-      <span>📅</span><span>Kalender</span>
+    <button type="button" class="dock-btn" id="navCalendar" onclick="switchTab('calendar')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <span>Kalender</span>
     </button>
-    <button type="button" class="fab-add" onclick="openAddModal()" aria-label="Tambah">+</button>
-    <button type="button" class="dock-btn" id="navReport" onclick="setNav('report')">
-      <span>📊</span><span>Laporan</span>
+    <button type="button" class="fab-btn" onclick="openTxModal()" aria-label="Tambah Transaksi">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
     </button>
-    <button type="button" class="dock-btn" id="navVault" onclick="setNav('vault')">
-      <span>🐷</span><span>Vault</span>
+    <button type="button" class="dock-btn" id="navBudget" onclick="switchTab('budget')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+      <span>Budget</span>
+    </button>
+    <button type="button" class="dock-btn" id="navSavings" onclick="switchTab('savings')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+      <span>Vault</span>
     </button>
   </nav>
 </div>
 
-<!-- MODAL NOTIFIKASI -->
-<div class="modal-bg" id="modalNotif" onclick="backdropClose(event, 'modalNotif')">
-  <div class="modal-card">
-    <div class="modal-top">
-      <h3>Notifikasi & Update</h3>
-      <button type="button" class="x-btn" onclick="closeModal('modalNotif')">✕</button>
-    </div>
-
-    <button type="button" class="btn-sub" id="btnBrowserPerm" onclick="requestBrowserNotifPermission()">
-      🔔 Aktifkan Notifikasi Browser
-    </button>
-
-    <div class="notif-list" id="notifHistoryList"></div>
-
-    <button type="button" class="btn-warn" onclick="clearNotifHistory()">Bersihkan Riwayat Notif</button>
-  </div>
-</div>
-
 <!-- MODAL TRANSAKSI -->
-<div class="modal-bg" id="modalAdd" onclick="backdropClose(event, 'modalAdd')">
-  <div class="modal-card">
-    <div class="modal-top">
-      <h3 id="modalAddTitle">Tambah Transaksi</h3>
-      <button type="button" class="x-btn" onclick="closeModal('modalAdd')">✕</button>
+<div class="modal-backdrop" id="modalTx" onclick="backdropClose(event, 'modalTx')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3 id="modalTxTitle">Catat Transaksi</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modalTx')">✕</button>
     </div>
 
-    <div class="type-grid" id="typeSelectorGrid">
-      <button type="button" class="type-opt active" id="optExp" onclick="chooseTxType('expense')">💸 Pengeluaran</button>
-      <button type="button" class="type-opt" id="optInc" onclick="chooseTxType('income')">💼 Income / Salary</button>
-      <button type="button" class="type-opt" id="optVin" onclick="chooseTxType('vault_in')">🐷 Nabung Vault</button>
-      <button type="button" class="type-opt" id="optVout" onclick="chooseTxType('vault_out')">📤 Tarik Vault</button>
+    <div class="tx-type-grid" id="txTypeSelector">
+      <button type="button" class="tx-type-btn active" id="ttExpense" onclick="selectTxType('expense')">Pengeluaran</button>
+      <button type="button" class="tx-type-btn" id="ttIncome" onclick="selectTxType('income')">Pemasukan</button>
+      <button type="button" class="tx-type-btn" id="ttSaveIn" onclick="selectTxType('savings_contribution')">Setor Tabungan</button>
+      <button type="button" class="tx-type-btn" id="ttSaveOut" onclick="selectTxType('savings_withdrawal')">Tarik Tabungan</button>
+      <button type="button" class="tx-type-btn" id="ttTransfer" onclick="selectTxType('internal_transfer')">Transfer Internal</button>
+      <button type="button" class="tx-type-btn" id="ttAdjust" onclick="selectTxType('balance_adjustment')">Penyesuaian Saldo</button>
     </div>
 
     <div class="field">
@@ -1224,24 +1330,29 @@
       <input type="number" id="txAmount" class="input" placeholder="Contoh: 25000" inputmode="numeric" />
     </div>
 
-    <div class="field" id="boxExpCat">
-      <label>Kategori Pengeluaran</label>
-      <select id="txExpCat" class="input">
-        <option value="🍜|Makan & Minum">🍜 Makan & Minum</option>
-        <option value="⛽|Transport & Bensin">⛽ Transport & Bensin</option>
-        <option value="🚬|Rokok">🚬 Rokok</option>
-        <option value="🍿|Jajan & Snack">🍿 Jajan & Snack</option>
-        <option value="🛍️|Belanja">🛍️ Belanja</option>
-        <option value="☕|Ngopi / Nongkrong">☕ Ngopi / Nongkrong</option>
-      </select>
+    <div class="field" id="txCategoryGroup">
+      <label>Kategori</label>
+      <select id="txCategory" class="select"></select>
     </div>
 
-    <div class="field hidden" id="boxIncKind">
-      <label>Jenis Income / Salary</label>
-      <select id="txIncKind" class="input">
-        <option value="💼|salary|Salary / Gaji">💼 Salary / Gaji</option>
-        <option value="✨|bonus|Tips / Bonus">✨ Tips / Bonus</option>
-        <option value="🎯|bonus|Side Job / Event">🎯 Side Job / Event</option>
+    <div class="field hidden" id="txSavingsAccountGroup">
+      <label id="txSavingsAccountLabel">Rekening Tabungan / Goal</label>
+      <select id="txSavingsAccount" class="select"></select>
+    </div>
+
+    <div class="field hidden" id="txTransferGroup">
+      <label>Arah Transfer Internal</label>
+      <div class="filter-grid" style="margin-bottom:0;">
+        <select id="txTransferFrom" class="select"></select>
+        <select id="txTransferTo" class="select"></select>
+      </div>
+    </div>
+
+    <div class="field hidden" id="txAdjustModeGroup">
+      <label>Mode Penyesuaian</label>
+      <select id="txAdjustMode" class="select">
+        <option value="add">Tambah Saldo Kas (+)</option>
+        <option value="sub">Kurangi Saldo Kas (-)</option>
       </select>
     </div>
 
@@ -1250,125 +1361,201 @@
       <input type="text" id="txNote" class="input" placeholder="Opsional..." />
     </div>
 
-    <label class="check-box" id="boxExtra">
-      <input type="checkbox" id="txExtra" />
-      <span>Tandai sebagai <b>Dana Ekstra</b> (tidak memotong limit harian)</span>
-    </label>
-
-    <button type="button" class="btn-main" id="btnSaveTx" onclick="submitTransaction()">Simpan</button>
+    <button type="button" class="btn-primary" id="btnSaveTx" onclick="saveTransaction()">Simpan Transaksi</button>
   </div>
 </div>
 
-<!-- MODAL GOAL -->
-<div class="modal-bg" id="modalGoal" onclick="backdropClose(event, 'modalGoal')">
-  <div class="modal-card">
-    <div class="modal-top">
-      <h3 id="modalGoalTitle">Target Barang / Goal</h3>
-      <button type="button" class="x-btn" onclick="closeModal('modalGoal')">✕</button>
+<!-- MODAL ANGGARAN -->
+<div class="modal-backdrop" id="modalBudget" onclick="backdropClose(event, 'modalBudget')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3 id="modalBudgetTitle">Kategori Anggaran</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modalBudget')">✕</button>
     </div>
-
     <div class="field">
-      <label>Ikon / Emoji</label>
-      <input type="text" id="goalEmoji" class="input" value="🎯" maxlength="4" />
+      <label>Nama Kategori</label>
+      <input type="text" id="budName" class="input" placeholder="Contoh: Makan & Minum" />
     </div>
-
     <div class="field">
-      <label>Nama Barang / Target</label>
-      <input type="text" id="goalTitle" class="input" placeholder="Contoh: Grinder / Sepatu / Liburan" />
+      <label>Batas Anggaran Bulanan (Rp)</label>
+      <input type="number" id="budLimit" class="input" placeholder="Contoh: 900000" inputmode="numeric" />
     </div>
+    <button type="button" class="btn-primary" onclick="saveBudgetCategory()">Simpan Anggaran</button>
+  </div>
+</div>
 
+<!-- MODAL REKENING TABUNGAN / GOAL -->
+<div class="modal-backdrop" id="modalSavings" onclick="backdropClose(event, 'modalSavings')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3 id="modalSavingsTitle">Rekening Tabungan / Goal</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modalSavings')">✕</button>
+    </div>
     <div class="field">
-      <label>Target Nominal (Rp)</label>
-      <input type="number" id="goalTargetAmount" class="input" placeholder="Contoh: 1500000" inputmode="numeric" />
+      <label>Nama Rekening / Goal</label>
+      <input type="text" id="savName" class="input" placeholder="Contoh: Dana Darurat / Grinder Kopi" />
     </div>
-
-    <button type="button" class="btn-main" onclick="saveGoalItem()">Simpan Goal</button>
+    <div class="field">
+      <label>Tipe Rekening</label>
+      <select id="savKind" class="select">
+        <option value="savings">Main Savings / Tabungan Utama</option>
+        <option value="emergency">Emergency Fund / Dana Darurat</option>
+        <option value="vault">Piggy Vault</option>
+        <option value="goal">Custom Savings Goal</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Target Bulanan (Rp)</label>
+      <input type="number" id="savMonthlyTarget" class="input" placeholder="Contoh: 500000" inputmode="numeric" />
+    </div>
+    <div class="field">
+      <label>Target Total Nominal (Rp)</label>
+      <input type="number" id="savGoalTarget" class="input" placeholder="Contoh: 10000000" inputmode="numeric" />
+    </div>
+    <button type="button" class="btn-primary" onclick="saveSavingsAccount()">Simpan Rekening</button>
   </div>
 </div>
 
 <!-- MODAL PROFIL -->
-<div class="modal-bg" id="modalProfile" onclick="backdropClose(event, 'modalProfile')">
-  <div class="modal-card">
-    <div class="modal-top">
-      <h3>Profil & Target</h3>
-      <button type="button" class="x-btn" onclick="closeModal('modalProfile')">✕</button>
+<div class="modal-backdrop" id="modalProfile" onclick="backdropClose(event, 'modalProfile')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3>Profil & Preferensi</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modalProfile')">✕</button>
     </div>
-
     <div class="field">
-      <label>Nama</label>
+      <label>Nama Pengguna</label>
       <input type="text" id="profName" class="input" />
     </div>
-
     <div class="field">
-      <label>Simbol Avatar</label>
-      <input type="text" id="profAvatar" class="input" maxlength="4" />
+      <label>Inisial Avatar (1–2 huruf)</label>
+      <input type="text" id="profInitials" class="input" maxlength="2" />
     </div>
-
     <div class="field">
-      <label>Target Tabungan Vault Utama (Rp)</label>
-      <input type="number" id="profVaultTarget" class="input" inputmode="numeric" />
+      <label>Target Pemasukan Bulanan (Rp)</label>
+      <input type="number" id="profMonthlyIncome" class="input" inputmode="numeric" />
     </div>
-
     <div class="field">
-      <label>Limit Pengeluaran Harian (Rp)</label>
-      <input type="number" id="profDailyLimit" class="input" inputmode="numeric" />
+      <label>Saldo Awal Kas Tersedia (Rp)</label>
+      <input type="number" id="profOpeningCash" class="input" inputmode="numeric" />
     </div>
-
-    <button type="button" class="btn-main" onclick="saveProfileData()">Simpan Profil</button>
+    <div class="field">
+      <label>Mata Uang & Tampilan</label>
+      <select id="profCurrency" class="select">
+        <option value="IDR">IDR — Rupiah (Rp)</option>
+      </select>
+    </div>
+    <button type="button" class="btn-primary" onclick="saveProfilePreferences()">Simpan Preferensi</button>
   </div>
 </div>
 
-<!-- MODAL SETTINGS -->
-<div class="modal-bg" id="modalSettings" onclick="backdropClose(event, 'modalSettings')">
-  <div class="modal-card">
-    <div class="modal-top">
-      <h3>Pengaturan & Backup</h3>
-      <button type="button" class="x-btn" onclick="closeModal('modalSettings')">✕</button>
+<!-- MODAL NOTIFIKASI -->
+<div class="modal-backdrop" id="modalNotif" onclick="backdropClose(event, 'modalNotif')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3>Notifikasi & Aktivitas</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modalNotif')">✕</button>
     </div>
+    <button type="button" class="btn-secondary" onclick="requestWebNotif()">Aktifkan Notifikasi Perangkat</button>
+    <div class="list-stack" id="notifModalList" style="margin-bottom:12px;"></div>
+    <button type="button" class="btn-danger" onclick="clearNotifs()">Bersihkan Riwayat Notifikasi</button>
+  </div>
+</div>
 
-    <p style="font-size: 12px; color: var(--ink-muted); margin-bottom: 14px;">
-      Data otomatis dicadangkan ke Multi-Mirror & IndexedDB di browser perangkat ini saja. File JSON tetap tersedia untuk pindah HP.
+<!-- MODAL PENGATURAN & BACKUP -->
+<div class="modal-backdrop" id="modalSettings" onclick="backdropClose(event, 'modalSettings')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3>Data, Keamanan & Backup</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modalSettings')">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;line-height:1.45;">
+      Data disimpan otomatis ke multi-mirror <code>localStorage</code> serta <code>IndexedDB</code> dengan validasi integritas dan pemulihan cadangan lokal.
     </p>
-
-    <button type="button" class="btn-sub" onclick="exportJson()">⬇️ Export Backup JSON (v3.0)</button>
-
-    <label class="btn-sub" style="display:block;text-align:center;cursor:pointer;">
-      ⬆️ Import Backup JSON
-      <input type="file" id="fileImportJson" accept=".json" onchange="importJson(event)" style="display:none;" />
+    <button type="button" class="btn-secondary" onclick="downloadVaultIconPng()">Unduh Ikon Huruf "O" (512×512 PNG)</button>
+    <button type="button" class="btn-secondary" onclick="exportBackupJson()">Export Backup JSON (v4.0)</button>
+    <label class="btn-secondary" style="display:block;text-align:center;cursor:pointer;">
+      Import Backup JSON (Tervalidasi)
+      <input type="file" id="importJsonInput" accept=".json" onchange="importBackupJson(event)" style="display:none;" />
     </label>
-
-    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
-
-    <button type="button" class="btn-warn" onclick="wipeAllData()">🗑️ Reset Semua Data</button>
+    <button type="button" class="btn-secondary" onclick="recoverFromBestStorage()">Audit & Pulihkan dari Mirror Terbaik</button>
+    <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;" />
+    <button type="button" class="btn-danger" onclick="resetAllVaultData()">Reset Seluruh Data</button>
   </div>
 </div>
 
 <script>
+  const V4_KEY = 'owens_vault_v4_0_state';
+  const MIRROR_1_KEY = 'owens_vault_v4_0_mirror_1';
+  const MIRROR_2_KEY = 'owens_vault_v4_0_mirror_2';
   const V3_KEY = 'owens_vault_v3_0_data';
-  const MIRROR_A_KEY = 'owens_vault_v3_0_mirror_a';
-  const MIRROR_B_KEY = 'owens_vault_v3_0_mirror_b';
+  const V3_MA = 'owens_vault_v3_0_mirror_a';
+  const V3_MB = 'owens_vault_v3_0_mirror_b';
   const V2_KEY = 'owens_vault_v2_2_data';
+
   const IDB_NAME = 'OwensVaultLocalDB';
   const IDB_STORE = 'vault_snapshots';
 
+  const DEFAULT_BUDGETS = [
+    { id: 'b_food', category: 'Makan & Minum', limit: 900000 },
+    { id: 'b_transport', category: 'Transport & Bensin', limit: 600000 },
+    { id: 'b_coffee', category: 'Ngopi & Nongkrong', limit: 500000 },
+    { id: 'b_smoke', category: 'Rokok & Snack', limit: 450000 },
+    { id: 'b_shop', category: 'Belanja & Kebutuhan', limit: 750000 }
+  ];
+
+  const DEFAULT_SAVINGS_ACCOUNTS = [
+    {
+      id: 'acc_main_savings',
+      name: 'Main Savings',
+      kind: 'savings',
+      monthlyTarget: 500000,
+      goalTarget: 10000000
+    },
+    {
+      id: 'acc_emergency_fund',
+      name: 'Emergency Fund',
+      kind: 'emergency',
+      monthlyTarget: 500000,
+      goalTarget: 15000000
+    },
+    {
+      id: 'acc_piggy_vault',
+      name: 'Piggy Vault',
+      kind: 'vault',
+      monthlyTarget: 250000,
+      goalTarget: 5000000
+    }
+  ];
+
+  const DEFAULT_QUICK_ACTIONS = [
+    { id: 'qa_1', type: 'expense', category: 'Makan & Minum', amount: 15000, label: 'Makan 15rb', note: 'Makan harian' },
+    { id: 'qa_2', type: 'expense', category: 'Transport & Bensin', amount: 20000, label: 'Bensin 20rb', note: 'BBM motor' },
+    { id: 'qa_3', type: 'expense', category: 'Ngopi & Nongkrong', amount: 25000, label: 'Ngopi 25rb', note: 'Kopi / nongkrong' },
+    { id: 'qa_4', type: 'income', category: 'Tips & Bonus', amount: 50000, label: 'Tips +50rb', note: 'Tips / bonus' },
+    { id: 'qa_5', type: 'savings_contribution', category: 'Tabungan', amount: 50000, label: 'Nabung Vault +50rb', accountId: 'acc_piggy_vault', note: 'Setor tabungan' }
+  ];
+
   const DEFAULT_STATE = {
-    version: '3.0',
+    version: '4.0',
     updatedAt: 0,
     profile: {
       name: 'Owen',
-      avatar: 'O',
-      vaultTarget: 10000000,
-      dailyLimit: 30000
+      initials: 'OW',
+      monthlyIncomeTarget: 0,
+      openingCash: 0,
+      currency: 'IDR',
+      hideBalances: false
     },
-    vaultTx: [],
-    expenseTx: [],
-    incomeTx: [],
-    goals: [],
+    budgets: DEFAULT_BUDGETS.slice(),
+    savingsAccounts: DEFAULT_SAVINGS_ACCOUNTS.slice(),
+    quickActions: DEFAULT_QUICK_ACTIONS.slice(),
+    transactions: [],
     notifications: [
       {
-        id: 'init_30',
-        tone: 'info',
-        title: "Owen's Vault 3.0 Minimal siap dipakai",
+        id: 'init_v4',
+        tone: 'gold',
+        title: "Owen's Vault 4.0 Emerald Luxury siap digunakan",
         time: 'Baru saja',
         read: false
       }
@@ -1384,121 +1571,243 @@
     return getTodayISO().slice(0, 7);
   }
 
-  function nowClockLabel() {
+  function clockNow() {
     const d = new Date();
     return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
   }
 
-  function normalizeTxList(list, fallbackDate) {
-    if (!Array.isArray(list)) return [];
-    return list
-      .filter(function(item) { return item && Number(item.amount) > 0; })
-      .map(function(item, idx) {
-        const rawDate = String(item.date || fallbackDate || getTodayISO());
-        const dateStr = rawDate.length >= 10 ? rawDate.slice(0, 10) : getTodayISO();
-        return Object.assign({}, item, {
-          id: String(item.id || (Date.now() + idx)),
-          amount: Math.round(Number(item.amount)),
-          date: dateStr
-        });
-      });
+  function formatRp(num) {
+    const n = Math.round(Number(num) || 0);
+    const sign = n < 0 ? '-' : '';
+    return sign + 'Rp ' + Math.abs(n).toLocaleString('id-ID');
   }
 
-  function normalizeGoalsList(list) {
-    if (!Array.isArray(list)) return [];
+  function displayMoney(num) {
+    if (state && state.profile && state.profile.hideBalances) return 'Rp ••••••';
+    return formatRp(num);
+  }
+
+  function escapeHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function stripLeadingEmoji(str) {
+    return String(str || '').replace(/^[^\p{L}\p{N}]+/gu, '').trim() || 'Umum';
+  }
+
+  function normalizeBudgets(list) {
+    if (!Array.isArray(list) || !list.length) return DEFAULT_BUDGETS.slice();
     return list
-      .filter(function(g) { return g && String(g.title || '').trim() && Number(g.target) > 0; })
-      .map(function(g, idx) {
+      .filter(function(b) { return b && String(b.category || '').trim() && Number(b.limit) >= 0; })
+      .map(function(b, i) {
         return {
-          id: String(g.id || ('goal_' + Date.now() + '_' + idx)),
-          emoji: String(g.emoji || '🎯').trim() || '🎯',
-          title: String(g.title).trim(),
-          target: Math.round(Number(g.target))
+          id: String(b.id || ('bud_' + i)),
+          category: stripLeadingEmoji(b.category),
+          limit: Math.round(Number(b.limit) || 0)
         };
       });
   }
 
-  function normalizeNotifList(list) {
-    if (!Array.isArray(list)) return DEFAULT_STATE.notifications.slice();
+  function normalizeSavingsAccounts(list) {
+    const validKinds = ['savings', 'emergency', 'vault', 'goal'];
+    if (!Array.isArray(list) || !list.length) return DEFAULT_SAVINGS_ACCOUNTS.slice();
     return list
-      .filter(function(n) { return n && String(n.title || '').trim(); })
-      .slice(0, 30)
-      .map(function(n, idx) {
+      .filter(function(a) { return a && String(a.name || '').trim(); })
+      .map(function(a, i) {
         return {
-          id: String(n.id || ('notif_' + Date.now() + '_' + idx)),
-          tone: n.tone === 'warn' || n.tone === 'info' ? n.tone : 'ok',
-          title: String(n.title).trim(),
-          time: String(n.time || nowClockLabel()),
-          read: !!n.read
+          id: String(a.id || ('acc_' + i)),
+          name: String(a.name).trim(),
+          kind: validKinds.indexOf(a.kind) !== -1 ? a.kind : 'goal',
+          monthlyTarget: Math.max(0, Math.round(Number(a.monthlyTarget) || 0)),
+          goalTarget: Math.max(1000, Math.round(Number(a.goalTarget) || 1000000))
         };
       });
   }
 
-  function sanitizeStateObject(src) {
-    if (!src || typeof src !== 'object') return null;
-    const inner = src.data && typeof src.data === 'object' ? src.data : src;
-    if (!Array.isArray(inner.vaultTx) && !Array.isArray(inner.expenseTx) && !Array.isArray(inner.incomeTx) && !inner.profile) {
-      return null;
+  function normalizeTransactions(list) {
+    if (!Array.isArray(list)) return [];
+    const allowedTypes = [
+      'income',
+      'expense',
+      'savings_contribution',
+      'savings_withdrawal',
+      'internal_transfer',
+      'balance_adjustment'
+    ];
+    return list
+      .filter(function(t) { return t && Number(t.amount) > 0; })
+      .map(function(t, idx) {
+        const type = allowedTypes.indexOf(t.type) !== -1 ? t.type : 'expense';
+        const dateStr = String(t.date || getTodayISO()).slice(0, 10);
+        return {
+          id: String(t.id || ('tx_' + Date.now() + '_' + idx)),
+          type: type,
+          amount: Math.round(Number(t.amount)),
+          date: dateStr.length === 10 ? dateStr : getTodayISO(),
+          category: stripLeadingEmoji(t.category || (type === 'income' ? 'Gaji & Pemasukan' : type === 'expense' ? 'Makan & Minum' : 'Akun')),
+          accountId: t.accountId ? String(t.accountId) : '',
+          fromAccount: t.fromAccount ? String(t.fromAccount) : 'cash',
+          toAccount: t.toAccount ? String(t.toAccount) : 'acc_main_savings',
+          adjustSign: t.adjustSign === 'sub' ? 'sub' : 'add',
+          note: String(t.note || '').trim()
+        };
+      });
+  }
+
+  function migrateLegacyPayload(rawObj) {
+    if (!rawObj || typeof rawObj !== 'object') return null;
+    const inner = rawObj.data && typeof rawObj.data === 'object' ? rawObj.data : rawObj;
+
+    // Already v4 shape
+    if (Array.isArray(inner.transactions) && Array.isArray(inner.savingsAccounts)) {
+      return {
+        version: '4.0',
+        updatedAt: Number(inner.updatedAt || rawObj.updatedAt || Date.now()),
+        profile: Object.assign({}, DEFAULT_STATE.profile, inner.profile || {}),
+        budgets: normalizeBudgets(inner.budgets),
+        savingsAccounts: normalizeSavingsAccounts(inner.savingsAccounts),
+        quickActions: Array.isArray(inner.quickActions) && inner.quickActions.length ? inner.quickActions : DEFAULT_QUICK_ACTIONS.slice(),
+        transactions: normalizeTransactions(inner.transactions),
+        notifications: Array.isArray(inner.notifications) ? inner.notifications.slice(0, 30) : DEFAULT_STATE.notifications.slice()
+      };
     }
+
+    // Legacy v2.2 / v3.0 shape migration
+    const hasLegacyArrays = Array.isArray(inner.expenseTx) || Array.isArray(inner.incomeTx) || Array.isArray(inner.vaultTx) || inner.profile;
+    if (!hasLegacyArrays) return null;
+
+    const accounts = DEFAULT_SAVINGS_ACCOUNTS.slice();
+    if (Array.isArray(inner.goals)) {
+      inner.goals.forEach(function(g, i) {
+        if (g && String(g.title || '').trim()) {
+          accounts.push({
+            id: String(g.id || ('goal_' + i)),
+            name: String(g.title).trim(),
+            kind: 'goal',
+            monthlyTarget: 0,
+            goalTarget: Math.max(1000, Math.round(Number(g.target) || 1000000))
+          });
+        }
+      });
+    }
+
+    const txs = [];
+    (inner.incomeTx || []).forEach(function(inc, i) {
+      if (!inc || Number(inc.amount) <= 0) return;
+      txs.push({
+        id: 'mig_inc_' + String(inc.id || i),
+        type: 'income',
+        amount: Math.round(Number(inc.amount)),
+        date: String(inc.date || getTodayISO()).slice(0, 10),
+        category: stripLeadingEmoji(inc.label || 'Gaji & Pemasukan'),
+        accountId: '',
+        fromAccount: '',
+        toAccount: '',
+        adjustSign: 'add',
+        note: String(inc.note || inc.label || '').trim()
+      });
+    });
+
+    (inner.expenseTx || []).forEach(function(exp, i) {
+      if (!exp || Number(exp.amount) <= 0) return;
+      txs.push({
+        id: 'mig_exp_' + String(exp.id || i),
+        type: 'expense',
+        amount: Math.round(Number(exp.amount)),
+        date: String(exp.date || getTodayISO()).slice(0, 10),
+        category: stripLeadingEmoji(exp.category || 'Pengeluaran'),
+        accountId: '',
+        fromAccount: '',
+        toAccount: '',
+        adjustSign: 'add',
+        note: String(exp.note || '').trim() + (exp.isExtra ? ' (Ekstra)' : '')
+      });
+    });
+
+    (inner.vaultTx || []).forEach(function(v, i) {
+      if (!v || Number(v.amount) <= 0) return;
+      txs.push({
+        id: 'mig_vlt_' + String(v.id || i),
+        type: v.type === 'out' ? 'savings_withdrawal' : 'savings_contribution',
+        amount: Math.round(Number(v.amount)),
+        date: String(v.date || getTodayISO()).slice(0, 10),
+        category: v.type === 'out' ? 'Tarik Tabungan' : 'Setor Tabungan',
+        accountId: 'acc_piggy_vault',
+        fromAccount: '',
+        toAccount: '',
+        adjustSign: 'add',
+        note: String(v.note || (v.type === 'out' ? 'Tarik Vault' : 'Setor Vault')).trim()
+      });
+    });
+
+    const prof = inner.profile || {};
+    const nameStr = String(prof.name || 'Owen').trim() || 'Owen';
+    const initialsStr = String(prof.avatar || nameStr.slice(0, 2)).trim().toUpperCase().slice(0, 2) || 'OW';
+
     return {
-      version: '3.0',
-      updatedAt: Number(inner.updatedAt || src.updatedAt || 0),
-      profile: Object.assign({}, DEFAULT_STATE.profile, inner.profile || {}),
-      vaultTx: normalizeTxList(inner.vaultTx),
-      expenseTx: normalizeTxList(inner.expenseTx),
-      incomeTx: normalizeTxList(inner.incomeTx),
-      goals: normalizeGoalsList(inner.goals),
-      notifications: normalizeNotifList(inner.notifications)
+      version: '4.0',
+      updatedAt: Number(inner.updatedAt || Date.now()),
+      profile: {
+        name: nameStr,
+        initials: initialsStr,
+        monthlyIncomeTarget: 0,
+        openingCash: 0,
+        currency: 'IDR',
+        hideBalances: false
+      },
+      budgets: DEFAULT_BUDGETS.slice(),
+      savingsAccounts: accounts,
+      quickActions: DEFAULT_QUICK_ACTIONS.slice(),
+      transactions: normalizeTransactions(txs),
+      notifications: [
+        {
+          id: 'mig_v4_' + Date.now(),
+          tone: 'gold',
+          title: 'Data lama berhasil dimigrasikan ke Owen\'s Vault 4.0',
+          time: clockNow(),
+          read: false
+        }
+      ]
     };
   }
 
-  function readFromLocalMirrors() {
-    const keys = [V3_KEY, MIRROR_A_KEY, MIRROR_B_KEY];
+  function loadBestLocalState() {
+    const candidates = [V4_KEY, MIRROR_1_KEY, MIRROR_2_KEY, V3_KEY, V3_MA, V3_MB, V2_KEY];
     let best = null;
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0; i < candidates.length; i++) {
       try {
-        const raw = localStorage.getItem(keys[i]);
+        const raw = localStorage.getItem(candidates[i]);
         if (!raw) continue;
-        const parsed = sanitizeStateObject(JSON.parse(raw));
-        if (parsed && (!best || (parsed.updatedAt || 0) > (best.updatedAt || 0))) {
-          best = parsed;
+        const migrated = migrateLegacyPayload(JSON.parse(raw));
+        if (migrated) {
+          const score = migrated.transactions.length + migrated.savingsAccounts.length;
+          const bestScore = best ? (best.transactions.length + best.savingsAccounts.length) : -1;
+          if (!best || (migrated.updatedAt || 0) > (best.updatedAt || 0) || score > bestScore) {
+            best = migrated;
+          }
         }
       } catch (e) {}
     }
-    if (best) return best;
-
-    try {
-      const rawV2 = localStorage.getItem(V2_KEY);
-      if (rawV2) {
-        const v2 = JSON.parse(rawV2);
-        return sanitizeStateObject({
-          version: '3.0',
-          updatedAt: Date.now(),
-          profile: v2.profile,
-          vaultTx: v2.vaultTx,
-          expenseTx: v2.expenseTx,
-          incomeTx: v2.incomeTx,
-          goals: [],
-          notifications: DEFAULT_STATE.notifications
-        });
-      }
-    } catch (e) {}
-    return null;
+    return best;
   }
 
-  function writeToLocalMirrors(st) {
-    const stamped = Object.assign({}, st, { version: '3.0', updatedAt: Date.now() });
-    const serialized = JSON.stringify(stamped);
-    [V3_KEY, MIRROR_A_KEY, MIRROR_B_KEY].forEach(function(k) {
-      try { localStorage.setItem(k, serialized); } catch (e) {}
+  function writeMirrors(st) {
+    const stamped = Object.assign({}, st, { version: '4.0', updatedAt: Date.now() });
+    const json = JSON.stringify(stamped);
+    [V4_KEY, MIRROR_1_KEY, MIRROR_2_KEY].forEach(function(k) {
+      try { localStorage.setItem(k, json); } catch (e) {}
     });
-    try { sessionStorage.setItem(V3_KEY, serialized); } catch (e) {}
+    try { sessionStorage.setItem(V4_KEY, json); } catch (e) {}
     return stamped;
   }
 
   function openVaultIDB() {
     return new Promise(function(resolve, reject) {
-      if (!('indexedDB' in window)) return reject(new Error('No IDB'));
+      if (!('indexedDB' in window)) return reject(new Error('IDB unsupported'));
       const req = indexedDB.open(IDB_NAME, 1);
       req.onupgradeneeded = function(e) {
         const db = e.target.result;
@@ -1511,938 +1820,1245 @@
     });
   }
 
-  function saveToIDB(st) {
+  function saveIDB(st) {
     openVaultIDB().then(function(db) {
       const tx = db.transaction(IDB_STORE, 'readwrite');
-      tx.objectStore(IDB_STORE).put({ id: 'latest_vault_3', payload: st });
+      tx.objectStore(IDB_STORE).put({ id: 'vault_v4_latest', payload: st });
     }).catch(function() {});
   }
 
-  function loadFromIDB() {
+  function loadIDB() {
     return openVaultIDB().then(function(db) {
       return new Promise(function(resolve) {
         const tx = db.transaction(IDB_STORE, 'readonly');
-        const req = tx.objectStore(IDB_STORE).get('latest_vault_3');
+        const req = tx.objectStore(IDB_STORE).get('vault_v4_latest');
         req.onsuccess = function() {
-          resolve(req.result ? sanitizeStateObject(req.result.payload) : null);
+          resolve(req.result ? migrateLegacyPayload(req.result.payload) : null);
         };
         req.onerror = function() { resolve(null); };
       });
     }).catch(function() { return null; });
   }
 
-  function clearIDB() {
-    openVaultIDB().then(function(db) {
-      const tx = db.transaction(IDB_STORE, 'readwrite');
-      tx.objectStore(IDB_STORE).clear();
-    }).catch(function() {});
-  }
-
-  let state = readFromLocalMirrors() || JSON.parse(JSON.stringify(DEFAULT_STATE));
-  let activeNav = 'home';
+  let state = loadBestLocalState() || JSON.parse(JSON.stringify(DEFAULT_STATE));
+  let activeTab = 'dashboard';
   let activeYM = getCurrentYM();
-  let selectedDayISO = getTodayISO();
-  let chosenType = 'expense';
-  let homeFilter = 'all';
-  let editingTarget = null;
-  let editingGoalId = null;
+  let selectedDateISO = getTodayISO();
+  let waveFilter = 'monthly';
+  let txFormType = 'expense';
+  let editingTxId = null;
+  let editingBudgetId = null;
+  let editingSavingsId = null;
   let toastTimer = null;
 
+  /* ACCURATE ACCOUNTING ENGINE */
+  function computeAccounting() {
+    const accounts = state.savingsAccounts || [];
+    const accMap = {};
+    const accBalances = {};
+    const accLedger = {};
+
+    accounts.forEach(function(a) {
+      accMap[a.id] = a;
+      accBalances[a.id] = 0;
+      accLedger[a.id] = [];
+    });
+
+    let spendingCash = Number(state.profile.openingCash) || 0;
+
+    // Process chronological transactions so withdrawals & transfers are accurate
+    const ordered = state.transactions.slice().sort(function(a, b) {
+      return a.date.localeCompare(b.date) || a.id.localeCompare(b.id);
+    });
+
+    ordered.forEach(function(tx) {
+      const amt = Math.round(Number(tx.amount) || 0);
+      if (amt <= 0) return;
+
+      if (tx.type === 'income') {
+        spendingCash += amt;
+      } else if (tx.type === 'expense') {
+        spendingCash -= amt;
+      } else if (tx.type === 'savings_contribution') {
+        // Rule 1: reduces available spending balance, increases selected savings account; not an expense
+        const aid = accMap[tx.accountId] ? tx.accountId : (accounts[0] && accounts[0].id);
+        spendingCash -= amt;
+        if (aid) {
+          accBalances[aid] = (accBalances[aid] || 0) + amt;
+          accLedger[aid].unshift({
+            date: tx.date,
+            kind: 'in',
+            amount: amt,
+            note: tx.note || 'Setor tabungan'
+          });
+        }
+      } else if (tx.type === 'savings_withdrawal') {
+        // Rule 2: increases available spending balance, decreases selected savings account
+        const aid = accMap[tx.accountId] ? tx.accountId : (accounts[0] && accounts[0].id);
+        spendingCash += amt;
+        if (aid) {
+          accBalances[aid] = (accBalances[aid] || 0) - amt;
+          accLedger[aid].unshift({
+            date: tx.date,
+            kind: 'out',
+            amount: amt,
+            note: tx.note || 'Tarik tabungan'
+          });
+        }
+      } else if (tx.type === 'internal_transfer') {
+        // Rule 3 & 4: never income/expense, never inflates total net worth
+        const fromId = tx.fromAccount || 'cash';
+        const toId = tx.toAccount || (accounts[0] && accounts[0].id) || 'cash';
+        if (fromId === 'cash' && accMap[toId]) {
+          spendingCash -= amt;
+          accBalances[toId] = (accBalances[toId] || 0) + amt;
+          accLedger[toId].unshift({ date: tx.date, kind: 'in', amount: amt, note: tx.note || 'Transfer dari Kas' });
+        } else if (accMap[fromId] && toId === 'cash') {
+          accBalances[fromId] = (accBalances[fromId] || 0) - amt;
+          spendingCash += amt;
+          accLedger[fromId].unshift({ date: tx.date, kind: 'out', amount: amt, note: tx.note || 'Transfer ke Kas' });
+        } else if (accMap[fromId] && accMap[toId] && fromId !== toId) {
+          accBalances[fromId] = (accBalances[fromId] || 0) - amt;
+          accBalances[toId] = (accBalances[toId] || 0) + amt;
+          accLedger[fromId].unshift({ date: tx.date, kind: 'out', amount: amt, note: tx.note || ('Transfer ke ' + accMap[toId].name) });
+          accLedger[toId].unshift({ date: tx.date, kind: 'in', amount: amt, note: tx.note || ('Transfer dari ' + accMap[fromId].name) });
+        }
+      } else if (tx.type === 'balance_adjustment') {
+        if (tx.adjustSign === 'sub') spendingCash -= amt;
+        else spendingCash += amt;
+      }
+    });
+
+    const totalSavings = accounts.reduce(function(sum, a) {
+      return sum + (accBalances[a.id] || 0);
+    }, 0);
+
+    const emergencyBalance = accounts
+      .filter(function(a) { return a.kind === 'emergency'; })
+      .reduce(function(sum, a) { return sum + (accBalances[a.id] || 0); }, 0);
+
+    // Rule 4 & 5: Net worth = spendingCash + totalSavings (contributions are transfers between cash & savings, not expenses)
+    const netWorth = spendingCash + totalSavings;
+
+    const monthTxs = state.transactions.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
+    const monthlyIncome = monthTxs
+      .filter(function(t) { return t.type === 'income'; })
+      .reduce(function(s, t) { return s + t.amount; }, 0);
+
+    const monthlyExpense = monthTxs
+      .filter(function(t) { return t.type === 'expense'; })
+      .reduce(function(s, t) { return s + t.amount; }, 0);
+
+    const monthlyNetCashflow = monthlyIncome - monthlyExpense;
+    const savingsRate = monthlyIncome > 0
+      ? Math.round(((monthlyIncome - monthlyExpense) / monthlyIncome) * 100)
+      : 0;
+
+    return {
+      spendingCash: spendingCash,
+      totalSavings: totalSavings,
+      emergencyBalance: emergencyBalance,
+      netWorth: netWorth,
+      accBalances: accBalances,
+      accLedger: accLedger,
+      monthTxs: monthTxs,
+      monthlyIncome: monthlyIncome,
+      monthlyExpense: monthlyExpense,
+      monthlyNetCashflow: monthlyNetCashflow,
+      savingsRate: savingsRate
+    };
+  }
+
+  function showToast(msg, tone) {
+    const card = document.getElementById('toastCard');
+    const dot = document.getElementById('toastDot');
+    const txt = document.getElementById('toastMsg');
+    if (!card || !dot || !txt) return;
+    dot.className = 'toast-dot' + (tone === 'warn' ? ' warn' : tone === 'gold' ? ' gold' : '');
+    txt.textContent = msg;
+    card.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { card.classList.remove('show'); }, 3000);
+  }
+
   function hideToast() {
-    const el = document.getElementById('toastCard');
-    if (el) el.classList.remove('show');
+    const card = document.getElementById('toastCard');
+    if (card) card.classList.remove('show');
     if (toastTimer) clearTimeout(toastTimer);
   }
 
-  function pushUpdateNotification(message, tone, silentToast) {
-    const item = {
+  function pushNotification(title, tone, silentToast) {
+    state.notifications = [{
       id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
       tone: tone || 'ok',
-      title: String(message || '').trim(),
-      time: nowClockLabel(),
+      title: String(title || '').trim(),
+      time: clockNow(),
       read: false
-    };
-    state.notifications = [item].concat(state.notifications || []).slice(0, 30);
+    }].concat(state.notifications || []).slice(0, 30);
 
-    if (!silentToast) {
-      const card = document.getElementById('toastCard');
-      const dot = document.getElementById('toastDot');
-      const msg = document.getElementById('toastMsg');
-      if (card && dot && msg) {
-        dot.className = 'toast-dot' + (item.tone === 'warn' ? ' warn' : item.tone === 'info' ? ' info' : '');
-        msg.textContent = item.title;
-        card.classList.add('show');
-        if (toastTimer) clearTimeout(toastTimer);
-        toastTimer = setTimeout(function() {
-          card.classList.remove('show');
-        }, 3200);
-      }
-    }
-
+    if (!silentToast) showToast(title, tone);
     if ('Notification' in window && Notification.permission === 'granted') {
-      try { new Notification("Owen's Vault 3.0", { body: item.title }); } catch (e) {}
+      try { new Notification("Owen's Vault 4.0", { body: title }); } catch (e) {}
     }
   }
 
-  function checkBudgetAndGoalMilestones(vaultBal) {
-    const todayISO = getTodayISO();
-    const dailyLimit = Math.max(1000, Number(state.profile.dailyLimit) || 30000);
-    const todaySpent = state.expenseTx
-      .filter(function(t) { return t.date === todayISO && !t.isExtra; })
-      .reduce(function(s, t) { return s + t.amount; }, 0);
-
-    if (todaySpent > dailyLimit) {
-      pushUpdateNotification('Limit harian rutin terlewati (' + rp(todaySpent) + ' / ' + rp(dailyLimit) + ').', 'warn', true);
-    } else if (todaySpent >= dailyLimit * 0.8 && todaySpent > 0) {
-      pushUpdateNotification('Limit harian rutin sudah ' + Math.round((todaySpent / dailyLimit) * 100) + '%.', 'info', true);
-    }
-
-    state.goals.forEach(function(g) {
-      if (vaultBal >= Number(g.target)) {
-        const key = 'goal_done_' + g.id;
-        const alreadyLogged = (state.notifications || []).some(function(n) { return n.id === key; });
-        if (!alreadyLogged) {
-          state.notifications = [{
-            id: key,
-            tone: 'ok',
-            title: 'Goal "' + g.title + '" sudah 100% tercapai di Vault!',
-            time: nowClockLabel(),
-            read: false
-          }].concat(state.notifications || []).slice(0, 30);
-        }
-      }
-    });
-  }
-
-  function persist(shouldClearIDB) {
-    checkBudgetAndGoalMilestones(getVaultBalance());
-    state = writeToLocalMirrors(state);
-    if (shouldClearIDB) {
-      clearIDB();
-    } else {
-      saveToIDB(state);
-    }
+  function persist(skipIDB) {
+    state = writeMirrors(state);
+    if (!skipIDB) saveIDB(state);
     renderAll();
   }
 
-  loadFromIDB().then(function(idbState) {
-    if (!idbState) return;
-    const localCount = state.vaultTx.length + state.expenseTx.length + state.incomeTx.length + state.goals.length;
-    const idbCount = idbState.vaultTx.length + idbState.expenseTx.length + idbState.incomeTx.length + idbState.goals.length;
-    if ((localCount === 0 && idbCount > 0) || ((idbState.updatedAt || 0) > (state.updatedAt || 0) && idbCount >= localCount)) {
-      state = writeToLocalMirrors(idbState);
+  loadIDB().then(function(idbData) {
+    if (!idbData) return;
+    const localLen = state.transactions.length + state.savingsAccounts.length;
+    const idbLen = idbData.transactions.length + idbData.savingsAccounts.length;
+    if ((localLen === 0 && idbLen > 0) || ((idbData.updatedAt || 0) > (state.updatedAt || 0) && idbLen >= localLen)) {
+      state = writeMirrors(idbData);
       renderAll();
     }
   });
 
-  function rp(n) {
-    return 'Rp ' + Math.round(Number(n || 0)).toLocaleString('id-ID');
-  }
-
-  function formatMonthLabel(ym) {
-    const parts = ym.split('-');
-    const d = new Date(Number(parts[0]), Number(parts[1]) - 1, 1);
-    return d.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+  /* NAVIGATION & PERIOD */
+  function switchTab(tab) {
+    activeTab = tab;
+    const tabs = ['dashboard', 'calendar', 'budget', 'savings'];
+    tabs.forEach(function(k) {
+      const cap = k.charAt(0).toUpperCase() + k.slice(1);
+      document.getElementById('nav' + cap).classList.toggle('active', k === tab);
+      document.getElementById('tab' + cap).classList.toggle('hidden', k !== tab);
+    });
+    document.getElementById('periodBar').classList.toggle('hidden', tab === 'savings');
+    renderAll();
   }
 
   function shiftMonth(delta) {
-    const parts = activeYM.split('-');
-    const d = new Date(Number(parts[0]), Number(parts[1]) - 1 + delta, 1);
+    const p = activeYM.split('-');
+    const d = new Date(Number(p[0]), Number(p[1]) - 1 + delta, 1);
     activeYM = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
-    if (!selectedDayISO.startsWith(activeYM)) {
-      selectedDayISO = activeYM + '-01';
-    }
+    if (!selectedDateISO.startsWith(activeYM)) selectedDateISO = activeYM + '-01';
     renderAll();
   }
 
   function jumpToCurrentMonth() {
     activeYM = getCurrentYM();
-    selectedDayISO = getTodayISO();
+    selectedDateISO = getTodayISO();
     renderAll();
   }
 
-  function setNav(tab) {
-    activeNav = tab;
-    ['home', 'calendar', 'report', 'vault'].forEach(function(k) {
-      const cap = k.charAt(0).toUpperCase() + k.slice(1);
-      document.getElementById('nav' + cap).classList.toggle('active', k === tab);
-      document.getElementById('sec' + cap).classList.toggle('hidden', k !== tab);
-    });
-    document.getElementById('monthSwitcher').classList.toggle('hidden', tab === 'vault');
-    renderAll();
-  }
-
-  function setHomeFilter(f) {
-    homeFilter = f;
-    document.querySelectorAll('#filterRow .chip').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-f') === f);
+  function setWaveFilter(f) {
+    waveFilter = f;
+    document.querySelectorAll('#waveFilterRow .mini-tab').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-wf') === f);
     });
     renderAll();
   }
 
-  function getVaultBalance(excludeId) {
-    return state.vaultTx.reduce(function(sum, t) {
-      if (excludeId && t.id === excludeId) return sum;
-      return t.type === 'in' ? sum + t.amount : sum - t.amount;
-    }, 0);
-  }
-
-  function renderNotifIndicator() {
-    const unreadCount = (state.notifications || []).filter(function(n) { return !n.read; }).length;
-    document.getElementById('notifDot').classList.toggle('hidden', unreadCount === 0);
-
-    const listEl = document.getElementById('notifHistoryList');
-    if (!listEl) return;
-    const list = state.notifications || [];
-    if (!list.length) {
-      listEl.innerHTML = '<div class="empty-box">Belum ada notifikasi update.</div>';
-      return;
-    }
-    listEl.innerHTML = list.map(function(n) {
-      return '<div class="notif-card' + (n.read ? '' : ' unread') + '">' +
-        '<div class="notif-title">' + escapeHtml(n.title) + '</div>' +
-        '<div class="notif-meta">' + escapeHtml(n.time || '') + (n.read ? ' • Dibaca' : ' • Baru') + '</div>' +
-      '</div>';
-    }).join('');
-  }
-
-  function openNotifModal() {
-    state.notifications = (state.notifications || []).map(function(n) {
-      return Object.assign({}, n, { read: true });
-    });
-    state = writeToLocalMirrors(state);
-    saveToIDB(state);
-    renderNotifIndicator();
-    openModal('modalNotif');
-  }
-
-  function requestBrowserNotifPermission() {
-    if (!('Notification' in window)) {
-      alert('Browser ini tidak mendukung Web Notification.');
-      return;
-    }
-    Notification.requestPermission().then(function(perm) {
-      pushUpdateNotification('Status notifikasi browser: ' + perm, 'info');
-      state = writeToLocalMirrors(state);
-      renderNotifIndicator();
-    });
-  }
-
-  function clearNotifHistory() {
-    state.notifications = [];
+  function togglePrivacy() {
+    state.profile.hideBalances = !state.profile.hideBalances;
     persist();
   }
 
-  function renderGoalsSection(vaultBal) {
-    const listEl = document.getElementById('goalsList');
-    if (!state.goals.length) {
-      listEl.innerHTML = '<div class="empty-box">Belum ada target barang. Tap <b>+ Tambah Goal</b> untuk bikin progress bar.</div>';
-      return;
+  /* RENDERERS */
+  function renderAll() {
+    const acc = computeAccounting();
+    const prof = state.profile;
+
+    document.getElementById('topName').textContent = prof.name || 'Owen';
+    document.getElementById('topAvatar').textContent = (prof.initials || 'OW').slice(0, 2).toUpperCase();
+    document.getElementById('topSubtitle').textContent = 'Vault 4.0 • ' + (prof.currency || 'IDR');
+
+    const mParts = activeYM.split('-');
+    const mDate = new Date(Number(mParts[0]), Number(mParts[1]) - 1, 1);
+    document.getElementById('monthTitle').textContent = mDate.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+    document.getElementById('monthSub').textContent = activeYM === getCurrentYM() ? 'Bulan Aktif • Tap untuk reset' : 'Arsip Bulan • Tap ke bulan ini';
+
+    // Dashboard Hero & Metrics
+    document.getElementById('heroAvailableBalance').textContent = displayMoney(acc.spendingCash);
+    const cfBadge = document.getElementById('cashFlowBadge');
+    cfBadge.textContent = 'Arus Kas ' + (acc.monthlyNetCashflow >= 0 ? '+' : '') + formatRp(acc.monthlyNetCashflow);
+    cfBadge.className = 'pill-tag' + (acc.monthlyNetCashflow < 0 ? ' neg' : '');
+
+    document.getElementById('dashIncomeVal').textContent = displayMoney(acc.monthlyIncome);
+    document.getElementById('dashExpenseVal').textContent = displayMoney(acc.monthlyExpense);
+    document.getElementById('dashTotalSavings').textContent = displayMoney(acc.totalSavings);
+    document.getElementById('dashEmergencyVal').textContent = displayMoney(acc.emergencyBalance);
+
+    const netEl = document.getElementById('dashNetCashflow');
+    netEl.textContent = displayMoney(acc.monthlyNetCashflow);
+    netEl.style.color = acc.monthlyNetCashflow >= 0 ? 'var(--income)' : 'var(--expense)';
+
+    const incTarget = Number(prof.monthlyIncomeTarget) || 0;
+    document.getElementById('dashIncomeTargetNote').textContent = incTarget > 0
+      ? 'Target masuk: ' + formatRp(incTarget) + ' (' + Math.round((acc.monthlyIncome / incTarget) * 100) + '%)'
+      : 'Set target pemasukan di Profil';
+
+    document.getElementById('dashSavingsRate').textContent = acc.savingsRate + '%';
+    document.getElementById('dashNetWorthNote').textContent = 'Kekayaan bersih: ' + displayMoney(acc.netWorth);
+
+    renderWaveChart(acc);
+    renderQuickActions();
+    renderInsights(acc);
+    renderTransactionFeed(acc);
+    renderCalendarTab(acc);
+    renderBudgetTab(acc);
+    renderSavingsTab(acc);
+    renderNotificationsModal();
+  }
+
+  function renderWaveChart(acc) {
+    const canvas = document.getElementById('waveCanvas');
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    const w = Math.max(280, Math.floor(rect.width || 440));
+    const h = Math.max(150, Math.floor(rect.height || 185));
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, w, h);
+
+    const buckets = buildWaveBuckets(waveFilter, activeYM);
+    document.getElementById('wavePeriodSummary').textContent = waveFilter.charAt(0).toUpperCase() + waveFilter.slice(1);
+
+    const seriesInc = buckets.map(function(b) { return b.inc; });
+    const seriesExp = buckets.map(function(b) { return b.exp; });
+    const seriesNet = buckets.map(function(b) { return b.inc - b.exp; });
+    const seriesPrev = buckets.map(function(b) { return b.prevNet; });
+
+    const allVals = seriesInc.concat(seriesExp).concat(seriesNet).concat(seriesPrev).map(function(v) { return Math.abs(v); });
+    const maxMag = Math.max.apply(null, allVals.concat([1]));
+
+    const padL = 12;
+    const padR = 12;
+    const padT = 18;
+    const padB = 26;
+    const plotW = w - padL - padR;
+    const plotH = h - padT - padB;
+    const count = Math.max(2, buckets.length);
+
+    function getX(idx) {
+      return padL + (idx / (count - 1)) * plotW;
     }
 
-    const usableSavings = Math.max(0, vaultBal);
-    listEl.innerHTML = state.goals.map(function(g) {
-      const targetVal = Math.max(1, Number(g.target) || 1);
-      const rawPct = Math.round((usableSavings / targetVal) * 100);
-      const barPct = Math.min(100, Math.max(0, rawPct));
-      const reached = usableSavings >= targetVal;
-      const missing = Math.max(0, targetVal - usableSavings);
+    function getY(val) {
+      // Center baseline for net & prev, positive upward
+      const norm = Math.max(-1, Math.min(1, val / maxMag));
+      return padT + plotH * (0.5 - norm * 0.42);
+    }
 
-      return '<div class="goal-card' + (reached ? ' reached' : '') + '">' +
-        '<div class="goal-top">' +
-          '<div class="goal-title-wrap">' +
-            '<div class="goal-emoji">' + escapeHtml(g.emoji || '🎯') + '</div>' +
-            '<div>' +
-              '<div class="goal-name">' + escapeHtml(g.title) + '</div>' +
-              '<div class="goal-sub">Target: ' + rp(targetVal) + '</div>' +
-            '</div>' +
-          '</div>' +
-          '<span class="goal-pct-pill">' + (reached ? '100% Tercapai' : rawPct + '%') + '</span>' +
-        '</div>' +
-        '<div class="progress-track" style="height:7px;margin-bottom:7px;">' +
-          '<div class="progress-fill' + (reached ? ' done' : '') + '" style="width:' + barPct + '%"></div>' +
-        '</div>' +
-        '<div class="goal-foot">' +
-          '<span>' + (reached ? 'Dana Vault sudah mencukupi' : 'Kurang ' + rp(missing)) + '</span>' +
-          '<div class="tx-actions" style="margin-top:0;">' +
-            '<button type="button" class="tx-act edit" onclick="openGoalModal(\'' + g.id + '\')">Edit</button>' +
-            '<button type="button" class="tx-act del" onclick="removeGoal(\'' + g.id + '\')">Hapus</button>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
+    // Subtle horizontal grid lines
+    ctx.strokeStyle = 'rgba(243, 244, 246, 0.06)';
+    ctx.lineWidth = 1;
+    [0.2, 0.5, 0.8].forEach(function(frac) {
+      const gy = padT + plotH * frac;
+      ctx.beginPath();
+      ctx.moveTo(padL, gy);
+      ctx.lineTo(w - padR, gy);
+      ctx.stroke();
+    });
+
+    function drawSmoothWave(values, strokeColor, fillTopColor, dashed) {
+      if (values.length < 2) return;
+      ctx.save();
+      if (dashed) ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      const pts = values.map(function(v, i) { return { x: getX(i), y: getY(v) }; });
+      ctx.moveTo(pts[0].x, pts[0].y);
+      for (let i = 0; i < pts.length - 1; i++) {
+        const xc = (pts[i].x + pts[i + 1].x) * 0.5;
+        const yc = (pts[i].y + pts[i + 1].y) * 0.5;
+        ctx.quadraticCurveTo(pts[i].x, pts[i].y, xc, yc);
+      }
+      ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = dashed ? 1.5 : 2.2;
+      ctx.stroke();
+
+      if (fillTopColor && !dashed) {
+        ctx.lineTo(pts[pts.length - 1].x, h - padB);
+        ctx.lineTo(pts[0].x, h - padB);
+        ctx.closePath();
+        const grad = ctx.createLinearGradient(0, padT, 0, h - padB);
+        grad.addColorStop(0, fillTopColor);
+        grad.addColorStop(1, 'rgba(9, 13, 11, 0)');
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    drawSmoothWave(seriesPrev, 'rgba(198, 161, 91, 0.75)', null, true);
+    drawSmoothWave(seriesExp, '#FB7185', 'rgba(251, 113, 133, 0.14)', false);
+    drawSmoothWave(seriesInc, '#34D399', 'rgba(52, 211, 153, 0.16)', false);
+    drawSmoothWave(seriesNet, '#10B981', 'rgba(16, 185, 129, 0.24)', false);
+
+    // X-axis labels
+    ctx.fillStyle = '#9CA3AF';
+    ctx.font = '600 10px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    const step = Math.max(1, Math.ceil(buckets.length / 6));
+    buckets.forEach(function(b, idx) {
+      if (idx % step === 0 || idx === buckets.length - 1) {
+        ctx.fillText(b.label, getX(idx), h - 8);
+      }
+    });
+  }
+
+  function buildWaveBuckets(mode, ym) {
+    const parts = ym.split('-');
+    const y = Number(parts[0]);
+    const m = Number(parts[1]) - 1;
+
+    function sumRange(startISO, endISO) {
+      let inc = 0;
+      let exp = 0;
+      state.transactions.forEach(function(t) {
+        if (t.date >= startISO && t.date <= endISO) {
+          if (t.type === 'income') inc += t.amount;
+          if (t.type === 'expense') exp += t.amount;
+        }
+      });
+      return { inc: inc, exp: exp };
+    }
+
+    if (mode === 'daily') {
+      const days = new Date(y, m + 1, 0).getDate();
+      const out = [];
+      for (let d = 1; d <= days; d++) {
+        const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        const prevDate = new Date(y, m, d - 7);
+        const prevIso = prevDate.getFullYear() + '-' + String(prevDate.getMonth() + 1).padStart(2, '0') + '-' + String(prevDate.getDate()).padStart(2, '0');
+        const cur = sumRange(iso, iso);
+        const prev = sumRange(prevIso, prevIso);
+        out.push({ label: String(d), inc: cur.inc, exp: cur.exp, prevNet: prev.inc - prev.exp });
+      }
+      return out;
+    }
+
+    if (mode === 'weekly') {
+      const out = [];
+      for (let w = 0; w < 4; w++) {
+        const dStart = w * 7 + 1;
+        const dEnd = w === 3 ? new Date(y, m + 1, 0).getDate() : (w + 1) * 7;
+        const sIso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(dStart).padStart(2, '0');
+        const eIso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(dEnd).padStart(2, '0');
+        const prevStart = new Date(y, m, dStart - 28);
+        const prevEnd = new Date(y, m, dEnd - 28);
+        const psIso = prevStart.getFullYear() + '-' + String(prevStart.getMonth() + 1).padStart(2, '0') + '-' + String(prevStart.getDate()).padStart(2, '0');
+        const peIso = prevEnd.getFullYear() + '-' + String(prevEnd.getMonth() + 1).padStart(2, '0') + '-' + String(prevEnd.getDate()).padStart(2, '0');
+        const cur = sumRange(sIso, eIso);
+        const prev = sumRange(psIso, peIso);
+        out.push({ label: 'W' + (w + 1), inc: cur.inc, exp: cur.exp, prevNet: prev.inc - prev.exp });
+      }
+      return out;
+    }
+
+    if (mode === 'yearly') {
+      const out = [];
+      for (let mo = 0; mo < 12; mo++) {
+        const ymCur = y + '-' + String(mo + 1).padStart(2, '0');
+        const lastDay = new Date(y, mo + 1, 0).getDate();
+        const ymPrev = (y - 1) + '-' + String(mo + 1).padStart(2, '0');
+        const lastDayPrev = new Date(y - 1, mo + 1, 0).getDate();
+        const cur = sumRange(ymCur + '-01', ymCur + '-' + String(lastDay).padStart(2, '0'));
+        const prev = sumRange(ymPrev + '-01', ymPrev + '-' + String(lastDayPrev).padStart(2, '0'));
+        const lbl = new Date(y, mo, 1).toLocaleDateString('id-ID', { month: 'short' });
+        out.push({ label: lbl, inc: cur.inc, exp: cur.exp, prevNet: prev.inc - prev.exp });
+      }
+      return out;
+    }
+
+    // Default monthly (last 6 months up to activeYM)
+    const out = [];
+    for (let i = -5; i <= 0; i++) {
+      const dt = new Date(y, m + i, 1);
+      const ymCur = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+      const lastD = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
+      const dtPrev = new Date(dt.getFullYear(), dt.getMonth() - 1, 1);
+      const ymPrev = dtPrev.getFullYear() + '-' + String(dtPrev.getMonth() + 1).padStart(2, '0');
+      const lastDPrev = new Date(dtPrev.getFullYear(), dtPrev.getMonth() + 1, 0).getDate();
+      const cur = sumRange(ymCur + '-01', ymCur + '-' + String(lastD).padStart(2, '0'));
+      const prev = sumRange(ymPrev + '-01', ymPrev + '-' + String(lastDPrev).padStart(2, '0'));
+      out.push({
+        label: dt.toLocaleDateString('id-ID', { month: 'short' }),
+        inc: cur.inc,
+        exp: cur.exp,
+        prevNet: prev.inc - prev.exp
+      });
+    }
+    return out;
+  }
+
+  function renderQuickActions() {
+    const strip = document.getElementById('quickActionStrip');
+    const qas = state.quickActions || DEFAULT_QUICK_ACTIONS;
+    strip.innerHTML = qas.map(function(qa) {
+      return '<button type="button" class="chip" onclick="runQuickAction(\'' + qa.id + '\')">' + escapeHtml(qa.label) + '</button>';
     }).join('');
   }
 
-  function renderAll() {
-    const prof = state.profile;
-    const displayName = (prof.name || 'Owen').trim() || 'Owen';
-    const avatarChar = (prof.avatar || displayName.charAt(0) || 'O').trim();
+  function runQuickAction(id) {
+    const qa = (state.quickActions || []).find(function(x) { return x.id === id; });
+    if (!qa) return;
+    const d = activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01';
+    state.transactions.push({
+      id: 'tx_' + Date.now(),
+      type: qa.type,
+      amount: Math.round(Number(qa.amount) || 0),
+      date: d,
+      category: qa.category || 'Umum',
+      accountId: qa.accountId || (state.savingsAccounts[0] && state.savingsAccounts[0].id) || '',
+      fromAccount: 'cash',
+      toAccount: qa.accountId || '',
+      adjustSign: 'add',
+      note: qa.note || qa.label
+    });
+    pushNotification('Tercatat: ' + qa.label, qa.type === 'expense' ? 'warn' : 'ok');
+    persist();
+  }
 
-    document.getElementById('topName').textContent = displayName;
-    document.getElementById('topAvatar').textContent = avatarChar;
-    document.getElementById('monthTitle').textContent = formatMonthLabel(activeYM);
-    document.getElementById('monthSub').textContent = activeYM === getCurrentYM() ? 'Bulan Aktif • Tap Reset' : 'Arsip Bulan • Tap ke Bulan Ini';
+  function renderInsights(acc) {
+    const box = document.getElementById('insightsList');
+    const items = [];
 
-    const monthExp = state.expenseTx.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
-    const monthInc = state.incomeTx.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
-
-    const totalInc = monthInc.reduce(function(s, t) { return s + t.amount; }, 0);
-    const salaryMain = monthInc.filter(function(t) { return t.kind === 'salary'; }).reduce(function(s, t) { return s + t.amount; }, 0);
-    const salaryBonus = totalInc - salaryMain;
-
-    const regularExp = monthExp.filter(function(t) { return !t.isExtra; }).reduce(function(s, t) { return s + t.amount; }, 0);
-    const extraExp = monthExp.filter(function(t) { return !!t.isExtra; }).reduce(function(s, t) { return s + t.amount; }, 0);
-    const totalExp = regularExp + extraExp;
-    const netCash = totalInc - totalExp;
-
-    document.getElementById('homeNetBalance').textContent = (netCash < 0 ? '-' : '') + rp(Math.abs(netCash));
-    document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--ink)' : 'var(--expense)';
-    const cashBadge = document.getElementById('homeCashBadge');
-    cashBadge.textContent = netCash >= 0 ? 'Surplus' : 'Defisit';
-    cashBadge.style.color = netCash >= 0 ? 'var(--income)' : 'var(--expense)';
-
-    document.getElementById('homeIncomeStat').textContent = 'Masuk: ' + rp(totalInc);
-    document.getElementById('homeExpenseStat').textContent = 'Keluar: ' + rp(totalExp);
-
-    const todayISO = getTodayISO();
-    const dailyLimit = Math.max(1000, Number(prof.dailyLimit) || 30000);
-    const todayRegularSpent = state.expenseTx
-      .filter(function(t) { return t.date === todayISO && !t.isExtra; })
-      .reduce(function(s, t) { return s + t.amount; }, 0);
-
-    const todayPct = Math.min(100, Math.round((todayRegularSpent / dailyLimit) * 100));
-    const todayRemain = dailyLimit - todayRegularSpent;
-    const todayBar = document.getElementById('todayBar');
-
-    document.getElementById('todaySpentVal').textContent = rp(todayRegularSpent);
-    todayBar.style.width = todayPct + '%';
-    if (todayRemain >= 0) {
-      todayBar.classList.remove('warn');
-      document.getElementById('todayRemainVal').textContent = 'Sisa: ' + rp(todayRemain) + ' / ' + rp(dailyLimit);
-      document.getElementById('todayLimitBadge').textContent = 'Aman';
-      document.getElementById('todayLimitBadge').style.color = 'var(--income)';
+    // Highest spending category this month
+    const catTotals = {};
+    acc.monthTxs.filter(function(t) { return t.type === 'expense'; }).forEach(function(t) {
+      catTotals[t.category] = (catTotals[t.category] || 0) + t.amount;
+    });
+    const sortedCats = Object.keys(catTotals).sort(function(a, b) { return catTotals[b] - catTotals[a]; });
+    if (sortedCats.length > 0) {
+      const topCat = sortedCats[0];
+      items.push({
+        tag: 'Kategori Terbesar',
+        title: topCat + ' — ' + formatRp(catTotals[topCat]),
+        sub: 'Pengeluaran tertinggi pada periode ' + activeYM + '.'
+      });
     } else {
-      todayBar.classList.add('warn');
-      document.getElementById('todayRemainVal').textContent = 'Lewat limit: ' + rp(Math.abs(todayRemain));
-      document.getElementById('todayLimitBadge').textContent = 'Over Limit';
-      document.getElementById('todayLimitBadge').style.color = 'var(--expense)';
-    }
-    document.getElementById('todayExtraVal').textContent = 'Ekstra: ' + rp(extraExp);
-
-    const query = (document.getElementById('homeSearch').value || '').trim().toLowerCase();
-    let combinedMonth = []
-      .concat(monthInc.map(function(t) { return Object.assign({}, t, { _kind: 'inc' }); }))
-      .concat(monthExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }));
-
-    if (homeFilter === 'inc') combinedMonth = combinedMonth.filter(function(t) { return t._kind === 'inc'; });
-    if (homeFilter === 'exp') combinedMonth = combinedMonth.filter(function(t) { return t._kind === 'exp' && !t.isExtra; });
-    if (homeFilter === 'extra') combinedMonth = combinedMonth.filter(function(t) { return t._kind === 'exp' && !!t.isExtra; });
-
-    if (query) {
-      combinedMonth = combinedMonth.filter(function(t) {
-        const hay = [t.note, t.category, t.label, t.date].join(' ').toLowerCase();
-        return hay.indexOf(query) !== -1;
+      items.push({
+        tag: 'Ringkasan',
+        title: 'Belum ada pengeluaran tercatat di bulan ini',
+        sub: 'Saldo tersedia saat ini ' + displayMoney(acc.spendingCash) + '.'
       });
     }
 
-    combinedMonth.sort(function(a, b) { return b.date.localeCompare(a.date) || Number(b.id) - Number(a.id); });
-
-    document.getElementById('homeTxCount').textContent = combinedMonth.length + ' item';
-    document.getElementById('homeTxList').innerHTML = renderFeedItems(combinedMonth);
-
-    renderCalendar(monthInc, monthExp);
-    renderReport(salaryMain, salaryBonus, monthExp);
-
-    const vaultBal = getVaultBalance();
-    const vaultTarget = Math.max(1000, Number(prof.vaultTarget) || 10000000);
-    const vaultPct = Math.min(100, Math.max(0, Math.round((vaultBal / vaultTarget) * 100)));
-
-    document.getElementById('vaultTotalVal').textContent = rp(vaultBal);
-    document.getElementById('vaultPctBadge').textContent = vaultPct + '%';
-    document.getElementById('vaultBar').style.width = vaultPct + '%';
-    document.getElementById('vaultTargetVal').textContent = 'Target Utama: ' + rp(vaultTarget);
-    document.getElementById('vaultTxCount').textContent = state.vaultTx.length + ' item';
-
-    renderGoalsSection(vaultBal);
-    renderNotifIndicator();
-
-    const vaultSorted = state.vaultTx.slice().reverse();
-    document.getElementById('vaultTxList').innerHTML = vaultSorted.length === 0
-      ? '<div class="empty-box">Belum ada transaksi di Piggy Vault. Tekan <b>+</b> untuk mulai nabung.</div>'
-      : vaultSorted.map(function(t) {
-          const isIn = t.type === 'in';
-          return '<div class="tx-item">' +
-            '<div class="tx-left">' +
-              '<div class="tx-badge">' + (isIn ? '🐷' : '📤') + '</div>' +
-              '<div>' +
-                '<div class="tx-title">' + escapeHtml(t.note || (isIn ? 'Setor Vault' : 'Tarik Vault')) + '</div>' +
-                '<div class="tx-sub">' + t.date + '</div>' +
-              '</div>' +
-            '</div>' +
-            '<div class="tx-right">' +
-              '<span class="tx-val ' + (isIn ? 'plus' : 'minus') + '">' + (isIn ? '+' : '-') + rp(t.amount) + '</span>' +
-              '<div class="tx-actions">' +
-                '<button type="button" class="tx-act edit" onclick="openEditTx(\'vault\',\'' + t.id + '\')">Edit</button>' +
-                '<button type="button" class="tx-act del" onclick="removeVaultTx(\'' + t.id + '\')">Hapus</button>' +
-              '</div>' +
-            '</div>' +
-          '</div>';
-        }).join('');
-  }
-
-  function renderFeedItems(items) {
-    if (!items.length) {
-      return '<div class="empty-box">Belum ada transaksi yang cocok dengan filter/bulan ini.</div>';
+    // Budget warnings
+    let overBudgets = 0;
+    (state.budgets || []).forEach(function(b) {
+      const spent = catTotals[b.category] || 0;
+      if (b.limit > 0 && spent >= b.limit * 0.85) overBudgets++;
+    });
+    if (overBudgets > 0) {
+      items.push({
+        tag: 'Peringatan Anggaran',
+        title: overBudgets + ' kategori mendekati atau melewati batas',
+        sub: 'Periksa tab Budget untuk menyesuaikan alokasi bulanan.'
+      });
     }
-    return items.map(function(t) {
-      if (t._kind === 'inc') {
-        return '<div class="tx-item">' +
-          '<div class="tx-left">' +
-            '<div class="tx-badge">' + (t.icon || '💼') + '</div>' +
-            '<div>' +
-              '<div class="tx-title">' + escapeHtml(t.note || t.label || 'Income') + '</div>' +
-              '<div class="tx-sub">' + escapeHtml(t.label || 'Salary') + ' • ' + t.date + '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="tx-right">' +
-            '<span class="tx-val plus">+' + rp(t.amount) + '</span>' +
-            '<div class="tx-actions">' +
-              '<button type="button" class="tx-act edit" onclick="openEditTx(\'inc\',\'' + t.id + '\')">Edit</button>' +
-              '<button type="button" class="tx-act del" onclick="removeIncomeTx(\'' + t.id + '\')">Hapus</button>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      }
-      const valCls = t.isExtra ? 'extra' : 'minus';
-      return '<div class="tx-item">' +
-        '<div class="tx-left">' +
-          '<div class="tx-badge">' + (t.icon || '💸') + '</div>' +
+
+    // Savings progress insight
+    const totalGoalTarget = (state.savingsAccounts || []).reduce(function(s, a) { return s + (Number(a.goalTarget) || 0); }, 0);
+    if (totalGoalTarget > 0) {
+      const pct = Math.min(100, Math.max(0, Math.round((acc.totalSavings / totalGoalTarget) * 100)));
+      items.push({
+        tag: 'Progres Tabungan',
+        title: 'Terkumpul ' + pct + '% dari total target rekening',
+        sub: 'Total tabungan ' + displayMoney(acc.totalSavings) + ' dari ' + formatRp(totalGoalTarget) + '.'
+      });
+    }
+
+    box.innerHTML = items.slice(0, 3).map(function(it) {
+      return '<div class="row-card">' +
+        '<div class="row-left">' +
+          '<div class="badge-icon gold">IN</div>' +
           '<div>' +
-            '<div class="tx-title">' + escapeHtml(t.note || t.category || 'Pengeluaran') + '</div>' +
-            '<div class="tx-sub">' + escapeHtml(t.category || 'Umum') + (t.isExtra ? ' • Ekstra' : '') + ' • ' + t.date + '</div>' +
+            '<div class="row-title">' + escapeHtml(it.title) + '</div>' +
+            '<div class="row-sub">' + escapeHtml(it.sub) + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="tx-right">' +
-          '<span class="tx-val ' + valCls + '">-' + rp(t.amount) + '</span>' +
-          '<div class="tx-actions">' +
-            '<button type="button" class="tx-act edit" onclick="openEditTx(\'exp\',\'' + t.id + '\')">Edit</button>' +
-            '<button type="button" class="tx-act del" onclick="removeExpenseTx(\'' + t.id + '\')">Hapus</button>' +
+        '<span class="pill-tag gold">' + escapeHtml(it.tag) + '</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  function syncCategoryFilterOptions() {
+    const sel = document.getElementById('txCategoryFilter');
+    if (!sel) return;
+    const prevVal = sel.value || 'all';
+    const setCats = new Set();
+    (state.budgets || []).forEach(function(b) { setCats.add(b.category); });
+    state.transactions.forEach(function(t) { if (t.category) setCats.add(t.category); });
+
+    const arr = Array.from(setCats).sort();
+    sel.innerHTML = '<option value="all">Semua Kategori</option>' + arr.map(function(c) {
+      return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>';
+    }).join('');
+    sel.value = Array.prototype.some.call(sel.options, function(o) { return o.value === prevVal; }) ? prevVal : 'all';
+  }
+
+  function renderTransactionFeed(acc) {
+    syncCategoryFilterOptions();
+    const q = (document.getElementById('txSearchInput').value || '').trim().toLowerCase();
+    const tFilter = document.getElementById('txTypeFilter').value;
+    const cFilter = document.getElementById('txCategoryFilter').value;
+    const dFrom = document.getElementById('txDateFrom').value;
+    const dTo = document.getElementById('txDateTo').value;
+
+    const typeLabels = {
+      income: 'Pemasukan',
+      expense: 'Pengeluaran',
+      savings_contribution: 'Setor Tabungan',
+      savings_withdrawal: 'Tarik Tabungan',
+      internal_transfer: 'Transfer Internal',
+      balance_adjustment: 'Penyesuaian Saldo'
+    };
+
+    const filtered = acc.monthTxs.filter(function(t) {
+      if (tFilter !== 'all' && t.type !== tFilter) return false;
+      if (cFilter !== 'all' && t.category !== cFilter) return false;
+      if (dFrom && t.date < dFrom) return false;
+      if (dTo && t.date > dTo) return false;
+      if (q) {
+        const hay = [t.note, t.category, typeLabels[t.type] || t.type, t.date].join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    }).sort(function(a, b) {
+      return b.date.localeCompare(a.date) || b.id.localeCompare(a.id);
+    });
+
+    document.getElementById('txFilteredCount').textContent = filtered.length + ' item';
+    const listEl = document.getElementById('txFeedList');
+
+    if (!filtered.length) {
+      listEl.innerHTML = '<div class="empty-state">Belum ada transaksi yang sesuai filter pada bulan ini.</div>';
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(function(t) {
+      let amtClass = 'amt-neu';
+      let prefix = '';
+      if (t.type === 'income' || t.type === 'savings_withdrawal') {
+        amtClass = 'amt-inc';
+        prefix = '+';
+      } else if (t.type === 'expense' || t.type === 'savings_contribution') {
+        amtClass = 'amt-exp';
+        prefix = '-';
+      } else if (t.type === 'internal_transfer') {
+        amtClass = 'amt-gold';
+      } else if (t.type === 'balance_adjustment') {
+        amtClass = t.adjustSign === 'sub' ? 'amt-exp' : 'amt-inc';
+        prefix = t.adjustSign === 'sub' ? '-' : '+';
+      }
+
+      const codeBadge = t.type === 'income' ? 'IN' : t.type === 'expense' ? 'EX' : t.type === 'internal_transfer' ? 'TF' : 'SV';
+      return '<div class="row-card">' +
+        '<div class="row-left">' +
+          '<div class="badge-icon' + (t.type === 'internal_transfer' ? ' gold' : '') + '">' + codeBadge + '</div>' +
+          '<div>' +
+            '<div class="row-title">' + escapeHtml(t.note || t.category) + '</div>' +
+            '<div class="row-sub">' + escapeHtml(typeLabels[t.type] || t.type) + ' • ' + escapeHtml(t.category) + ' • ' + t.date + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="row-right">' +
+          '<div class="' + amtClass + '">' + prefix + displayMoney(t.amount) + '</div>' +
+          '<div class="mini-actions">' +
+            '<button type="button" class="link-btn" onclick="openEditTx(\'' + t.id + '\')">Edit</button>' +
+            '<button type="button" class="link-btn danger" onclick="deleteTx(\'' + t.id + '\')">Hapus</button>' +
           '</div>' +
         '</div>' +
       '</div>';
     }).join('');
   }
 
-  function renderCalendar(monthInc, monthExp) {
+  /* CALENDAR TAB */
+  function renderCalendarTab(acc) {
     const parts = activeYM.split('-');
     const y = Number(parts[0]);
     const m = Number(parts[1]) - 1;
     const firstDow = new Date(y, m, 1).getDay();
-    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const totalDays = new Date(y, m + 1, 0).getDate();
     const todayISO = getTodayISO();
 
-    const incDays = new Set(monthInc.map(function(t) { return t.date; }));
-    const expDays = new Set(monthExp.map(function(t) { return t.date; }));
+    const dayStats = {};
+    acc.monthTxs.forEach(function(t) {
+      if (!dayStats[t.date]) dayStats[t.date] = { inc: 0, exp: 0, list: [] };
+      if (t.type === 'income') dayStats[t.date].inc += t.amount;
+      if (t.type === 'expense') dayStats[t.date].exp += t.amount;
+      dayStats[t.date].list.push(t);
+    });
 
-    let html = '';
-    for (let e = 0; e < firstDow; e++) {
-      html += '<div class="cal-day empty"></div>';
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-      const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
-      const cls = ['cal-day'];
+    const netPill = document.getElementById('calMonthNetPill');
+    netPill.textContent = 'Net: ' + (acc.monthlyNetCashflow >= 0 ? '+' : '') + formatRp(acc.monthlyNetCashflow);
+    netPill.className = 'pill-tag' + (acc.monthlyNetCashflow < 0 ? ' neg' : '');
+
+    let cells = '';
+    for (let e = 0; e < firstDow; e++) cells += '<div class="cal-cell empty"></div>';
+
+    for (let d = 1; d <= totalDays; d++) {
+      const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      const st = dayStats[iso] || { inc: 0, exp: 0 };
+      const net = st.inc - st.exp;
+      const cls = ['cal-cell'];
       if (iso === todayISO) cls.push('today');
-      if (iso === selectedDayISO) cls.push('selected');
+      if (iso === selectedDateISO) cls.push('selected');
 
       const dots = [];
-      if (incDays.has(iso)) dots.push('<span class="dot inc"></span>');
-      if (expDays.has(iso)) dots.push('<span class="dot exp"></span>');
+      if (st.inc > 0) dots.push('<i class="dot-inc"></i>');
+      if (st.exp > 0) dots.push('<i class="dot-exp"></i>');
 
-      html += '<button type="button" class="' + cls.join(' ') + '" onclick="selectCalDay(\'' + iso + '\')">' +
-        '<span>' + day + '</span>' +
+      const compactNet = net !== 0 ? ((net > 0 ? '+' : '-') + Math.round(Math.abs(net) / 1000) + 'k') : '';
+      cells += '<button type="button" class="' + cls.join(' ') + '" onclick="selectCalendarDate(\'' + iso + '\')">' +
+        '<span>' + d + '</span>' +
+        (compactNet ? '<span class="cal-mini-net" style="color:' + (net >= 0 ? 'var(--income)' : 'var(--expense)') + '">' + compactNet + '</span>' : '<span class="cal-mini-net" style="opacity:0.35;">·</span>') +
         '<span class="cal-dots">' + dots.join('') + '</span>' +
       '</button>';
     }
-    document.getElementById('calGrid').innerHTML = html;
+    document.getElementById('calGrid').innerHTML = cells;
 
-    const dayInc = monthInc.filter(function(t) { return t.date === selectedDayISO; });
-    const dayExp = monthExp.filter(function(t) { return t.date === selectedDayISO; });
+    const selStat = dayStats[selectedDateISO] || { inc: 0, exp: 0, list: [] };
+    const selNet = selStat.inc - selStat.exp;
+    document.getElementById('calSelDateLabel').textContent = 'Tanggal: ' + selectedDateISO;
+    document.getElementById('calSelInc').textContent = displayMoney(selStat.inc);
+    document.getElementById('calSelExp').textContent = displayMoney(selStat.exp);
+    document.getElementById('calSelNet').textContent = 'Bersih Harian: ' + (selNet >= 0 ? '+' : '') + displayMoney(selNet);
+    document.getElementById('calDetailHeading').textContent = 'Transaksi ' + selectedDateISO;
+    document.getElementById('calDetailCount').textContent = selStat.list.length + ' item';
 
-    document.getElementById('calDayInc').textContent = rp(dayInc.reduce(function(s, t) { return s + t.amount; }, 0));
-    document.getElementById('calDayExp').textContent = rp(dayExp.reduce(function(s, t) { return s + t.amount; }, 0));
-    document.getElementById('calSelectedTitle').textContent = 'Transaksi ' + selectedDayISO;
+    const detailEl = document.getElementById('calDetailList');
+    if (!selStat.list.length) {
+      detailEl.innerHTML = '<div class="empty-state">Tidak ada transaksi pada tanggal ' + selectedDateISO + '.</div>';
+      return;
+    }
 
-    const mergedDay = []
-      .concat(dayInc.map(function(t) { return Object.assign({}, t, { _kind: 'inc' }); }))
-      .concat(dayExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }));
-
-    document.getElementById('calDayCount').textContent = mergedDay.length + ' item';
-    document.getElementById('calDayList').innerHTML = mergedDay.length === 0
-      ? '<div class="empty-box">Tidak ada transaksi pada tanggal ' + selectedDayISO + '.</div>'
-      : renderFeedItems(mergedDay);
+    detailEl.innerHTML = selStat.list.map(function(t) {
+      const isPos = t.type === 'income' || t.type === 'savings_withdrawal';
+      const isNeg = t.type === 'expense' || t.type === 'savings_contribution';
+      return '<div class="row-card">' +
+        '<div class="row-left">' +
+          '<div class="badge-icon">' + (isPos ? '+' : isNeg ? '-' : '•') + '</div>' +
+          '<div>' +
+            '<div class="row-title">' + escapeHtml(t.note || t.category) + '</div>' +
+            '<div class="row-sub">' + escapeHtml(t.category) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="' + (isPos ? 'amt-inc' : isNeg ? 'amt-exp' : 'amt-gold') + '">' + (isPos ? '+' : isNeg ? '-' : '') + displayMoney(t.amount) + '</div>' +
+      '</div>';
+    }).join('');
   }
 
-  function selectCalDay(iso) {
-    selectedDayISO = iso;
+  function selectCalendarDate(iso) {
+    selectedDateISO = iso;
     renderAll();
   }
 
-  function renderReport(salaryMain, salaryBonus, monthExp) {
-    document.getElementById('repSalaryMain').textContent = rp(salaryMain);
-    document.getElementById('repSalaryBonus').textContent = rp(salaryBonus);
+  /* BUDGET TAB */
+  function renderBudgetTab(acc) {
+    const spentByCat = {};
+    acc.monthTxs.filter(function(t) { return t.type === 'expense'; }).forEach(function(t) {
+      spentByCat[t.category] = (spentByCat[t.category] || 0) + t.amount;
+    });
 
-    const parts = activeYM.split('-');
-    const baseY = Number(parts[0]);
-    const baseM = Number(parts[1]) - 1;
-    const months = [];
-    for (let i = -5; i <= 0; i++) {
-      const d = new Date(baseY, baseM + i, 1);
-      const ym = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
-      const inc = state.incomeTx.filter(function(t) { return t.date.slice(0, 7) === ym; }).reduce(function(s, t) { return s + t.amount; }, 0);
-      const exp = state.expenseTx.filter(function(t) { return t.date.slice(0, 7) === ym; }).reduce(function(s, t) { return s + t.amount; }, 0);
-      months.push({
-        lbl: d.toLocaleDateString('id-ID', { month: 'short' }),
-        inc: inc,
-        exp: exp
-      });
+    const budgets = state.budgets || [];
+    const totalLimit = budgets.reduce(function(s, b) { return s + (Number(b.limit) || 0); }, 0);
+    const totalBudgetSpent = budgets.reduce(function(s, b) { return s + (spentByCat[b.category] || 0); }, 0);
+    const remaining = totalLimit - totalBudgetSpent;
+    const pct = totalLimit > 0 ? Math.min(100, Math.round((totalBudgetSpent / totalLimit) * 100)) : 0;
+
+    document.getElementById('budgetTotalRemaining').textContent = displayMoney(remaining);
+    document.getElementById('budgetTotalRatio').textContent = pct + '% Terpakai';
+    document.getElementById('budgetOverallBar').style.width = pct + '%';
+    document.getElementById('budgetOverallBar').className = 'bar-fill' + (pct >= 90 ? ' warn' : pct >= 75 ? ' gold' : '');
+    document.getElementById('budgetTotalSpentText').textContent = 'Terpakai: ' + displayMoney(totalBudgetSpent);
+    document.getElementById('budgetTotalLimitText').textContent = 'Total Limit: ' + formatRp(totalLimit);
+
+    const listEl = document.getElementById('budgetList');
+    if (!budgets.length) {
+      listEl.innerHTML = '<div class="empty-state">Belum ada kategori anggaran. Tap + Kategori untuk membuat.</div>';
+      return;
     }
 
-    const maxVal = Math.max.apply(null, months.reduce(function(arr, m) { return arr.concat([m.inc, m.exp]); }, [1]));
-    document.getElementById('sixMonthChart').innerHTML = months.map(function(m) {
-      const hInc = Math.max(4, Math.round((m.inc / maxVal) * 108));
-      const hExp = Math.max(4, Math.round((m.exp / maxVal) * 108));
-      return '<div class="chart-col">' +
-        '<div class="chart-bars">' +
-          '<div class="bar inc" style="height:' + hInc + 'px" title="Masuk: ' + rp(m.inc) + '"></div>' +
-          '<div class="bar exp" style="height:' + hExp + 'px" title="Keluar: ' + rp(m.exp) + '"></div>' +
+    listEl.innerHTML = budgets.map(function(b) {
+      const spent = spentByCat[b.category] || 0;
+      const rem = b.limit - spent;
+      const ratio = b.limit > 0 ? Math.round((spent / b.limit) * 100) : 0;
+      const barW = Math.min(100, Math.max(0, ratio));
+      const barCls = ratio >= 100 ? ' warn' : ratio >= 80 ? ' gold' : '';
+
+      return '<div class="account-card">' +
+        '<div class="account-head">' +
+          '<div>' +
+            '<div class="row-title">' + escapeHtml(b.category) + '</div>' +
+            '<div class="row-sub">Terpakai ' + displayMoney(spent) + ' dari ' + formatRp(b.limit) + '</div>' +
+          '</div>' +
+          '<div class="mini-actions" style="margin-top:0;">' +
+            '<button type="button" class="link-btn" onclick="openBudgetModal(\'' + b.id + '\')">Edit</button>' +
+            '<button type="button" class="link-btn danger" onclick="deleteBudgetCategory(\'' + b.id + '\')">Hapus</button>' +
+          '</div>' +
         '</div>' +
-        '<span class="chart-lbl">' + m.lbl + '</span>' +
+        '<div class="bar-track"><div class="bar-fill' + barCls + '" style="width:' + barW + '%"></div></div>' +
+        '<div class="account-meta-foot">' +
+          '<span style="color:' + (rem >= 0 ? 'var(--income)' : 'var(--expense)') + '">' + (rem >= 0 ? 'Sisa ' + displayMoney(rem) : 'Lewat ' + displayMoney(Math.abs(rem))) + '</span>' +
+          '<span>' + ratio + '%</span>' +
+        '</div>' +
       '</div>';
     }).join('');
+  }
 
-    const totalExp = monthExp.reduce(function(s, t) { return s + t.amount; }, 0);
-    const mapCat = {};
-    monthExp.forEach(function(t) {
-      const key = t.category || 'Lainnya';
-      mapCat[key] = (mapCat[key] || 0) + t.amount;
+  function openBudgetModal(id) {
+    editingBudgetId = id || null;
+    if (editingBudgetId) {
+      const b = state.budgets.find(function(x) { return x.id === editingBudgetId; });
+      if (!b) return;
+      document.getElementById('modalBudgetTitle').textContent = 'Edit Kategori Anggaran';
+      document.getElementById('budName').value = b.category;
+      document.getElementById('budLimit').value = b.limit;
+    } else {
+      document.getElementById('modalBudgetTitle').textContent = 'Tambah Kategori Anggaran';
+      document.getElementById('budName').value = '';
+      document.getElementById('budLimit').value = '';
+    }
+    openModal('modalBudget');
+  }
+
+  function saveBudgetCategory() {
+    const name = stripLeadingEmoji(document.getElementById('budName').value);
+    const limit = Math.max(0, Math.round(Number(document.getElementById('budLimit').value) || 0));
+    if (!name || limit <= 0) {
+      showToast('Isi nama kategori dan batas anggaran yang valid', 'warn');
+      return;
+    }
+    if (editingBudgetId) {
+      state.budgets = state.budgets.map(function(b) {
+        return b.id === editingBudgetId ? Object.assign({}, b, { category: name, limit: limit }) : b;
+      });
+      pushNotification('Anggaran "' + name + '" diperbarui', 'ok');
+    } else {
+      state.budgets.push({ id: 'bud_' + Date.now(), category: name, limit: limit });
+      pushNotification('Kategori anggaran "' + name + '" ditambahkan', 'ok');
+    }
+    editingBudgetId = null;
+    persist();
+    closeModal('modalBudget');
+  }
+
+  function deleteBudgetCategory(id) {
+    state.budgets = state.budgets.filter(function(b) { return b.id !== id; });
+    pushNotification('Kategori anggaran dihapus', 'gold');
+    persist();
+  }
+
+  /* SAVINGS ACCOUNTS & GOALS TAB */
+  function renderSavingsTab(acc) {
+    const accounts = state.savingsAccounts || [];
+    const totalMonthlyTarget = accounts.reduce(function(s, a) { return s + (Number(a.monthlyTarget) || 0); }, 0);
+    const totalGoalTarget = accounts.reduce(function(s, a) { return s + (Number(a.goalTarget) || 0); }, 0);
+    const pct = totalGoalTarget > 0 ? Math.min(100, Math.max(0, Math.round((acc.totalSavings / totalGoalTarget) * 100))) : 0;
+
+    document.getElementById('savingsGrandTotal').textContent = displayMoney(acc.totalSavings);
+    document.getElementById('savingsOverallPct').textContent = pct + '% Tercapai';
+    document.getElementById('savingsGrandBar').style.width = pct + '%';
+    document.getElementById('savingsMonthlyTargetSum').textContent = 'Target Bulanan: ' + formatRp(totalMonthlyTarget);
+    document.getElementById('savingsGoalTargetSum').textContent = 'Total Target: ' + formatRp(totalGoalTarget);
+
+    const kindNames = {
+      savings: 'Main Savings',
+      emergency: 'Emergency Fund',
+      vault: 'Piggy Vault',
+      goal: 'Savings Goal'
+    };
+
+    const listEl = document.getElementById('savingsAccountsList');
+    if (!accounts.length) {
+      listEl.innerHTML = '<div class="empty-state">Belum ada rekening tabungan. Tap + Rekening / Goal untuk menambah.</div>';
+      return;
+    }
+
+    listEl.innerHTML = accounts.map(function(a) {
+      const bal = acc.accBalances[a.id] || 0;
+      const target = Math.max(1000, Number(a.goalTarget) || 1000000);
+      const prog = Math.min(100, Math.max(0, Math.round((bal / target) * 100)));
+      const recent = (acc.accLedger[a.id] || []).slice(0, 2);
+
+      return '<div class="account-card">' +
+        '<div class="account-head">' +
+          '<div>' +
+            '<span class="pill-tag" style="margin-bottom:4px;display:inline-block;">' + escapeHtml(kindNames[a.kind] || 'Goal') + '</span>' +
+            '<div class="row-title" style="font-size:15px;">' + escapeHtml(a.name) + '</div>' +
+            '<div class="account-bal">' + displayMoney(bal) + '</div>' +
+          '</div>' +
+          '<div class="mini-actions" style="margin-top:0;">' +
+            '<button type="button" class="link-btn" onclick="openSavingsModal(\'' + a.id + '\')">Edit</button>' +
+            '<button type="button" class="link-btn danger" onclick="deleteSavingsAccount(\'' + a.id + '\')">Hapus</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="bar-track"><div class="bar-fill' + (a.kind === 'emergency' ? ' gold' : '') + '" style="width:' + prog + '%"></div></div>' +
+        '<div class="account-meta-foot">' +
+          '<span>Target: ' + formatRp(target) + ' (' + prog + '%)</span>' +
+          '<span>Bulanan: ' + formatRp(a.monthlyTarget) + '</span>' +
+        '</div>' +
+        (recent.length ? '<div class="ledger-chip">' + recent.map(function(ev) {
+          return '<div>' + ev.date + ' • ' + (ev.kind === 'in' ? '+' : '-') + formatRp(ev.amount) + ' — ' + escapeHtml(ev.note) + '</div>';
+        }).join('') + '</div>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  function openSavingsModal(id) {
+    editingSavingsId = id || null;
+    if (editingSavingsId) {
+      const a = state.savingsAccounts.find(function(x) { return x.id === editingSavingsId; });
+      if (!a) return;
+      document.getElementById('modalSavingsTitle').textContent = 'Edit Rekening / Goal';
+      document.getElementById('savName').value = a.name;
+      document.getElementById('savKind').value = a.kind;
+      document.getElementById('savMonthlyTarget').value = a.monthlyTarget;
+      document.getElementById('savGoalTarget').value = a.goalTarget;
+    } else {
+      document.getElementById('modalSavingsTitle').textContent = 'Tambah Rekening / Goal';
+      document.getElementById('savName').value = '';
+      document.getElementById('savKind').value = 'goal';
+      document.getElementById('savMonthlyTarget').value = '500000';
+      document.getElementById('savGoalTarget').value = '1000000';
+    }
+    openModal('modalSavings');
+  }
+
+  function saveSavingsAccount() {
+    const name = String(document.getElementById('savName').value || '').trim();
+    const kind = document.getElementById('savKind').value;
+    const monthlyTarget = Math.max(0, Math.round(Number(document.getElementById('savMonthlyTarget').value) || 0));
+    const goalTarget = Math.max(1000, Math.round(Number(document.getElementById('savGoalTarget').value) || 1000000));
+
+    if (!name) {
+      showToast('Masukkan nama rekening atau goal', 'warn');
+      return;
+    }
+
+    if (editingSavingsId) {
+      state.savingsAccounts = state.savingsAccounts.map(function(a) {
+        return a.id === editingSavingsId
+          ? Object.assign({}, a, { name: name, kind: kind, monthlyTarget: monthlyTarget, goalTarget: goalTarget })
+          : a;
+      });
+      pushNotification('Rekening "' + name + '" diperbarui', 'ok');
+    } else {
+      state.savingsAccounts.push({
+        id: 'acc_' + Date.now(),
+        name: name,
+        kind: kind,
+        monthlyTarget: monthlyTarget,
+        goalTarget: goalTarget
+      });
+      pushNotification('Rekening "' + name + '" ditambahkan', 'ok');
+    }
+    editingSavingsId = null;
+    persist();
+    closeModal('modalSavings');
+  }
+
+  function deleteSavingsAccount(id) {
+    state.savingsAccounts = state.savingsAccounts.filter(function(a) { return a.id !== id; });
+    pushNotification('Rekening tabungan dihapus', 'gold');
+    persist();
+  }
+
+  /* TRANSACTION MODAL & CRUD */
+  function populateTxDropdowns(selectedAccId, fromId, toId, selectedCat) {
+    const catSel = document.getElementById('txCategory');
+    const cats = new Set((state.budgets || []).map(function(b) { return b.category; }));
+    ['Gaji & Pemasukan', 'Tips & Bonus', 'Tabungan', 'Transfer Internal', 'Penyesuaian'].forEach(function(c) { cats.add(c); });
+    const catList = Array.from(cats);
+    catSel.innerHTML = catList.map(function(c) {
+      return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>';
+    }).join('');
+    if (selectedCat && catList.indexOf(selectedCat) !== -1) catSel.value = selectedCat;
+
+    const accSel = document.getElementById('txSavingsAccount');
+    const accs = state.savingsAccounts || [];
+    accSel.innerHTML = accs.map(function(a) {
+      return '<option value="' + escapeHtml(a.id) + '">' + escapeHtml(a.name) + '</option>';
+    }).join('');
+    if (selectedAccId) accSel.value = selectedAccId;
+
+    const fromSel = document.getElementById('txTransferFrom');
+    const toSel = document.getElementById('txTransferTo');
+    const endpointOptions = '<option value="cash">Kas Tersedia (Spending Cash)</option>' + accs.map(function(a) {
+      return '<option value="' + escapeHtml(a.id) + '">' + escapeHtml(a.name) + '</option>';
+    }).join('');
+    fromSel.innerHTML = endpointOptions;
+    toSel.innerHTML = endpointOptions;
+    fromSel.value = fromId || 'cash';
+    toSel.value = toId || (accs[0] && accs[0].id) || 'cash';
+  }
+
+  function selectTxType(type) {
+    txFormType = type;
+    const map = {
+      expense: 'ttExpense',
+      income: 'ttIncome',
+      savings_contribution: 'ttSaveIn',
+      savings_withdrawal: 'ttSaveOut',
+      internal_transfer: 'ttTransfer',
+      balance_adjustment: 'ttAdjust'
+    };
+    Object.keys(map).forEach(function(k) {
+      document.getElementById(map[k]).classList.toggle('active', k === type);
     });
 
-    const entries = Object.keys(mapCat).map(function(k) { return { name: k, val: mapCat[k] }; }).sort(function(a, b) { return b.val - a.val; });
-    document.getElementById('categoryBreakdown').innerHTML = entries.length === 0
-      ? '<div class="empty-box" style="border:none;padding:12px;">Belum ada data kategori di bulan ini.</div>'
-      : entries.map(function(e) {
-          const pct = totalExp > 0 ? Math.round((e.val / totalExp) * 100) : 0;
-          return '<div class="cat-row">' +
-            '<div class="cat-top"><span>' + escapeHtml(e.name) + ' (' + pct + '%)</span><strong>' + rp(e.val) + '</strong></div>' +
-            '<div class="progress-track" style="height:6px;margin-bottom:0;"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
-          '</div>';
-        }).join('');
+    document.getElementById('txCategoryGroup').classList.toggle('hidden', type === 'internal_transfer' || type === 'savings_contribution' || type === 'savings_withdrawal');
+    const showSavAcc = type === 'savings_contribution' || type === 'savings_withdrawal';
+    document.getElementById('txSavingsAccountGroup').classList.toggle('hidden', !showSavAcc);
+    document.getElementById('txSavingsAccountLabel').textContent = type === 'savings_contribution' ? 'Setor ke Rekening Tabungan' : 'Tarik dari Rekening Tabungan';
+    document.getElementById('txTransferGroup').classList.toggle('hidden', type !== 'internal_transfer');
+    document.getElementById('txAdjustModeGroup').classList.toggle('hidden', type !== 'balance_adjustment');
   }
 
-  function openModal(id) { document.getElementById(id).classList.add('open'); }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
-    if (id === 'modalAdd') editingTarget = null;
-    if (id === 'modalGoal') editingGoalId = null;
-  }
-  function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
-
-  function openGoalModal(goalId) {
-    editingGoalId = goalId || null;
-    if (editingGoalId) {
-      const g = state.goals.find(function(item) { return item.id === editingGoalId; });
-      if (!g) return;
-      document.getElementById('modalGoalTitle').textContent = 'Edit Target Barang';
-      document.getElementById('goalEmoji').value = g.emoji || '🎯';
-      document.getElementById('goalTitle').value = g.title || '';
-      document.getElementById('goalTargetAmount').value = g.target || '';
-    } else {
-      document.getElementById('modalGoalTitle').textContent = 'Tambah Target Barang';
-      document.getElementById('goalEmoji').value = '🎯';
-      document.getElementById('goalTitle').value = '';
-      document.getElementById('goalTargetAmount').value = '';
-    }
-    openModal('modalGoal');
-  }
-
-  function saveGoalItem() {
-    const emoji = (document.getElementById('goalEmoji').value || '🎯').trim() || '🎯';
-    const title = (document.getElementById('goalTitle').value || '').trim();
-    const target = Math.round(Number(document.getElementById('goalTargetAmount').value));
-
-    if (!title) {
-      alert('Masukkan nama barang atau target.');
-      return;
-    }
-    if (!target || target <= 0) {
-      alert('Masukkan nominal target yang valid.');
-      return;
-    }
-
-    if (editingGoalId) {
-      state.goals = state.goals.map(function(g) {
-        if (g.id !== editingGoalId) return g;
-        return Object.assign({}, g, { emoji: emoji, title: title, target: target });
-      });
-      pushUpdateNotification('Goal "' + title + '" diperbarui (' + rp(target) + ')', 'info');
-    } else {
-      state.goals.push({
-        id: 'goal_' + Date.now(),
-        emoji: emoji,
-        title: title,
-        target: target
-      });
-      pushUpdateNotification('Goal baru "' + title + '" ditambahkan (' + rp(target) + ')', 'ok');
-    }
-
-    editingGoalId = null;
-    persist();
-    closeModal('modalGoal');
-  }
-
-  function removeGoal(id) {
-    if (!confirm('Hapus target barang ini?')) return;
-    const found = state.goals.find(function(g) { return g.id === id; });
-    state.goals = state.goals.filter(function(g) { return g.id !== id; });
-    pushUpdateNotification('Goal "' + (found ? found.title : 'Target') + '" dihapus', 'info');
-    persist();
-  }
-
-  function openAddModal() {
-    editingTarget = null;
-    document.getElementById('modalAddTitle').textContent = 'Tambah Transaksi';
-    document.getElementById('btnSaveTx').textContent = 'Simpan';
-    document.getElementById('typeSelectorGrid').classList.remove('hidden');
-
+  function openTxModal() {
+    editingTxId = null;
+    document.getElementById('modalTxTitle').textContent = 'Catat Transaksi';
+    document.getElementById('btnSaveTx').textContent = 'Simpan Transaksi';
+    document.getElementById('txTypeSelector').classList.remove('hidden');
     document.getElementById('txAmount').value = '';
     document.getElementById('txNote').value = '';
-    document.getElementById('txExtra').checked = false;
-    const defaultDate = selectedDayISO.startsWith(activeYM) ? selectedDayISO : (activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01');
-    document.getElementById('txDate').value = defaultDate;
+    document.getElementById('txDate').value = selectedDateISO.startsWith(activeYM) ? selectedDateISO : (activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01');
 
-    const initialType = activeNav === 'vault' ? 'vault_in' : 'expense';
-    chooseTxType(initialType);
-    openModal('modalAdd');
+    populateTxDropdowns();
+    selectTxType(activeTab === 'savings' ? 'savings_contribution' : 'expense');
+    openModal('modalTx');
   }
 
-  function openEditTx(kind, id) {
-    let item = null;
-    if (kind === 'exp') item = state.expenseTx.find(function(t) { return t.id === id; });
-    if (kind === 'inc') item = state.incomeTx.find(function(t) { return t.id === id; });
-    if (kind === 'vault') item = state.vaultTx.find(function(t) { return t.id === id; });
-    if (!item) return;
+  function openEditTx(id) {
+    const tx = state.transactions.find(function(x) { return x.id === id; });
+    if (!tx) return;
+    editingTxId = id;
+    document.getElementById('modalTxTitle').textContent = 'Edit Transaksi';
+    document.getElementById('btnSaveTx').textContent = 'Perbarui Transaksi';
+    document.getElementById('txTypeSelector').classList.add('hidden');
+    document.getElementById('txDate').value = tx.date;
+    document.getElementById('txAmount').value = tx.amount;
+    document.getElementById('txNote').value = tx.note || '';
+    document.getElementById('txAdjustMode').value = tx.adjustSign || 'add';
 
-    editingTarget = { kind: kind, id: id };
-    document.getElementById('modalAddTitle').textContent = 'Edit Transaksi';
-    document.getElementById('btnSaveTx').textContent = 'Update Transaksi';
-    document.getElementById('typeSelectorGrid').classList.add('hidden');
-
-    document.getElementById('txDate').value = item.date || getTodayISO();
-    document.getElementById('txAmount').value = item.amount;
-    document.getElementById('txNote').value = item.note || '';
-
-    if (kind === 'exp') {
-      chosenType = 'expense';
-      document.getElementById('boxExpCat').classList.remove('hidden');
-      document.getElementById('boxIncKind').classList.add('hidden');
-      document.getElementById('boxExtra').classList.remove('hidden');
-      document.getElementById('txExtra').checked = !!item.isExtra;
-      const catPair = (item.icon || '💸') + '|' + (item.category || 'Umum');
-      const sel = document.getElementById('txExpCat');
-      const hasOpt = Array.prototype.some.call(sel.options, function(o) { return o.value === catPair; });
-      if (hasOpt) sel.value = catPair;
-    } else if (kind === 'inc') {
-      chosenType = 'income';
-      document.getElementById('boxExpCat').classList.add('hidden');
-      document.getElementById('boxIncKind').classList.remove('hidden');
-      document.getElementById('boxExtra').classList.add('hidden');
-      const incPair = (item.icon || '💼') + '|' + (item.kind || 'salary') + '|' + (item.label || 'Salary / Gaji');
-      const selInc = document.getElementById('txIncKind');
-      const hasIncOpt = Array.prototype.some.call(selInc.options, function(o) { return o.value === incPair; });
-      if (hasIncOpt) selInc.value = incPair;
-    } else {
-      chosenType = item.type === 'out' ? 'vault_out' : 'vault_in';
-      document.getElementById('boxExpCat').classList.add('hidden');
-      document.getElementById('boxIncKind').classList.add('hidden');
-      document.getElementById('boxExtra').classList.add('hidden');
-    }
-
-    openModal('modalAdd');
+    populateTxDropdowns(tx.accountId, tx.fromAccount, tx.toAccount, tx.category);
+    selectTxType(tx.type);
+    openModal('modalTx');
   }
 
-  function chooseTxType(type) {
-    chosenType = type;
-    document.getElementById('optExp').classList.toggle('active', type === 'expense');
-    document.getElementById('optInc').classList.toggle('active', type === 'income');
-    document.getElementById('optVin').classList.toggle('active', type === 'vault_in');
-    document.getElementById('optVout').classList.toggle('active', type === 'vault_out');
-
-    document.getElementById('boxExpCat').classList.toggle('hidden', type !== 'expense');
-    document.getElementById('boxExtra').classList.toggle('hidden', type !== 'expense');
-    document.getElementById('boxIncKind').classList.toggle('hidden', type !== 'income');
-  }
-
-  function submitTransaction() {
-    const amount = Math.round(Number(document.getElementById('txAmount').value));
-    if (!amount || amount <= 0) {
-      alert('Masukkan nominal yang valid.');
+  function saveTransaction() {
+    const amount = Math.round(Number(document.getElementById('txAmount').value) || 0);
+    if (amount <= 0) {
+      showToast('Nominal transaksi harus lebih dari 0', 'warn');
       return;
     }
+
     const dateVal = document.getElementById('txDate').value || getTodayISO();
-    const noteVal = document.getElementById('txNote').value.trim();
+    const noteVal = String(document.getElementById('txNote').value || '').trim();
+    const catVal = document.getElementById('txCategory').value || 'Umum';
+    const accIdVal = document.getElementById('txSavingsAccount').value || '';
+    const fromVal = document.getElementById('txTransferFrom').value;
+    const toVal = document.getElementById('txTransferTo').value;
+    const adjSign = document.getElementById('txAdjustMode').value;
 
-    if (editingTarget) {
-      if (editingTarget.kind === 'exp') {
-        const cat = document.getElementById('txExpCat').value.split('|');
-        const isExtra = document.getElementById('txExtra').checked;
-        state.expenseTx = state.expenseTx.map(function(t) {
-          if (t.id !== editingTarget.id) return t;
-          return Object.assign({}, t, {
-            amount: amount,
-            icon: cat[0],
-            category: cat[1],
-            note: noteVal,
-            isExtra: isExtra,
-            date: dateVal
-          });
-        });
-        pushUpdateNotification('Pengeluaran diupdate: ' + rp(amount), 'info');
-      } else if (editingTarget.kind === 'inc') {
-        const inc = document.getElementById('txIncKind').value.split('|');
-        state.incomeTx = state.incomeTx.map(function(t) {
-          if (t.id !== editingTarget.id) return t;
-          return Object.assign({}, t, {
-            amount: amount,
-            icon: inc[0],
-            kind: inc[1],
-            label: inc[2],
-            note: noteVal || inc[2],
-            date: dateVal
-          });
-        });
-        pushUpdateNotification('Income diupdate: +' + rp(amount), 'ok');
-      } else if (editingTarget.kind === 'vault') {
-        const targetItem = state.vaultTx.find(function(t) { return t.id === editingTarget.id; });
-        if (targetItem && targetItem.type === 'out' && amount > getVaultBalance(editingTarget.id)) {
-          alert('Saldo Vault tidak mencukupi untuk penarikan sebesar ' + rp(amount) + '.');
-          return;
-        }
-        state.vaultTx = state.vaultTx.map(function(t) {
-          if (t.id !== editingTarget.id) return t;
-          return Object.assign({}, t, {
-            amount: amount,
-            note: noteVal,
-            date: dateVal
-          });
-        });
-        pushUpdateNotification('Mutasi Vault diupdate: ' + rp(amount), 'info');
-      }
-      editingTarget = null;
-      persist();
-      closeModal('modalAdd');
+    if (txFormType === 'internal_transfer' && fromVal === toVal) {
+      showToast('Pilih akun asal dan tujuan yang berbeda', 'warn');
       return;
     }
 
-    if (chosenType === 'expense') {
-      const cat = document.getElementById('txExpCat').value.split('|');
-      const isExtra = document.getElementById('txExtra').checked;
-      state.expenseTx.push({
-        id: String(Date.now()),
-        amount: amount,
-        icon: cat[0],
-        category: cat[1],
-        note: noteVal,
-        isExtra: isExtra,
-        date: dateVal
-      });
-      activeYM = dateVal.slice(0, 7);
-      selectedDayISO = dateVal;
-      pushUpdateNotification('Keluar ' + rp(amount) + ' (' + cat[1] + (isExtra ? ' • Ekstra' : '') + ')', isExtra ? 'info' : 'warn');
-    } else if (chosenType === 'income') {
-      const inc = document.getElementById('txIncKind').value.split('|');
-      state.incomeTx.push({
-        id: String(Date.now()),
-        amount: amount,
-        icon: inc[0],
-        kind: inc[1],
-        label: inc[2],
-        note: noteVal || inc[2],
-        date: dateVal
-      });
-      activeYM = dateVal.slice(0, 7);
-      selectedDayISO = dateVal;
-      pushUpdateNotification('Masuk +' + rp(amount) + ' (' + inc[2] + ')', 'ok');
+    const payload = {
+      id: editingTxId || ('tx_' + Date.now()),
+      type: txFormType,
+      amount: amount,
+      date: dateVal,
+      category: txFormType === 'savings_contribution' ? 'Setor Tabungan' : txFormType === 'savings_withdrawal' ? 'Tarik Tabungan' : txFormType === 'internal_transfer' ? 'Transfer Internal' : txFormType === 'balance_adjustment' ? 'Penyesuaian' : catVal,
+      accountId: accIdVal,
+      fromAccount: fromVal,
+      toAccount: toVal,
+      adjustSign: adjSign,
+      note: noteVal
+    };
+
+    if (editingTxId) {
+      state.transactions = state.transactions.map(function(t) { return t.id === editingTxId ? payload : t; });
+      pushNotification('Transaksi diperbarui (' + formatRp(amount) + ')', 'ok');
     } else {
-      const vType = chosenType === 'vault_in' ? 'in' : 'out';
-      if (vType === 'out' && amount > getVaultBalance()) {
-        alert('Saldo Vault tidak mencukupi untuk penarikan sebesar ' + rp(amount) + '.');
-        return;
-      }
-      state.vaultTx.push({
-        id: String(Date.now()),
-        type: vType,
-        amount: amount,
-        note: noteVal,
-        date: dateVal
-      });
-      pushUpdateNotification((vType === 'in' ? 'Setor Vault +' : 'Tarik Vault -') + rp(amount), vType === 'in' ? 'ok' : 'warn');
+      state.transactions.push(payload);
+      activeYM = dateVal.slice(0, 7);
+      selectedDateISO = dateVal;
+      pushNotification('Transaksi tersimpan (' + formatRp(amount) + ')', txFormType === 'expense' ? 'warn' : 'ok');
     }
 
+    editingTxId = null;
     persist();
-    closeModal('modalAdd');
+    closeModal('modalTx');
   }
 
-  function quickExp(category, amount, icon, isExtra) {
-    const d = activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01';
-    state.expenseTx.push({
-      id: String(Date.now()),
-      amount: amount,
-      icon: icon,
-      category: category,
-      note: category,
-      isExtra: !!isExtra,
-      date: d
-    });
-    pushUpdateNotification('Keluar ' + rp(amount) + ' (' + category + ')', isExtra ? 'info' : 'warn');
+  function deleteTx(id) {
+    state.transactions = state.transactions.filter(function(t) { return t.id !== id; });
+    pushNotification('Transaksi dihapus & saldo dihitung ulang', 'gold');
     persist();
   }
 
-  function quickInc(label, amount, icon, kind) {
-    const d = activeYM === getCurrentYM() ? getTodayISO() : activeYM + '-01';
-    state.incomeTx.push({
-      id: String(Date.now()),
-      amount: amount,
-      icon: icon,
-      kind: kind,
-      label: label,
-      note: label,
-      date: d
-    });
-    pushUpdateNotification('Masuk +' + rp(amount) + ' (' + label + ')', 'ok');
-    persist();
-  }
-
-  function quickVault(amount) {
-    state.vaultTx.push({
-      id: String(Date.now()),
-      type: 'in',
-      amount: amount,
-      note: 'Setor Cepat',
-      date: getTodayISO()
-    });
-    pushUpdateNotification('Setor Vault +' + rp(amount), 'ok');
-    persist();
-  }
-
-  function removeExpenseTx(id) {
-    if (!confirm('Hapus transaksi pengeluaran ini?')) return;
-    state.expenseTx = state.expenseTx.filter(function(t) { return t.id !== id; });
-    pushUpdateNotification('Transaksi pengeluaran dihapus', 'info');
-    persist();
-  }
-
-  function removeIncomeTx(id) {
-    if (!confirm('Hapus transaksi income/salary ini?')) return;
-    state.incomeTx = state.incomeTx.filter(function(t) { return t.id !== id; });
-    pushUpdateNotification('Transaksi income dihapus', 'info');
-    persist();
-  }
-
-  function removeVaultTx(id) {
-    if (!confirm('Hapus mutasi Piggy Vault ini?')) return;
-    state.vaultTx = state.vaultTx.filter(function(t) { return t.id !== id; });
-    pushUpdateNotification('Mutasi Vault dihapus', 'info');
-    persist();
-  }
-
+  /* PROFILE, NOTIFICATIONS & BACKUP */
   function openProfileModal() {
     document.getElementById('profName').value = state.profile.name || 'Owen';
-    document.getElementById('profAvatar').value = state.profile.avatar || 'O';
-    document.getElementById('profVaultTarget').value = state.profile.vaultTarget || 10000000;
-    document.getElementById('profDailyLimit').value = state.profile.dailyLimit || 30000;
+    document.getElementById('profInitials').value = state.profile.initials || 'OW';
+    document.getElementById('profMonthlyIncome').value = state.profile.monthlyIncomeTarget || 0;
+    document.getElementById('profOpeningCash').value = state.profile.openingCash || 0;
+    document.getElementById('profCurrency').value = state.profile.currency || 'IDR';
     openModal('modalProfile');
   }
 
-  function saveProfileData() {
-    const name = document.getElementById('profName').value.trim() || 'Owen';
-    const avatar = document.getElementById('profAvatar').value.trim() || name.charAt(0).toUpperCase();
-    const vaultTarget = Math.max(1000, Math.round(Number(document.getElementById('profVaultTarget').value) || 10000000));
-    const dailyLimit = Math.max(1000, Math.round(Number(document.getElementById('profDailyLimit').value) || 30000));
-
-    state.profile = { name: name, avatar: avatar, vaultTarget: vaultTarget, dailyLimit: dailyLimit };
-    pushUpdateNotification('Profil & limit harian diperbarui (' + rp(dailyLimit) + '/hari)', 'info');
+  function saveProfilePreferences() {
+    const name = String(document.getElementById('profName').value || '').trim() || 'Owen';
+    const initials = String(document.getElementById('profInitials').value || name.slice(0, 2)).trim().toUpperCase().slice(0, 2) || 'OW';
+    state.profile.name = name;
+    state.profile.initials = initials;
+    state.profile.monthlyIncomeTarget = Math.max(0, Math.round(Number(document.getElementById('profMonthlyIncome').value) || 0));
+    state.profile.openingCash = Math.round(Number(document.getElementById('profOpeningCash').value) || 0);
+    state.profile.currency = document.getElementById('profCurrency').value || 'IDR';
+    pushNotification('Preferensi profil diperbarui', 'ok');
     persist();
     closeModal('modalProfile');
+  }
+
+  function openNotifModal() {
+    state.notifications = (state.notifications || []).map(function(n) { return Object.assign({}, n, { read: true }); });
+    persist();
+    openModal('modalNotif');
+  }
+
+  function renderNotificationsModal() {
+    const list = state.notifications || [];
+    const unread = list.filter(function(n) { return !n.read; }).length;
+    document.getElementById('notifDot').classList.toggle('hidden', unread === 0);
+
+    const el = document.getElementById('notifModalList');
+    if (!el) return;
+    if (!list.length) {
+      el.innerHTML = '<div class="empty-state">Tidak ada riwayat notifikasi.</div>';
+      return;
+    }
+    el.innerHTML = list.map(function(n) {
+      return '<div class="row-card">' +
+        '<div>' +
+          '<div class="row-title">' + escapeHtml(n.title) + '</div>' +
+          '<div class="row-sub">' + escapeHtml(n.time || '') + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function requestWebNotif() {
+    if (!('Notification' in window)) {
+      showToast('Perangkat tidak mendukung notifikasi web', 'warn');
+      return;
+    }
+    Notification.requestPermission().then(function(p) {
+      showToast('Izin notifikasi: ' + p, 'gold');
+    });
+  }
+
+  function clearNotifs() {
+    state.notifications = [];
+    persist();
   }
 
   function openSettingsModal() {
     openModal('modalSettings');
   }
 
-  function exportJson() {
-    const payload = {
-      version: '3.0',
+  function downloadVaultIconPng() {
+    if (typeof window.__OWEN_VAULT_ICON_512 !== 'function') return;
+    const url = window.__OWEN_VAULT_ICON_512();
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'owens-vault-icon-512.png';
+    a.click();
+    showToast('Ikon huruf "O" (512×512) diunduh', 'gold');
+  }
+
+  function exportBackupJson() {
+    const bundle = {
+      app: "Owen's Vault",
+      version: '4.0',
       exportedAt: new Date().toISOString(),
       data: state
     };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'owens-vault-3.0-' + getTodayISO() + '.json';
+    a.download = 'owens-vault-4.0-' + getTodayISO() + '.json';
     a.click();
     URL.revokeObjectURL(url);
-    pushUpdateNotification('Backup JSON berhasil di-export', 'ok');
-    state = writeToLocalMirrors(state);
-    renderNotifIndicator();
+    showToast('Backup JSON v4.0 berhasil diunduh', 'ok');
   }
 
-  function importJson(ev) {
+  function importBackupJson(ev) {
     const file = ev.target.files && ev.target.files[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(e) {
       try {
-        const cleaned = sanitizeStateObject(JSON.parse(e.target.result));
-        if (!cleaned) {
-          alert('Format file JSON tidak dikenali.');
+        const parsed = JSON.parse(e.target.result);
+        const migrated = migrateLegacyPayload(parsed);
+        if (!migrated) {
+          showToast('Struktur JSON tidak valid atau kosong', 'warn');
           return;
         }
-        state = cleaned;
-        pushUpdateNotification('Backup JSON berhasil dipulihkan', 'ok');
+        state = migrated;
+        pushNotification('Backup JSON berhasil dipulihkan (' + state.transactions.length + ' transaksi)', 'ok');
         persist();
         closeModal('modalSettings');
       } catch (err) {
-        alert('File JSON rusak atau tidak valid.');
+        showToast('Gagal membaca file JSON', 'warn');
       }
       ev.target.value = '';
     };
     reader.readAsText(file);
   }
 
-  function wipeAllData() {
-    if (confirm('Hapus permanen semua data Vault, Salary, dan Pengeluaran?')) {
-      state = JSON.parse(JSON.stringify(DEFAULT_STATE));
-      state.notifications = [{
-        id: 'reset_' + Date.now(),
-        tone: 'warn',
-        title: 'Semua data telah direset',
-        time: nowClockLabel(),
-        read: false
-      }];
-      persist(true);
-      closeModal('modalSettings');
+  function recoverFromBestStorage() {
+    const best = loadBestLocalState();
+    if (best) {
+      state = best;
+      persist();
+      showToast('Data dipulihkan dari mirror lokal terbaik', 'gold');
+    } else {
+      loadIDB().then(function(idb) {
+        if (idb) {
+          state = idb;
+          persist();
+          showToast('Data dipulihkan dari IndexedDB', 'gold');
+        } else {
+          showToast('Tidak ada cadangan lain ditemukan', 'warn');
+        }
+      });
     }
   }
 
-  function escapeHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  function resetAllVaultData() {
+    if (!confirm('Hapus seluruh data transaksi, anggaran, dan rekening tabungan di perangkat ini?')) return;
+    state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    state.notifications = [{
+      id: 'rst_' + Date.now(),
+      tone: 'warn',
+      title: 'Seluruh data direset ke kondisi awal',
+      time: clockNow(),
+      read: false
+    }];
+    persist();
+    closeModal('modalSettings');
   }
 
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
+
+  window.addEventListener('resize', function() { renderWaveChart(computeAccounting()); });
   renderAll();
 </script>
 </body>
