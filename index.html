@@ -21,7 +21,6 @@
         c.height = pxSize;
         const ctx = c.getContext('2d');
 
-        // Deep dark emerald background (#090D0B)
         ctx.fillStyle = '#090D0B';
         ctx.fillRect(0, 0, pxSize, pxSize);
 
@@ -30,7 +29,6 @@
         const outerR = pxSize * 0.29;
         const innerR = pxSize * 0.165;
 
-        // Subtle deep emerald halo (#064E3B)
         const halo = ctx.createRadialGradient(cx, cy, innerR * 0.4, cx, cy, outerR * 1.35);
         halo.addColorStop(0, 'rgba(16, 185, 129, 0.18)');
         halo.addColorStop(0.65, 'rgba(6, 78, 59, 0.14)');
@@ -40,7 +38,6 @@
         ctx.arc(cx, cy, outerR * 1.35, 0, Math.PI * 2);
         ctx.fill();
 
-        // Geometric "O" ring in Primary Emerald (#10B981) with Deep Emerald (#064E3B) edge
         ctx.save();
         ctx.beginPath();
         ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
@@ -54,14 +51,12 @@
         ctx.strokeStyle = 'rgba(6, 78, 59, 0.9)';
         ctx.stroke();
 
-        // Subtle Gold Accent (#C6A15B) architectural tick & inner ring accent
         ctx.beginPath();
         ctx.arc(cx, cy, outerR - ctx.lineWidth * 0.52, -Math.PI * 0.35, Math.PI * 0.15);
         ctx.lineWidth = Math.max(2.5, pxSize * 0.011);
         ctx.strokeStyle = '#C6A15B';
         ctx.stroke();
 
-        // Precision vertical/horizontal vault alignment notch in Gold (#C6A15B)
         const notchLen = pxSize * 0.048;
         ctx.strokeStyle = '#C6A15B';
         ctx.lineWidth = Math.max(2.5, pxSize * 0.011);
@@ -89,7 +84,6 @@
         if (a192) a192.href = icon512;
         if (fav) fav.href = icon180;
 
-        // Probe external ./icon-180.png if user uploaded one; keep generated crisp "O" icon on fallback
         const probe = new Image();
         probe.onload = function() {
           if (a180) a180.href = './icon-180.png?v=40';
@@ -97,7 +91,6 @@
         };
         probe.src = './icon-180.png?v=40';
 
-        // Dynamic PWA Web App Manifest blob for standalone home screen support
         const manifestObj = {
           name: "Owen's Vault 4.0",
           short_name: "Owen's Vault",
@@ -128,16 +121,16 @@
       --bg-input: #0D1410;
       --emerald: #10B981;
       --emerald-deep: #064E3B;
-      --emerald-soft: rgba(16, 185, 129, 0.12);
+      --emerald-soft: rgba(16, 185, 129, 0.14);
       --income: #34D399;
       --expense: #FB7185;
-      --expense-soft: rgba(251, 113, 133, 0.12);
+      --expense-soft: rgba(251, 113, 133, 0.14);
       --text-primary: #F3F4F6;
       --text-secondary: #9CA3AF;
       --gold: #C6A15B;
-      --gold-soft: rgba(198, 161, 91, 0.14);
+      --gold-soft: rgba(198, 161, 91, 0.15);
       --border: rgba(243, 244, 246, 0.08);
-      --border-emerald: rgba(16, 185, 129, 0.24);
+      --border-emerald: rgba(16, 185, 129, 0.26);
       --safe-top: env(safe-area-inset-top, 14px);
       --safe-bottom: env(safe-area-inset-bottom, 14px);
     }
@@ -164,6 +157,113 @@
       max-width: 520px;
       margin: 0 auto;
       padding: 0 16px;
+    }
+
+    /* PIN Lock Screen */
+    .lock-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-main);
+      z-index: 4000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px calc(var(--safe-bottom) + 24px);
+    }
+
+    .lock-card {
+      width: 100%;
+      max-width: 360px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-emerald);
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .lock-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 3px solid var(--emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .lock-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .lock-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .pin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .pin-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 999px;
+      border: 1.5px solid var(--text-secondary);
+      background: transparent;
+      transition: all 0.14s ease;
+    }
+
+    .pin-dot.filled {
+      background: var(--emerald);
+      border-color: var(--emerald);
+    }
+
+    .pin-err {
+      min-height: 18px;
+      font-size: 12px;
+      color: var(--expense);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .key-btn {
+      height: 52px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .key-btn:active {
+      background: var(--emerald-deep);
+      border-color: var(--emerald);
+    }
+
+    .key-btn.ghost {
+      background: transparent;
+      border-color: transparent;
+      font-size: 13px;
+      color: var(--text-secondary);
     }
 
     /* Toast Notification */
@@ -246,6 +346,7 @@
       cursor: pointer;
       color: var(--text-primary);
       text-align: left;
+      min-width: 0;
     }
 
     .avatar-circle {
@@ -263,29 +364,40 @@
       flex-shrink: 0;
     }
 
+    .profile-meta {
+      min-width: 0;
+    }
+
     .profile-meta strong {
       display: block;
       font-size: 13px;
       font-weight: 700;
       line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .profile-meta span {
       display: block;
       font-size: 11px;
       color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
+      flex-shrink: 0;
     }
 
     .icon-btn {
       position: relative;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 12px;
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -303,8 +415,8 @@
 
     .badge-dot {
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: 7px;
+      right: 7px;
       width: 7px;
       height: 7px;
       border-radius: 50%;
@@ -363,7 +475,7 @@
     }
 
     .hero-balance-card {
-      background: linear-gradient(165deg, rgba(6, 78, 59, 0.34) 0%, var(--bg-card) 68%);
+      background: linear-gradient(165deg, var(--emerald-soft) 0%, var(--bg-card) 72%);
       border-color: var(--border-emerald);
     }
 
@@ -378,7 +490,7 @@
     .label-muted {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       color: var(--text-secondary);
     }
@@ -386,11 +498,13 @@
     .pill-tag {
       font-size: 11px;
       font-weight: 700;
-      padding: 3px 9px;
+      padding: 4px 9px;
       border-radius: 999px;
       background: var(--emerald-soft);
       color: var(--income);
       border: 1px solid rgba(16, 185, 129, 0.25);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .pill-tag.neg {
@@ -550,13 +664,23 @@
 
     .input, .select, .search-input {
       width: 100%;
+      min-height: 42px;
       background: var(--bg-input);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 11px 13px;
+      padding: 10px 12px;
       border-radius: 12px;
       font-size: 14px;
+      line-height: 1.3;
       outline: none;
+    }
+
+    input[type="date"].input {
+      display: flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 8px 10px;
+      font-size: 13px;
     }
 
     .input:focus, .select:focus, .search-input:focus {
@@ -567,7 +691,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     /* Progress Bars */
@@ -732,31 +856,37 @@
       padding: 13px 14px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
     }
 
     .row-left {
       display: flex;
-      align-items: center;
-      gap: 11px;
+      align-items: flex-start;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .row-content {
       min-width: 0;
       flex: 1;
     }
 
     .badge-icon {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 11px;
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       color: var(--emerald);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      margin-top: 1px;
     }
 
     .badge-icon.gold {
@@ -768,6 +898,11 @@
       font-size: 13px;
       font-weight: 700;
       color: var(--text-primary);
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .row-title.single-line {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -776,10 +911,9 @@
     .row-sub {
       font-size: 11px;
       color: var(--text-secondary);
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin-top: 3px;
+      line-height: 1.35;
+      word-break: break-word;
     }
 
     .row-right {
@@ -862,6 +996,61 @@
       color: var(--text-secondary);
     }
 
+    /* Theme Presets & Color Pickers */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .preset-btn {
+      padding: 10px 11px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .preset-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .color-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .color-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .color-box input[type="color"] {
+      width: 30px;
+      height: 26px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
     /* Bottom Dock */
     .dock-wrap {
       position: fixed;
@@ -880,7 +1069,7 @@
       display: flex;
       align-items: center;
       gap: 3px;
-      background: rgba(17, 27, 22, 0.96);
+      background: var(--bg-card);
       border: 1px solid var(--border-emerald);
       padding: 6px;
       border-radius: 20px;
@@ -977,6 +1166,19 @@
       margin-bottom: 5px;
     }
 
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
     .tx-type-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1044,6 +1246,36 @@
 </head>
 <body>
 
+<!-- PIN LOCK SCREEN -->
+<div class="lock-screen hidden" id="pinLockScreen">
+  <div class="lock-card">
+    <div class="lock-mark">O</div>
+    <div class="lock-title">Owen's Vault Terkunci</div>
+    <div class="lock-sub" id="lockSubLabel">Masukkan PIN keamanan untuk membuka</div>
+    <div class="pin-dots" id="pinDots">
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+    </div>
+    <div class="pin-err" id="pinError"></div>
+    <div class="keypad">
+      <button type="button" class="key-btn" onclick="pressPinKey('1')">1</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('2')">2</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('3')">3</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('4')">4</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('5')">5</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('6')">6</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('7')">7</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('8')">8</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('9')">9</button>
+      <button type="button" class="key-btn ghost" onclick="clearPinEntry()">Hapus</button>
+      <button type="button" class="key-btn" onclick="pressPinKey('0')">0</button>
+      <button type="button" class="key-btn ghost" onclick="backspacePinEntry()">⌫</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast-wrap">
   <div class="toast-card" id="toastCard">
     <div class="toast-left">
@@ -1066,12 +1298,15 @@
     </button>
 
     <div class="top-actions">
+      <button type="button" class="icon-btn" id="btnLockNow" onclick="lockVaultNow()" aria-label="Kunci Aplikasi">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </button>
       <button type="button" class="icon-btn" onclick="openNotifModal()" aria-label="Notifikasi">
         <span class="badge-dot hidden" id="notifDot"></span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
       </button>
       <button type="button" class="icon-btn" onclick="openSettingsModal()" aria-label="Pengaturan & Backup">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
   </header>
@@ -1136,7 +1371,7 @@
     <div class="card">
       <div class="card-header-row">
         <span class="label-muted">Grafik Gelombang Finansial</span>
-        <span class="pill-tag gold" id="wavePeriodSummary">Bulanan</span>
+        <span class="pill-tag gold" id="wavePeriodSummary">Monthly</span>
       </div>
       <div class="chart-filter-row" id="waveFilterRow">
         <button type="button" class="mini-tab" data-wf="daily" onclick="setWaveFilter('daily')">Daily</button>
@@ -1150,15 +1385,15 @@
       <div class="chart-legend">
         <span class="legend-item"><i class="legend-swatch" style="background:#34D399;"></i>Income</span>
         <span class="legend-item"><i class="legend-swatch" style="background:#FB7185;"></i>Expense</span>
-        <span class="legend-item"><i class="legend-swatch" style="background:#10B981;"></i>Net Cash Flow</span>
-        <span class="legend-item"><i class="legend-swatch" style="background:#C6A15B;"></i>Periode Sebelumnya</span>
+        <span class="legend-item"><i class="legend-swatch" style="background:var(--emerald);"></i>Net Cash Flow</span>
+        <span class="legend-item"><i class="legend-swatch" style="background:var(--gold);"></i>Periode Sebelumnya</span>
       </div>
     </div>
 
     <!-- QUICK ACTIONS -->
     <div class="section-head">
       <h3>Aksi Cepat</h3>
-      <span id="quickActionsHint">Satu ketukan untuk mencatat</span>
+      <span>Satu ketukan untuk mencatat</span>
     </div>
     <div class="chip-strip" id="quickActionStrip"></div>
 
@@ -1416,20 +1651,28 @@
   </div>
 </div>
 
-<!-- MODAL PROFIL -->
+<!-- MODAL PROFIL, KEAMANAN PIN & TEMA -->
 <div class="modal-backdrop" id="modalProfile" onclick="backdropClose(event, 'modalProfile')">
   <div class="modal-sheet">
     <div class="modal-head">
-      <h3>Profil & Preferensi</h3>
+      <h3>Profil, PIN & Tema</h3>
       <button type="button" class="close-btn" onclick="closeModal('modalProfile')">✕</button>
     </div>
     <div class="field">
       <label>Nama Pengguna</label>
       <input type="text" id="profName" class="input" />
     </div>
-    <div class="field">
-      <label>Inisial Avatar (1–2 huruf)</label>
-      <input type="text" id="profInitials" class="input" maxlength="2" />
+    <div class="filter-grid">
+      <div class="field" style="margin-bottom:0;">
+        <label>Inisial Avatar</label>
+        <input type="text" id="profInitials" class="input" maxlength="2" />
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>Mata Uang</label>
+        <select id="profCurrency" class="select">
+          <option value="IDR">IDR (Rp)</option>
+        </select>
+      </div>
     </div>
     <div class="field">
       <label>Target Pemasukan Bulanan (Rp)</label>
@@ -1439,13 +1682,41 @@
       <label>Saldo Awal Kas Tersedia (Rp)</label>
       <input type="number" id="profOpeningCash" class="input" inputmode="numeric" />
     </div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
+
     <div class="field">
-      <label>Mata Uang & Tampilan</label>
-      <select id="profCurrency" class="select">
-        <option value="IDR">IDR — Rupiah (Rp)</option>
-      </select>
+      <label>Tema & Warna Mandiri</label>
+      <div class="preset-grid">
+        <button type="button" class="preset-btn" onclick="applyThemePreset('emerald')"><i class="preset-swatch" style="background:#10B981;"></i>Emerald Luxury</button>
+        <button type="button" class="preset-btn" onclick="applyThemePreset('gold')"><i class="preset-swatch" style="background:#C6A15B;"></i>Obsidian Gold</button>
+        <button type="button" class="preset-btn" onclick="applyThemePreset('mint')"><i class="preset-swatch" style="background:#2DD4BF;"></i>Midnight Mint</button>
+        <button type="button" class="preset-btn" onclick="applyThemePreset('slate')"><i class="preset-swatch" style="background:#60A5FA;"></i>Nordic Sapphire</button>
+      </div>
+      <div class="color-row">
+        <label class="color-box">
+          <span>Warna Utama</span>
+          <input type="color" id="customPrimaryColor" value="#10B981" onchange="onCustomColorChange()" />
+        </label>
+        <label class="color-box">
+          <span>Aksen Kedua</span>
+          <input type="color" id="customAccentColor" value="#C6A15B" onchange="onCustomColorChange()" />
+        </label>
+      </div>
     </div>
-    <button type="button" class="btn-primary" onclick="saveProfilePreferences()">Simpan Preferensi</button>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
+
+    <label class="check-row">
+      <input type="checkbox" id="profPinEnabled" />
+      <span>Aktifkan Kunci PIN saat buka / kunci aplikasi</span>
+    </label>
+    <div class="field">
+      <label>Atur / Ganti PIN (4–6 digit angka, kosongkan jika tidak diubah)</label>
+      <input type="password" id="profNewPin" class="input" placeholder="Contoh: 1234 atau 250899" inputmode="numeric" maxlength="6" />
+    </div>
+
+    <button type="button" class="btn-primary" onclick="saveProfilePreferences()">Simpan Profil & Pengaturan</button>
   </div>
 </div>
 
@@ -1496,6 +1767,49 @@
   const IDB_NAME = 'OwensVaultLocalDB';
   const IDB_STORE = 'vault_snapshots';
 
+  const THEME_PRESETS = {
+    emerald: {
+      name: 'Emerald Luxury',
+      bgMain: '#090D0B',
+      bgCard: '#111B16',
+      bgElevated: '#16241D',
+      bgInput: '#0D1410',
+      primary: '#10B981',
+      deep: '#064E3B',
+      gold: '#C6A15B'
+    },
+    gold: {
+      name: 'Obsidian Gold',
+      bgMain: '#0B0A08',
+      bgCard: '#161410',
+      bgElevated: '#201C16',
+      bgInput: '#100E0B',
+      primary: '#C6A15B',
+      deep: '#4A3818',
+      gold: '#E5C580'
+    },
+    mint: {
+      name: 'Midnight Mint',
+      bgMain: '#080D0F',
+      bgCard: '#0F1A1E',
+      bgElevated: '#15252B',
+      bgInput: '#0B1316',
+      primary: '#2DD4BF',
+      deep: '#0F4C47',
+      gold: '#C6A15B'
+    },
+    slate: {
+      name: 'Nordic Sapphire',
+      bgMain: '#090C12',
+      bgCard: '#111724',
+      bgElevated: '#182133',
+      bgInput: '#0C111B',
+      primary: '#60A5FA',
+      deep: '#1E3A8A',
+      gold: '#C6A15B'
+    }
+  };
+
   const DEFAULT_BUDGETS = [
     { id: 'b_food', category: 'Makan & Minum', limit: 900000 },
     { id: 'b_transport', category: 'Transport & Bensin', limit: 600000 },
@@ -1545,7 +1859,12 @@
       monthlyIncomeTarget: 0,
       openingCash: 0,
       currency: 'IDR',
-      hideBalances: false
+      hideBalances: false,
+      pinEnabled: false,
+      pinHash: '',
+      themePreset: 'emerald',
+      primaryColor: '#10B981',
+      accentColor: '#C6A15B'
     },
     budgets: DEFAULT_BUDGETS.slice(),
     savingsAccounts: DEFAULT_SAVINGS_ACCOUNTS.slice(),
@@ -1555,12 +1874,64 @@
       {
         id: 'init_v4',
         tone: 'gold',
-        title: "Owen's Vault 4.0 Emerald Luxury siap digunakan",
+        title: "Owen's Vault 4.0 siap digunakan",
         time: 'Baru saja',
         read: false
       }
     ]
   };
+
+  function hashPinValue(pinStr) {
+    const clean = String(pinStr || '').trim();
+    if (!clean) return '';
+    let h = 2166136261;
+    for (let i = 0; i < clean.length; i++) {
+      h ^= clean.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return 'pin_' + (h >>> 0).toString(16);
+  }
+
+  function hexToRgba(hex, alpha) {
+    const clean = String(hex || '#10B981').replace('#', '');
+    if (clean.length !== 6) return 'rgba(16, 185, 129, ' + alpha + ')';
+    const r = parseInt(clean.slice(0, 2), 16);
+    const g = parseInt(clean.slice(2, 4), 16);
+    const b = parseInt(clean.slice(4, 6), 16);
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+  }
+
+  function darkenHex(hex, factor) {
+    const clean = String(hex || '#10B981').replace('#', '');
+    if (clean.length !== 6) return '#064E3B';
+    const r = Math.max(0, Math.min(255, Math.round(parseInt(clean.slice(0, 2), 16) * factor)));
+    const g = Math.max(0, Math.min(255, Math.round(parseInt(clean.slice(2, 4), 16) * factor)));
+    const b = Math.max(0, Math.min(255, Math.round(parseInt(clean.slice(4, 6), 16) * factor)));
+    return '#' + [r, g, b].map(function(x) { return x.toString(16).padStart(2, '0'); }).join('');
+  }
+
+  function applyThemeToDocument(prof) {
+    const presetKey = (prof && prof.themePreset) || 'emerald';
+    const preset = THEME_PRESETS[presetKey] || THEME_PRESETS.emerald;
+    const primary = (prof && prof.primaryColor) || preset.primary;
+    const accent = (prof && prof.accentColor) || preset.gold;
+    const deep = presetKey === 'emerald' && primary === '#10B981' ? '#064E3B' : darkenHex(primary, 0.36);
+
+    const root = document.documentElement.style;
+    root.setProperty('--bg-main', preset.bgMain);
+    root.setProperty('--bg-card', preset.bgCard);
+    root.setProperty('--bg-elevated', preset.bgElevated);
+    root.setProperty('--bg-input', preset.bgInput);
+    root.setProperty('--emerald', primary);
+    root.setProperty('--emerald-deep', deep);
+    root.setProperty('--emerald-soft', hexToRgba(primary, 0.15));
+    root.setProperty('--border-emerald', hexToRgba(primary, 0.28));
+    root.setProperty('--gold', accent);
+    root.setProperty('--gold-soft', hexToRgba(accent, 0.16));
+
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) metaTheme.setAttribute('content', preset.bgMain);
+  }
 
   function getTodayISO() {
     const d = new Date();
@@ -1662,7 +2033,6 @@
     if (!rawObj || typeof rawObj !== 'object') return null;
     const inner = rawObj.data && typeof rawObj.data === 'object' ? rawObj.data : rawObj;
 
-    // Already v4 shape
     if (Array.isArray(inner.transactions) && Array.isArray(inner.savingsAccounts)) {
       return {
         version: '4.0',
@@ -1676,7 +2046,6 @@
       };
     }
 
-    // Legacy v2.2 / v3.0 shape migration
     const hasLegacyArrays = Array.isArray(inner.expenseTx) || Array.isArray(inner.incomeTx) || Array.isArray(inner.vaultTx) || inner.profile;
     if (!hasLegacyArrays) return null;
 
@@ -1751,14 +2120,10 @@
     return {
       version: '4.0',
       updatedAt: Number(inner.updatedAt || Date.now()),
-      profile: {
+      profile: Object.assign({}, DEFAULT_STATE.profile, {
         name: nameStr,
-        initials: initialsStr,
-        monthlyIncomeTarget: 0,
-        openingCash: 0,
-        currency: 'IDR',
-        hideBalances: false
-      },
+        initials: initialsStr
+      }),
       budgets: DEFAULT_BUDGETS.slice(),
       savingsAccounts: accounts,
       quickActions: DEFAULT_QUICK_ACTIONS.slice(),
@@ -1767,7 +2132,7 @@
         {
           id: 'mig_v4_' + Date.now(),
           tone: 'gold',
-          title: 'Data lama berhasil dimigrasikan ke Owen\'s Vault 4.0',
+          title: "Data lama berhasil dimigrasikan ke Owen's Vault 4.0",
           time: clockNow(),
           read: false
         }
@@ -1850,8 +2215,74 @@
   let editingBudgetId = null;
   let editingSavingsId = null;
   let toastTimer = null;
+  let enteredPin = '';
+  let isVaultLocked = false;
 
-  /* ACCURATE ACCOUNTING ENGINE */
+  /* PIN LOCK ENGINE */
+  function initPinGateOnBoot() {
+    if (state.profile && state.profile.pinEnabled && state.profile.pinHash) {
+      isVaultLocked = true;
+      enteredPin = '';
+      document.getElementById('pinError').textContent = '';
+      renderPinDots();
+      document.getElementById('pinLockScreen').classList.remove('hidden');
+    } else {
+      isVaultLocked = false;
+      document.getElementById('pinLockScreen').classList.add('hidden');
+    }
+  }
+
+  function lockVaultNow() {
+    if (!state.profile || !state.profile.pinEnabled || !state.profile.pinHash) {
+      openProfileModal();
+      showToast('Aktifkan PIN dulu di bagian bawah menu Profil', 'gold');
+      return;
+    }
+    isVaultLocked = true;
+    enteredPin = '';
+    document.getElementById('pinError').textContent = '';
+    renderPinDots();
+    document.getElementById('pinLockScreen').classList.remove('hidden');
+  }
+
+  function renderPinDots() {
+    const dots = document.querySelectorAll('#pinDots .pin-dot');
+    dots.forEach(function(d, idx) {
+      d.classList.toggle('filled', idx < enteredPin.length);
+    });
+  }
+
+  function pressPinKey(digit) {
+    if (enteredPin.length >= 6) return;
+    enteredPin += String(digit);
+    document.getElementById('pinError').textContent = '';
+    renderPinDots();
+
+    if (enteredPin.length >= 4 && hashPinValue(enteredPin) === state.profile.pinHash) {
+      isVaultLocked = false;
+      enteredPin = '';
+      document.getElementById('pinLockScreen').classList.add('hidden');
+      showToast('Vault terbuka', 'ok');
+    } else if (enteredPin.length === 6) {
+      document.getElementById('pinError').textContent = 'PIN salah, coba lagi';
+      enteredPin = '';
+      setTimeout(renderPinDots, 160);
+    }
+  }
+
+  function backspacePinEntry() {
+    enteredPin = enteredPin.slice(0, -1);
+    document.getElementById('pinError').textContent = '';
+    renderPinDots();
+  }
+
+  function clearPinEntry() {
+    enteredPin = '';
+    document.getElementById('pinError').textContent = '';
+    renderPinDots();
+  }
+
+  /* ACCOUNTING ENGINE */
   function computeAccounting() {
     const accounts = state.savingsAccounts || [];
     const accMap = {};
@@ -1866,7 +2297,6 @@
 
     let spendingCash = Number(state.profile.openingCash) || 0;
 
-    // Process chronological transactions so withdrawals & transfers are accurate
     const ordered = state.transactions.slice().sort(function(a, b) {
       return a.date.localeCompare(b.date) || a.id.localeCompare(b.id);
     });
@@ -1880,33 +2310,20 @@
       } else if (tx.type === 'expense') {
         spendingCash -= amt;
       } else if (tx.type === 'savings_contribution') {
-        // Rule 1: reduces available spending balance, increases selected savings account; not an expense
         const aid = accMap[tx.accountId] ? tx.accountId : (accounts[0] && accounts[0].id);
         spendingCash -= amt;
         if (aid) {
           accBalances[aid] = (accBalances[aid] || 0) + amt;
-          accLedger[aid].unshift({
-            date: tx.date,
-            kind: 'in',
-            amount: amt,
-            note: tx.note || 'Setor tabungan'
-          });
+          accLedger[aid].unshift({ date: tx.date, kind: 'in', amount: amt, note: tx.note || 'Setor tabungan' });
         }
       } else if (tx.type === 'savings_withdrawal') {
-        // Rule 2: increases available spending balance, decreases selected savings account
         const aid = accMap[tx.accountId] ? tx.accountId : (accounts[0] && accounts[0].id);
         spendingCash += amt;
         if (aid) {
           accBalances[aid] = (accBalances[aid] || 0) - amt;
-          accLedger[aid].unshift({
-            date: tx.date,
-            kind: 'out',
-            amount: amt,
-            note: tx.note || 'Tarik tabungan'
-          });
+          accLedger[aid].unshift({ date: tx.date, kind: 'out', amount: amt, note: tx.note || 'Tarik tabungan' });
         }
       } else if (tx.type === 'internal_transfer') {
-        // Rule 3 & 4: never income/expense, never inflates total net worth
         const fromId = tx.fromAccount || 'cash';
         const toId = tx.toAccount || (accounts[0] && accounts[0].id) || 'cash';
         if (fromId === 'cash' && accMap[toId]) {
@@ -1929,30 +2346,17 @@
       }
     });
 
-    const totalSavings = accounts.reduce(function(sum, a) {
-      return sum + (accBalances[a.id] || 0);
-    }, 0);
-
+    const totalSavings = accounts.reduce(function(sum, a) { return sum + (accBalances[a.id] || 0); }, 0);
     const emergencyBalance = accounts
       .filter(function(a) { return a.kind === 'emergency'; })
       .reduce(function(sum, a) { return sum + (accBalances[a.id] || 0); }, 0);
-
-    // Rule 4 & 5: Net worth = spendingCash + totalSavings (contributions are transfers between cash & savings, not expenses)
     const netWorth = spendingCash + totalSavings;
 
     const monthTxs = state.transactions.filter(function(t) { return t.date.slice(0, 7) === activeYM; });
-    const monthlyIncome = monthTxs
-      .filter(function(t) { return t.type === 'income'; })
-      .reduce(function(s, t) { return s + t.amount; }, 0);
-
-    const monthlyExpense = monthTxs
-      .filter(function(t) { return t.type === 'expense'; })
-      .reduce(function(s, t) { return s + t.amount; }, 0);
-
+    const monthlyIncome = monthTxs.filter(function(t) { return t.type === 'income'; }).reduce(function(s, t) { return s + t.amount; }, 0);
+    const monthlyExpense = monthTxs.filter(function(t) { return t.type === 'expense'; }).reduce(function(s, t) { return s + t.amount; }, 0);
     const monthlyNetCashflow = monthlyIncome - monthlyExpense;
-    const savingsRate = monthlyIncome > 0
-      ? Math.round(((monthlyIncome - monthlyExpense) / monthlyIncome) * 100)
-      : 0;
+    const savingsRate = monthlyIncome > 0 ? Math.round(((monthlyIncome - monthlyExpense) / monthlyIncome) * 100) : 0;
 
     return {
       spendingCash: spendingCash,
@@ -2014,11 +2418,12 @@
     const idbLen = idbData.transactions.length + idbData.savingsAccounts.length;
     if ((localLen === 0 && idbLen > 0) || ((idbData.updatedAt || 0) > (state.updatedAt || 0) && idbLen >= localLen)) {
       state = writeMirrors(idbData);
+      applyThemeToDocument(state.profile);
+      initPinGateOnBoot();
       renderAll();
     }
   });
 
-  /* NAVIGATION & PERIOD */
   function switchTab(tab) {
     activeTab = tab;
     const tabs = ['dashboard', 'calendar', 'budget', 'savings'];
@@ -2058,21 +2463,21 @@
     persist();
   }
 
-  /* RENDERERS */
   function renderAll() {
+    applyThemeToDocument(state.profile);
     const acc = computeAccounting();
     const prof = state.profile;
+    const presetObj = THEME_PRESETS[prof.themePreset] || THEME_PRESETS.emerald;
 
     document.getElementById('topName').textContent = prof.name || 'Owen';
     document.getElementById('topAvatar').textContent = (prof.initials || 'OW').slice(0, 2).toUpperCase();
-    document.getElementById('topSubtitle').textContent = 'Vault 4.0 • ' + (prof.currency || 'IDR');
+    document.getElementById('topSubtitle').textContent = 'Vault 4.0 • ' + presetObj.name;
 
     const mParts = activeYM.split('-');
     const mDate = new Date(Number(mParts[0]), Number(mParts[1]) - 1, 1);
     document.getElementById('monthTitle').textContent = mDate.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
     document.getElementById('monthSub').textContent = activeYM === getCurrentYM() ? 'Bulan Aktif • Tap untuk reset' : 'Arsip Bulan • Tap ke bulan ini';
 
-    // Dashboard Hero & Metrics
     document.getElementById('heroAvailableBalance').textContent = displayMoney(acc.spendingCash);
     const cfBadge = document.getElementById('cashFlowBadge');
     cfBadge.textContent = 'Arus Kas ' + (acc.monthlyNetCashflow >= 0 ? '+' : '') + formatRp(acc.monthlyNetCashflow);
@@ -2119,6 +2524,9 @@
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, w, h);
 
+    const primaryCol = (state.profile && state.profile.primaryColor) || '#10B981';
+    const goldCol = (state.profile && state.profile.accentColor) || '#C6A15B';
+
     const buckets = buildWaveBuckets(waveFilter, activeYM);
     document.getElementById('wavePeriodSummary').textContent = waveFilter.charAt(0).toUpperCase() + waveFilter.slice(1);
 
@@ -2138,17 +2546,12 @@
     const plotH = h - padT - padB;
     const count = Math.max(2, buckets.length);
 
-    function getX(idx) {
-      return padL + (idx / (count - 1)) * plotW;
-    }
-
+    function getX(idx) { return padL + (idx / (count - 1)) * plotW; }
     function getY(val) {
-      // Center baseline for net & prev, positive upward
       const norm = Math.max(-1, Math.min(1, val / maxMag));
       return padT + plotH * (0.5 - norm * 0.42);
     }
 
-    // Subtle horizontal grid lines
     ctx.strokeStyle = 'rgba(243, 244, 246, 0.06)';
     ctx.lineWidth = 1;
     [0.2, 0.5, 0.8].forEach(function(frac) {
@@ -2189,12 +2592,11 @@
       ctx.restore();
     }
 
-    drawSmoothWave(seriesPrev, 'rgba(198, 161, 91, 0.75)', null, true);
+    drawSmoothWave(seriesPrev, hexToRgba(goldCol, 0.78), null, true);
     drawSmoothWave(seriesExp, '#FB7185', 'rgba(251, 113, 133, 0.14)', false);
-    drawSmoothWave(seriesInc, '#34D399', 'rgba(52, 211, 153, 0.16)', false);
-    drawSmoothWave(seriesNet, '#10B981', 'rgba(16, 185, 129, 0.24)', false);
+    drawSmoothWave(seriesInc, '#34D399', 'rgba(52, 211, 153, 0.15)', false);
+    drawSmoothWave(seriesNet, primaryCol, hexToRgba(primaryCol, 0.24), false);
 
-    // X-axis labels
     ctx.fillStyle = '#9CA3AF';
     ctx.font = '600 10px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.textAlign = 'center';
@@ -2270,7 +2672,6 @@
       return out;
     }
 
-    // Default monthly (last 6 months up to activeYM)
     const out = [];
     for (let i = -5; i <= 0; i++) {
       const dt = new Date(y, m + i, 1);
@@ -2323,7 +2724,6 @@
     const box = document.getElementById('insightsList');
     const items = [];
 
-    // Highest spending category this month
     const catTotals = {};
     acc.monthTxs.filter(function(t) { return t.type === 'expense'; }).forEach(function(t) {
       catTotals[t.category] = (catTotals[t.category] || 0) + t.amount;
@@ -2344,7 +2744,6 @@
       });
     }
 
-    // Budget warnings
     let overBudgets = 0;
     (state.budgets || []).forEach(function(b) {
       const spent = catTotals[b.category] || 0;
@@ -2352,18 +2751,17 @@
     });
     if (overBudgets > 0) {
       items.push({
-        tag: 'Peringatan Anggaran',
+        tag: 'Peringatan Budget',
         title: overBudgets + ' kategori mendekati atau melewati batas',
         sub: 'Periksa tab Budget untuk menyesuaikan alokasi bulanan.'
       });
     }
 
-    // Savings progress insight
     const totalGoalTarget = (state.savingsAccounts || []).reduce(function(s, a) { return s + (Number(a.goalTarget) || 0); }, 0);
     if (totalGoalTarget > 0) {
       const pct = Math.min(100, Math.max(0, Math.round((acc.totalSavings / totalGoalTarget) * 100)));
       items.push({
-        tag: 'Progres Tabungan',
+        tag: 'Progres Vault',
         title: 'Terkumpul ' + pct + '% dari total target rekening',
         sub: 'Total tabungan ' + displayMoney(acc.totalSavings) + ' dari ' + formatRp(totalGoalTarget) + '.'
       });
@@ -2373,7 +2771,7 @@
       return '<div class="row-card">' +
         '<div class="row-left">' +
           '<div class="badge-icon gold">IN</div>' +
-          '<div>' +
+          '<div class="row-content">' +
             '<div class="row-title">' + escapeHtml(it.title) + '</div>' +
             '<div class="row-sub">' + escapeHtml(it.sub) + '</div>' +
           '</div>' +
@@ -2457,8 +2855,8 @@
       return '<div class="row-card">' +
         '<div class="row-left">' +
           '<div class="badge-icon' + (t.type === 'internal_transfer' ? ' gold' : '') + '">' + codeBadge + '</div>' +
-          '<div>' +
-            '<div class="row-title">' + escapeHtml(t.note || t.category) + '</div>' +
+          '<div class="row-content">' +
+            '<div class="row-title single-line">' + escapeHtml(t.note || t.category) + '</div>' +
             '<div class="row-sub">' + escapeHtml(typeLabels[t.type] || t.type) + ' • ' + escapeHtml(t.category) + ' • ' + t.date + '</div>' +
           '</div>' +
         '</div>' +
@@ -2473,7 +2871,6 @@
     }).join('');
   }
 
-  /* CALENDAR TAB */
   function renderCalendarTab(acc) {
     const parts = activeYM.split('-');
     const y = Number(parts[0]);
@@ -2539,7 +2936,7 @@
       return '<div class="row-card">' +
         '<div class="row-left">' +
           '<div class="badge-icon">' + (isPos ? '+' : isNeg ? '-' : '•') + '</div>' +
-          '<div>' +
+          '<div class="row-content">' +
             '<div class="row-title">' + escapeHtml(t.note || t.category) + '</div>' +
             '<div class="row-sub">' + escapeHtml(t.category) + '</div>' +
           '</div>' +
@@ -2554,7 +2951,6 @@
     renderAll();
   }
 
-  /* BUDGET TAB */
   function renderBudgetTab(acc) {
     const spentByCat = {};
     acc.monthTxs.filter(function(t) { return t.type === 'expense'; }).forEach(function(t) {
@@ -2650,7 +3046,6 @@
     persist();
   }
 
-  /* SAVINGS ACCOUNTS & GOALS TAB */
   function renderSavingsTab(acc) {
     const accounts = state.savingsAccounts || [];
     const totalMonthlyTarget = accounts.reduce(function(s, a) { return s + (Number(a.monthlyTarget) || 0); }, 0);
@@ -2765,7 +3160,6 @@
     persist();
   }
 
-  /* TRANSACTION MODAL & CRUD */
   function populateTxDropdowns(selectedAccId, fromId, toId, selectedCat) {
     const catSel = document.getElementById('txCategory');
     const cats = new Set((state.budgets || []).map(function(b) { return b.category; }));
@@ -2901,25 +3295,69 @@
     persist();
   }
 
-  /* PROFILE, NOTIFICATIONS & BACKUP */
+  /* PROFILE, THEME CUSTOMIZER & PIN */
   function openProfileModal() {
-    document.getElementById('profName').value = state.profile.name || 'Owen';
-    document.getElementById('profInitials').value = state.profile.initials || 'OW';
-    document.getElementById('profMonthlyIncome').value = state.profile.monthlyIncomeTarget || 0;
-    document.getElementById('profOpeningCash').value = state.profile.openingCash || 0;
-    document.getElementById('profCurrency').value = state.profile.currency || 'IDR';
+    const p = state.profile;
+    const preset = THEME_PRESETS[p.themePreset] || THEME_PRESETS.emerald;
+    document.getElementById('profName').value = p.name || 'Owen';
+    document.getElementById('profInitials').value = p.initials || 'OW';
+    document.getElementById('profMonthlyIncome').value = p.monthlyIncomeTarget || 0;
+    document.getElementById('profOpeningCash').value = p.openingCash || 0;
+    document.getElementById('profCurrency').value = p.currency || 'IDR';
+    document.getElementById('customPrimaryColor').value = p.primaryColor || preset.primary;
+    document.getElementById('customAccentColor').value = p.accentColor || preset.gold;
+    document.getElementById('profPinEnabled').checked = !!p.pinEnabled;
+    document.getElementById('profNewPin').value = '';
     openModal('modalProfile');
+  }
+
+  function applyThemePreset(presetKey) {
+    const pr = THEME_PRESETS[presetKey] || THEME_PRESETS.emerald;
+    state.profile.themePreset = presetKey;
+    state.profile.primaryColor = pr.primary;
+    state.profile.accentColor = pr.gold;
+    document.getElementById('customPrimaryColor').value = pr.primary;
+    document.getElementById('customAccentColor').value = pr.gold;
+    applyThemeToDocument(state.profile);
+    renderWaveChart(computeAccounting());
+  }
+
+  function onCustomColorChange() {
+    state.profile.primaryColor = document.getElementById('customPrimaryColor').value;
+    state.profile.accentColor = document.getElementById('customAccentColor').value;
+    applyThemeToDocument(state.profile);
+    renderWaveChart(computeAccounting());
   }
 
   function saveProfilePreferences() {
     const name = String(document.getElementById('profName').value || '').trim() || 'Owen';
     const initials = String(document.getElementById('profInitials').value || name.slice(0, 2)).trim().toUpperCase().slice(0, 2) || 'OW';
+    const pinEnabled = document.getElementById('profPinEnabled').checked;
+    const rawNewPin = String(document.getElementById('profNewPin').value || '').trim();
+
+    if (rawNewPin) {
+      if (!/^\d{4,6}$/.test(rawNewPin)) {
+        showToast('PIN harus berupa 4 sampai 6 digit angka', 'warn');
+        return;
+      }
+      state.profile.pinHash = hashPinValue(rawNewPin);
+    }
+
+    if (pinEnabled && !state.profile.pinHash) {
+      showToast('Masukkan 4–6 digit PIN terlebih dahulu', 'warn');
+      return;
+    }
+
     state.profile.name = name;
     state.profile.initials = initials;
     state.profile.monthlyIncomeTarget = Math.max(0, Math.round(Number(document.getElementById('profMonthlyIncome').value) || 0));
     state.profile.openingCash = Math.round(Number(document.getElementById('profOpeningCash').value) || 0);
     state.profile.currency = document.getElementById('profCurrency').value || 'IDR';
-    pushNotification('Preferensi profil diperbarui', 'ok');
+    state.profile.primaryColor = document.getElementById('customPrimaryColor').value || '#10B981';
+    state.profile.accentColor = document.getElementById('customAccentColor').value || '#C6A15B';
+    state.profile.pinEnabled = pinEnabled;
+
+    pushNotification('Profil, tema & keamanan diperbarui', 'ok');
     persist();
     closeModal('modalProfile');
   }
@@ -2943,7 +3381,7 @@
     }
     el.innerHTML = list.map(function(n) {
       return '<div class="row-card">' +
-        '<div>' +
+        '<div class="row-content">' +
           '<div class="row-title">' + escapeHtml(n.title) + '</div>' +
           '<div class="row-sub">' + escapeHtml(n.time || '') + '</div>' +
         '</div>' +
@@ -3059,6 +3497,8 @@
   function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
 
   window.addEventListener('resize', function() { renderWaveChart(computeAccounting()); });
+  applyThemeToDocument(state.profile);
+  initPinGateOnBoot();
   renderAll();
 </script>
 </body>
