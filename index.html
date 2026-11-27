@@ -9,11 +9,11 @@
   <meta name="theme-color" content="#090c12" />
   <title>Owen's Vault 3.0</title>
 
-  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="" />
-  <link id="favicon" rel="icon" type="image/png" href="" />
+  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./icon.png?v=30" />
+  <link id="favicon" rel="icon" type="image/png" href="./icon.png?v=30" />
 
   <script>
-    (function generatePrivateBankingIcon() {
+    (function initVaultIcon() {
       try {
         const size = 512;
         const c = document.createElement('canvas');
@@ -80,11 +80,21 @@
         ctx.font = '700 20px -apple-system, BlinkMacSystemFont, sans-serif';
         ctx.fillText("OWEN'S VAULT", 256, 422);
 
-        const url = c.toDataURL('image/png');
-        const a = document.getElementById('apple-touch-icon');
-        const f = document.getElementById('favicon');
-        if (a) a.href = url;
-        if (f) f.href = url;
+        const canvasUrl = c.toDataURL('image/png');
+        const probe = new Image();
+        probe.onload = function() {
+          const a = document.getElementById('apple-touch-icon');
+          const f = document.getElementById('favicon');
+          if (a) a.href = './icon.png?v=30';
+          if (f) f.href = './icon.png?v=30';
+        };
+        probe.onerror = function() {
+          const a = document.getElementById('apple-touch-icon');
+          const f = document.getElementById('favicon');
+          if (a) a.href = canvasUrl;
+          if (f) f.href = canvasUrl;
+        };
+        probe.src = './icon.png?v=30';
       } catch (e) {}
     })();
   </script>
@@ -132,7 +142,6 @@
       padding: 0 16px;
     }
 
-    /* Top Bar */
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -197,7 +206,6 @@
       background: var(--surface-2);
     }
 
-    /* Month Switcher */
     .month-switcher {
       display: flex;
       align-items: center;
@@ -240,7 +248,6 @@
       color: var(--gold);
     }
 
-    /* Cards & Animations */
     .view-section {
       animation: fadeSlide 0.2s ease;
     }
@@ -299,6 +306,10 @@
       transition: width 0.35s ease;
     }
 
+    .progress-fill.done {
+      background: linear-gradient(90deg, #14b8a6, var(--income));
+    }
+
     .progress-fill.warn {
       background: linear-gradient(90deg, #f59e0b, var(--expense));
     }
@@ -354,12 +365,24 @@
       color: var(--text-muted);
     }
 
+    .mini-link-btn {
+      background: var(--gold-soft);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-bright);
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
     .chip-row {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 4px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       scrollbar-width: none;
     }
     .chip-row::-webkit-scrollbar { display: none; }
@@ -368,7 +391,7 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       color: var(--text-dim);
-      padding: 9px 13px;
+      padding: 8px 12px;
       border-radius: 13px;
       font-size: 12px;
       font-weight: 600;
@@ -377,10 +400,113 @@
       touch-action: manipulation;
     }
 
+    .chip.active {
+      background: var(--gold-soft);
+      border-color: var(--gold);
+      color: var(--gold-bright);
+    }
+
     .chip:active {
       transform: scale(0.95);
       border-color: var(--border-gold);
       color: var(--text);
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 13px;
+      border-radius: 14px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    .search-box:focus { border-color: var(--border-gold); }
+
+    /* Saweria-style Goal Cards */
+    .goal-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .goal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 15px;
+    }
+
+    .goal-card.reached {
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+
+    .goal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .goal-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .goal-emoji {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .goal-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .goal-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .goal-pct-pill {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: var(--gold-bright);
+      flex-shrink: 0;
+    }
+
+    .goal-card.reached .goal-pct-pill {
+      background: rgba(45, 212, 191, 0.14);
+      color: var(--income);
+    }
+
+    .goal-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
     /* Calendar */
@@ -527,11 +653,15 @@
       display: flex;
       align-items: center;
       gap: 11px;
+      min-width: 0;
+      flex: 1;
+      padding-right: 8px;
     }
 
     .tx-badge {
       width: 40px;
       height: 40px;
+      flex-shrink: 0;
       border-radius: 13px;
       background: var(--surface-2);
       border: 1px solid var(--border);
@@ -546,15 +676,22 @@
       font-weight: 600;
       margin-bottom: 2px;
       color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .tx-sub {
       font-size: 11px;
       color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .tx-right {
       text-align: right;
+      flex-shrink: 0;
     }
 
     .tx-val {
@@ -567,27 +704,35 @@
     .tx-val.minus { color: var(--expense); }
     .tx-val.extra { color: var(--gold); }
 
-    .tx-del {
+    .tx-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 3px;
+    }
+
+    .tx-act {
       background: none;
       border: none;
       color: var(--text-muted);
       font-size: 11px;
-      margin-top: 3px;
       cursor: pointer;
       touch-action: manipulation;
     }
+
+    .tx-act.edit:hover, .tx-act.edit:active { color: var(--gold); }
+    .tx-act.del:hover, .tx-act.del:active { color: var(--expense); }
 
     .empty-box {
       background: var(--surface);
       border: 1px dashed var(--border);
       border-radius: 16px;
-      padding: 24px 14px;
+      padding: 20px 14px;
       text-align: center;
       font-size: 13px;
       color: var(--text-muted);
     }
 
-    /* Bottom Dock + FAB */
     .dock-wrap {
       position: fixed;
       left: 0;
@@ -655,7 +800,6 @@
 
     .fab-add:active { transform: scale(0.92); }
 
-    /* Modal */
     .modal-bg {
       position: fixed;
       inset: 0;
@@ -804,13 +948,12 @@
 <body>
 
 <div class="app">
-  <!-- TOP HEADER -->
   <header class="topbar">
     <button type="button" class="user-pill" onclick="openProfileModal()">
       <div class="avatar" id="topAvatar">O</div>
       <div class="user-meta">
         <strong id="topName">Owen</strong>
-        <span id="storageStatusText">Vault 3.0 • Auto-Mirror Aktif</span>
+        <span>Vault 3.0 • Private Edition</span>
       </div>
     </button>
 
@@ -821,7 +964,6 @@
     </div>
   </header>
 
-  <!-- MONTH SWITCHER -->
   <div class="month-switcher" id="monthSwitcher">
     <button type="button" class="month-btn" onclick="shiftMonth(-1)">‹</button>
     <div class="month-center" onclick="jumpToCurrentMonth()">
@@ -864,10 +1006,10 @@
       <h3>Aksi Cepat</h3>
     </div>
     <div class="chip-row">
-      <button type="button" class="chip" onclick="quickExp('Makan', 15000, '🍜', false)">🍜 Makan 15rb</button>
+      <button type="button" class="chip" onclick="quickExp('Makan & Minum', 15000, '🍜', false)">🍜 Makan 15rb</button>
       <button type="button" class="chip" onclick="quickExp('Rokok', 28000, '🚬', false)">🚬 Rokok 28rb</button>
-      <button type="button" class="chip" onclick="quickExp('Bensin', 20000, '⛽', false)">⛽ Bensin 20rb</button>
-      <button type="button" class="chip" onclick="quickExp('Ngopi (Ekstra)', 25000, '☕', true)">☕ Ngopi 25rb</button>
+      <button type="button" class="chip" onclick="quickExp('Transport & Bensin', 20000, '⛽', false)">⛽ Bensin 20rb</button>
+      <button type="button" class="chip" onclick="quickExp('Ngopi / Nongkrong', 25000, '☕', true)">☕ Ngopi 25rb</button>
       <button type="button" class="chip" onclick="quickInc('Tips / Bonus', 50000, '✨', 'bonus')">✨ Tips 50rb</button>
     </div>
 
@@ -875,6 +1017,16 @@
       <h3>Aktivitas Bulan Ini</h3>
       <span id="homeTxCount">0 item</span>
     </div>
+
+    <div class="chip-row" id="filterRow">
+      <button type="button" class="chip active" data-f="all" onclick="setHomeFilter('all')">Semua</button>
+      <button type="button" class="chip" data-f="inc" onclick="setHomeFilter('inc')">Income</button>
+      <button type="button" class="chip" data-f="exp" onclick="setHomeFilter('exp')">Pengeluaran</button>
+      <button type="button" class="chip" data-f="extra" onclick="setHomeFilter('extra')">Ekstra</button>
+    </div>
+
+    <input type="text" id="homeSearch" class="search-box" placeholder="Cari catatan atau kategori..." oninput="renderAll()" />
+
     <div class="tx-list" id="homeTxList"></div>
   </section>
 
@@ -935,7 +1087,7 @@
     </div>
   </section>
 
-  <!-- TAB 4: PIGGY VAULT -->
+  <!-- TAB 4: PIGGY VAULT + GOALS BAR -->
   <section id="secVault" class="view-section hidden">
     <div class="card balance-card">
       <div class="eyebrow">
@@ -948,9 +1100,15 @@
       </div>
       <div class="card-foot">
         <span>Terkumpul</span>
-        <span id="vaultTargetVal">Target: Rp 10.000.000</span>
+        <span id="vaultTargetVal">Target Utama: Rp 10.000.000</span>
       </div>
     </div>
+
+    <div class="section-head">
+      <h3>Target Barang / Goals</h3>
+      <button type="button" class="mini-link-btn" onclick="openGoalModal()">+ Tambah Goal</button>
+    </div>
+    <div class="goal-stack" id="goalsList"></div>
 
     <div class="section-head">
       <h3>Setor Cepat ke Vault</h3>
@@ -970,7 +1128,6 @@
   </section>
 </div>
 
-<!-- BOTTOM NAVIGATION DOCK -->
 <div class="dock-wrap">
   <nav class="dock">
     <button type="button" class="dock-btn active" id="navHome" onclick="setNav('home')">
@@ -989,15 +1146,15 @@
   </nav>
 </div>
 
-<!-- MODAL TAMBAH TRANSAKSI -->
+<!-- MODAL TAMBAH / EDIT TRANSAKSI -->
 <div class="modal-bg" id="modalAdd" onclick="backdropClose(event, 'modalAdd')">
   <div class="modal-card">
     <div class="modal-top">
-      <h3>Tambah Transaksi</h3>
+      <h3 id="modalAddTitle">Tambah Transaksi</h3>
       <button type="button" class="x-btn" onclick="closeModal('modalAdd')">✕</button>
     </div>
 
-    <div class="type-grid">
+    <div class="type-grid" id="typeSelectorGrid">
       <button type="button" class="type-opt active" id="optExp" onclick="chooseTxType('expense')">💸 Pengeluaran</button>
       <button type="button" class="type-opt" id="optInc" onclick="chooseTxType('income')">💼 Income / Salary</button>
       <button type="button" class="type-opt" id="optVin" onclick="chooseTxType('vault_in')">🐷 Nabung Vault</button>
@@ -1045,7 +1202,34 @@
       <span>Tandai sebagai <b>Dana Ekstra</b> (tidak memotong limit harian)</span>
     </label>
 
-    <button type="button" class="btn-main" onclick="submitTransaction()">Simpan</button>
+    <button type="button" class="btn-main" id="btnSaveTx" onclick="submitTransaction()">Simpan</button>
+  </div>
+</div>
+
+<!-- MODAL TAMBAH / EDIT GOAL BAR -->
+<div class="modal-bg" id="modalGoal" onclick="backdropClose(event, 'modalGoal')">
+  <div class="modal-card">
+    <div class="modal-top">
+      <h3 id="modalGoalTitle">Target Barang / Goal</h3>
+      <button type="button" class="x-btn" onclick="closeModal('modalGoal')">✕</button>
+    </div>
+
+    <div class="field">
+      <label>Ikon / Emoji</label>
+      <input type="text" id="goalEmoji" class="input" value="🎯" maxlength="4" />
+    </div>
+
+    <div class="field">
+      <label>Nama Barang / Target</label>
+      <input type="text" id="goalTitle" class="input" placeholder="Contoh: Grinder / Sepatu / Liburan" />
+    </div>
+
+    <div class="field">
+      <label>Target Nominal (Rp)</label>
+      <input type="number" id="goalTargetAmount" class="input" placeholder="Contoh: 1500000" inputmode="numeric" />
+    </div>
+
+    <button type="button" class="btn-main" onclick="saveGoalItem()">Simpan Goal</button>
   </div>
 </div>
 
@@ -1068,7 +1252,7 @@
     </div>
 
     <div class="field">
-      <label>Target Tabungan Vault (Rp)</label>
+      <label>Target Tabungan Vault Utama (Rp)</label>
       <input type="number" id="profVaultTarget" class="input" inputmode="numeric" />
     </div>
 
@@ -1125,7 +1309,8 @@
     },
     vaultTx: [],
     expenseTx: [],
-    incomeTx: []
+    incomeTx: [],
+    goals: []
   };
 
   function getTodayISO() {
@@ -1152,6 +1337,20 @@
       });
   }
 
+  function normalizeGoalsList(list) {
+    if (!Array.isArray(list)) return [];
+    return list
+      .filter(function(g) { return g && String(g.title || '').trim() && Number(g.target) > 0; })
+      .map(function(g, idx) {
+        return {
+          id: String(g.id || ('goal_' + Date.now() + '_' + idx)),
+          emoji: String(g.emoji || '🎯').trim() || '🎯',
+          title: String(g.title).trim(),
+          target: Math.round(Number(g.target))
+        };
+      });
+  }
+
   function sanitizeStateObject(src) {
     if (!src || typeof src !== 'object') return null;
     const inner = src.data && typeof src.data === 'object' ? src.data : src;
@@ -1164,7 +1363,8 @@
       profile: Object.assign({}, DEFAULT_STATE.profile, inner.profile || {}),
       vaultTx: normalizeTxList(inner.vaultTx),
       expenseTx: normalizeTxList(inner.expenseTx),
-      incomeTx: normalizeTxList(inner.incomeTx)
+      incomeTx: normalizeTxList(inner.incomeTx),
+      goals: normalizeGoalsList(inner.goals)
     };
   }
 
@@ -1193,7 +1393,8 @@
           profile: v2.profile,
           vaultTx: v2.vaultTx,
           expenseTx: v2.expenseTx,
-          incomeTx: v2.incomeTx
+          incomeTx: v2.incomeTx,
+          goals: []
         });
       }
     } catch (e) {}
@@ -1210,7 +1411,6 @@
     return stamped;
   }
 
-  // IndexedDB Layer (penyimpanan lokal tambahan di browser)
   function openVaultIDB() {
     return new Promise(function(resolve, reject) {
       if (!('indexedDB' in window)) return reject(new Error('No IDB'));
@@ -1258,6 +1458,9 @@
   let activeYM = getCurrentYM();
   let selectedDayISO = getTodayISO();
   let chosenType = 'expense';
+  let homeFilter = 'all';
+  let editingTarget = null;
+  let editingGoalId = null;
 
   function persist(shouldClearIDB) {
     state = writeToLocalMirrors(state);
@@ -1269,11 +1472,10 @@
     renderAll();
   }
 
-  // Pulihkan dari IndexedDB jika localStorage kosong/terhapus
   loadFromIDB().then(function(idbState) {
     if (!idbState) return;
-    const localCount = state.vaultTx.length + state.expenseTx.length + state.incomeTx.length;
-    const idbCount = idbState.vaultTx.length + idbState.expenseTx.length + idbState.incomeTx.length;
+    const localCount = state.vaultTx.length + state.expenseTx.length + state.incomeTx.length + state.goals.length;
+    const idbCount = idbState.vaultTx.length + idbState.expenseTx.length + idbState.incomeTx.length + idbState.goals.length;
     if ((localCount === 0 && idbCount > 0) || ((idbState.updatedAt || 0) > (state.updatedAt || 0) && idbCount >= localCount)) {
       state = writeToLocalMirrors(idbState);
       renderAll();
@@ -1317,10 +1519,59 @@
     renderAll();
   }
 
-  function getVaultBalance() {
+  function setHomeFilter(f) {
+    homeFilter = f;
+    document.querySelectorAll('#filterRow .chip').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-f') === f);
+    });
+    renderAll();
+  }
+
+  function getVaultBalance(excludeId) {
     return state.vaultTx.reduce(function(sum, t) {
+      if (excludeId && t.id === excludeId) return sum;
       return t.type === 'in' ? sum + t.amount : sum - t.amount;
     }, 0);
+  }
+
+  function renderGoalsSection(vaultBal) {
+    const listEl = document.getElementById('goalsList');
+    if (!state.goals.length) {
+      listEl.innerHTML = '<div class="empty-box">Belum ada target barang. Tap <b>+ Tambah Goal</b> untuk bikin progress bar ala Saweria.</div>';
+      return;
+    }
+
+    const usableSavings = Math.max(0, vaultBal);
+    listEl.innerHTML = state.goals.map(function(g) {
+      const targetVal = Math.max(1, Number(g.target) || 1);
+      const rawPct = Math.round((usableSavings / targetVal) * 100);
+      const barPct = Math.min(100, Math.max(0, rawPct));
+      const reached = usableSavings >= targetVal;
+      const missing = Math.max(0, targetVal - usableSavings);
+
+      return '<div class="goal-card' + (reached ? ' reached' : '') + '">' +
+        '<div class="goal-top">' +
+          '<div class="goal-title-wrap">' +
+            '<div class="goal-emoji">' + escapeHtml(g.emoji || '🎯') + '</div>' +
+            '<div>' +
+              '<div class="goal-name">' + escapeHtml(g.title) + '</div>' +
+              '<div class="goal-sub">Target: ' + rp(targetVal) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<span class="goal-pct-pill">' + (reached ? '100% Terkumpul' : rawPct + '%') + '</span>' +
+        '</div>' +
+        '<div class="progress-track" style="height:9px;margin-bottom:7px;">' +
+          '<div class="progress-fill' + (reached ? ' done' : '') + '" style="width:' + barPct + '%"></div>' +
+        '</div>' +
+        '<div class="goal-foot">' +
+          '<span>' + (reached ? 'Sudah tercapai di saldo Vault!' : 'Kurang ' + rp(missing) + ' lagi') + '</span>' +
+          '<div class="tx-actions" style="margin-top:0;">' +
+            '<button type="button" class="tx-act edit" onclick="openGoalModal(\'' + g.id + '\')">Edit</button>' +
+            '<button type="button" class="tx-act del" onclick="removeGoal(\'' + g.id + '\')">Hapus</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
   }
 
   function renderAll() {
@@ -1345,7 +1596,6 @@
     const totalExp = regularExp + extraExp;
     const netCash = totalInc - totalExp;
 
-    // HOME
     document.getElementById('homeNetBalance').textContent = (netCash < 0 ? '-' : '') + rp(Math.abs(netCash));
     document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--text)' : 'var(--expense)';
     const cashBadge = document.getElementById('homeCashBadge');
@@ -1380,21 +1630,30 @@
     }
     document.getElementById('todayExtraVal').textContent = 'Ekstra Bulan Ini: ' + rp(extraExp);
 
-    const combinedMonth = []
+    const query = (document.getElementById('homeSearch').value || '').trim().toLowerCase();
+    let combinedMonth = []
       .concat(monthInc.map(function(t) { return Object.assign({}, t, { _kind: 'inc' }); }))
-      .concat(monthExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }))
-      .sort(function(a, b) { return b.date.localeCompare(a.date) || Number(b.id) - Number(a.id); });
+      .concat(monthExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }));
+
+    if (homeFilter === 'inc') combinedMonth = combinedMonth.filter(function(t) { return t._kind === 'inc'; });
+    if (homeFilter === 'exp') combinedMonth = combinedMonth.filter(function(t) { return t._kind === 'exp' && !t.isExtra; });
+    if (homeFilter === 'extra') combinedMonth = combinedMonth.filter(function(t) { return t._kind === 'exp' && !!t.isExtra; });
+
+    if (query) {
+      combinedMonth = combinedMonth.filter(function(t) {
+        const hay = [t.note, t.category, t.label, t.date].join(' ').toLowerCase();
+        return hay.indexOf(query) !== -1;
+      });
+    }
+
+    combinedMonth.sort(function(a, b) { return b.date.localeCompare(a.date) || Number(b.id) - Number(a.id); });
 
     document.getElementById('homeTxCount').textContent = combinedMonth.length + ' item';
     document.getElementById('homeTxList').innerHTML = renderFeedItems(combinedMonth);
 
-    // CALENDAR
     renderCalendar(monthInc, monthExp);
-
-    // REPORT
     renderReport(salaryMain, salaryBonus, monthExp);
 
-    // VAULT
     const vaultBal = getVaultBalance();
     const vaultTarget = Math.max(1000, Number(prof.vaultTarget) || 10000000);
     const vaultPct = Math.min(100, Math.max(0, Math.round((vaultBal / vaultTarget) * 100)));
@@ -1402,8 +1661,10 @@
     document.getElementById('vaultTotalVal').textContent = rp(vaultBal);
     document.getElementById('vaultPctBadge').textContent = vaultPct + '%';
     document.getElementById('vaultBar').style.width = vaultPct + '%';
-    document.getElementById('vaultTargetVal').textContent = 'Target: ' + rp(vaultTarget);
+    document.getElementById('vaultTargetVal').textContent = 'Target Utama: ' + rp(vaultTarget);
     document.getElementById('vaultTxCount').textContent = state.vaultTx.length + ' item';
+
+    renderGoalsSection(vaultBal);
 
     const vaultSorted = state.vaultTx.slice().reverse();
     document.getElementById('vaultTxList').innerHTML = vaultSorted.length === 0
@@ -1420,7 +1681,10 @@
             '</div>' +
             '<div class="tx-right">' +
               '<span class="tx-val ' + (isIn ? 'plus' : 'minus') + '">' + (isIn ? '+' : '-') + rp(t.amount) + '</span>' +
-              '<button type="button" class="tx-del" onclick="removeVaultTx(\'' + t.id + '\')">Hapus</button>' +
+              '<div class="tx-actions">' +
+                '<button type="button" class="tx-act edit" onclick="openEditTx(\'vault\',\'' + t.id + '\')">Edit</button>' +
+                '<button type="button" class="tx-act del" onclick="removeVaultTx(\'' + t.id + '\')">Hapus</button>' +
+              '</div>' +
             '</div>' +
           '</div>';
         }).join('');
@@ -1428,7 +1692,7 @@
 
   function renderFeedItems(items) {
     if (!items.length) {
-      return '<div class="empty-box">Belum ada pemasukan atau pengeluaran di bulan ini.</div>';
+      return '<div class="empty-box">Belum ada transaksi yang cocok dengan filter/bulan ini.</div>';
     }
     return items.map(function(t) {
       if (t._kind === 'inc') {
@@ -1442,7 +1706,10 @@
           '</div>' +
           '<div class="tx-right">' +
             '<span class="tx-val plus">+' + rp(t.amount) + '</span>' +
-            '<button type="button" class="tx-del" onclick="removeIncomeTx(\'' + t.id + '\')">Hapus</button>' +
+            '<div class="tx-actions">' +
+              '<button type="button" class="tx-act edit" onclick="openEditTx(\'inc\',\'' + t.id + '\')">Edit</button>' +
+              '<button type="button" class="tx-act del" onclick="removeIncomeTx(\'' + t.id + '\')">Hapus</button>' +
+            '</div>' +
           '</div>' +
         '</div>';
       }
@@ -1457,7 +1724,10 @@
         '</div>' +
         '<div class="tx-right">' +
           '<span class="tx-val ' + valCls + '">-' + rp(t.amount) + '</span>' +
-          '<button type="button" class="tx-del" onclick="removeExpenseTx(\'' + t.id + '\')">Hapus</button>' +
+          '<div class="tx-actions">' +
+            '<button type="button" class="tx-act edit" onclick="openEditTx(\'exp\',\'' + t.id + '\')">Edit</button>' +
+            '<button type="button" class="tx-act del" onclick="removeExpenseTx(\'' + t.id + '\')">Hapus</button>' +
+          '</div>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -1570,10 +1840,76 @@
   }
 
   function openModal(id) { document.getElementById(id).classList.add('open'); }
-  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    if (id === 'modalAdd') editingTarget = null;
+    if (id === 'modalGoal') editingGoalId = null;
+  }
   function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
 
+  function openGoalModal(goalId) {
+    editingGoalId = goalId || null;
+    if (editingGoalId) {
+      const g = state.goals.find(function(item) { return item.id === editingGoalId; });
+      if (!g) return;
+      document.getElementById('modalGoalTitle').textContent = 'Edit Target Barang';
+      document.getElementById('goalEmoji').value = g.emoji || '🎯';
+      document.getElementById('goalTitle').value = g.title || '';
+      document.getElementById('goalTargetAmount').value = g.target || '';
+    } else {
+      document.getElementById('modalGoalTitle').textContent = 'Tambah Target Barang';
+      document.getElementById('goalEmoji').value = '🎯';
+      document.getElementById('goalTitle').value = '';
+      document.getElementById('goalTargetAmount').value = '';
+    }
+    openModal('modalGoal');
+  }
+
+  function saveGoalItem() {
+    const emoji = (document.getElementById('goalEmoji').value || '🎯').trim() || '🎯';
+    const title = (document.getElementById('goalTitle').value || '').trim();
+    const target = Math.round(Number(document.getElementById('goalTargetAmount').value));
+
+    if (!title) {
+      alert('Masukkan nama barang atau target.');
+      return;
+    }
+    if (!target || target <= 0) {
+      alert('Masukkan nominal target yang valid.');
+      return;
+    }
+
+    if (editingGoalId) {
+      state.goals = state.goals.map(function(g) {
+        if (g.id !== editingGoalId) return g;
+        return Object.assign({}, g, { emoji: emoji, title: title, target: target });
+      });
+    } else {
+      state.goals.push({
+        id: 'goal_' + Date.now(),
+        emoji: emoji,
+        title: title,
+        target: target
+      });
+    }
+
+    editingGoalId = null;
+    persist();
+    closeModal('modalGoal');
+  }
+
+  function removeGoal(id) {
+    if (!confirm('Hapus target barang ini?')) return;
+    state.goals = state.goals.filter(function(g) { return g.id !== id; });
+    persist();
+  }
+
   function openAddModal() {
+    editingTarget = null;
+    document.getElementById('modalAddTitle').textContent = 'Tambah Transaksi';
+    document.getElementById('btnSaveTx').textContent = 'Simpan';
+    document.getElementById('typeSelectorGrid').classList.remove('hidden');
+
     document.getElementById('txAmount').value = '';
     document.getElementById('txNote').value = '';
     document.getElementById('txExtra').checked = false;
@@ -1582,6 +1918,51 @@
 
     const initialType = activeNav === 'vault' ? 'vault_in' : 'expense';
     chooseTxType(initialType);
+    openModal('modalAdd');
+  }
+
+  function openEditTx(kind, id) {
+    let item = null;
+    if (kind === 'exp') item = state.expenseTx.find(function(t) { return t.id === id; });
+    if (kind === 'inc') item = state.incomeTx.find(function(t) { return t.id === id; });
+    if (kind === 'vault') item = state.vaultTx.find(function(t) { return t.id === id; });
+    if (!item) return;
+
+    editingTarget = { kind: kind, id: id };
+    document.getElementById('modalAddTitle').textContent = 'Edit Transaksi';
+    document.getElementById('btnSaveTx').textContent = 'Update Transaksi';
+    document.getElementById('typeSelectorGrid').classList.add('hidden');
+
+    document.getElementById('txDate').value = item.date || getTodayISO();
+    document.getElementById('txAmount').value = item.amount;
+    document.getElementById('txNote').value = item.note || '';
+
+    if (kind === 'exp') {
+      chosenType = 'expense';
+      document.getElementById('boxExpCat').classList.remove('hidden');
+      document.getElementById('boxIncKind').classList.add('hidden');
+      document.getElementById('boxExtra').classList.remove('hidden');
+      document.getElementById('txExtra').checked = !!item.isExtra;
+      const catPair = (item.icon || '💸') + '|' + (item.category || 'Umum');
+      const sel = document.getElementById('txExpCat');
+      const hasOpt = Array.prototype.some.call(sel.options, function(o) { return o.value === catPair; });
+      if (hasOpt) sel.value = catPair;
+    } else if (kind === 'inc') {
+      chosenType = 'income';
+      document.getElementById('boxExpCat').classList.add('hidden');
+      document.getElementById('boxIncKind').classList.remove('hidden');
+      document.getElementById('boxExtra').classList.add('hidden');
+      const incPair = (item.icon || '💼') + '|' + (item.kind || 'salary') + '|' + (item.label || 'Salary / Gaji');
+      const selInc = document.getElementById('txIncKind');
+      const hasIncOpt = Array.prototype.some.call(selInc.options, function(o) { return o.value === incPair; });
+      if (hasIncOpt) selInc.value = incPair;
+    } else {
+      chosenType = item.type === 'out' ? 'vault_out' : 'vault_in';
+      document.getElementById('boxExpCat').classList.add('hidden');
+      document.getElementById('boxIncKind').classList.add('hidden');
+      document.getElementById('boxExtra').classList.add('hidden');
+    }
+
     openModal('modalAdd');
   }
 
@@ -1605,6 +1986,55 @@
     }
     const dateVal = document.getElementById('txDate').value || getTodayISO();
     const noteVal = document.getElementById('txNote').value.trim();
+
+    if (editingTarget) {
+      if (editingTarget.kind === 'exp') {
+        const cat = document.getElementById('txExpCat').value.split('|');
+        const isExtra = document.getElementById('txExtra').checked;
+        state.expenseTx = state.expenseTx.map(function(t) {
+          if (t.id !== editingTarget.id) return t;
+          return Object.assign({}, t, {
+            amount: amount,
+            icon: cat[0],
+            category: cat[1],
+            note: noteVal,
+            isExtra: isExtra,
+            date: dateVal
+          });
+        });
+      } else if (editingTarget.kind === 'inc') {
+        const inc = document.getElementById('txIncKind').value.split('|');
+        state.incomeTx = state.incomeTx.map(function(t) {
+          if (t.id !== editingTarget.id) return t;
+          return Object.assign({}, t, {
+            amount: amount,
+            icon: inc[0],
+            kind: inc[1],
+            label: inc[2],
+            note: noteVal || inc[2],
+            date: dateVal
+          });
+        });
+      } else if (editingTarget.kind === 'vault') {
+        const targetItem = state.vaultTx.find(function(t) { return t.id === editingTarget.id; });
+        if (targetItem && targetItem.type === 'out' && amount > getVaultBalance(editingTarget.id)) {
+          alert('Saldo Vault tidak mencukupi untuk penarikan sebesar ' + rp(amount) + '.');
+          return;
+        }
+        state.vaultTx = state.vaultTx.map(function(t) {
+          if (t.id !== editingTarget.id) return t;
+          return Object.assign({}, t, {
+            amount: amount,
+            note: noteVal,
+            date: dateVal
+          });
+        });
+      }
+      editingTarget = null;
+      persist();
+      closeModal('modalAdd');
+      return;
+    }
 
     if (chosenType === 'expense') {
       const cat = document.getElementById('txExpCat').value.split('|');
@@ -1692,16 +2122,19 @@
   }
 
   function removeExpenseTx(id) {
+    if (!confirm('Hapus transaksi pengeluaran ini?')) return;
     state.expenseTx = state.expenseTx.filter(function(t) { return t.id !== id; });
     persist();
   }
 
   function removeIncomeTx(id) {
+    if (!confirm('Hapus transaksi income/salary ini?')) return;
     state.incomeTx = state.incomeTx.filter(function(t) { return t.id !== id; });
     persist();
   }
 
   function removeVaultTx(id) {
+    if (!confirm('Hapus mutasi Piggy Vault ini?')) return;
     state.vaultTx = state.vaultTx.filter(function(t) { return t.id !== id; });
     persist();
   }
