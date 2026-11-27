@@ -6,14 +6,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Owen's Vault 3.0" />
-  <meta name="theme-color" content="#090c12" />
+  <meta name="theme-color" content="#0b0d10" />
   <title>Owen's Vault 3.0</title>
 
-  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./icon.png?v=30" />
-  <link id="favicon" rel="icon" type="image/png" href="./icon.png?v=30" />
+  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./icon.png?v=32" />
+  <link id="favicon" rel="icon" type="image/png" href="./icon.png?v=32" />
 
   <script>
-    (function initVaultIcon() {
+    (function initMinimalIcon() {
       try {
         const size = 512;
         const c = document.createElement('canvas');
@@ -21,11 +21,7 @@
         c.height = size;
         const ctx = c.getContext('2d');
 
-        const bg = ctx.createRadialGradient(170, 120, 25, 256, 256, 360);
-        bg.addColorStop(0, '#1b2334');
-        bg.addColorStop(0.55, '#0e131e');
-        bg.addColorStop(1, '#07090f');
-        ctx.fillStyle = bg;
+        ctx.fillStyle = '#0b0d10';
         ctx.fillRect(0, 0, size, size);
 
         function rrect(x, y, w, h, r) {
@@ -38,55 +34,34 @@
           ctx.closePath();
         }
 
-        ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-        ctx.shadowBlur = 34;
-        ctx.shadowOffsetY = 18;
-        const boxGrad = ctx.createLinearGradient(104, 96, 408, 376);
-        boxGrad.addColorStop(0, '#1c2436');
-        boxGrad.addColorStop(1, '#0d111a');
-        rrect(104, 96, 304, 276, 56);
-        ctx.fillStyle = boxGrad;
+        rrect(96, 96, 320, 280, 56);
+        ctx.fillStyle = '#141922';
         ctx.fill();
-        ctx.restore();
-
-        const goldBorder = ctx.createLinearGradient(104, 96, 408, 372);
-        goldBorder.addColorStop(0, '#f3d59b');
-        goldBorder.addColorStop(0.5, 'rgba(229, 192, 123, 0.45)');
-        goldBorder.addColorStop(1, '#b68d40');
-        rrect(104, 96, 304, 276, 56);
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = goldBorder;
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'rgba(241, 245, 249, 0.16)';
         ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(256, 226, 74, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(229, 192, 123, 0.08)';
-        ctx.fill();
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = '#e5c07b';
-        ctx.stroke();
-
-        const textGrad = ctx.createLinearGradient(256, 185, 256, 265);
-        textGrad.addColorStop(0, '#fff0cc');
-        textGrad.addColorStop(1, '#d4a853');
-        ctx.fillStyle = textGrad;
-        ctx.font = '800 54px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('3.0', 256, 228);
 
         ctx.fillStyle = '#f8fafc';
-        ctx.font = '700 20px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.fillText("OWEN'S VAULT", 256, 422);
+        ctx.font = '800 62px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('3.0', 256, 224);
+
+        ctx.fillStyle = '#34d399';
+        ctx.font = '700 18px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText('VAULT', 256, 282);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '600 18px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText("OWEN'S VAULT", 256, 424);
 
         const canvasUrl = c.toDataURL('image/png');
         const probe = new Image();
         probe.onload = function() {
           const a = document.getElementById('apple-touch-icon');
           const f = document.getElementById('favicon');
-          if (a) a.href = './icon.png?v=30';
-          if (f) f.href = './icon.png?v=30';
+          if (a) a.href = './icon.png?v=32';
+          if (f) f.href = './icon.png?v=32';
         };
         probe.onerror = function() {
           const a = document.getElementById('apple-touch-icon');
@@ -94,27 +69,27 @@
           if (a) a.href = canvasUrl;
           if (f) f.href = canvasUrl;
         };
-        probe.src = './icon.png?v=30';
+        probe.src = './icon.png?v=32';
       } catch (e) {}
     })();
   </script>
 
   <style>
     :root {
-      --bg: #090c12;
-      --surface: #121722;
-      --surface-2: #181f2e;
-      --surface-3: #20293d;
-      --gold: #e5c07b;
-      --gold-bright: #f5d89c;
-      --gold-soft: rgba(229, 192, 123, 0.14);
-      --income: #2dd4bf;
+      --bg: #0b0d10;
+      --surface: #12161c;
+      --surface-2: #181d26;
+      --surface-3: #222936;
+      --ink: #f8fafc;
+      --ink-soft: #cbd5e1;
+      --ink-muted: #7c8798;
+      --accent: #f1f5f9;
+      --accent-soft: rgba(241, 245, 249, 0.1);
+      --income: #34d399;
       --expense: #fb7185;
-      --text: #f8fafc;
-      --text-dim: #cbd5e1;
-      --text-muted: #7c8aa3;
-      --border: rgba(226, 232, 240, 0.09);
-      --border-gold: rgba(229, 192, 123, 0.26);
+      --extra: #93c5fd;
+      --border: rgba(248, 250, 252, 0.08);
+      --border-strong: rgba(248, 250, 252, 0.16);
       --safe-top: env(safe-area-inset-top, 16px);
       --safe-bottom: env(safe-area-inset-bottom, 16px);
     }
@@ -128,10 +103,10 @@
     }
 
     body {
-      background: radial-gradient(circle at 50% -10%, #1c2436 0%, var(--bg) 56%);
-      color: var(--text);
+      background: var(--bg);
+      color: var(--ink);
       min-height: 100vh;
-      padding-top: calc(var(--safe-top) + 10px);
+      padding-top: calc(var(--safe-top) + 12px);
       padding-bottom: calc(var(--safe-bottom) + 106px);
       overflow-x: hidden;
     }
@@ -142,17 +117,80 @@
       padding: 0 16px;
     }
 
+    /* Live Notification Toast */
+    .toast-wrap {
+      position: fixed;
+      top: calc(var(--safe-top) + 8px);
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 0 16px;
+      z-index: 3000;
+      pointer-events: none;
+    }
+
+    .toast-card {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 458px;
+      background: rgba(24, 29, 38, 0.96);
+      border: 1px solid var(--border-strong);
+      border-radius: 15px;
+      padding: 11px 13px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .toast-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast-left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .toast-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--income);
+      flex-shrink: 0;
+    }
+
+    .toast-dot.warn { background: var(--expense); }
+    .toast-dot.info { background: var(--extra); }
+
+    .toast-msg {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .user-pill {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
       background: var(--surface);
       border: 1px solid var(--border);
       padding: 6px 14px 6px 6px;
@@ -162,13 +200,13 @@
     }
 
     .avatar {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--gold-bright), #b68d40);
-      color: #090c12;
+      background: var(--accent);
+      color: #0b0d10;
       font-weight: 800;
-      font-size: 15px;
+      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -178,21 +216,28 @@
       display: block;
       font-size: 14px;
       line-height: 1.15;
-      color: var(--text);
+      color: var(--ink);
     }
 
     .user-meta span {
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text-dim);
+      color: var(--ink-soft);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -202,8 +247,18 @@
     }
 
     .btn-icon:active {
-      transform: scale(0.92);
+      transform: scale(0.93);
       background: var(--surface-2);
+    }
+
+    .notif-badge {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--income);
     }
 
     .month-switcher {
@@ -212,25 +267,25 @@
       justify-content: space-between;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 8px 10px;
+      border-radius: 15px;
+      padding: 7px 9px;
       margin-bottom: 14px;
     }
 
     .month-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
       border: 1px solid var(--border);
       background: var(--surface-2);
-      color: var(--text);
-      font-size: 18px;
+      color: var(--ink);
+      font-size: 17px;
       font-weight: 700;
       cursor: pointer;
       touch-action: manipulation;
     }
 
-    .month-btn:active { transform: scale(0.92); }
+    .month-btn:active { transform: scale(0.93); }
 
     .month-center {
       text-align: center;
@@ -239,43 +294,42 @@
 
     .month-center strong {
       display: block;
-      font-size: 14px;
-      color: var(--text);
+      font-size: 13px;
+      color: var(--ink);
     }
 
     .month-center span {
       font-size: 11px;
-      color: var(--gold);
+      color: var(--ink-muted);
     }
 
     .view-section {
-      animation: fadeSlide 0.2s ease;
+      animation: fadeSlide 0.18s ease;
     }
 
     @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 22px;
+      border-radius: 20px;
       padding: 18px;
-      margin-bottom: 14px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      margin-bottom: 12px;
     }
 
     .balance-card {
-      background: linear-gradient(145deg, #1a2234 0%, #101520 100%);
-      border-color: var(--border-gold);
+      background: var(--surface-2);
+      border-color: var(--border-strong);
     }
 
     .eyebrow {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.85px;
-      color: var(--text-muted);
+      letter-spacing: 0.7px;
+      color: var(--ink-muted);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -286,14 +340,14 @@
     .big-amount {
       font-size: 30px;
       font-weight: 800;
-      letter-spacing: -0.8px;
+      letter-spacing: -0.7px;
       margin-bottom: 12px;
-      color: var(--text);
+      color: var(--ink);
     }
 
     .progress-track {
-      height: 8px;
-      background: rgba(255, 255, 255, 0.06);
+      height: 6px;
+      background: rgba(248, 250, 252, 0.08);
       border-radius: 99px;
       overflow: hidden;
       margin-bottom: 8px;
@@ -301,44 +355,39 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+      background: var(--accent);
       border-radius: 99px;
-      transition: width 0.35s ease;
+      transition: width 0.3s ease;
     }
 
-    .progress-fill.done {
-      background: linear-gradient(90deg, #14b8a6, var(--income));
-    }
-
-    .progress-fill.warn {
-      background: linear-gradient(90deg, #f59e0b, var(--expense));
-    }
+    .progress-fill.done { background: var(--income); }
+    .progress-fill.warn { background: var(--expense); }
 
     .card-foot {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 11px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .mini-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 13px 14px;
     }
 
     .mini-card small {
       display: block;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
       margin-bottom: 4px;
     }
 
@@ -351,26 +400,27 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 6px 0 10px;
+      margin: 8px 0 9px;
     }
 
     .section-head h3 {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--text-dim);
+      color: var(--ink-soft);
+      letter-spacing: 0.2px;
     }
 
     .section-head span {
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 11px;
+      color: var(--ink-muted);
     }
 
     .mini-link-btn {
-      background: var(--gold-soft);
-      border: 1px solid var(--border-gold);
-      color: var(--gold-bright);
+      background: var(--surface-2);
+      border: 1px solid var(--border-strong);
+      color: var(--ink);
       padding: 5px 10px;
-      border-radius: 10px;
+      border-radius: 9px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
@@ -382,17 +432,17 @@
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
       scrollbar-width: none;
     }
     .chip-row::-webkit-scrollbar { display: none; }
 
     .chip {
-      background: var(--surface-2);
+      background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text-dim);
+      color: var(--ink-soft);
       padding: 8px 12px;
-      border-radius: 13px;
+      border-radius: 11px;
       font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
@@ -401,54 +451,48 @@
     }
 
     .chip.active {
-      background: var(--gold-soft);
-      border-color: var(--gold);
-      color: var(--gold-bright);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0b0d10;
+      font-weight: 700;
     }
 
-    .chip:active {
-      transform: scale(0.95);
-      border-color: var(--border-gold);
-      color: var(--text);
-    }
+    .chip:active { transform: scale(0.95); }
 
     .search-box {
       width: 100%;
       background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--ink);
       padding: 10px 13px;
-      border-radius: 14px;
+      border-radius: 12px;
       font-size: 13px;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
       outline: none;
     }
 
-    .search-box:focus { border-color: var(--border-gold); }
+    .search-box:focus { border-color: var(--border-strong); }
 
-    /* Saweria-style Goal Cards */
     .goal-stack {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
       margin-bottom: 14px;
     }
 
     .goal-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px 15px;
+      border-radius: 16px;
+      padding: 13px 14px;
     }
 
-    .goal-card.reached {
-      border-color: rgba(45, 212, 191, 0.35);
-    }
+    .goal-card.reached { border-color: rgba(52, 211, 153, 0.3); }
 
     .goal-top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 10px;
       margin-bottom: 8px;
     }
@@ -461,42 +505,33 @@
     }
 
     .goal-emoji {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       background: var(--surface-2);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 17px;
       flex-shrink: 0;
     }
 
-    .goal-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .goal-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
+    .goal-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .goal-sub { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
 
     .goal-pct-pill {
-      font-size: 12px;
-      font-weight: 800;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: var(--gold-soft);
-      color: var(--gold-bright);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--ink-soft);
       flex-shrink: 0;
     }
 
     .goal-card.reached .goal-pct-pill {
-      background: rgba(45, 212, 191, 0.14);
+      background: rgba(52, 211, 153, 0.14);
       color: var(--income);
     }
 
@@ -505,8 +540,37 @@
       justify-content: space-between;
       align-items: center;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
       margin-top: 2px;
+    }
+
+    /* Notification Feed */
+    .notif-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .notif-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 11px 12px;
+    }
+
+    .notif-card.unread { border-color: var(--border-strong); }
+
+    .notif-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .notif-meta {
+      font-size: 11px;
+      color: var(--ink-muted);
     }
 
     /* Calendar */
@@ -515,7 +579,7 @@
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
       margin-bottom: 8px;
       font-weight: 600;
     }
@@ -528,8 +592,8 @@
 
     .cal-day {
       aspect-ratio: 1;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.025);
+      border-radius: 11px;
+      background: transparent;
       border: 1px solid transparent;
       display: flex;
       flex-direction: column;
@@ -537,53 +601,35 @@
       justify-content: center;
       font-size: 13px;
       font-weight: 600;
-      color: var(--text-dim);
+      color: var(--ink-soft);
       cursor: pointer;
       position: relative;
       touch-action: manipulation;
     }
 
-    .cal-day.empty {
-      background: transparent;
-      cursor: default;
-    }
-
-    .cal-day.today {
-      border-color: var(--border-gold);
-      color: var(--gold-bright);
-    }
-
-    .cal-day.selected {
-      background: linear-gradient(135deg, var(--gold-bright), #c99e4c);
-      color: #090c12;
-      font-weight: 800;
-    }
+    .cal-day.empty { cursor: default; }
+    .cal-day.today { border-color: var(--border-strong); color: var(--ink); }
+    .cal-day.selected { background: var(--accent); color: #0b0d10; font-weight: 800; }
 
     .cal-dots {
       display: flex;
       gap: 3px;
       margin-top: 3px;
-      height: 5px;
+      height: 4px;
     }
 
-    .dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-    }
-
+    .dot { width: 4px; height: 4px; border-radius: 50%; }
     .dot.inc { background: var(--income); }
     .dot.exp { background: var(--expense); }
-    .cal-day.selected .dot { background: #090c12; }
+    .cal-day.selected .dot { background: #0b0d10; }
 
-    /* Chart Bars */
     .chart-wrap {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 10px;
-      height: 150px;
-      padding-top: 16px;
+      height: 146px;
+      padding-top: 14px;
     }
 
     .chart-col {
@@ -604,8 +650,8 @@
     }
 
     .bar {
-      width: 11px;
-      border-radius: 6px 6px 2px 2px;
+      width: 10px;
+      border-radius: 5px 5px 2px 2px;
       min-height: 3px;
       transition: height 0.3s ease;
     }
@@ -615,28 +661,25 @@
 
     .chart-lbl {
       font-size: 10px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
       margin-top: 6px;
       font-weight: 600;
     }
 
-    .cat-row {
-      margin-bottom: 12px;
-    }
+    .cat-row { margin-bottom: 11px; }
 
     .cat-top {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
       margin-bottom: 5px;
-      color: var(--text-dim);
+      color: var(--ink-soft);
     }
 
-    /* Transactions */
     .tx-list {
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 8px;
     }
 
     .tx-item {
@@ -645,37 +688,37 @@
       align-items: center;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px 14px;
+      border-radius: 15px;
+      padding: 12px 13px;
     }
 
     .tx-left {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
       min-width: 0;
       flex: 1;
       padding-right: 8px;
     }
 
     .tx-badge {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       flex-shrink: 0;
-      border-radius: 13px;
+      border-radius: 11px;
       background: var(--surface-2);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .tx-title {
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 2px;
-      color: var(--text);
+      color: var(--ink);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -683,26 +726,17 @@
 
     .tx-sub {
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .tx-right {
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .tx-val {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
+    .tx-right { text-align: right; flex-shrink: 0; }
+    .tx-val { display: block; font-size: 14px; font-weight: 700; }
     .tx-val.plus { color: var(--income); }
     .tx-val.minus { color: var(--expense); }
-    .tx-val.extra { color: var(--gold); }
+    .tx-val.extra { color: var(--extra); }
 
     .tx-actions {
       display: flex;
@@ -714,23 +748,23 @@
     .tx-act {
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: var(--ink-muted);
       font-size: 11px;
       cursor: pointer;
       touch-action: manipulation;
     }
 
-    .tx-act.edit:hover, .tx-act.edit:active { color: var(--gold); }
-    .tx-act.del:hover, .tx-act.del:active { color: var(--expense); }
+    .tx-act.edit:active { color: var(--ink); }
+    .tx-act.del:active { color: var(--expense); }
 
     .empty-box {
       background: var(--surface);
       border: 1px dashed var(--border);
-      border-radius: 16px;
+      border-radius: 15px;
       padding: 20px 14px;
       text-align: center;
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--ink-muted);
     }
 
     .dock-wrap {
@@ -749,12 +783,12 @@
       pointer-events: auto;
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(18, 23, 34, 0.95);
-      border: 1px solid var(--border-gold);
+      gap: 5px;
+      background: rgba(18, 22, 28, 0.94);
+      border: 1px solid var(--border-strong);
       padding: 6px 8px;
-      border-radius: 22px;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+      border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -762,9 +796,9 @@
     .dock-btn {
       border: none;
       background: transparent;
-      color: var(--text-muted);
-      padding: 9px 11px;
-      border-radius: 15px;
+      color: var(--ink-muted);
+      padding: 8px 11px;
+      border-radius: 13px;
       font-size: 11px;
       font-weight: 700;
       display: flex;
@@ -775,35 +809,31 @@
       touch-action: manipulation;
     }
 
-    .dock-btn.active {
-      background: var(--surface-3);
-      color: var(--gold-bright);
-    }
+    .dock-btn.active { background: var(--surface-3); color: var(--ink); }
 
     .fab-add {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
       border: none;
-      background: linear-gradient(135deg, var(--gold-bright), #c99e4c);
-      color: #090c12;
-      font-size: 28px;
+      background: var(--accent);
+      color: #0b0d10;
+      font-size: 26px;
       font-weight: 800;
       line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(229, 192, 123, 0.32);
       touch-action: manipulation;
     }
 
-    .fab-add:active { transform: scale(0.92); }
+    .fab-add:active { transform: scale(0.93); }
 
     .modal-bg {
       position: fixed;
       inset: 0;
-      background: rgba(5, 7, 12, 0.85);
+      background: rgba(5, 7, 10, 0.82);
       display: none;
       align-items: flex-end;
       justify-content: center;
@@ -814,8 +844,8 @@
 
     .modal-card {
       background: var(--surface);
-      border-top: 1px solid var(--border-gold);
-      border-radius: 24px 24px 0 0;
+      border-top: 1px solid var(--border-strong);
+      border-radius: 22px 22px 0 0;
       width: 100%;
       max-width: 490px;
       padding: 20px 18px calc(var(--safe-bottom) + 24px);
@@ -827,10 +857,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 15px;
     }
 
-    .modal-top h3 { font-size: 17px; font-weight: 700; color: var(--text); }
+    .modal-top h3 { font-size: 16px; font-weight: 700; color: var(--ink); }
 
     .x-btn {
       width: 32px;
@@ -838,8 +868,8 @@
       border-radius: 10px;
       border: 1px solid var(--border);
       background: var(--surface-2);
-      color: var(--text);
-      font-size: 16px;
+      color: var(--ink);
+      font-size: 15px;
       cursor: pointer;
     }
 
@@ -847,35 +877,33 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 13px;
     }
 
     .type-opt {
       padding: 10px;
-      border-radius: 12px;
+      border-radius: 11px;
       border: 1px solid var(--border);
       background: var(--bg);
-      color: var(--text-muted);
+      color: var(--ink-muted);
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
     }
 
     .type-opt.active {
-      background: var(--gold-soft);
-      border-color: var(--gold);
-      color: var(--gold-bright);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0b0d10;
     }
 
-    .field {
-      margin-bottom: 13px;
-    }
+    .field { margin-bottom: 12px; }
 
     .field label {
       display: block;
       font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 6px;
+      color: var(--ink-soft);
+      margin-bottom: 5px;
       font-weight: 600;
     }
 
@@ -883,14 +911,14 @@
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
-      color: var(--text);
-      padding: 12px 13px;
-      border-radius: 12px;
+      color: var(--ink);
+      padding: 11px 13px;
+      border-radius: 11px;
       font-size: 15px;
       outline: none;
     }
 
-    .input:focus { border-color: var(--gold); }
+    .input:focus { border-color: var(--border-strong); }
 
     .check-box {
       display: flex;
@@ -898,20 +926,20 @@
       gap: 10px;
       background: var(--bg);
       border: 1px solid var(--border);
-      padding: 11px 12px;
-      border-radius: 12px;
-      margin-bottom: 14px;
+      padding: 10px 12px;
+      border-radius: 11px;
+      margin-bottom: 13px;
       font-size: 13px;
-      color: var(--text-dim);
+      color: var(--ink-soft);
     }
 
     .btn-main {
       width: 100%;
-      padding: 14px;
-      border-radius: 14px;
+      padding: 13px;
+      border-radius: 12px;
       border: none;
-      background: linear-gradient(135deg, var(--gold-bright), #c99e4c);
-      color: #090c12;
+      background: var(--accent);
+      color: #0b0d10;
       font-size: 15px;
       font-weight: 800;
       cursor: pointer;
@@ -920,10 +948,10 @@
     .btn-sub {
       width: 100%;
       padding: 12px;
-      border-radius: 12px;
+      border-radius: 11px;
       border: 1px solid var(--border);
       background: var(--surface-2);
-      color: var(--text);
+      color: var(--ink);
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 10px;
@@ -933,9 +961,9 @@
     .btn-warn {
       width: 100%;
       padding: 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(251, 113, 133, 0.35);
-      background: rgba(251, 113, 133, 0.12);
+      border-radius: 11px;
+      border: 1px solid rgba(251, 113, 133, 0.3);
+      background: rgba(251, 113, 133, 0.1);
       color: #fda4af;
       font-size: 13px;
       font-weight: 600;
@@ -947,19 +975,33 @@
 </head>
 <body>
 
+<div class="toast-wrap">
+  <div class="toast-card" id="toastCard">
+    <div class="toast-left">
+      <span class="toast-dot" id="toastDot"></span>
+      <span class="toast-msg" id="toastMsg">Update</span>
+    </div>
+    <button type="button" class="tx-act" onclick="hideToast()">Tutup</button>
+  </div>
+</div>
+
 <div class="app">
   <header class="topbar">
     <button type="button" class="user-pill" onclick="openProfileModal()">
       <div class="avatar" id="topAvatar">O</div>
       <div class="user-meta">
         <strong id="topName">Owen</strong>
-        <span>Vault 3.0 • Private Edition</span>
+        <span>Vault 3.0 • Minimal</span>
       </div>
     </button>
 
     <div class="top-actions">
+      <button type="button" class="btn-icon" onclick="openNotifModal()" aria-label="Notifications">
+        <span class="notif-badge hidden" id="notifDot"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      </button>
       <button type="button" class="btn-icon" onclick="openSettingsModal()" aria-label="Settings">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
     </div>
   </header>
@@ -978,11 +1020,11 @@
     <div class="card balance-card">
       <div class="eyebrow">
         <span>Saldo Kas Bulan Ini</span>
-        <span id="homeCashBadge" style="color: var(--gold);">Surplus</span>
+        <span id="homeCashBadge">Surplus</span>
       </div>
       <div class="big-amount" id="homeNetBalance">Rp 0</div>
       <div class="card-foot">
-        <span id="homeIncomeStat" style="color: var(--income);">Salary/Income: Rp 0</span>
+        <span id="homeIncomeStat" style="color: var(--income);">Masuk: Rp 0</span>
         <span id="homeExpenseStat" style="color: var(--expense);">Keluar: Rp 0</span>
       </div>
     </div>
@@ -998,13 +1040,11 @@
       </div>
       <div class="card-foot">
         <span id="todayRemainVal">Sisa: Rp 30.000</span>
-        <span id="todayExtraVal" style="color: var(--gold);">Ekstra Bulan Ini: Rp 0</span>
+        <span id="todayExtraVal" style="color: var(--extra);">Ekstra: Rp 0</span>
       </div>
     </div>
 
-    <div class="section-head">
-      <h3>Aksi Cepat</h3>
-    </div>
+    <div class="section-head"><h3>Aksi Cepat</h3></div>
     <div class="chip-row">
       <button type="button" class="chip" onclick="quickExp('Makan & Minum', 15000, '🍜', false)">🍜 Makan 15rb</button>
       <button type="button" class="chip" onclick="quickExp('Rokok', 28000, '🚬', false)">🚬 Rokok 28rb</button>
@@ -1026,7 +1066,6 @@
     </div>
 
     <input type="text" id="homeSearch" class="search-box" placeholder="Cari catatan atau kategori..." oninput="renderAll()" />
-
     <div class="tx-list" id="homeTxList"></div>
   </section>
 
@@ -1038,8 +1077,8 @@
       </div>
       <div class="cal-grid" id="calGrid"></div>
       <div class="card-foot" style="margin-top: 12px;">
-        <span><i class="dot inc" style="display:inline-block;margin-right:4px;"></i>Income/Salary</span>
-        <span><i class="dot exp" style="display:inline-block;margin-right:4px;"></i>Pengeluaran</span>
+        <span><i class="dot inc" style="display:inline-block;margin-right:5px;"></i>Masuk</span>
+        <span><i class="dot exp" style="display:inline-block;margin-right:5px;"></i>Keluar</span>
       </div>
     </div>
 
@@ -1061,12 +1100,10 @@
     <div class="tx-list" id="calDayList"></div>
   </section>
 
-  <!-- TAB 3: LAPORAN & GRAFIK -->
+  <!-- TAB 3: LAPORAN -->
   <section id="secReport" class="view-section hidden">
     <div class="card">
-      <div class="eyebrow">
-        <span>Grafik 6 Bulan (Mint: Masuk • Coral: Keluar)</span>
-      </div>
+      <div class="eyebrow"><span>Grafik 6 Bulan (Mint: Masuk • Rose: Keluar)</span></div>
       <div class="chart-wrap" id="sixMonthChart"></div>
     </div>
 
@@ -1077,7 +1114,7 @@
       </div>
       <div class="mini-card">
         <small>Tips / Bonus Bulan Ini</small>
-        <strong id="repSalaryBonus" style="color: var(--gold);">Rp 0</strong>
+        <strong id="repSalaryBonus" style="color: var(--ink);">Rp 0</strong>
       </div>
     </div>
 
@@ -1087,14 +1124,14 @@
     </div>
   </section>
 
-  <!-- TAB 4: PIGGY VAULT + GOALS BAR -->
+  <!-- TAB 4: PIGGY VAULT & GOALS -->
   <section id="secVault" class="view-section hidden">
     <div class="card balance-card">
       <div class="eyebrow">
         <span>Total Tabungan Vault</span>
-        <span id="vaultPctBadge" style="color: var(--gold);">0%</span>
+        <span id="vaultPctBadge">0%</span>
       </div>
-      <div class="big-amount" id="vaultTotalVal" style="color: var(--gold-bright);">Rp 0</div>
+      <div class="big-amount" id="vaultTotalVal">Rp 0</div>
       <div class="progress-track">
         <div class="progress-fill" id="vaultBar" style="width: 0%"></div>
       </div>
@@ -1110,9 +1147,7 @@
     </div>
     <div class="goal-stack" id="goalsList"></div>
 
-    <div class="section-head">
-      <h3>Setor Cepat ke Vault</h3>
-    </div>
+    <div class="section-head"><h3>Setor Cepat ke Vault</h3></div>
     <div class="chip-row">
       <button type="button" class="chip" onclick="quickVault(20000)">+ Rp 20rb</button>
       <button type="button" class="chip" onclick="quickVault(50000)">+ Rp 50rb</button>
@@ -1146,7 +1181,25 @@
   </nav>
 </div>
 
-<!-- MODAL TAMBAH / EDIT TRANSAKSI -->
+<!-- MODAL NOTIFIKASI -->
+<div class="modal-bg" id="modalNotif" onclick="backdropClose(event, 'modalNotif')">
+  <div class="modal-card">
+    <div class="modal-top">
+      <h3>Notifikasi & Update</h3>
+      <button type="button" class="x-btn" onclick="closeModal('modalNotif')">✕</button>
+    </div>
+
+    <button type="button" class="btn-sub" id="btnBrowserPerm" onclick="requestBrowserNotifPermission()">
+      🔔 Aktifkan Notifikasi Browser
+    </button>
+
+    <div class="notif-list" id="notifHistoryList"></div>
+
+    <button type="button" class="btn-warn" onclick="clearNotifHistory()">Bersihkan Riwayat Notif</button>
+  </div>
+</div>
+
+<!-- MODAL TRANSAKSI -->
 <div class="modal-bg" id="modalAdd" onclick="backdropClose(event, 'modalAdd')">
   <div class="modal-card">
     <div class="modal-top">
@@ -1206,7 +1259,7 @@
   </div>
 </div>
 
-<!-- MODAL TAMBAH / EDIT GOAL BAR -->
+<!-- MODAL GOAL -->
 <div class="modal-bg" id="modalGoal" onclick="backdropClose(event, 'modalGoal')">
   <div class="modal-card">
     <div class="modal-top">
@@ -1273,8 +1326,8 @@
       <button type="button" class="x-btn" onclick="closeModal('modalSettings')">✕</button>
     </div>
 
-    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-      Data otomatis dicadangkan ke Multi-Mirror & IndexedDB di browser perangkat ini saja (tidak dibagikan ke orang lain). File JSON tetap tersedia untuk pindah HP.
+    <p style="font-size: 12px; color: var(--ink-muted); margin-bottom: 14px;">
+      Data otomatis dicadangkan ke Multi-Mirror & IndexedDB di browser perangkat ini saja. File JSON tetap tersedia untuk pindah HP.
     </p>
 
     <button type="button" class="btn-sub" onclick="exportJson()">⬇️ Export Backup JSON (v3.0)</button>
@@ -1310,7 +1363,16 @@
     vaultTx: [],
     expenseTx: [],
     incomeTx: [],
-    goals: []
+    goals: [],
+    notifications: [
+      {
+        id: 'init_30',
+        tone: 'info',
+        title: "Owen's Vault 3.0 Minimal siap dipakai",
+        time: 'Baru saja',
+        read: false
+      }
+    ]
   };
 
   function getTodayISO() {
@@ -1320,6 +1382,11 @@
 
   function getCurrentYM() {
     return getTodayISO().slice(0, 7);
+  }
+
+  function nowClockLabel() {
+    const d = new Date();
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
   }
 
   function normalizeTxList(list, fallbackDate) {
@@ -1351,6 +1418,22 @@
       });
   }
 
+  function normalizeNotifList(list) {
+    if (!Array.isArray(list)) return DEFAULT_STATE.notifications.slice();
+    return list
+      .filter(function(n) { return n && String(n.title || '').trim(); })
+      .slice(0, 30)
+      .map(function(n, idx) {
+        return {
+          id: String(n.id || ('notif_' + Date.now() + '_' + idx)),
+          tone: n.tone === 'warn' || n.tone === 'info' ? n.tone : 'ok',
+          title: String(n.title).trim(),
+          time: String(n.time || nowClockLabel()),
+          read: !!n.read
+        };
+      });
+  }
+
   function sanitizeStateObject(src) {
     if (!src || typeof src !== 'object') return null;
     const inner = src.data && typeof src.data === 'object' ? src.data : src;
@@ -1364,7 +1447,8 @@
       vaultTx: normalizeTxList(inner.vaultTx),
       expenseTx: normalizeTxList(inner.expenseTx),
       incomeTx: normalizeTxList(inner.incomeTx),
-      goals: normalizeGoalsList(inner.goals)
+      goals: normalizeGoalsList(inner.goals),
+      notifications: normalizeNotifList(inner.notifications)
     };
   }
 
@@ -1394,7 +1478,8 @@
           vaultTx: v2.vaultTx,
           expenseTx: v2.expenseTx,
           incomeTx: v2.incomeTx,
-          goals: []
+          goals: [],
+          notifications: DEFAULT_STATE.notifications
         });
       }
     } catch (e) {}
@@ -1461,8 +1546,76 @@
   let homeFilter = 'all';
   let editingTarget = null;
   let editingGoalId = null;
+  let toastTimer = null;
+
+  function hideToast() {
+    const el = document.getElementById('toastCard');
+    if (el) el.classList.remove('show');
+    if (toastTimer) clearTimeout(toastTimer);
+  }
+
+  function pushUpdateNotification(message, tone, silentToast) {
+    const item = {
+      id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+      tone: tone || 'ok',
+      title: String(message || '').trim(),
+      time: nowClockLabel(),
+      read: false
+    };
+    state.notifications = [item].concat(state.notifications || []).slice(0, 30);
+
+    if (!silentToast) {
+      const card = document.getElementById('toastCard');
+      const dot = document.getElementById('toastDot');
+      const msg = document.getElementById('toastMsg');
+      if (card && dot && msg) {
+        dot.className = 'toast-dot' + (item.tone === 'warn' ? ' warn' : item.tone === 'info' ? ' info' : '');
+        msg.textContent = item.title;
+        card.classList.add('show');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+          card.classList.remove('show');
+        }, 3200);
+      }
+    }
+
+    if ('Notification' in window && Notification.permission === 'granted') {
+      try { new Notification("Owen's Vault 3.0", { body: item.title }); } catch (e) {}
+    }
+  }
+
+  function checkBudgetAndGoalMilestones(vaultBal) {
+    const todayISO = getTodayISO();
+    const dailyLimit = Math.max(1000, Number(state.profile.dailyLimit) || 30000);
+    const todaySpent = state.expenseTx
+      .filter(function(t) { return t.date === todayISO && !t.isExtra; })
+      .reduce(function(s, t) { return s + t.amount; }, 0);
+
+    if (todaySpent > dailyLimit) {
+      pushUpdateNotification('Limit harian rutin terlewati (' + rp(todaySpent) + ' / ' + rp(dailyLimit) + ').', 'warn', true);
+    } else if (todaySpent >= dailyLimit * 0.8 && todaySpent > 0) {
+      pushUpdateNotification('Limit harian rutin sudah ' + Math.round((todaySpent / dailyLimit) * 100) + '%.', 'info', true);
+    }
+
+    state.goals.forEach(function(g) {
+      if (vaultBal >= Number(g.target)) {
+        const key = 'goal_done_' + g.id;
+        const alreadyLogged = (state.notifications || []).some(function(n) { return n.id === key; });
+        if (!alreadyLogged) {
+          state.notifications = [{
+            id: key,
+            tone: 'ok',
+            title: 'Goal "' + g.title + '" sudah 100% tercapai di Vault!',
+            time: nowClockLabel(),
+            read: false
+          }].concat(state.notifications || []).slice(0, 30);
+        }
+      }
+    });
+  }
 
   function persist(shouldClearIDB) {
+    checkBudgetAndGoalMilestones(getVaultBalance());
     state = writeToLocalMirrors(state);
     if (shouldClearIDB) {
       clearIDB();
@@ -1534,10 +1687,56 @@
     }, 0);
   }
 
+  function renderNotifIndicator() {
+    const unreadCount = (state.notifications || []).filter(function(n) { return !n.read; }).length;
+    document.getElementById('notifDot').classList.toggle('hidden', unreadCount === 0);
+
+    const listEl = document.getElementById('notifHistoryList');
+    if (!listEl) return;
+    const list = state.notifications || [];
+    if (!list.length) {
+      listEl.innerHTML = '<div class="empty-box">Belum ada notifikasi update.</div>';
+      return;
+    }
+    listEl.innerHTML = list.map(function(n) {
+      return '<div class="notif-card' + (n.read ? '' : ' unread') + '">' +
+        '<div class="notif-title">' + escapeHtml(n.title) + '</div>' +
+        '<div class="notif-meta">' + escapeHtml(n.time || '') + (n.read ? ' • Dibaca' : ' • Baru') + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function openNotifModal() {
+    state.notifications = (state.notifications || []).map(function(n) {
+      return Object.assign({}, n, { read: true });
+    });
+    state = writeToLocalMirrors(state);
+    saveToIDB(state);
+    renderNotifIndicator();
+    openModal('modalNotif');
+  }
+
+  function requestBrowserNotifPermission() {
+    if (!('Notification' in window)) {
+      alert('Browser ini tidak mendukung Web Notification.');
+      return;
+    }
+    Notification.requestPermission().then(function(perm) {
+      pushUpdateNotification('Status notifikasi browser: ' + perm, 'info');
+      state = writeToLocalMirrors(state);
+      renderNotifIndicator();
+    });
+  }
+
+  function clearNotifHistory() {
+    state.notifications = [];
+    persist();
+  }
+
   function renderGoalsSection(vaultBal) {
     const listEl = document.getElementById('goalsList');
     if (!state.goals.length) {
-      listEl.innerHTML = '<div class="empty-box">Belum ada target barang. Tap <b>+ Tambah Goal</b> untuk bikin progress bar ala Saweria.</div>';
+      listEl.innerHTML = '<div class="empty-box">Belum ada target barang. Tap <b>+ Tambah Goal</b> untuk bikin progress bar.</div>';
       return;
     }
 
@@ -1558,13 +1757,13 @@
               '<div class="goal-sub">Target: ' + rp(targetVal) + '</div>' +
             '</div>' +
           '</div>' +
-          '<span class="goal-pct-pill">' + (reached ? '100% Terkumpul' : rawPct + '%') + '</span>' +
+          '<span class="goal-pct-pill">' + (reached ? '100% Tercapai' : rawPct + '%') + '</span>' +
         '</div>' +
-        '<div class="progress-track" style="height:9px;margin-bottom:7px;">' +
+        '<div class="progress-track" style="height:7px;margin-bottom:7px;">' +
           '<div class="progress-fill' + (reached ? ' done' : '') + '" style="width:' + barPct + '%"></div>' +
         '</div>' +
         '<div class="goal-foot">' +
-          '<span>' + (reached ? 'Sudah tercapai di saldo Vault!' : 'Kurang ' + rp(missing) + ' lagi') + '</span>' +
+          '<span>' + (reached ? 'Dana Vault sudah mencukupi' : 'Kurang ' + rp(missing)) + '</span>' +
           '<div class="tx-actions" style="margin-top:0;">' +
             '<button type="button" class="tx-act edit" onclick="openGoalModal(\'' + g.id + '\')">Edit</button>' +
             '<button type="button" class="tx-act del" onclick="removeGoal(\'' + g.id + '\')">Hapus</button>' +
@@ -1597,12 +1796,12 @@
     const netCash = totalInc - totalExp;
 
     document.getElementById('homeNetBalance').textContent = (netCash < 0 ? '-' : '') + rp(Math.abs(netCash));
-    document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--text)' : 'var(--expense)';
+    document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--ink)' : 'var(--expense)';
     const cashBadge = document.getElementById('homeCashBadge');
     cashBadge.textContent = netCash >= 0 ? 'Surplus' : 'Defisit';
-    cashBadge.style.color = netCash >= 0 ? 'var(--gold)' : 'var(--expense)';
+    cashBadge.style.color = netCash >= 0 ? 'var(--income)' : 'var(--expense)';
 
-    document.getElementById('homeIncomeStat').textContent = 'Salary/Income: ' + rp(totalInc);
+    document.getElementById('homeIncomeStat').textContent = 'Masuk: ' + rp(totalInc);
     document.getElementById('homeExpenseStat').textContent = 'Keluar: ' + rp(totalExp);
 
     const todayISO = getTodayISO();
@@ -1628,7 +1827,7 @@
       document.getElementById('todayLimitBadge').textContent = 'Over Limit';
       document.getElementById('todayLimitBadge').style.color = 'var(--expense)';
     }
-    document.getElementById('todayExtraVal').textContent = 'Ekstra Bulan Ini: ' + rp(extraExp);
+    document.getElementById('todayExtraVal').textContent = 'Ekstra: ' + rp(extraExp);
 
     const query = (document.getElementById('homeSearch').value || '').trim().toLowerCase();
     let combinedMonth = []
@@ -1665,6 +1864,7 @@
     document.getElementById('vaultTxCount').textContent = state.vaultTx.length + ' item';
 
     renderGoalsSection(vaultBal);
+    renderNotifIndicator();
 
     const vaultSorted = state.vaultTx.slice().reverse();
     document.getElementById('vaultTxList').innerHTML = vaultSorted.length === 0
@@ -1809,11 +2009,11 @@
 
     const maxVal = Math.max.apply(null, months.reduce(function(arr, m) { return arr.concat([m.inc, m.exp]); }, [1]));
     document.getElementById('sixMonthChart').innerHTML = months.map(function(m) {
-      const hInc = Math.max(4, Math.round((m.inc / maxVal) * 110));
-      const hExp = Math.max(4, Math.round((m.exp / maxVal) * 110));
+      const hInc = Math.max(4, Math.round((m.inc / maxVal) * 108));
+      const hExp = Math.max(4, Math.round((m.exp / maxVal) * 108));
       return '<div class="chart-col">' +
         '<div class="chart-bars">' +
-          '<div class="bar inc" style="height:' + hInc + 'px" title="Income: ' + rp(m.inc) + '"></div>' +
+          '<div class="bar inc" style="height:' + hInc + 'px" title="Masuk: ' + rp(m.inc) + '"></div>' +
           '<div class="bar exp" style="height:' + hExp + 'px" title="Keluar: ' + rp(m.exp) + '"></div>' +
         '</div>' +
         '<span class="chart-lbl">' + m.lbl + '</span>' +
@@ -1834,7 +2034,7 @@
           const pct = totalExp > 0 ? Math.round((e.val / totalExp) * 100) : 0;
           return '<div class="cat-row">' +
             '<div class="cat-top"><span>' + escapeHtml(e.name) + ' (' + pct + '%)</span><strong>' + rp(e.val) + '</strong></div>' +
-            '<div class="progress-track" style="height:7px;margin-bottom:0;"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+            '<div class="progress-track" style="height:6px;margin-bottom:0;"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
           '</div>';
         }).join('');
   }
@@ -1884,6 +2084,7 @@
         if (g.id !== editingGoalId) return g;
         return Object.assign({}, g, { emoji: emoji, title: title, target: target });
       });
+      pushUpdateNotification('Goal "' + title + '" diperbarui (' + rp(target) + ')', 'info');
     } else {
       state.goals.push({
         id: 'goal_' + Date.now(),
@@ -1891,6 +2092,7 @@
         title: title,
         target: target
       });
+      pushUpdateNotification('Goal baru "' + title + '" ditambahkan (' + rp(target) + ')', 'ok');
     }
 
     editingGoalId = null;
@@ -1900,7 +2102,9 @@
 
   function removeGoal(id) {
     if (!confirm('Hapus target barang ini?')) return;
+    const found = state.goals.find(function(g) { return g.id === id; });
     state.goals = state.goals.filter(function(g) { return g.id !== id; });
+    pushUpdateNotification('Goal "' + (found ? found.title : 'Target') + '" dihapus', 'info');
     persist();
   }
 
@@ -2002,6 +2206,7 @@
             date: dateVal
           });
         });
+        pushUpdateNotification('Pengeluaran diupdate: ' + rp(amount), 'info');
       } else if (editingTarget.kind === 'inc') {
         const inc = document.getElementById('txIncKind').value.split('|');
         state.incomeTx = state.incomeTx.map(function(t) {
@@ -2015,6 +2220,7 @@
             date: dateVal
           });
         });
+        pushUpdateNotification('Income diupdate: +' + rp(amount), 'ok');
       } else if (editingTarget.kind === 'vault') {
         const targetItem = state.vaultTx.find(function(t) { return t.id === editingTarget.id; });
         if (targetItem && targetItem.type === 'out' && amount > getVaultBalance(editingTarget.id)) {
@@ -2029,6 +2235,7 @@
             date: dateVal
           });
         });
+        pushUpdateNotification('Mutasi Vault diupdate: ' + rp(amount), 'info');
       }
       editingTarget = null;
       persist();
@@ -2050,6 +2257,7 @@
       });
       activeYM = dateVal.slice(0, 7);
       selectedDayISO = dateVal;
+      pushUpdateNotification('Keluar ' + rp(amount) + ' (' + cat[1] + (isExtra ? ' • Ekstra' : '') + ')', isExtra ? 'info' : 'warn');
     } else if (chosenType === 'income') {
       const inc = document.getElementById('txIncKind').value.split('|');
       state.incomeTx.push({
@@ -2063,6 +2271,7 @@
       });
       activeYM = dateVal.slice(0, 7);
       selectedDayISO = dateVal;
+      pushUpdateNotification('Masuk +' + rp(amount) + ' (' + inc[2] + ')', 'ok');
     } else {
       const vType = chosenType === 'vault_in' ? 'in' : 'out';
       if (vType === 'out' && amount > getVaultBalance()) {
@@ -2076,6 +2285,7 @@
         note: noteVal,
         date: dateVal
       });
+      pushUpdateNotification((vType === 'in' ? 'Setor Vault +' : 'Tarik Vault -') + rp(amount), vType === 'in' ? 'ok' : 'warn');
     }
 
     persist();
@@ -2093,6 +2303,7 @@
       isExtra: !!isExtra,
       date: d
     });
+    pushUpdateNotification('Keluar ' + rp(amount) + ' (' + category + ')', isExtra ? 'info' : 'warn');
     persist();
   }
 
@@ -2107,6 +2318,7 @@
       note: label,
       date: d
     });
+    pushUpdateNotification('Masuk +' + rp(amount) + ' (' + label + ')', 'ok');
     persist();
   }
 
@@ -2118,24 +2330,28 @@
       note: 'Setor Cepat',
       date: getTodayISO()
     });
+    pushUpdateNotification('Setor Vault +' + rp(amount), 'ok');
     persist();
   }
 
   function removeExpenseTx(id) {
     if (!confirm('Hapus transaksi pengeluaran ini?')) return;
     state.expenseTx = state.expenseTx.filter(function(t) { return t.id !== id; });
+    pushUpdateNotification('Transaksi pengeluaran dihapus', 'info');
     persist();
   }
 
   function removeIncomeTx(id) {
     if (!confirm('Hapus transaksi income/salary ini?')) return;
     state.incomeTx = state.incomeTx.filter(function(t) { return t.id !== id; });
+    pushUpdateNotification('Transaksi income dihapus', 'info');
     persist();
   }
 
   function removeVaultTx(id) {
     if (!confirm('Hapus mutasi Piggy Vault ini?')) return;
     state.vaultTx = state.vaultTx.filter(function(t) { return t.id !== id; });
+    pushUpdateNotification('Mutasi Vault dihapus', 'info');
     persist();
   }
 
@@ -2154,6 +2370,7 @@
     const dailyLimit = Math.max(1000, Math.round(Number(document.getElementById('profDailyLimit').value) || 30000));
 
     state.profile = { name: name, avatar: avatar, vaultTarget: vaultTarget, dailyLimit: dailyLimit };
+    pushUpdateNotification('Profil & limit harian diperbarui (' + rp(dailyLimit) + '/hari)', 'info');
     persist();
     closeModal('modalProfile');
   }
@@ -2175,6 +2392,9 @@
     a.download = 'owens-vault-3.0-' + getTodayISO() + '.json';
     a.click();
     URL.revokeObjectURL(url);
+    pushUpdateNotification('Backup JSON berhasil di-export', 'ok');
+    state = writeToLocalMirrors(state);
+    renderNotifIndicator();
   }
 
   function importJson(ev) {
@@ -2189,8 +2409,8 @@
           return;
         }
         state = cleaned;
+        pushUpdateNotification('Backup JSON berhasil dipulihkan', 'ok');
         persist();
-        alert('Backup berhasil dipulihkan ke Owen\'s Vault 3.0!');
         closeModal('modalSettings');
       } catch (err) {
         alert('File JSON rusak atau tidak valid.');
@@ -2203,6 +2423,13 @@
   function wipeAllData() {
     if (confirm('Hapus permanen semua data Vault, Salary, dan Pengeluaran?')) {
       state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      state.notifications = [{
+        id: 'reset_' + Date.now(),
+        tone: 'warn',
+        title: 'Semua data telah direset',
+        time: nowClockLabel(),
+        read: false
+      }];
       persist(true);
       closeModal('modalSettings');
     }
