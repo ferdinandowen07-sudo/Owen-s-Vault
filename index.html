@@ -1320,11 +1320,11 @@
     </div>
     <div class="field">
       <label>Nama Kategori</label>
-      <input type="text" id="budName" class="input" placeholder="Contoh: Makan & Minum" />
+      <input type="text" id="budName" class="input" placeholder="Contoh: Rokok / Makan & Minum" />
     </div>
     <div class="field">
       <label>Batas Anggaran Bulanan (Rp)</label>
-      <input type="number" id="budLimit" class="input" placeholder="Contoh: 900000" inputmode="numeric" />
+      <input type="number" id="budLimit" class="input" placeholder="Contoh: 450000" inputmode="numeric" />
     </div>
     <button type="button" class="btn-primary" onclick="saveBudgetCategory()">Simpan Anggaran</button>
   </div>
@@ -1420,7 +1420,7 @@
 
     <label class="check-row">
       <input type="checkbox" id="profPinEnabled" />
-      <span>Aktifkan Kunci PIN</span>
+      <span>Aktifkan Kunci PIN tiap buka / masuk ulang</span>
     </label>
     <div class="field">
       <label>Atur / Ganti PIN (4–6 digit angka)</label>
@@ -1487,6 +1487,7 @@
 
   const DEFAULT_BUDGETS = [
     { id: 'b_food', category: 'Makan & Minum', limit: 900000 },
+    { id: 'b_smoke', category: 'Rokok', limit: 450000 },
     { id: 'b_transport', category: 'Transport & Bensin', limit: 600000 },
     { id: 'b_coffee', category: 'Ngopi & Nongkrong', limit: 500000 },
     { id: 'b_shop', category: 'Belanja & Kebutuhan', limit: 750000 }
@@ -1500,10 +1501,11 @@
 
   const DEFAULT_QUICK_ACTIONS = [
     { id: 'qa_1', type: 'expense', category: 'Makan & Minum', amount: 15000, label: 'Makan 15rb', note: 'Makan harian', isExtra: false },
-    { id: 'qa_2', type: 'expense', category: 'Transport & Bensin', amount: 20000, label: 'Bensin 20rb', note: 'BBM motor', isExtra: false },
-    { id: 'qa_3', type: 'expense', category: 'Ngopi & Nongkrong', amount: 25000, label: 'Ngopi 25rb', note: 'Kopi / nongkrong', isExtra: false },
-    { id: 'qa_4', type: 'income', category: 'Tips & Bonus', amount: 50000, label: 'Tips +50rb', note: 'Tips / bonus', isExtra: false },
-    { id: 'qa_5', type: 'savings_contribution', category: 'Tabungan', amount: 50000, label: 'Vault +50rb', accountId: 'acc_piggy_vault', note: 'Setor tabungan', isExtra: false }
+    { id: 'qa_2', type: 'expense', category: 'Rokok', amount: 25000, label: 'Rokok 25rb', note: 'Rokok harian', isExtra: false },
+    { id: 'qa_3', type: 'expense', category: 'Transport & Bensin', amount: 20000, label: 'Bensin 20rb', note: 'BBM motor', isExtra: false },
+    { id: 'qa_4', type: 'expense', category: 'Ngopi & Nongkrong', amount: 25000, label: 'Ngopi 25rb', note: 'Kopi / nongkrong', isExtra: false },
+    { id: 'qa_5', type: 'income', category: 'Tips & Bonus', amount: 50000, label: 'Tips +50rb', note: 'Tips / bonus', isExtra: false },
+    { id: 'qa_6', type: 'savings_contribution', category: 'Tabungan', amount: 50000, label: 'Vault +50rb', accountId: 'acc_piggy_vault', note: 'Setor tabungan', isExtra: false }
   ];
 
   const DEFAULT_STATE = {
@@ -1529,7 +1531,7 @@
     quickActions: DEFAULT_QUICK_ACTIONS.slice(),
     transactions: [],
     notifications: [
-      { id: 'init_v4', tone: 'gold', title: "Owen's Vault 4.0 siap (Patokan harian Rp30.000)", time: 'Baru saja', read: false }
+      { id: 'init_v4', tone: 'gold', title: "Owen's Vault 4.0 siap (Kategori Rokok & Patokan Rp30.000)", time: 'Baru saja', read: false }
     ]
   };
 
@@ -1616,10 +1618,15 @@
   }
 
   function normalizeBudgets(list) {
-    if (!Array.isArray(list) || !list.length) return DEFAULT_BUDGETS.slice();
-    return list.filter(function(b) { return b && String(b.category || '').trim() && Number(b.limit) >= 0; }).map(function(b, i) {
+    const base = Array.isArray(list) && list.length ? list : DEFAULT_BUDGETS.slice();
+    const mapped = base.filter(function(b) { return b && String(b.category || '').trim() && Number(b.limit) >= 0; }).map(function(b, i) {
       return { id: String(b.id || ('bud_' + i)), category: stripLeadingEmoji(b.category), limit: Math.round(Number(b.limit) || 0) };
     });
+    const hasSmoke = mapped.some(function(b) { return b.category.toLowerCase() === 'rokok'; });
+    if (!hasSmoke) {
+      mapped.splice(1, 0, { id: 'b_smoke', category: 'Rokok', limit: 450000 });
+    }
+    return mapped;
   }
 
   function normalizeSavingsAccounts(list) {
@@ -1667,6 +1674,7 @@
       if (typeof mergedProf.dailySpendingLimit !== 'number' || Number.isNaN(mergedProf.dailySpendingLimit)) mergedProf.dailySpendingLimit = 30000;
       const len = Number(mergedProf.pinLength);
       mergedProf.pinLength = (len >= 4 && len <= 6) ? len : 6;
+      mergedProf.pinEnabled = Boolean(mergedProf.pinEnabled && mergedProf.pinHash);
       return {
         version: '4.0',
         updatedAt: Number(inner.updatedAt || rawObj.updatedAt || Date.now()),
@@ -1707,7 +1715,7 @@
         initials: String(prof.avatar || nameStr.slice(0, 2)).trim().toUpperCase().slice(0, 2) || 'OW',
         dailySpendingLimit: Math.max(0, Math.round(Number(prof.dailyLimit) || 30000))
       }),
-      budgets: DEFAULT_BUDGETS.slice(),
+      budgets: normalizeBudgets(DEFAULT_BUDGETS.slice()),
       savingsAccounts: accounts,
       quickActions: DEFAULT_QUICK_ACTIONS.slice(),
       transactions: normalizeTransactions(txs),
@@ -1773,6 +1781,7 @@
   }
 
   let state = loadBestLocalState() || JSON.parse(JSON.stringify(DEFAULT_STATE));
+  state.budgets = normalizeBudgets(state.budgets);
   let activeTab = 'dashboard';
   let activeYM = getCurrentYM();
   let selectedDateISO = getTodayISO();
@@ -1783,7 +1792,7 @@
   let toastTimer = null;
   let enteredPin = '';
 
-  /* FIXED 6-DIGIT PIN LOCK ENGINE */
+  /* FIXED PIN LOCK ENGINE (ALWAYS LOCKS ON OPEN & RE-ENTRY) */
   function getTargetPinLength() {
     const len = Number(state.profile && state.profile.pinLength);
     return (len >= 4 && len <= 6) ? len : 6;
@@ -1799,7 +1808,11 @@
     wrap.innerHTML = html;
   }
 
-  function initPinGateOnBoot() {
+  function enforcePinGate() {
+    const latest = loadBestLocalState();
+    if (latest && (latest.updatedAt || 0) >= (state.updatedAt || 0)) {
+      state = latest;
+    }
     if (state.profile && state.profile.pinEnabled && state.profile.pinHash) {
       enteredPin = '';
       document.getElementById('pinError').textContent = '';
@@ -1814,14 +1827,10 @@
   function lockVaultNow() {
     if (!state.profile || !state.profile.pinEnabled || !state.profile.pinHash) {
       openProfileModal();
-      showToast('Aktifkan & isi PIN di bagian bawah menu Profil', 'gold');
+      showToast('Centang "Aktifkan Kunci PIN" & isi PIN di bawah', 'gold');
       return;
     }
-    enteredPin = '';
-    document.getElementById('pinError').textContent = '';
-    document.getElementById('lockSubLabel').textContent = 'Masukkan ' + getTargetPinLength() + ' digit PIN untuk membuka';
-    buildPinDotsDom();
-    document.getElementById('pinLockScreen').classList.remove('hidden');
+    enforcePinGate();
   }
 
   function pressPinKey(digit) {
@@ -1855,6 +1864,16 @@
     document.getElementById('pinError').textContent = '';
     buildPinDotsDom();
   }
+
+  window.addEventListener('pageshow', function() {
+    enforcePinGate();
+  });
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+      enforcePinGate();
+    }
+  });
 
   /* ACCOUNTING ENGINE */
   function computeAccounting() {
@@ -1954,7 +1973,7 @@
     if ((localLen === 0 && idbLen > 0) || ((idbData.updatedAt || 0) > (state.updatedAt || 0) && idbLen >= localLen)) {
       state = writeMirrors(idbData);
       applyThemeToDocument(state.profile);
-      initPinGateOnBoot();
+      enforcePinGate();
       renderAll();
     }
   });
@@ -2014,7 +2033,6 @@
     document.getElementById('dashExpenseVal').textContent = displayMoney(acc.monthlyExpense);
     document.getElementById('dashTotalSavings').textContent = displayMoney(acc.totalSavings);
 
-    // Daily Cap Render
     const dailyCap = Math.max(0, Number(prof.dailySpendingLimit) || 0);
     const capPct = dailyCap > 0 ? Math.min(100, Math.round((acc.dailySpent / dailyCap) * 100)) : 0;
     const capRem = dailyCap - acc.dailySpent;
@@ -2398,7 +2416,7 @@
   function populateTxDropdowns(selectedAccId, fromId, toId, selectedCat) {
     const catSel = document.getElementById('txCategory');
     const cats = new Set((state.budgets || []).map(function(b) { return b.category; }));
-    ['Gaji & Pemasukan', 'Tips & Bonus', 'Tabungan', 'Transfer Internal', 'Penyesuaian'].forEach(function(c) { cats.add(c); });
+    ['Makan & Minum', 'Rokok', 'Gaji & Pemasukan', 'Tips & Bonus', 'Tabungan', 'Transfer Internal', 'Penyesuaian'].forEach(function(c) { cats.add(c); });
     const catList = Array.from(cats);
     catSel.innerHTML = catList.map(function(c) { return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>'; }).join('');
     if (selectedCat && catList.indexOf(selectedCat) !== -1) catSel.value = selectedCat;
@@ -2571,7 +2589,7 @@
     state.profile.accentColor = document.getElementById('customAccentColor').value || '#C6A15B';
     state.profile.pinEnabled = pinEnabled;
 
-    pushNotification('Pengaturan tersimpan', 'ok');
+    pushNotification('Pengaturan & PIN tersimpan', 'ok');
     persist();
     closeModal('modalProfile');
   }
@@ -2664,7 +2682,7 @@
   function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
 
   applyThemeToDocument(state.profile);
-  initPinGateOnBoot();
+  enforcePinGate();
   renderAll();
 </script>
 </body>
