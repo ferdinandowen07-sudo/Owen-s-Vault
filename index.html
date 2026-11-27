@@ -6,14 +6,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Owen's Vault 3.0" />
-  <meta name="theme-color" content="#05130d" />
+  <meta name="theme-color" content="#090c12" />
   <title>Owen's Vault 3.0</title>
 
   <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="" />
   <link id="favicon" rel="icon" type="image/png" href="" />
 
   <script>
-    (function generateVault3Icon() {
+    (function generatePrivateBankingIcon() {
       try {
         const size = 512;
         const c = document.createElement('canvas');
@@ -21,10 +21,10 @@
         c.height = size;
         const ctx = c.getContext('2d');
 
-        const bg = ctx.createRadialGradient(165, 115, 30, 256, 256, 360);
-        bg.addColorStop(0, '#164e37');
-        bg.addColorStop(0.55, '#081f15');
-        bg.addColorStop(1, '#030c08');
+        const bg = ctx.createRadialGradient(170, 120, 25, 256, 256, 360);
+        bg.addColorStop(0, '#1b2334');
+        bg.addColorStop(0.55, '#0e131e');
+        bg.addColorStop(1, '#07090f');
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, size, size);
 
@@ -39,42 +39,45 @@
         }
 
         ctx.save();
-        ctx.shadowColor = 'rgba(0,0,0,0.65)';
-        ctx.shadowBlur = 32;
-        ctx.shadowOffsetY = 16;
-        const cardGrad = ctx.createLinearGradient(108, 96, 404, 372);
-        cardGrad.addColorStop(0, '#123828');
-        cardGrad.addColorStop(1, '#06150e');
-        rrect(108, 96, 296, 276, 54);
-        ctx.fillStyle = cardGrad;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+        ctx.shadowBlur = 34;
+        ctx.shadowOffsetY = 18;
+        const boxGrad = ctx.createLinearGradient(104, 96, 408, 376);
+        boxGrad.addColorStop(0, '#1c2436');
+        boxGrad.addColorStop(1, '#0d111a');
+        rrect(104, 96, 304, 276, 56);
+        ctx.fillStyle = boxGrad;
         ctx.fill();
         ctx.restore();
 
-        const rim = ctx.createLinearGradient(108, 96, 404, 372);
-        rim.addColorStop(0, '#fde68a');
-        rim.addColorStop(0.5, '#10b981');
-        rim.addColorStop(1, '#f59e0b');
-        rrect(108, 96, 296, 276, 54);
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = rim;
+        const goldBorder = ctx.createLinearGradient(104, 96, 408, 372);
+        goldBorder.addColorStop(0, '#f3d59b');
+        goldBorder.addColorStop(0.5, 'rgba(229, 192, 123, 0.45)');
+        goldBorder.addColorStop(1, '#b68d40');
+        rrect(104, 96, 304, 276, 56);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = goldBorder;
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(256, 226, 72, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(16, 185, 129, 0.14)';
+        ctx.arc(256, 226, 74, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(229, 192, 123, 0.08)';
         ctx.fill();
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = '#fbbf24';
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#e5c07b';
         ctx.stroke();
 
-        ctx.fillStyle = '#fef08a';
-        ctx.font = '900 58px -apple-system, BlinkMacSystemFont, sans-serif';
+        const textGrad = ctx.createLinearGradient(256, 185, 256, 265);
+        textGrad.addColorStop(0, '#fff0cc');
+        textGrad.addColorStop(1, '#d4a853');
+        ctx.fillStyle = textGrad;
+        ctx.font = '800 54px -apple-system, BlinkMacSystemFont, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('3.0', 256, 228);
 
-        ctx.fillStyle = '#ecfdf5';
-        ctx.font = '800 22px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = '700 20px -apple-system, BlinkMacSystemFont, sans-serif';
         ctx.fillText("OWEN'S VAULT", 256, 422);
 
         const url = c.toDataURL('image/png');
@@ -88,19 +91,20 @@
 
   <style>
     :root {
-      --bg: #05130d;
-      --surface: #0b2017;
-      --surface-2: #112e21;
-      --surface-3: #173d2c;
-      --accent: #10b981;
-      --accent-2: #34d399;
-      --accent-soft: rgba(16, 185, 129, 0.14);
-      --gold: #fbbf24;
-      --danger: #f87171;
-      --text: #ecfdf5;
-      --text-dim: #9bd3b8;
-      --text-muted: #679f85;
-      --border: rgba(52, 211, 153, 0.18);
+      --bg: #090c12;
+      --surface: #121722;
+      --surface-2: #181f2e;
+      --surface-3: #20293d;
+      --gold: #e5c07b;
+      --gold-bright: #f5d89c;
+      --gold-soft: rgba(229, 192, 123, 0.14);
+      --income: #2dd4bf;
+      --expense: #fb7185;
+      --text: #f8fafc;
+      --text-dim: #cbd5e1;
+      --text-muted: #7c8aa3;
+      --border: rgba(226, 232, 240, 0.09);
+      --border-gold: rgba(229, 192, 123, 0.26);
       --safe-top: env(safe-area-inset-top, 16px);
       --safe-bottom: env(safe-area-inset-bottom, 16px);
     }
@@ -114,11 +118,11 @@
     }
 
     body {
-      background: radial-gradient(circle at top right, #0d2b1e 0%, var(--bg) 52%);
+      background: radial-gradient(circle at 50% -10%, #1c2436 0%, var(--bg) 56%);
       color: var(--text);
       min-height: 100vh;
       padding-top: calc(var(--safe-top) + 10px);
-      padding-bottom: calc(var(--safe-bottom) + 104px);
+      padding-bottom: calc(var(--safe-bottom) + 106px);
       overflow-x: hidden;
     }
 
@@ -142,7 +146,7 @@
       gap: 11px;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 6px 12px 6px 6px;
+      padding: 6px 14px 6px 6px;
       border-radius: 999px;
       cursor: pointer;
       touch-action: manipulation;
@@ -152,10 +156,10 @@
       width: 36px;
       height: 36px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), #047857);
-      color: #04130c;
+      background: linear-gradient(135deg, var(--gold-bright), #b68d40);
+      color: #090c12;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -165,16 +169,12 @@
       display: block;
       font-size: 14px;
       line-height: 1.15;
+      color: var(--text);
     }
 
     .user-meta span {
       font-size: 11px;
       color: var(--text-muted);
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 8px;
     }
 
     .btn-icon {
@@ -183,7 +183,7 @@
       border-radius: 13px;
       background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--text-dim);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -237,7 +237,7 @@
 
     .month-center span {
       font-size: 11px;
-      color: var(--accent-2);
+      color: var(--gold);
     }
 
     /* Cards & Animations */
@@ -256,22 +256,24 @@
       border-radius: 22px;
       padding: 18px;
       margin-bottom: 14px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
 
     .balance-card {
-      background: linear-gradient(145deg, #103525 0%, #071b12 100%);
+      background: linear-gradient(145deg, #1a2234 0%, #101520 100%);
+      border-color: var(--border-gold);
     }
 
     .eyebrow {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-dim);
+      letter-spacing: 0.85px;
+      color: var(--text-muted);
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 6px;
+      font-weight: 600;
     }
 
     .big-amount {
@@ -279,11 +281,12 @@
       font-weight: 800;
       letter-spacing: -0.8px;
       margin-bottom: 12px;
+      color: var(--text);
     }
 
     .progress-track {
-      height: 9px;
-      background: rgba(0, 0, 0, 0.35);
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
       border-radius: 99px;
       overflow: hidden;
       margin-bottom: 8px;
@@ -291,13 +294,13 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      background: linear-gradient(90deg, var(--gold), var(--gold-bright));
       border-radius: 99px;
       transition: width 0.35s ease;
     }
 
     .progress-fill.warn {
-      background: linear-gradient(90deg, #f59e0b, #ef4444);
+      background: linear-gradient(90deg, #f59e0b, var(--expense));
     }
 
     .card-foot {
@@ -317,7 +320,7 @@
     .mini-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 17px;
+      border-radius: 18px;
       padding: 14px;
     }
 
@@ -364,7 +367,7 @@
     .chip {
       background: var(--surface-2);
       border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--text-dim);
       padding: 9px 13px;
       border-radius: 13px;
       font-size: 12px;
@@ -374,7 +377,11 @@
       touch-action: manipulation;
     }
 
-    .chip:active { transform: scale(0.95); }
+    .chip:active {
+      transform: scale(0.95);
+      border-color: var(--border-gold);
+      color: var(--text);
+    }
 
     /* Calendar */
     .cal-weekdays {
@@ -396,7 +403,7 @@
     .cal-day {
       aspect-ratio: 1;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid transparent;
       display: flex;
       flex-direction: column;
@@ -404,7 +411,7 @@
       justify-content: center;
       font-size: 13px;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text-dim);
       cursor: pointer;
       position: relative;
       touch-action: manipulation;
@@ -416,12 +423,13 @@
     }
 
     .cal-day.today {
-      border-color: var(--accent-2);
+      border-color: var(--border-gold);
+      color: var(--gold-bright);
     }
 
     .cal-day.selected {
-      background: var(--accent);
-      color: #04130c;
+      background: linear-gradient(135deg, var(--gold-bright), #c99e4c);
+      color: #090c12;
       font-weight: 800;
     }
 
@@ -438,9 +446,9 @@
       border-radius: 50%;
     }
 
-    .dot.inc { background: #34d399; }
-    .dot.exp { background: #f87171; }
-    .cal-day.selected .dot { background: #04130c; }
+    .dot.inc { background: var(--income); }
+    .dot.exp { background: var(--expense); }
+    .cal-day.selected .dot { background: #090c12; }
 
     /* Chart Bars */
     .chart-wrap {
@@ -476,8 +484,8 @@
       transition: height 0.3s ease;
     }
 
-    .bar.inc { background: var(--accent-2); }
-    .bar.exp { background: var(--danger); }
+    .bar.inc { background: var(--income); }
+    .bar.exp { background: var(--expense); }
 
     .chart-lbl {
       font-size: 10px;
@@ -495,6 +503,7 @@
       justify-content: space-between;
       font-size: 12px;
       margin-bottom: 5px;
+      color: var(--text-dim);
     }
 
     /* Transactions */
@@ -524,7 +533,8 @@
       width: 40px;
       height: 40px;
       border-radius: 13px;
-      background: var(--accent-soft);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -535,6 +545,7 @@
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 2px;
+      color: var(--text);
     }
 
     .tx-sub {
@@ -552,8 +563,8 @@
       font-weight: 700;
     }
 
-    .tx-val.plus { color: var(--accent-2); }
-    .tx-val.minus { color: var(--danger); }
+    .tx-val.plus { color: var(--income); }
+    .tx-val.minus { color: var(--expense); }
     .tx-val.extra { color: var(--gold); }
 
     .tx-del {
@@ -594,13 +605,13 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(11, 32, 23, 0.95);
-      border: 1px solid var(--border);
+      background: rgba(18, 23, 34, 0.95);
+      border: 1px solid var(--border-gold);
       padding: 6px 8px;
       border-radius: 22px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .dock-btn {
@@ -621,7 +632,7 @@
 
     .dock-btn.active {
       background: var(--surface-3);
-      color: var(--accent-2);
+      color: var(--gold-bright);
     }
 
     .fab-add {
@@ -629,8 +640,8 @@
       height: 48px;
       border-radius: 16px;
       border: none;
-      background: linear-gradient(135deg, var(--accent), #059669);
-      color: #04130c;
+      background: linear-gradient(135deg, var(--gold-bright), #c99e4c);
+      color: #090c12;
       font-size: 28px;
       font-weight: 800;
       line-height: 1;
@@ -638,7 +649,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 8px 20px rgba(229, 192, 123, 0.32);
       touch-action: manipulation;
     }
 
@@ -648,7 +659,7 @@
     .modal-bg {
       position: fixed;
       inset: 0;
-      background: rgba(2, 10, 6, 0.84);
+      background: rgba(5, 7, 12, 0.85);
       display: none;
       align-items: flex-end;
       justify-content: center;
@@ -659,7 +670,7 @@
 
     .modal-card {
       background: var(--surface);
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-gold);
       border-radius: 24px 24px 0 0;
       width: 100%;
       max-width: 490px;
@@ -675,7 +686,7 @@
       margin-bottom: 16px;
     }
 
-    .modal-top h3 { font-size: 17px; font-weight: 700; }
+    .modal-top h3 { font-size: 17px; font-weight: 700; color: var(--text); }
 
     .x-btn {
       width: 32px;
@@ -707,9 +718,9 @@
     }
 
     .type-opt.active {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: var(--text);
+      background: var(--gold-soft);
+      border-color: var(--gold);
+      color: var(--gold-bright);
     }
 
     .field {
@@ -735,7 +746,7 @@
       outline: none;
     }
 
-    .input:focus { border-color: var(--accent); }
+    .input:focus { border-color: var(--gold); }
 
     .check-box {
       display: flex;
@@ -747,6 +758,7 @@
       border-radius: 12px;
       margin-bottom: 14px;
       font-size: 13px;
+      color: var(--text-dim);
     }
 
     .btn-main {
@@ -754,8 +766,8 @@
       padding: 14px;
       border-radius: 14px;
       border: none;
-      background: var(--accent);
-      color: #04130c;
+      background: linear-gradient(135deg, var(--gold-bright), #c99e4c);
+      color: #090c12;
       font-size: 15px;
       font-weight: 800;
       cursor: pointer;
@@ -778,9 +790,9 @@
       width: 100%;
       padding: 12px;
       border-radius: 12px;
-      border: 1px solid rgba(248, 113, 113, 0.35);
-      background: rgba(248, 113, 113, 0.12);
-      color: #fca5a5;
+      border: 1px solid rgba(251, 113, 133, 0.35);
+      background: rgba(251, 113, 133, 0.12);
+      color: #fda4af;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
@@ -798,7 +810,7 @@
       <div class="avatar" id="topAvatar">O</div>
       <div class="user-meta">
         <strong id="topName">Owen</strong>
-        <span>Vault 3.0 • Tap Profil</span>
+        <span>Vault 3.0 • Private Edition</span>
       </div>
     </button>
 
@@ -809,7 +821,7 @@
     </div>
   </header>
 
-  <!-- MONTH SWITCHER (HOME, CALENDAR, REPORT) -->
+  <!-- MONTH SWITCHER -->
   <div class="month-switcher" id="monthSwitcher">
     <button type="button" class="month-btn" onclick="shiftMonth(-1)">‹</button>
     <div class="month-center" onclick="jumpToCurrentMonth()">
@@ -819,17 +831,17 @@
     <button type="button" class="month-btn" onclick="shiftMonth(1)">›</button>
   </div>
 
-  <!-- TAB 1: HOME (SALDO BULANAN, SALARY, PENGELUARAN & LIMIT HARIAN) -->
+  <!-- TAB 1: HOME -->
   <section id="secHome" class="view-section">
     <div class="card balance-card">
       <div class="eyebrow">
-        <span>Saldo Kas Bulan Ini (Income - Keluar)</span>
-        <span id="homeCashBadge">Positif</span>
+        <span>Saldo Kas Bulan Ini</span>
+        <span id="homeCashBadge" style="color: var(--gold);">Surplus</span>
       </div>
       <div class="big-amount" id="homeNetBalance">Rp 0</div>
       <div class="card-foot">
-        <span id="homeIncomeStat">Salary/Income: Rp 0</span>
-        <span id="homeExpenseStat">Keluar: Rp 0</span>
+        <span id="homeIncomeStat" style="color: var(--income);">Salary/Income: Rp 0</span>
+        <span id="homeExpenseStat" style="color: var(--expense);">Keluar: Rp 0</span>
       </div>
     </div>
 
@@ -866,7 +878,7 @@
     <div class="tx-list" id="homeTxList"></div>
   </section>
 
-  <!-- TAB 2: KALENDER PEMASUKAN & PENGELUARAN -->
+  <!-- TAB 2: KALENDER -->
   <section id="secCalendar" class="view-section hidden">
     <div class="card">
       <div class="cal-weekdays">
@@ -874,19 +886,19 @@
       </div>
       <div class="cal-grid" id="calGrid"></div>
       <div class="card-foot" style="margin-top: 12px;">
-        <span><i class="dot inc" style="display:inline-block;margin-right:4px;"></i>Ada Income/Salary</span>
-        <span><i class="dot exp" style="display:inline-block;margin-right:4px;"></i>Ada Pengeluaran</span>
+        <span><i class="dot inc" style="display:inline-block;margin-right:4px;"></i>Income/Salary</span>
+        <span><i class="dot exp" style="display:inline-block;margin-right:4px;"></i>Pengeluaran</span>
       </div>
     </div>
 
     <div class="grid-2">
       <div class="mini-card">
-        <small>Masuk di Tanggal Ini</small>
-        <strong id="calDayInc" style="color: var(--accent-2);">Rp 0</strong>
+        <small>Masuk Tanggal Ini</small>
+        <strong id="calDayInc" style="color: var(--income);">Rp 0</strong>
       </div>
       <div class="mini-card">
-        <small>Keluar di Tanggal Ini</small>
-        <strong id="calDayExp" style="color: var(--danger);">Rp 0</strong>
+        <small>Keluar Tanggal Ini</small>
+        <strong id="calDayExp" style="color: var(--expense);">Rp 0</strong>
       </div>
     </div>
 
@@ -897,11 +909,11 @@
     <div class="tx-list" id="calDayList"></div>
   </section>
 
-  <!-- TAB 3: LAPORAN BULANAN & GRAFIK -->
+  <!-- TAB 3: LAPORAN & GRAFIK -->
   <section id="secReport" class="view-section hidden">
     <div class="card">
       <div class="eyebrow">
-        <span>Grafik 6 Bulan (Hijau: Income • Merah: Keluar)</span>
+        <span>Grafik 6 Bulan (Mint: Masuk • Coral: Keluar)</span>
       </div>
       <div class="chart-wrap" id="sixMonthChart"></div>
     </div>
@@ -909,7 +921,7 @@
     <div class="grid-2">
       <div class="mini-card">
         <small>Salary Pokok Bulan Ini</small>
-        <strong id="repSalaryMain" style="color: var(--accent-2);">Rp 0</strong>
+        <strong id="repSalaryMain" style="color: var(--income);">Rp 0</strong>
       </div>
       <div class="mini-card">
         <small>Tips / Bonus Bulan Ini</small>
@@ -923,14 +935,14 @@
     </div>
   </section>
 
-  <!-- TAB 4: PIGGY VAULT (TABUNGAN) -->
+  <!-- TAB 4: PIGGY VAULT -->
   <section id="secVault" class="view-section hidden">
     <div class="card balance-card">
       <div class="eyebrow">
         <span>Total Tabungan Vault</span>
-        <span id="vaultPctBadge">0%</span>
+        <span id="vaultPctBadge" style="color: var(--gold);">0%</span>
       </div>
-      <div class="big-amount" id="vaultTotalVal">Rp 0</div>
+      <div class="big-amount" id="vaultTotalVal" style="color: var(--gold-bright);">Rp 0</div>
       <div class="progress-track">
         <div class="progress-fill" id="vaultBar" style="width: 0%"></div>
       </div>
@@ -1051,7 +1063,7 @@
     </div>
 
     <div class="field">
-      <label>Simbol Avatar (1-2 Karakter / Emoji)</label>
+      <label>Simbol Avatar</label>
       <input type="text" id="profAvatar" class="input" maxlength="4" />
     </div>
 
@@ -1149,7 +1161,6 @@
         };
       }
 
-      // Migrasi otomatis dari data Vault 2.2 jika ada
       const rawV2 = localStorage.getItem(V2_KEY);
       if (rawV2) {
         const v2 = JSON.parse(rawV2);
@@ -1247,10 +1258,10 @@
 
     // HOME
     document.getElementById('homeNetBalance').textContent = (netCash < 0 ? '-' : '') + rp(Math.abs(netCash));
-    document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--text)' : 'var(--danger)';
+    document.getElementById('homeNetBalance').style.color = netCash >= 0 ? 'var(--text)' : 'var(--expense)';
     const cashBadge = document.getElementById('homeCashBadge');
-    cashBadge.textContent = netCash >= 0 ? 'Surplus / Aman' : 'Defisit';
-    cashBadge.style.color = netCash >= 0 ? 'var(--accent-2)' : 'var(--danger)';
+    cashBadge.textContent = netCash >= 0 ? 'Surplus' : 'Defisit';
+    cashBadge.style.color = netCash >= 0 ? 'var(--gold)' : 'var(--expense)';
 
     document.getElementById('homeIncomeStat').textContent = 'Salary/Income: ' + rp(totalInc);
     document.getElementById('homeExpenseStat').textContent = 'Keluar: ' + rp(totalExp);
@@ -1271,16 +1282,15 @@
       todayBar.classList.remove('warn');
       document.getElementById('todayRemainVal').textContent = 'Sisa: ' + rp(todayRemain) + ' / ' + rp(dailyLimit);
       document.getElementById('todayLimitBadge').textContent = 'Aman';
-      document.getElementById('todayLimitBadge').style.color = 'var(--accent-2)';
+      document.getElementById('todayLimitBadge').style.color = 'var(--income)';
     } else {
       todayBar.classList.add('warn');
       document.getElementById('todayRemainVal').textContent = 'Lewat limit: ' + rp(Math.abs(todayRemain));
       document.getElementById('todayLimitBadge').textContent = 'Over Limit';
-      document.getElementById('todayLimitBadge').style.color = 'var(--danger)';
+      document.getElementById('todayLimitBadge').style.color = 'var(--expense)';
     }
     document.getElementById('todayExtraVal').textContent = 'Ekstra Bulan Ini: ' + rp(extraExp);
 
-    // Gabungkan aktivitas bulan aktif
     const combinedMonth = []
       .concat(monthInc.map(function(t) { return Object.assign({}, t, { _kind: 'inc' }); }))
       .concat(monthExp.map(function(t) { return Object.assign({}, t, { _kind: 'exp' }); }))
@@ -1422,7 +1432,6 @@
     document.getElementById('repSalaryMain').textContent = rp(salaryMain);
     document.getElementById('repSalaryBonus').textContent = rp(salaryBonus);
 
-    // Grafik 6 bulan terakhir dari activeYM
     const parts = activeYM.split('-');
     const baseY = Number(parts[0]);
     const baseM = Number(parts[1]) - 1;
@@ -1452,7 +1461,6 @@
       '</div>';
     }).join('');
 
-    // Breakdown kategori pengeluaran bulan aktif
     const totalExp = monthExp.reduce(function(s, t) { return s + t.amount; }, 0);
     const mapCat = {};
     monthExp.forEach(function(t) {
@@ -1472,7 +1480,6 @@
         }).join('');
   }
 
-  // Modals & Actions
   function openModal(id) { document.getElementById(id).classList.add('open'); }
   function closeModal(id) { document.getElementById(id).classList.remove('open'); }
   function backdropClose(e, id) { if (e.target.id === id) closeModal(id); }
